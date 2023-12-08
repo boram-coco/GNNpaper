@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://boram-coco.github.io/GNNpaper/index.html</loc>
-    <lastmod>2023-12-07T10:31:39.324Z</lastmod>
+    <lastmod>2023-12-07T11:01:23.386Z</lastmod>
   </url>
   <url>
     <loc>https://boram-coco.github.io/GNNpaper/posts/231101.html</loc>
@@ -13,8 +13,12 @@
     <lastmod>2023-10-05T09:58:59.000Z</lastmod>
   </url>
   <url>
-    <loc>https://boram-coco.github.io/GNNpaper/posts/230905 데이터(10, df02교수님).html</loc>
-    <lastmod>2023-10-05T09:58:59.000Z</lastmod>
+    <loc>https://boram-coco.github.io/GNNpaper/posts/0810.html</loc>
+    <lastmod>2023-12-08T04:21:00.828Z</lastmod>
+  </url>
+  <url>
+    <loc>https://boram-coco.github.io/GNNpaper/posts/230810 데이터정리.html</loc>
+    <lastmod>2023-10-05T09:57:23.000Z</lastmod>
   </url>
   <url>
     <loc>https://boram-coco.github.io/GNNpaper/posts/230913 데이터(11, df50 정리)-Copy1.html</loc>
@@ -125,6 +129,10 @@
     <lastmod>2023-10-05T09:58:59.000Z</lastmod>
   </url>
   <url>
+    <loc>https://boram-coco.github.io/GNNpaper/posts/230905 데이터(10, df02교수님).html</loc>
+    <lastmod>2023-10-05T09:58:59.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://boram-coco.github.io/GNNpaper/posts/231110.html</loc>
     <lastmod>2023-11-12T04:43:43.000Z</lastmod>
   </url>
@@ -134,6 +142,6 @@
   </url>
   <url>
     <loc>https://boram-coco.github.io/GNNpaper/about.html</loc>
-    <lastmod>2023-12-07T10:31:39.324Z</lastmod>
+    <lastmod>2023-12-08T04:22:15.983Z</lastmod>
   </url>
 </urlset>
