@@ -1,0 +1,12 @@
+---
+title: "Boram-coco"
+image: coco.jpg
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/boram-coco
+---
+
+Everyday with Coco
