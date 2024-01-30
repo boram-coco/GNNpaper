@@ -1,1 +1,9 @@
 /.quarto/
+/.ipynb_ckeckpoints
+*.npy
+*.csv
+*.pickle
+*.pth
+*.json
+*.pkl
+*.pdf
