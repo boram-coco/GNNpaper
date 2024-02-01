@@ -1,0 +1,2331 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.538">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="신록예찬,김보람">
+<meta name="dcterms.date" content="2024-02-01">
+
+<title>GNNpaper - [GNN] 신용카드거래 사기탐지 – pyod 사용</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">GNNpaper</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">Boram-coco</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">[GNN] 신용카드거래 사기탐지 – pyod 사용</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>신록예찬,김보람 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 1, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>ref: <a href="https://pyod.readthedocs.io/en/latest/pyod.models.html#all-models" class="uri">https://pyod.readthedocs.io/en/latest/pyod.models.html#all-models</a></p>
+<section id="imports" class="level1">
+<h1>1. Imports</h1>
+<div id="f4162b18-f612-4403-bf6b-823b6b662ea4" class="cell" data-tags="[]" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_3490192/761229760.py:1: DeprecationWarning: 
+Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
+(to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
+but was not found to be installed on your system.
+If this would cause problems for you,
+please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
+        
+  import pandas as pd</code></pre>
+</div>
+</div>
+<div id="e59bf270-951d-4da7-b7bb-09d4227238bd" class="cell" data-tags="[]" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="e42d11c8-75b7-4337-b0ac-c715d41b1011" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>run functions.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="81833a59-fff8-46f3-bd2d-f77279fb7aa9" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>pyod에 random_state 매개변수가 명시되어 있지 않다..? 클래스 작성해야 하는뎀..</p>
+</blockquote>
+</section>
+<section id="section" class="level1">
+<h1>2.</h1>
+<section id="시도10.3-0.05" class="level2">
+<h2 class="anchored" data-anchor-id="시도10.3-0.05">시도1(0.3 / 0.05)</h2>
+<div id="9330d2a1-940f-4687-869e-fb10f589aa4f" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess(fraudTrain, <span class="fl">0.3</span>, <span class="fl">0.05</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">pyod</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ABOD</td>
+<td>0.752989</td>
+<td>0.950050</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.500000</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>COPOD</td>
+<td>0.004074</td>
+<td>0.749417</td>
+<td>0.138138</td>
+<td>0.766667</td>
+<td>0.234097</td>
+<td>0.757589</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>ECOD</td>
+<td>0.003891</td>
+<td>0.719447</td>
+<td>0.116768</td>
+<td>0.703333</td>
+<td>0.200285</td>
+<td>0.711814</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>GMM</td>
+<td>0.080132</td>
+<td>0.706294</td>
+<td>0.093785</td>
+<td>0.563333</td>
+<td>0.160799</td>
+<td>0.638572</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>HBOS</td>
+<td>0.002255</td>
+<td>0.949717</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499825</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>IForest</td>
+<td>0.196480</td>
+<td>0.822844</td>
+<td>0.187398</td>
+<td>0.763333</td>
+<td>0.300920</td>
+<td>0.794653</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>INNE</td>
+<td>0.428953</td>
+<td>0.739594</td>
+<td>0.116505</td>
+<td>0.640000</td>
+<td>0.197125</td>
+<td>0.692415</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>KDE</td>
+<td>4.580457</td>
+<td>0.845155</td>
+<td>0.213115</td>
+<td>0.780000</td>
+<td>0.334764</td>
+<td>0.814290</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>KNN</td>
+<td>0.015898</td>
+<td>0.816683</td>
+<td>0.176755</td>
+<td>0.730000</td>
+<td>0.284600</td>
+<td>0.775620</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>LODA</td>
+<td>0.060742</td>
+<td>0.949717</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499825</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>LOF</td>
+<td>0.037978</td>
+<td>0.511988</td>
+<td>0.051483</td>
+<td>0.503333</td>
+<td>0.093412</td>
+<td>0.507888</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>MAD</td>
+<td>0.001551</td>
+<td>0.961205</td>
+<td>0.646288</td>
+<td>0.493333</td>
+<td>0.559546</td>
+<td>0.739569</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>MCD</td>
+<td>0.005365</td>
+<td>0.847486</td>
+<td>0.215867</td>
+<td>0.780000</td>
+<td>0.338150</td>
+<td>0.815517</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>OCSVM</td>
+<td>8.742899</td>
+<td>0.808525</td>
+<td>0.171561</td>
+<td>0.740000</td>
+<td>0.278545</td>
+<td>0.776064</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>PCA</td>
+<td>0.002501</td>
+<td>0.454545</td>
+<td>0.020619</td>
+<td>0.213333</td>
+<td>0.037603</td>
+<td>0.340280</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>ROD</td>
+<td>1.897241</td>
+<td>0.583417</td>
+<td>0.027062</td>
+<td>0.210000</td>
+<td>0.047945</td>
+<td>0.406525</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.407164</td>
+<td>6006</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="시도20.3-0.005" class="level2">
+<h2 class="anchored" data-anchor-id="시도20.3-0.005">시도2(0.3 / 0.005)</h2>
+<div id="f75c12d8-c9d4-42ae-98b4-0cc57936a201" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess(fraudTrain, <span class="fl">0.3</span>, <span class="fl">0.005</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">pyod</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ABOD</td>
+<td>0.769208</td>
+<td>0.995005</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.500000</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>COPOD</td>
+<td>0.004077</td>
+<td>0.722611</td>
+<td>0.015976</td>
+<td>0.900000</td>
+<td>0.031395</td>
+<td>0.810860</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>ECOD</td>
+<td>0.003934</td>
+<td>0.712121</td>
+<td>0.013738</td>
+<td>0.800000</td>
+<td>0.027012</td>
+<td>0.755840</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>GMM</td>
+<td>0.068339</td>
+<td>0.703130</td>
+<td>0.010609</td>
+<td>0.633333</td>
+<td>0.020868</td>
+<td>0.668407</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>HBOS</td>
+<td>0.002113</td>
+<td>0.994672</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499833</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>IForest</td>
+<td>0.185365</td>
+<td>0.819847</td>
+<td>0.024412</td>
+<td>0.900000</td>
+<td>0.047535</td>
+<td>0.859722</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>INNE</td>
+<td>0.427760</td>
+<td>0.725275</td>
+<td>0.011460</td>
+<td>0.633333</td>
+<td>0.022512</td>
+<td>0.679535</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>KDE</td>
+<td>4.592304</td>
+<td>0.835498</td>
+<td>0.026680</td>
+<td>0.900000</td>
+<td>0.051823</td>
+<td>0.867587</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>KNN</td>
+<td>0.015570</td>
+<td>0.805361</td>
+<td>0.020219</td>
+<td>0.800000</td>
+<td>0.039441</td>
+<td>0.802694</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>LODA</td>
+<td>0.054602</td>
+<td>0.994672</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499833</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>LOF</td>
+<td>0.037884</td>
+<td>0.494339</td>
+<td>0.003632</td>
+<td>0.366667</td>
+<td>0.007192</td>
+<td>0.430823</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>MAD</td>
+<td>0.001662</td>
+<td>0.984682</td>
+<td>0.177083</td>
+<td>0.566667</td>
+<td>0.269841</td>
+<td>0.776724</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>MCD</td>
+<td>0.005319</td>
+<td>0.835997</td>
+<td>0.026759</td>
+<td>0.900000</td>
+<td>0.051973</td>
+<td>0.867838</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>OCSVM</td>
+<td>8.734179</td>
+<td>0.776557</td>
+<td>0.019062</td>
+<td>0.866667</td>
+<td>0.037303</td>
+<td>0.821386</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>PCA</td>
+<td>0.002419</td>
+<td>0.419414</td>
+<td>0.000866</td>
+<td>0.100000</td>
+<td>0.001718</td>
+<td>0.260509</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>ROD</td>
+<td>2.139708</td>
+<td>0.561605</td>
+<td>0.001150</td>
+<td>0.100000</td>
+<td>0.002274</td>
+<td>0.331961</td>
+<td>False</td>
+<td>True</td>
+<td>0.3</td>
+<td>14014</td>
+<td>[amt]</td>
+<td>0.426431</td>
+<td>6006</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="시도30.2-0.05" class="level2">
+<h2 class="anchored" data-anchor-id="시도30.2-0.05">시도3(0.2 / 0.05)</h2>
+<div id="6e060271-a628-4976-b888-8e3d985c9aad" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess(fraudTrain, <span class="fl">0.2</span>, <span class="fl">0.05</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">pyod</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ABOD</td>
+<td>1.099863</td>
+<td>0.950050</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.500000</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>COPOD</td>
+<td>0.005624</td>
+<td>0.855256</td>
+<td>0.223803</td>
+<td>0.768889</td>
+<td>0.346693</td>
+<td>0.814343</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>ECOD</td>
+<td>0.005390</td>
+<td>0.806971</td>
+<td>0.151056</td>
+<td>0.620000</td>
+<td>0.242926</td>
+<td>0.718401</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>GMM</td>
+<td>0.079051</td>
+<td>0.807193</td>
+<td>0.136646</td>
+<td>0.537778</td>
+<td>0.217920</td>
+<td>0.679568</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>HBOS</td>
+<td>0.002512</td>
+<td>0.949828</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499883</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>IForest</td>
+<td>0.233243</td>
+<td>0.909313</td>
+<td>0.326066</td>
+<td>0.764444</td>
+<td>0.457143</td>
+<td>0.840687</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>INNE</td>
+<td>0.617690</td>
+<td>0.900766</td>
+<td>0.301075</td>
+<td>0.746667</td>
+<td>0.429119</td>
+<td>0.827767</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>KDE</td>
+<td>10.888934</td>
+<td>0.905206</td>
+<td>0.313653</td>
+<td>0.755556</td>
+<td>0.443286</td>
+<td>0.834315</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>KNN</td>
+<td>0.021715</td>
+<td>0.894439</td>
+<td>0.283865</td>
+<td>0.731111</td>
+<td>0.408950</td>
+<td>0.817069</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>LODA</td>
+<td>0.077641</td>
+<td>0.949828</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499883</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>LOF</td>
+<td>0.052920</td>
+<td>0.662893</td>
+<td>0.055040</td>
+<td>0.355556</td>
+<td>0.095323</td>
+<td>0.517303</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>MAD</td>
+<td>0.001756</td>
+<td>0.963370</td>
+<td>0.647783</td>
+<td>0.584444</td>
+<td>0.614486</td>
+<td>0.783868</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>MCD</td>
+<td>0.006619</td>
+<td>0.908980</td>
+<td>0.325142</td>
+<td>0.764444</td>
+<td>0.456233</td>
+<td>0.840512</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>OCSVM</td>
+<td>20.612067</td>
+<td>0.905428</td>
+<td>0.314233</td>
+<td>0.755556</td>
+<td>0.443864</td>
+<td>0.834432</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>PCA</td>
+<td>0.002859</td>
+<td>0.667999</td>
+<td>0.027520</td>
+<td>0.164444</td>
+<td>0.047149</td>
+<td>0.429459</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>ROD</td>
+<td>2.941879</td>
+<td>0.688534</td>
+<td>0.017609</td>
+<td>0.095556</td>
+<td>0.029737</td>
+<td>0.407633</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.264307</td>
+<td>9009</td>
+<td>0.04995</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="시도40.2-0.005" class="level2">
+<h2 class="anchored" data-anchor-id="시도40.2-0.005">시도4(0.2 / 0.005)</h2>
+<div id="edc1182b-998c-47cf-83fb-4fdc10b62692" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess(fraudTrain, <span class="fl">0.2</span>, <span class="fl">0.005</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">pyod</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ABOD</td>
+<td>1.120067</td>
+<td>0.995005</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.500000</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>COPOD</td>
+<td>0.005354</td>
+<td>0.837829</td>
+<td>0.024194</td>
+<td>0.800000</td>
+<td>0.046967</td>
+<td>0.819009</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>ECOD</td>
+<td>0.005339</td>
+<td>0.805639</td>
+<td>0.016988</td>
+<td>0.666667</td>
+<td>0.033131</td>
+<td>0.736502</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>GMM</td>
+<td>0.051490</td>
+<td>0.804973</td>
+<td>0.013636</td>
+<td>0.533333</td>
+<td>0.026593</td>
+<td>0.669835</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>HBOS</td>
+<td>0.002509</td>
+<td>0.994672</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499833</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>IForest</td>
+<td>0.242377</td>
+<td>0.908092</td>
+<td>0.042105</td>
+<td>0.800000</td>
+<td>0.080000</td>
+<td>0.854317</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>INNE</td>
+<td>0.605491</td>
+<td>0.909535</td>
+<td>0.042755</td>
+<td>0.800000</td>
+<td>0.081172</td>
+<td>0.855042</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>KDE</td>
+<td>11.031554</td>
+<td>0.903985</td>
+<td>0.040359</td>
+<td>0.800000</td>
+<td>0.076841</td>
+<td>0.852253</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>KNN</td>
+<td>0.021737</td>
+<td>0.893884</td>
+<td>0.033777</td>
+<td>0.733333</td>
+<td>0.064579</td>
+<td>0.814012</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>LODA</td>
+<td>0.071639</td>
+<td>0.994672</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499833</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>LOF</td>
+<td>0.051358</td>
+<td>0.660340</td>
+<td>0.004926</td>
+<td>0.333333</td>
+<td>0.009709</td>
+<td>0.497657</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>MAD</td>
+<td>0.001691</td>
+<td>0.981352</td>
+<td>0.144509</td>
+<td>0.555556</td>
+<td>0.229358</td>
+<td>0.769523</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>MCD</td>
+<td>0.006587</td>
+<td>0.908314</td>
+<td>0.042204</td>
+<td>0.800000</td>
+<td>0.080178</td>
+<td>0.854429</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>OCSVM</td>
+<td>19.988524</td>
+<td>0.902875</td>
+<td>0.039911</td>
+<td>0.800000</td>
+<td>0.076030</td>
+<td>0.851696</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>PCA</td>
+<td>0.002834</td>
+<td>0.669331</td>
+<td>0.002037</td>
+<td>0.133333</td>
+<td>0.004012</td>
+<td>0.402677</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>ROD</td>
+<td>3.424712</td>
+<td>0.744145</td>
+<td>0.000442</td>
+<td>0.022222</td>
+<td>0.000867</td>
+<td>0.384996</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.283574</td>
+<td>9009</td>
+<td>0.004995</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="시도50.2-0.0005" class="level2">
+<h2 class="anchored" data-anchor-id="시도50.2-0.0005">시도5(0.2 / 0.0005)</h2>
+<div id="202d1f02-65e1-4d85-a5c2-22a087ea2d53" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess(fraudTrain, <span class="fl">0.2</span>, <span class="fl">0.0005</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">pyod</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ABOD</td>
+<td>1.069119</td>
+<td>0.999556</td>
+<td>0.000000</td>
+<td>0.00</td>
+<td>0.000000</td>
+<td>0.500000</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>COPOD</td>
+<td>0.005346</td>
+<td>0.835942</td>
+<td>0.002027</td>
+<td>0.75</td>
+<td>0.004043</td>
+<td>0.792990</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>ECOD</td>
+<td>0.006209</td>
+<td>0.805528</td>
+<td>0.001710</td>
+<td>0.75</td>
+<td>0.003413</td>
+<td>0.777776</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>GMM</td>
+<td>0.082742</td>
+<td>0.804529</td>
+<td>0.000569</td>
+<td>0.25</td>
+<td>0.001134</td>
+<td>0.527388</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>HBOS</td>
+<td>0.002443</td>
+<td>0.999223</td>
+<td>0.000000</td>
+<td>0.00</td>
+<td>0.000000</td>
+<td>0.499833</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>IForest</td>
+<td>0.230697</td>
+<td>0.908536</td>
+<td>0.003632</td>
+<td>0.75</td>
+<td>0.007229</td>
+<td>0.829303</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>INNE</td>
+<td>0.609098</td>
+<td>0.832723</td>
+<td>0.001327</td>
+<td>0.50</td>
+<td>0.002647</td>
+<td>0.666435</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>KDE</td>
+<td>10.856316</td>
+<td>0.904096</td>
+<td>0.003464</td>
+<td>0.75</td>
+<td>0.006897</td>
+<td>0.827082</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>KNN</td>
+<td>0.021676</td>
+<td>0.894439</td>
+<td>0.002103</td>
+<td>0.50</td>
+<td>0.004188</td>
+<td>0.697307</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>LODA</td>
+<td>0.071447</td>
+<td>0.999223</td>
+<td>0.000000</td>
+<td>0.00</td>
+<td>0.000000</td>
+<td>0.499833</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>LOF</td>
+<td>0.050616</td>
+<td>0.661672</td>
+<td>0.000984</td>
+<td>0.75</td>
+<td>0.001965</td>
+<td>0.705816</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>MAD</td>
+<td>0.001689</td>
+<td>0.983128</td>
+<td>0.013158</td>
+<td>0.50</td>
+<td>0.025641</td>
+<td>0.741671</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>MCD</td>
+<td>0.006512</td>
+<td>0.908425</td>
+<td>0.003628</td>
+<td>0.75</td>
+<td>0.007220</td>
+<td>0.829248</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>OCSVM</td>
+<td>20.150592</td>
+<td>0.902431</td>
+<td>0.003405</td>
+<td>0.75</td>
+<td>0.006780</td>
+<td>0.826249</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>PCA</td>
+<td>0.002643</td>
+<td>0.671329</td>
+<td>0.000000</td>
+<td>0.00</td>
+<td>0.000000</td>
+<td>0.335813</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>ROD</td>
+<td>2.808707</td>
+<td>0.748363</td>
+<td>0.000000</td>
+<td>0.00</td>
+<td>0.000000</td>
+<td>0.374348</td>
+<td>False</td>
+<td>True</td>
+<td>0.2</td>
+<td>21021</td>
+<td>[amt]</td>
+<td>0.285524</td>
+<td>9009</td>
+<td>0.000444</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

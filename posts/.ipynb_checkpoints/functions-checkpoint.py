@@ -36,10 +36,6 @@ def split_dataframe(data_frame, test_fraud_rate, test_rate=0.3, random_state=42)
 
     return train_data, test_data
 
-
-####################################################################################################################
-################ proposed 
-
 def concat(df_tr, df_tst):   
     df = pd.concat([df_tr, df_tst])
     train_mask = np.concatenate((np.full(len(df_tr), True), np.full(len(df_tst), False)))    # index꼬이는거 방지하기 위해서? ★ (이거,, 훔,,?(
@@ -88,10 +84,7 @@ def gcn_data(df):
     return data
 
 
-
-####################################################################################################################
-################ pyod
-
+# pyod
 
 from pyod.models.abod import ABOD
 #from pyod.models.alad import ALAD
