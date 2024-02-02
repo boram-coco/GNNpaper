@@ -190,7 +190,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="imports" class="level1">
 <h1>imports</h1>
-<div id="4eb91738-6398-4ffc-bbec-fc48fcc8f249" class="cell" data-execution_count="3">
+<div id="4eb91738-6398-4ffc-bbec-fc48fcc8f249" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
@@ -216,425 +216,128 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># autogluon</span></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> autogluon.tabular <span class="im">import</span> TabularDataset, TabularPredictor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/torch_geometric/typing.py:18: UserWarning: An issue occurred while importing 'pyg-lib'. Disabling its usage. Stacktrace: /home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/libpyg.so: undefined symbol: _ZN2at4_ops12split_Tensor4callERKNS_6TensorEN3c106SymIntEl
+  warnings.warn(f"An issue occurred while importing 'pyg-lib'. "
+/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/torch_geometric/typing.py:31: UserWarning: An issue occurred while importing 'torch-scatter'. Disabling its usage. Stacktrace: /home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/torch_scatter/_scatter_cuda.so: undefined symbol: _ZNK3c107SymBool10guard_boolEPKcl
+  warnings.warn(f"An issue occurred while importing 'torch-scatter'. "
+/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/torch_geometric/typing.py:42: UserWarning: An issue occurred while importing 'torch-sparse'. Disabling its usage. Stacktrace: /home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/torch_sparse/_diag_cuda.so: undefined symbol: _ZN3c106detail19maybe_wrap_dim_slowIlEET_S2_S2_b
+  warnings.warn(f"An issue occurred while importing 'torch-sparse'. "</code></pre>
+</div>
 </div>
 <div id="2774d96b-b24a-492b-a587-2815ff6e3ead" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> throw(df, fraud_rate):  <span class="co"># 사기 거래 비율에 맞춰 버려지는 함수!</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        df1 <span class="op">=</span> df[df[<span class="st">'is_fraud'</span>] <span class="op">==</span> <span class="dv">1</span>].copy()</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        df0 <span class="op">=</span> df[df[<span class="st">'is_fraud'</span>] <span class="op">==</span> <span class="dv">0</span>].copy()</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        df0_downsample <span class="op">=</span> (<span class="bu">len</span>(df1) <span class="op">*</span> (<span class="dv">1</span><span class="op">-</span>fraud_rate)) <span class="op">/</span> (<span class="bu">len</span>(df0) <span class="op">*</span> fraud_rate)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        df0_down <span class="op">=</span> df0.sample(frac<span class="op">=</span>df0_downsample, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        df_p <span class="op">=</span> pd.concat([df1, df0_down])</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> df_p</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> split_dataframe(data_frame, test_fraud_rate, test_rate<span class="op">=</span><span class="fl">0.3</span>):</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> <span class="bu">len</span>(data_frame)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 사기 거래와 정상 거래를 분리</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        fraud_data <span class="op">=</span> data_frame[data_frame[<span class="st">'is_fraud'</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        normal_data <span class="op">=</span> data_frame[data_frame[<span class="st">'is_fraud'</span>] <span class="op">==</span> <span class="dv">0</span>]</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 테스트 데이터 크기 계산</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        test_samples <span class="op">=</span> <span class="bu">int</span>(test_fraud_rate <span class="op">*</span> (n <span class="op">*</span> test_rate))</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        remaining_test_samples <span class="op">=</span> <span class="bu">int</span>(n <span class="op">*</span> test_rate) <span class="op">-</span> test_samples</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 사기 거래 및 정상 거래에서 무작위로 테스트 데이터 추출</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        test_fraud_data <span class="op">=</span> fraud_data.sample(n<span class="op">=</span>test_samples, replace<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        test_normal_data <span class="op">=</span> normal_data.sample(n<span class="op">=</span>remaining_test_samples, replace<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 테스트 데이터 합치기</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        test_data <span class="op">=</span> pd.concat([test_normal_data, test_fraud_data])</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 훈련 데이터 생성</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        train_data <span class="op">=</span> data_frame[<span class="op">~</span>data_frame.index.isin(test_data.index)]</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> train_data, test_data</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> concat(df_tr, df_tst):   </span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> pd.concat([df_tr, df_tst])</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        train_mask <span class="op">=</span> np.concatenate((np.full(<span class="bu">len</span>(df_tr), <span class="va">True</span>), np.full(<span class="bu">len</span>(df_tst), <span class="va">False</span>)))    <span class="co"># index꼬이는거 방지하기 위해서? ★ (이거,, 훔,,?(</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        test_mask <span class="op">=</span>  np.concatenate((np.full(<span class="bu">len</span>(df_tr), <span class="va">False</span>), np.full(<span class="bu">len</span>(df_tst), <span class="va">True</span>))) </span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> (train_mask, test_mask)</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> df, mask</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> evaluation(y, yhat):</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        metrics <span class="op">=</span> [sklearn.metrics.accuracy_score,</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>                   sklearn.metrics.precision_score,</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>                   sklearn.metrics.recall_score,</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>                   sklearn.metrics.f1_score,</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>                   sklearn.metrics.roc_auc_score]</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.DataFrame({m.<span class="va">__name__</span>:[m(y,yhat).<span class="bu">round</span>(<span class="dv">6</span>)] <span class="cf">for</span> m <span class="kw">in</span> metrics})</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> compute_time_difference(group):</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> <span class="bu">len</span>(group)</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> []</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>                time_difference <span class="op">=</span> <span class="bu">abs</span>((group.iloc[i].trans_date_trans_time <span class="op">-</span> group.iloc[j].trans_date_trans_time).total_seconds())</span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>                result.append([group.iloc[i].name, group.iloc[j].name, time_difference])</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> edge_index_save(df, unique_col, theta, gamma):</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>        groups <span class="op">=</span> df.groupby(unique_col)</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>        edge_index <span class="op">=</span> np.array([item <span class="cf">for</span> sublist <span class="kw">in</span> (compute_time_difference(group) <span class="cf">for</span> _, group <span class="kw">in</span> groups) <span class="cf">for</span> item <span class="kw">in</span> sublist])</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>        edge_index <span class="op">=</span> edge_index.astype(np.float64)</span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>        filename <span class="op">=</span> <span class="ss">f"edge_index_attempt</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>save_attempt<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span><span class="bu">str</span>(unique_col)<span class="sc">.</span>replace(<span class="st">' '</span>, <span class="st">''</span>)<span class="sc">.</span>replace(<span class="st">'_'</span>, <span class="st">''</span>)<span class="sc">}</span><span class="ss">.npy"</span></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> os.path.exists(filename):</span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.save_attempt <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>            filename <span class="op">=</span> <span class="ss">f"edge_index_attempt</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>save_attempt<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span><span class="bu">str</span>(unique_col)<span class="sc">.</span>replace(<span class="st">' '</span>, <span class="st">''</span>)<span class="sc">.</span>replace(<span class="st">'_'</span>, <span class="st">''</span>)<span class="sc">}</span><span class="ss">.npy"</span></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>        np.save(filename, edge_index)</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>        <span class="co">#tetha = edge_index_plust_itme[:,].mean()</span></span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>        edge_index[:,<span class="dv">2</span>] <span class="op">=</span> (np.exp(<span class="op">-</span>edge_index[:,<span class="dv">2</span>]<span class="op">/</span>(theta)) <span class="op">!=</span> <span class="dv">1</span>)<span class="op">*</span>(np.exp(<span class="op">-</span>edge_index[:,<span class="dv">2</span>]<span class="op">/</span>(theta))).tolist()</span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>        edge_index <span class="op">=</span> torch.tensor([(<span class="bu">int</span>(row[<span class="dv">0</span>]), <span class="bu">int</span>(row[<span class="dv">1</span>])) <span class="cf">for</span> row <span class="kw">in</span> edge_index <span class="cf">if</span> row[<span class="dv">2</span>] <span class="op">&gt;</span> gamma], dtype<span class="op">=</span>torch.<span class="bu">long</span>).t()</span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> edge_index</span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> edge_index(df, unique_col, theta, gamma):</span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>        groups <span class="op">=</span> df.groupby(unique_col)</span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>        edge_index <span class="op">=</span> np.array([item <span class="cf">for</span> sublist <span class="kw">in</span> (compute_time_difference(group) <span class="cf">for</span> _, group <span class="kw">in</span> groups) <span class="cf">for</span> item <span class="kw">in</span> sublist])</span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>        edge_index <span class="op">=</span> edge_index.astype(np.float64)</span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>       <span class="co"># filename = f"edge_index_attempt{self.save_attempt}_{str(unique_col).replace(' ', '').replace('_', '')}.npy"</span></span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>        <span class="co"># while os.path.exists(filename):</span></span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     self.save_attempt += 1</span></span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     filename = f"edge_index_attempt{self.save_attempt}_{str(unique_col).replace(' ', '').replace('_', '')}.npy"</span></span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>        <span class="co"># np.save(filename, edge_index)</span></span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>        <span class="co">#tetha = edge_index_plust_itme[:,].mean()</span></span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>        edge_index[:,<span class="dv">2</span>] <span class="op">=</span> (np.exp(<span class="op">-</span>edge_index[:,<span class="dv">2</span>]<span class="op">/</span>(theta)) <span class="op">!=</span> <span class="dv">1</span>)<span class="op">*</span>(np.exp(<span class="op">-</span>edge_index[:,<span class="dv">2</span>]<span class="op">/</span>(theta))).tolist()</span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>        edge_index <span class="op">=</span> torch.tensor([(<span class="bu">int</span>(row[<span class="dv">0</span>]), <span class="bu">int</span>(row[<span class="dv">1</span>])) <span class="cf">for</span> row <span class="kw">in</span> edge_index <span class="cf">if</span> row[<span class="dv">2</span>] <span class="op">&gt;</span> gamma], dtype<span class="op">=</span>torch.<span class="bu">long</span>).t()</span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> edge_index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> throw(df, fraud_rate):  <span class="co"># 사기 거래 비율에 맞춰 버려지는 함수!</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    df1 <span class="op">=</span> df[df[<span class="st">'is_fraud'</span>] <span class="op">==</span> <span class="dv">1</span>].copy()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    df0 <span class="op">=</span> df[df[<span class="st">'is_fraud'</span>] <span class="op">==</span> <span class="dv">0</span>].copy()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    df0_downsample <span class="op">=</span> (<span class="bu">len</span>(df1) <span class="op">*</span> (<span class="dv">1</span><span class="op">-</span>fraud_rate)) <span class="op">/</span> (<span class="bu">len</span>(df0) <span class="op">*</span> fraud_rate)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    df0_down <span class="op">=</span> df0.sample(frac<span class="op">=</span>df0_downsample, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    df_p <span class="op">=</span> pd.concat([df1, df0_down])</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_p</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> split_dataframe(data_frame, test_fraud_rate, test_rate<span class="op">=</span><span class="fl">0.3</span>):</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(data_frame)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 사기 거래와 정상 거래를 분리</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    fraud_data <span class="op">=</span> data_frame[data_frame[<span class="st">'is_fraud'</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    normal_data <span class="op">=</span> data_frame[data_frame[<span class="st">'is_fraud'</span>] <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 테스트 데이터 크기 계산</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    test_samples <span class="op">=</span> <span class="bu">int</span>(test_fraud_rate <span class="op">*</span> (n <span class="op">*</span> test_rate))</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    remaining_test_samples <span class="op">=</span> <span class="bu">int</span>(n <span class="op">*</span> test_rate) <span class="op">-</span> test_samples</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 사기 거래 및 정상 거래에서 무작위로 테스트 데이터 추출</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    test_fraud_data <span class="op">=</span> fraud_data.sample(n<span class="op">=</span>test_samples, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    test_normal_data <span class="op">=</span> normal_data.sample(n<span class="op">=</span>remaining_test_samples, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 테스트 데이터 합치기</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    test_data <span class="op">=</span> pd.concat([test_normal_data, test_fraud_data])</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 훈련 데이터 생성</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    train_data <span class="op">=</span> data_frame[<span class="op">~</span>data_frame.index.isin(test_data.index)]</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> train_data, test_data</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> concat(df_tr, df_tst):   </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.concat([df_tr, df_tst])</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    train_mask <span class="op">=</span> np.concatenate((np.full(<span class="bu">len</span>(df_tr), <span class="va">True</span>), np.full(<span class="bu">len</span>(df_tst), <span class="va">False</span>)))    <span class="co"># index꼬이는거 방지하기 위해서? ★ (이거,, 훔,,?(</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    test_mask <span class="op">=</span>  np.concatenate((np.full(<span class="bu">len</span>(df_tr), <span class="va">False</span>), np.full(<span class="bu">len</span>(df_tst), <span class="va">True</span>))) </span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> (train_mask, test_mask)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df, mask</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluation(y, yhat):</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    metrics <span class="op">=</span> [sklearn.metrics.accuracy_score,</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>               sklearn.metrics.precision_score,</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>               sklearn.metrics.recall_score,</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>               sklearn.metrics.f1_score,</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>               sklearn.metrics.roc_auc_score]</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame({m.<span class="va">__name__</span>:[m(y,yhat).<span class="bu">round</span>(<span class="dv">6</span>)] <span class="cf">for</span> m <span class="kw">in</span> metrics})</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_time_difference(group):</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(group)</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> []</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>            time_difference <span class="op">=</span> <span class="bu">abs</span>((group.iloc[i].trans_date_trans_time <span class="op">-</span> group.iloc[j].trans_date_trans_time).total_seconds())</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>            result.append([group.iloc[i].name, group.iloc[j].name, time_difference])</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> edge_index_save(df, unique_col, theta, gamma):</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>    groups <span class="op">=</span> df.groupby(unique_col)</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>    edge_index <span class="op">=</span> np.array([item <span class="cf">for</span> sublist <span class="kw">in</span> (compute_time_difference(group) <span class="cf">for</span> _, group <span class="kw">in</span> groups) <span class="cf">for</span> item <span class="kw">in</span> sublist])</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    edge_index <span class="op">=</span> edge_index.astype(np.float64)</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>    filename <span class="op">=</span> <span class="ss">f"edge_index_attempt</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>save_attempt<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span><span class="bu">str</span>(unique_col)<span class="sc">.</span>replace(<span class="st">' '</span>, <span class="st">''</span>)<span class="sc">.</span>replace(<span class="st">'_'</span>, <span class="st">''</span>)<span class="sc">}</span><span class="ss">.npy"</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> os.path.exists(filename):</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.save_attempt <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>        filename <span class="op">=</span> <span class="ss">f"edge_index_attempt</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>save_attempt<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span><span class="bu">str</span>(unique_col)<span class="sc">.</span>replace(<span class="st">' '</span>, <span class="st">''</span>)<span class="sc">.</span>replace(<span class="st">'_'</span>, <span class="st">''</span>)<span class="sc">}</span><span class="ss">.npy"</span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    np.save(filename, edge_index)</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>    <span class="co">#tetha = edge_index_plust_itme[:,].mean()</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    edge_index[:,<span class="dv">2</span>] <span class="op">=</span> (np.exp(<span class="op">-</span>edge_index[:,<span class="dv">2</span>]<span class="op">/</span>(theta)) <span class="op">!=</span> <span class="dv">1</span>)<span class="op">*</span>(np.exp(<span class="op">-</span>edge_index[:,<span class="dv">2</span>]<span class="op">/</span>(theta))).tolist()</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    edge_index <span class="op">=</span> torch.tensor([(<span class="bu">int</span>(row[<span class="dv">0</span>]), <span class="bu">int</span>(row[<span class="dv">1</span>])) <span class="cf">for</span> row <span class="kw">in</span> edge_index <span class="cf">if</span> row[<span class="dv">2</span>] <span class="op">&gt;</span> gamma], dtype<span class="op">=</span>torch.<span class="bu">long</span>).t()</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> edge_index</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> edge_index(df, unique_col, theta, gamma):</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>    groups <span class="op">=</span> df.groupby(unique_col)</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>    edge_index <span class="op">=</span> np.array([item <span class="cf">for</span> sublist <span class="kw">in</span> (compute_time_difference(group) <span class="cf">for</span> _, group <span class="kw">in</span> groups) <span class="cf">for</span> item <span class="kw">in</span> sublist])</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>    edge_index <span class="op">=</span> edge_index.astype(np.float64)</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>   <span class="co"># filename = f"edge_index_attempt{self.save_attempt}_{str(unique_col).replace(' ', '').replace('_', '')}.npy"</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>    <span class="co"># while os.path.exists(filename):</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     self.save_attempt += 1</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     filename = f"edge_index_attempt{self.save_attempt}_{str(unique_col).replace(' ', '').replace('_', '')}.npy"</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>    <span class="co"># np.save(filename, edge_index)</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>    <span class="co">#tetha = edge_index_plust_itme[:,].mean()</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>    edge_index[:,<span class="dv">2</span>] <span class="op">=</span> (np.exp(<span class="op">-</span>edge_index[:,<span class="dv">2</span>]<span class="op">/</span>(theta)) <span class="op">!=</span> <span class="dv">1</span>)<span class="op">*</span>(np.exp(<span class="op">-</span>edge_index[:,<span class="dv">2</span>]<span class="op">/</span>(theta))).tolist()</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>    edge_index <span class="op">=</span> torch.tensor([(<span class="bu">int</span>(row[<span class="dv">0</span>]), <span class="bu">int</span>(row[<span class="dv">1</span>])) <span class="cf">for</span> row <span class="kw">in</span> edge_index <span class="cf">if</span> row[<span class="dv">2</span>] <span class="op">&gt;</span> gamma], dtype<span class="op">=</span>torch.<span class="bu">long</span>).t()</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> edge_index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="9f8b4812-1b25-44e2-bc14-438f74d7e911" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="9444d5cf-9c88-4018-a0e9-1ae2f5803ed2" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fraudTrain</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">trans_date_trans_time</th>
-<th data-quarto-table-cell-role="th">cc_num</th>
-<th data-quarto-table-cell-role="th">merchant</th>
-<th data-quarto-table-cell-role="th">category</th>
-<th data-quarto-table-cell-role="th">amt</th>
-<th data-quarto-table-cell-role="th">first</th>
-<th data-quarto-table-cell-role="th">last</th>
-<th data-quarto-table-cell-role="th">gender</th>
-<th data-quarto-table-cell-role="th">street</th>
-<th data-quarto-table-cell-role="th">city</th>
-<th data-quarto-table-cell-role="th">...</th>
-<th data-quarto-table-cell-role="th">lat</th>
-<th data-quarto-table-cell-role="th">long</th>
-<th data-quarto-table-cell-role="th">city_pop</th>
-<th data-quarto-table-cell-role="th">job</th>
-<th data-quarto-table-cell-role="th">dob</th>
-<th data-quarto-table-cell-role="th">trans_num</th>
-<th data-quarto-table-cell-role="th">unix_time</th>
-<th data-quarto-table-cell-role="th">merch_lat</th>
-<th data-quarto-table-cell-role="th">merch_long</th>
-<th data-quarto-table-cell-role="th">is_fraud</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>2019-01-01 00:00:00</td>
-<td>2.703190e+15</td>
-<td>fraud_Rippin, Kub and Mann</td>
-<td>misc_net</td>
-<td>4.97</td>
-<td>Jennifer</td>
-<td>Banks</td>
-<td>F</td>
-<td>561 Perry Cove</td>
-<td>Moravian Falls</td>
-<td>...</td>
-<td>36.0788</td>
-<td>-81.1781</td>
-<td>3495</td>
-<td>Psychologist, counselling</td>
-<td>1988-03-09</td>
-<td>0b242abb623afc578575680df30655b9</td>
-<td>1325376018</td>
-<td>36.011293</td>
-<td>-82.048315</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2019-01-01 00:00:00</td>
-<td>6.304230e+11</td>
-<td>fraud_Heller, Gutmann and Zieme</td>
-<td>grocery_pos</td>
-<td>107.23</td>
-<td>Stephanie</td>
-<td>Gill</td>
-<td>F</td>
-<td>43039 Riley Greens Suite 393</td>
-<td>Orient</td>
-<td>...</td>
-<td>48.8878</td>
-<td>-118.2105</td>
-<td>149</td>
-<td>Special educational needs teacher</td>
-<td>1978-06-21</td>
-<td>1f76529f8574734946361c461b024d99</td>
-<td>1325376044</td>
-<td>49.159047</td>
-<td>-118.186462</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>2019-01-01 00:00:00</td>
-<td>3.885950e+13</td>
-<td>fraud_Lind-Buckridge</td>
-<td>entertainment</td>
-<td>220.11</td>
-<td>Edward</td>
-<td>Sanchez</td>
-<td>M</td>
-<td>594 White Dale Suite 530</td>
-<td>Malad City</td>
-<td>...</td>
-<td>42.1808</td>
-<td>-112.2620</td>
-<td>4154</td>
-<td>Nature conservation officer</td>
-<td>1962-01-19</td>
-<td>a1a22d70485983eac12b5b88dad1cf95</td>
-<td>1325376051</td>
-<td>43.150704</td>
-<td>-112.154481</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>2019-01-01 00:01:00</td>
-<td>3.534090e+15</td>
-<td>fraud_Kutch, Hermiston and Farrell</td>
-<td>gas_transport</td>
-<td>45.00</td>
-<td>Jeremy</td>
-<td>White</td>
-<td>M</td>
-<td>9443 Cynthia Court Apt. 038</td>
-<td>Boulder</td>
-<td>...</td>
-<td>46.2306</td>
-<td>-112.1138</td>
-<td>1939</td>
-<td>Patent attorney</td>
-<td>1967-01-12</td>
-<td>6b849c168bdad6f867558c3793159a81</td>
-<td>1325376076</td>
-<td>47.034331</td>
-<td>-112.561071</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>2019-01-01 00:03:00</td>
-<td>3.755340e+14</td>
-<td>fraud_Keeling-Crist</td>
-<td>misc_pos</td>
-<td>41.96</td>
-<td>Tyler</td>
-<td>Garcia</td>
-<td>M</td>
-<td>408 Bradley Rest</td>
-<td>Doe Hill</td>
-<td>...</td>
-<td>38.4207</td>
-<td>-79.4629</td>
-<td>99</td>
-<td>Dance movement psychotherapist</td>
-<td>1986-03-28</td>
-<td>a41d7549acf90789359a9aa5346dcb46</td>
-<td>1325376186</td>
-<td>38.674999</td>
-<td>-78.632459</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1048570</td>
-<td>2020-03-10 16:07:00</td>
-<td>6.011980e+15</td>
-<td>fraud_Fadel Inc</td>
-<td>health_fitness</td>
-<td>77.00</td>
-<td>Haley</td>
-<td>Wagner</td>
-<td>F</td>
-<td>05561 Farrell Crescent</td>
-<td>Annapolis</td>
-<td>...</td>
-<td>39.0305</td>
-<td>-76.5515</td>
-<td>92106</td>
-<td>Accountant, chartered certified</td>
-<td>1943-05-28</td>
-<td>45ecd198c65e81e597db22e8d2ef7361</td>
-<td>1362931649</td>
-<td>38.779464</td>
-<td>-76.317042</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1048571</td>
-<td>2020-03-10 16:07:00</td>
-<td>4.839040e+15</td>
-<td>fraud_Cremin, Hamill and Reichel</td>
-<td>misc_pos</td>
-<td>116.94</td>
-<td>Meredith</td>
-<td>Campbell</td>
-<td>F</td>
-<td>043 Hanson Turnpike</td>
-<td>Hedrick</td>
-<td>...</td>
-<td>41.1826</td>
-<td>-92.3097</td>
-<td>1583</td>
-<td>Geochemist</td>
-<td>1999-06-28</td>
-<td>c00ce51c6ebb7657474a77b9e0b51f34</td>
-<td>1362931670</td>
-<td>41.400318</td>
-<td>-92.726724</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1048572</td>
-<td>2020-03-10 16:08:00</td>
-<td>5.718440e+11</td>
-<td>fraud_O'Connell, Botsford and Hand</td>
-<td>home</td>
-<td>21.27</td>
-<td>Susan</td>
-<td>Mills</td>
-<td>F</td>
-<td>005 Cody Estates</td>
-<td>Louisville</td>
-<td>...</td>
-<td>38.2507</td>
-<td>-85.7476</td>
-<td>736284</td>
-<td>Engineering geologist</td>
-<td>1952-04-02</td>
-<td>17c9dc8b2a6449ca2473726346e58e6c</td>
-<td>1362931711</td>
-<td>37.293339</td>
-<td>-84.798122</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1048573</td>
-<td>2020-03-10 16:08:00</td>
-<td>4.646850e+18</td>
-<td>fraud_Thompson-Gleason</td>
-<td>health_fitness</td>
-<td>9.52</td>
-<td>Julia</td>
-<td>Bell</td>
-<td>F</td>
-<td>576 House Crossroad</td>
-<td>West Sayville</td>
-<td>...</td>
-<td>40.7320</td>
-<td>-73.1000</td>
-<td>4056</td>
-<td>Film/video editor</td>
-<td>1990-06-25</td>
-<td>5ca650881b48a6a38754f841c23b77ab</td>
-<td>1362931718</td>
-<td>39.773077</td>
-<td>-72.213209</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1048574</td>
-<td>2020-03-10 16:08:00</td>
-<td>2.283740e+15</td>
-<td>fraud_Buckridge PLC</td>
-<td>misc_pos</td>
-<td>6.81</td>
-<td>Shannon</td>
-<td>Williams</td>
-<td>F</td>
-<td>9345 Spencer Junctions Suite 183</td>
-<td>Alpharetta</td>
-<td>...</td>
-<td>34.0770</td>
-<td>-84.3033</td>
-<td>165556</td>
-<td>Prison officer</td>
-<td>1997-12-27</td>
-<td>8d0a575fe635bbde12f1a2bffc126731</td>
-<td>1362931730</td>
-<td>33.601468</td>
-<td>-83.891921</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-
-<p>1048575 rows × 22 columns</p>
-</div>
-</div>
+<div id="9f8b4812-1b25-44e2-bc14-438f74d7e911" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="autogluondf02" class="level1">
 <h1>Autogluon(df02)</h1>
-<div id="c660f6c2-92c5-4e58-8967-8477870828d4" class="cell" data-execution_count="9">
+<div id="c660f6c2-92c5-4e58-8967-8477870828d4" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fraudTrain <span class="op">=</span> fraudTrain[[<span class="st">"amt"</span>,<span class="st">"is_fraud"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="49bc58b4-948f-42ef-9c3e-d1d2ce72ea0e" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> auto(df,test_fraud_rate):</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    df_tr, df_tst <span class="op">=</span> split_dataframe(df, test_fraud_rate)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    tr <span class="op">=</span> TabularDataset(df_tr)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    tst <span class="op">=</span> TabularDataset(df_tst)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    predictr <span class="op">=</span> TabularPredictor(<span class="st">"is_fraud"</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    predictr.fit(tr, presets<span class="op">=</span><span class="st">'best_quality'</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> tst.is_fraud</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    yhat <span class="op">=</span> predictr.predict(tst)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> evaluation(y,yhat)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="49bc58b4-948f-42ef-9c3e-d1d2ce72ea0e" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># def auto(df,test_fraud_rate):</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     df_tr, df_tst = split_dataframe(df, test_fraud_rate)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     tr = TabularDataset(df_tr)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     tst = TabularDataset(df_tst)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     predictr = TabularPredictor("is_fraud")</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     predictr.fit(tr, presets='best_quality')</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#     y = tst.is_fraud</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     yhat = predictr.predict(tst)</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     result = evaluation(y,yhat)</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     return result</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cfd3c747-4e7e-42fb-9b33-8d526e345213" class="cell" data-execution_count="13">
+<div id="cfd3c747-4e7e-42fb-9b33-8d526e345213" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> throw(fraudTrain, <span class="fl">0.3</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_tr, df_tst <span class="op">=</span> split_dataframe(df, <span class="fl">0.5</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>tr <span class="op">=</span> TabularDataset(df_tr)</span>
@@ -645,17 +348,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(tst)</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>result1 <span class="op">=</span> evaluation(y,yhat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240201_084407/"
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240202_071009/"
 Presets specified: ['best_quality']
 Stack configuration (auto_stack=True): num_stack_levels=0, num_bag_folds=8, num_bag_sets=1
 Beginning AutoGluon training ...
-AutoGluon will save models to "AutogluonModels/ag-20240201_084407/"
+AutoGluon will save models to "AutogluonModels/ag-20240202_071009/"
 AutoGluon Version:  0.8.2
 Python Version:     3.8.18
 Operating System:   Linux
 Platform Machine:   x86_64
 Platform Version:   #38~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov  2 18:01:13 UTC 2
-Disk Space Avail:   598.14 GB / 982.82 GB (60.9%)
+Disk Space Avail:   590.08 GB / 982.82 GB (60.0%)
 Train Data Rows:    14014
 Train Data Columns: 1
 Label Column: is_fraud
@@ -666,7 +369,7 @@ AutoGluon infers your prediction problem is: 'binary' (because only two unique l
 Selected class &lt;--&gt; label mapping:  class 1 = 1, class 0 = 0
 Using Feature Generators to preprocess the data ...
 Fitting AutoMLPipelineFeatureGenerator...
-    Available Memory:                    50234.26 MB
+    Available Memory:                    48787.66 MB
     Train Data (Original)  Memory Usage: 0.11 MB (0.0% of available memory)
     Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
     Stage 1 Generators:
@@ -686,7 +389,7 @@ Fitting AutoMLPipelineFeatureGenerator...
     0.0s = Fit runtime
     1 features in original data used to generate 1 features in processed data.
     Train Data (Processed) Memory Usage: 0.11 MB (0.0% of available memory)
-Data preprocessing and feature engineering runtime = 0.04s ...
+Data preprocessing and feature engineering runtime = 0.03s ...
 AutoGluon will gauge predictive performance using evaluation metric: 'accuracy'
     To change this, specify the eval_metric parameter of Predictor()
 User-specified model hyperparameters to be fit:
@@ -702,95 +405,718 @@ User-specified model hyperparameters to be fit:
 }
 Fitting 13 L1 models ...
 Fitting model: KNeighborsUnif_BAG_L1 ...
-    0.9181   = Validation score   (accuracy)
+    0.917    = Validation score   (accuracy)
     0.0s     = Training   runtime
-    0.01s    = Validation runtime
+    0.02s    = Validation runtime
 Fitting model: KNeighborsDist_BAG_L1 ...
-    0.9135   = Validation score   (accuracy)
+    0.9084   = Validation score   (accuracy)
     0.0s     = Training   runtime
-    0.01s    = Validation runtime
+    0.02s    = Validation runtime
 Fitting model: LightGBMXT_BAG_L1 ...
     Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
-    0.9244   = Validation score   (accuracy)
-    0.54s    = Training   runtime
+    0.9234   = Validation score   (accuracy)
+    0.38s    = Training   runtime
     0.03s    = Validation runtime
 Fitting model: LightGBM_BAG_L1 ...
     Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
-    0.9271   = Validation score   (accuracy)
-    0.69s    = Training   runtime
+    0.9261   = Validation score   (accuracy)
+    0.76s    = Training   runtime
     0.03s    = Validation runtime
 Fitting model: RandomForestGini_BAG_L1 ...
-    0.9056   = Validation score   (accuracy)
-    0.43s    = Training   runtime
-    0.25s    = Validation runtime
+    0.9022   = Validation score   (accuracy)
+    0.44s    = Training   runtime
+    0.26s    = Validation runtime
 Fitting model: RandomForestEntr_BAG_L1 ...
-    0.9056   = Validation score   (accuracy)
-    0.45s    = Training   runtime
+    0.9022   = Validation score   (accuracy)
+    0.51s    = Training   runtime
     0.24s    = Validation runtime
 Fitting model: CatBoost_BAG_L1 ...
     Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
-    0.9274   = Validation score   (accuracy)
-    1.99s    = Training   runtime
+    0.9247   = Validation score   (accuracy)
+    1.77s    = Training   runtime
     0.01s    = Validation runtime
 Fitting model: ExtraTreesGini_BAG_L1 ...
-    0.9103   = Validation score   (accuracy)
-    0.35s    = Training   runtime
-    0.33s    = Validation runtime
+    0.9068   = Validation score   (accuracy)
+    0.34s    = Training   runtime
+    0.28s    = Validation runtime
 Fitting model: ExtraTreesEntr_BAG_L1 ...
-    0.9098   = Validation score   (accuracy)
-    0.33s    = Training   runtime
-    0.27s    = Validation runtime
+    0.907    = Validation score   (accuracy)
+    0.36s    = Training   runtime
+    0.28s    = Validation runtime
 Fitting model: NeuralNetFastAI_BAG_L1 ...
     Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
-    0.9268   = Validation score   (accuracy)
-    12.45s   = Training   runtime
-    0.11s    = Validation runtime
+    0.9259   = Validation score   (accuracy)
+    12.19s   = Training   runtime
+    0.14s    = Validation runtime
 Fitting model: XGBoost_BAG_L1 ...
     Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
-    0.9262   = Validation score   (accuracy)
-    0.58s    = Training   runtime
+    0.9246   = Validation score   (accuracy)
+    0.5s     = Training   runtime
     0.02s    = Validation runtime
 Fitting model: NeuralNetTorch_BAG_L1 ...
     Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
-    0.9266   = Validation score   (accuracy)
-    14.41s   = Training   runtime
+    0.9259   = Validation score   (accuracy)
+    13.51s   = Training   runtime
     0.07s    = Validation runtime
 Fitting model: LightGBMLarge_BAG_L1 ...
     Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
-    0.9271   = Validation score   (accuracy)
-    1.05s    = Training   runtime
+    0.9261   = Validation score   (accuracy)
+    1.0s     = Training   runtime
     0.02s    = Validation runtime
 Fitting model: WeightedEnsemble_L2 ...
-    0.9285   = Validation score   (accuracy)
-    2.91s    = Training   runtime
-    0.01s    = Validation runtime
-AutoGluon training complete, total runtime = 47.53s ... Best model: "WeightedEnsemble_L2"
-TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20240201_084407/")</code></pre>
+    0.9261   = Validation score   (accuracy)
+    2.94s    = Training   runtime
+    0.02s    = Validation runtime
+AutoGluon training complete, total runtime = 45.78s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20240202_071009/")</code></pre>
 </div>
 </div>
-<div id="0c5e4318-5969-4445-ae3f-3a9d575c5fb4" class="cell" data-execution_count="14">
+<div id="c0cff45d-cd55-4dff-8cb0-bff96f3c712a" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>predictr.evaluate(tst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Evaluation: accuracy on test data: 0.855977355977356
+<pre><code>Evaluation: accuracy on test data: 0.8519813519813519
 Evaluations on test data:
 {
-    "accuracy": 0.855977355977356,
-    "balanced_accuracy": 0.855977355977356,
-    "mcc": 0.7334069897169785,
-    "roc_auc": 0.9624103834893047,
-    "f1": 0.836329233680227,
-    "precision": 0.9684487291849255,
-    "recall": 0.7359307359307359
+    "accuracy": 0.8519813519813519,
+    "balanced_accuracy": 0.8519813519813519,
+    "mcc": 0.7293218533016024,
+    "roc_auc": 0.9617966670913722,
+    "f1": 0.8297261061099407,
+    "precision": 0.9765554553651938,
+    "recall": 0.7212787212787213
 }</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="14">
-<pre><code>{'accuracy': 0.855977355977356,
- 'balanced_accuracy': 0.855977355977356,
- 'mcc': 0.7334069897169785,
- 'roc_auc': 0.9624103834893047,
- 'f1': 0.836329233680227,
- 'precision': 0.9684487291849255,
- 'recall': 0.7359307359307359}</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>{'accuracy': 0.8519813519813519,
+ 'balanced_accuracy': 0.8519813519813519,
+ 'mcc': 0.7293218533016024,
+ 'roc_auc': 0.9617966670913722,
+ 'f1': 0.8297261061099407,
+ 'precision': 0.9765554553651938,
+ 'recall': 0.7212787212787213}</code></pre>
+</div>
+</div>
+<div id="d815208e-5fcc-44ed-ad95-48556e582291" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>predictr._trainer.model_graph.nodes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>NodeView(('KNeighborsUnif_BAG_L1', 'KNeighborsDist_BAG_L1', 'LightGBMXT_BAG_L1', 'LightGBM_BAG_L1', 'RandomForestGini_BAG_L1', 'RandomForestEntr_BAG_L1', 'CatBoost_BAG_L1', 'ExtraTreesGini_BAG_L1', 'ExtraTreesEntr_BAG_L1', 'NeuralNetFastAI_BAG_L1', 'XGBoost_BAG_L1', 'NeuralNetTorch_BAG_L1', 'LightGBMLarge_BAG_L1', 'WeightedEnsemble_L2'))</code></pre>
+</div>
+</div>
+<div id="d3fb15d9-f9cb-4737-893f-abfaaeffc695" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>predictr.fit_summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>*** Summary of fit() ***
+Estimated performance of each model:
+                      model  score_val  pred_time_val   fit_time  pred_time_val_marginal  fit_time_marginal  stack_level  can_infer  fit_order
+0      LightGBMLarge_BAG_L1   0.926145       0.023825   1.000465                0.023825           1.000465            1       True         13
+1           LightGBM_BAG_L1   0.926145       0.030142   0.756562                0.030142           0.756562            1       True          4
+2       WeightedEnsemble_L2   0.926145       0.045217   3.698785                0.015075           2.942223            2       True         14
+3     NeuralNetTorch_BAG_L1   0.925931       0.068089  13.514495                0.068089          13.514495            1       True         12
+4    NeuralNetFastAI_BAG_L1   0.925860       0.144026  12.193488                0.144026          12.193488            1       True         10
+5           CatBoost_BAG_L1   0.924718       0.005455   1.765058                0.005455           1.765058            1       True          7
+6            XGBoost_BAG_L1   0.924575       0.019437   0.499822                0.019437           0.499822            1       True         11
+7         LightGBMXT_BAG_L1   0.923362       0.034598   0.377455                0.034598           0.377455            1       True          3
+8     KNeighborsUnif_BAG_L1   0.917012       0.015843   0.003800                0.015843           0.003800            1       True          1
+9     KNeighborsDist_BAG_L1   0.908377       0.015021   0.003333                0.015021           0.003333            1       True          2
+10    ExtraTreesEntr_BAG_L1   0.907022       0.277414   0.361435                0.277414           0.361435            1       True          9
+11    ExtraTreesGini_BAG_L1   0.906807       0.276092   0.336341                0.276092           0.336341            1       True          8
+12  RandomForestEntr_BAG_L1   0.902169       0.239527   0.511043                0.239527           0.511043            1       True          6
+13  RandomForestGini_BAG_L1   0.902169       0.255825   0.442638                0.255825           0.442638            1       True          5
+Number of models trained: 14
+Types of models trained:
+{'StackerEnsembleModel_CatBoost', 'StackerEnsembleModel_LGB', 'StackerEnsembleModel_TabularNeuralNetTorch', 'StackerEnsembleModel_RF', 'StackerEnsembleModel_NNFastAiTabular', 'StackerEnsembleModel_XGBoost', 'StackerEnsembleModel_XT', 'WeightedEnsembleModel', 'StackerEnsembleModel_KNN'}
+Bagging used: True  (with 8 folds)
+Multi-layer stack-ensembling used: False 
+Feature Metadata (Processed):
+(raw dtype, special dtypes):
+('float', []) : 1 | ['amt']
+*** End of fit() summary ***</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/autogluon/core/utils/plots.py:169: UserWarning: AutoGluon summary plots cannot be created because bokeh is not installed. To see plots, please do: "pip install bokeh==2.0.1"
+  warnings.warn('AutoGluon summary plots cannot be created because bokeh is not installed. To see plots, please do: "pip install bokeh==2.0.1"')</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>{'model_types': {'KNeighborsUnif_BAG_L1': 'StackerEnsembleModel_KNN',
+  'KNeighborsDist_BAG_L1': 'StackerEnsembleModel_KNN',
+  'LightGBMXT_BAG_L1': 'StackerEnsembleModel_LGB',
+  'LightGBM_BAG_L1': 'StackerEnsembleModel_LGB',
+  'RandomForestGini_BAG_L1': 'StackerEnsembleModel_RF',
+  'RandomForestEntr_BAG_L1': 'StackerEnsembleModel_RF',
+  'CatBoost_BAG_L1': 'StackerEnsembleModel_CatBoost',
+  'ExtraTreesGini_BAG_L1': 'StackerEnsembleModel_XT',
+  'ExtraTreesEntr_BAG_L1': 'StackerEnsembleModel_XT',
+  'NeuralNetFastAI_BAG_L1': 'StackerEnsembleModel_NNFastAiTabular',
+  'XGBoost_BAG_L1': 'StackerEnsembleModel_XGBoost',
+  'NeuralNetTorch_BAG_L1': 'StackerEnsembleModel_TabularNeuralNetTorch',
+  'LightGBMLarge_BAG_L1': 'StackerEnsembleModel_LGB',
+  'WeightedEnsemble_L2': 'WeightedEnsembleModel'},
+ 'model_performance': {'KNeighborsUnif_BAG_L1': 0.9170115598687028,
+  'KNeighborsDist_BAG_L1': 0.9083773369487655,
+  'LightGBMXT_BAG_L1': 0.9233623519337805,
+  'LightGBM_BAG_L1': 0.9261452832881404,
+  'RandomForestGini_BAG_L1': 0.9021692593121164,
+  'RandomForestEntr_BAG_L1': 0.9021692593121164,
+  'CatBoost_BAG_L1': 0.9247181390038532,
+  'ExtraTreesGini_BAG_L1': 0.9068074782360497,
+  'ExtraTreesEntr_BAG_L1': 0.9070215498786928,
+  'NeuralNetFastAI_BAG_L1': 0.925859854431283,
+  'XGBoost_BAG_L1': 0.9245754245754245,
+  'NeuralNetTorch_BAG_L1': 0.9259312116454974,
+  'LightGBMLarge_BAG_L1': 0.9261452832881404,
+  'WeightedEnsemble_L2': 0.9261452832881404},
+ 'model_best': 'WeightedEnsemble_L2',
+ 'model_paths': {'KNeighborsUnif_BAG_L1': 'AutogluonModels/ag-20240202_071009/models/KNeighborsUnif_BAG_L1/',
+  'KNeighborsDist_BAG_L1': 'AutogluonModels/ag-20240202_071009/models/KNeighborsDist_BAG_L1/',
+  'LightGBMXT_BAG_L1': 'AutogluonModels/ag-20240202_071009/models/LightGBMXT_BAG_L1/',
+  'LightGBM_BAG_L1': 'AutogluonModels/ag-20240202_071009/models/LightGBM_BAG_L1/',
+  'RandomForestGini_BAG_L1': 'AutogluonModels/ag-20240202_071009/models/RandomForestGini_BAG_L1/',
+  'RandomForestEntr_BAG_L1': 'AutogluonModels/ag-20240202_071009/models/RandomForestEntr_BAG_L1/',
+  'CatBoost_BAG_L1': 'AutogluonModels/ag-20240202_071009/models/CatBoost_BAG_L1/',
+  'ExtraTreesGini_BAG_L1': 'AutogluonModels/ag-20240202_071009/models/ExtraTreesGini_BAG_L1/',
+  'ExtraTreesEntr_BAG_L1': 'AutogluonModels/ag-20240202_071009/models/ExtraTreesEntr_BAG_L1/',
+  'NeuralNetFastAI_BAG_L1': 'AutogluonModels/ag-20240202_071009/models/NeuralNetFastAI_BAG_L1/',
+  'XGBoost_BAG_L1': 'AutogluonModels/ag-20240202_071009/models/XGBoost_BAG_L1/',
+  'NeuralNetTorch_BAG_L1': 'AutogluonModels/ag-20240202_071009/models/NeuralNetTorch_BAG_L1/',
+  'LightGBMLarge_BAG_L1': 'AutogluonModels/ag-20240202_071009/models/LightGBMLarge_BAG_L1/',
+  'WeightedEnsemble_L2': 'AutogluonModels/ag-20240202_071009/models/WeightedEnsemble_L2/'},
+ 'model_fit_times': {'KNeighborsUnif_BAG_L1': 0.0038001537322998047,
+  'KNeighborsDist_BAG_L1': 0.0033333301544189453,
+  'LightGBMXT_BAG_L1': 0.377455472946167,
+  'LightGBM_BAG_L1': 0.7565624713897705,
+  'RandomForestGini_BAG_L1': 0.4426383972167969,
+  'RandomForestEntr_BAG_L1': 0.511042594909668,
+  'CatBoost_BAG_L1': 1.7650575637817383,
+  'ExtraTreesGini_BAG_L1': 0.33634114265441895,
+  'ExtraTreesEntr_BAG_L1': 0.3614346981048584,
+  'NeuralNetFastAI_BAG_L1': 12.193488121032715,
+  'XGBoost_BAG_L1': 0.49982166290283203,
+  'NeuralNetTorch_BAG_L1': 13.514495372772217,
+  'LightGBMLarge_BAG_L1': 1.000464916229248,
+  'WeightedEnsemble_L2': 2.9422225952148438},
+ 'model_pred_times': {'KNeighborsUnif_BAG_L1': 0.01584339141845703,
+  'KNeighborsDist_BAG_L1': 0.015021324157714844,
+  'LightGBMXT_BAG_L1': 0.03459787368774414,
+  'LightGBM_BAG_L1': 0.03014206886291504,
+  'RandomForestGini_BAG_L1': 0.2558248043060303,
+  'RandomForestEntr_BAG_L1': 0.23952651023864746,
+  'CatBoost_BAG_L1': 0.00545501708984375,
+  'ExtraTreesGini_BAG_L1': 0.2760922908782959,
+  'ExtraTreesEntr_BAG_L1': 0.27741408348083496,
+  'NeuralNetFastAI_BAG_L1': 0.1440262794494629,
+  'XGBoost_BAG_L1': 0.019437313079833984,
+  'NeuralNetTorch_BAG_L1': 0.06808900833129883,
+  'LightGBMLarge_BAG_L1': 0.02382516860961914,
+  'WeightedEnsemble_L2': 0.015074968338012695},
+ 'num_bag_folds': 8,
+ 'max_stack_level': 2,
+ 'num_classes': 2,
+ 'model_hyperparams': {'KNeighborsUnif_BAG_L1': {'use_orig_features': True,
+   'max_base_models': 25,
+   'max_base_models_per_type': 5,
+   'save_bag_folds': True,
+   'use_child_oof': True},
+  'KNeighborsDist_BAG_L1': {'use_orig_features': True,
+   'max_base_models': 25,
+   'max_base_models_per_type': 5,
+   'save_bag_folds': True,
+   'use_child_oof': True},
+  'LightGBMXT_BAG_L1': {'use_orig_features': True,
+   'max_base_models': 25,
+   'max_base_models_per_type': 5,
+   'save_bag_folds': True},
+  'LightGBM_BAG_L1': {'use_orig_features': True,
+   'max_base_models': 25,
+   'max_base_models_per_type': 5,
+   'save_bag_folds': True},
+  'RandomForestGini_BAG_L1': {'use_orig_features': True,
+   'max_base_models': 25,
+   'max_base_models_per_type': 5,
+   'save_bag_folds': True,
+   'use_child_oof': True},
+  'RandomForestEntr_BAG_L1': {'use_orig_features': True,
+   'max_base_models': 25,
+   'max_base_models_per_type': 5,
+   'save_bag_folds': True,
+   'use_child_oof': True},
+  'CatBoost_BAG_L1': {'use_orig_features': True,
+   'max_base_models': 25,
+   'max_base_models_per_type': 5,
+   'save_bag_folds': True},
+  'ExtraTreesGini_BAG_L1': {'use_orig_features': True,
+   'max_base_models': 25,
+   'max_base_models_per_type': 5,
+   'save_bag_folds': True,
+   'use_child_oof': True},
+  'ExtraTreesEntr_BAG_L1': {'use_orig_features': True,
+   'max_base_models': 25,
+   'max_base_models_per_type': 5,
+   'save_bag_folds': True,
+   'use_child_oof': True},
+  'NeuralNetFastAI_BAG_L1': {'use_orig_features': True,
+   'max_base_models': 25,
+   'max_base_models_per_type': 5,
+   'save_bag_folds': True},
+  'XGBoost_BAG_L1': {'use_orig_features': True,
+   'max_base_models': 25,
+   'max_base_models_per_type': 5,
+   'save_bag_folds': True},
+  'NeuralNetTorch_BAG_L1': {'use_orig_features': True,
+   'max_base_models': 25,
+   'max_base_models_per_type': 5,
+   'save_bag_folds': True},
+  'LightGBMLarge_BAG_L1': {'use_orig_features': True,
+   'max_base_models': 25,
+   'max_base_models_per_type': 5,
+   'save_bag_folds': True},
+  'WeightedEnsemble_L2': {'use_orig_features': False,
+   'max_base_models': 25,
+   'max_base_models_per_type': 5,
+   'save_bag_folds': True}},
+ 'leaderboard':                       model  score_val  pred_time_val   fit_time  \
+ 0      LightGBMLarge_BAG_L1   0.926145       0.023825   1.000465   
+ 1           LightGBM_BAG_L1   0.926145       0.030142   0.756562   
+ 2       WeightedEnsemble_L2   0.926145       0.045217   3.698785   
+ 3     NeuralNetTorch_BAG_L1   0.925931       0.068089  13.514495   
+ 4    NeuralNetFastAI_BAG_L1   0.925860       0.144026  12.193488   
+ 5           CatBoost_BAG_L1   0.924718       0.005455   1.765058   
+ 6            XGBoost_BAG_L1   0.924575       0.019437   0.499822   
+ 7         LightGBMXT_BAG_L1   0.923362       0.034598   0.377455   
+ 8     KNeighborsUnif_BAG_L1   0.917012       0.015843   0.003800   
+ 9     KNeighborsDist_BAG_L1   0.908377       0.015021   0.003333   
+ 10    ExtraTreesEntr_BAG_L1   0.907022       0.277414   0.361435   
+ 11    ExtraTreesGini_BAG_L1   0.906807       0.276092   0.336341   
+ 12  RandomForestEntr_BAG_L1   0.902169       0.239527   0.511043   
+ 13  RandomForestGini_BAG_L1   0.902169       0.255825   0.442638   
+ 
+     pred_time_val_marginal  fit_time_marginal  stack_level  can_infer  \
+ 0                 0.023825           1.000465            1       True   
+ 1                 0.030142           0.756562            1       True   
+ 2                 0.015075           2.942223            2       True   
+ 3                 0.068089          13.514495            1       True   
+ 4                 0.144026          12.193488            1       True   
+ 5                 0.005455           1.765058            1       True   
+ 6                 0.019437           0.499822            1       True   
+ 7                 0.034598           0.377455            1       True   
+ 8                 0.015843           0.003800            1       True   
+ 9                 0.015021           0.003333            1       True   
+ 10                0.277414           0.361435            1       True   
+ 11                0.276092           0.336341            1       True   
+ 12                0.239527           0.511043            1       True   
+ 13                0.255825           0.442638            1       True   
+ 
+     fit_order  
+ 0          13  
+ 1           4  
+ 2          14  
+ 3          12  
+ 4          10  
+ 5           7  
+ 6          11  
+ 7           3  
+ 8           1  
+ 9           2  
+ 10          9  
+ 11          8  
+ 12          6  
+ 13          5  }</code></pre>
+</div>
+</div>
+<div id="28d4a6ec-355a-430c-8d14-e67c748370d3" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>predictr.get_model_names()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>['KNeighborsUnif_BAG_L1',
+ 'KNeighborsDist_BAG_L1',
+ 'LightGBMXT_BAG_L1',
+ 'LightGBM_BAG_L1',
+ 'RandomForestGini_BAG_L1',
+ 'RandomForestEntr_BAG_L1',
+ 'CatBoost_BAG_L1',
+ 'ExtraTreesGini_BAG_L1',
+ 'ExtraTreesEntr_BAG_L1',
+ 'NeuralNetFastAI_BAG_L1',
+ 'XGBoost_BAG_L1',
+ 'NeuralNetTorch_BAG_L1',
+ 'LightGBMLarge_BAG_L1',
+ 'WeightedEnsemble_L2']</code></pre>
+</div>
+</div>
+<div id="60c0d6b6-71d9-498a-9902-9b3aed5351ba" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> predictr._trainer.model_graph.nodes</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 결과를 저장할 데이터프레임 생성</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[<span class="st">'Model'</span>, <span class="st">'Evaluation'</span>])</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 각 모델에 대해 평가 수행 및 결과 저장</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> model_name <span class="kw">in</span> models:</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 모델 평가</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    eval_result <span class="op">=</span> predictr.evaluate(tst, model<span class="op">=</span>model_name)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 결과를 데이터프레임에 추가</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> results.append({<span class="st">'Model'</span>: model_name, <span class="st">'Evaluation'</span>: eval_result}, ignore_index<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Evaluation: accuracy on test data: 0.8591408591408591
+Evaluations on test data:
+{
+    "accuracy": 0.8591408591408591,
+    "balanced_accuracy": 0.8591408591408591,
+    "mcc": 0.7333692346586707,
+    "roc_auc": 0.9238014178074118,
+    "f1": 0.8433333333333334,
+    "precision": 0.9499374217772215,
+    "recall": 0.7582417582417582
+}
+/tmp/ipykernel_3624978/2085143255.py:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  results = results.append({'Model': model_name, 'Evaluation': eval_result}, ignore_index=True)
+Evaluation: accuracy on test data: 0.8546453546453546
+Evaluations on test data:
+{
+    "accuracy": 0.8546453546453546,
+    "balanced_accuracy": 0.8546453546453547,
+    "mcc": 0.7243419861043393,
+    "roc_auc": 0.9035307017324999,
+    "f1": 0.8382434685936633,
+    "precision": 0.9448621553884712,
+    "recall": 0.7532467532467533
+}
+/tmp/ipykernel_3624978/2085143255.py:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  results = results.append({'Model': model_name, 'Evaluation': eval_result}, ignore_index=True)
+Evaluation: accuracy on test data: 0.8576423576423576
+Evaluations on test data:
+{
+    "accuracy": 0.8576423576423576,
+    "balanced_accuracy": 0.8576423576423576,
+    "mcc": 0.7357286217082192,
+    "roc_auc": 0.9497830951377405,
+    "f1": 0.8387705072600414,
+    "precision": 0.9669565217391304,
+    "recall": 0.7405927405927406
+}
+/tmp/ipykernel_3624978/2085143255.py:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  results = results.append({'Model': model_name, 'Evaluation': eval_result}, ignore_index=True)
+Evaluation: accuracy on test data: 0.8519813519813519
+Evaluations on test data:
+{
+    "accuracy": 0.8519813519813519,
+    "balanced_accuracy": 0.8519813519813519,
+    "mcc": 0.7293218533016024,
+    "roc_auc": 0.9617966670913722,
+    "f1": 0.8297261061099407,
+    "precision": 0.9765554553651938,
+    "recall": 0.7212787212787213
+}
+/tmp/ipykernel_3624978/2085143255.py:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  results = results.append({'Model': model_name, 'Evaluation': eval_result}, ignore_index=True)
+Evaluation: accuracy on test data: 0.8463203463203464
+Evaluations on test data:
+{
+    "accuracy": 0.8463203463203464,
+    "balanced_accuracy": 0.8463203463203464,
+    "mcc": 0.7069430711855968,
+    "roc_auc": 0.9305546823029339,
+    "f1": 0.829232192414431,
+    "precision": 0.9329725228975854,
+    "recall": 0.7462537462537463
+}
+/tmp/ipykernel_3624978/2085143255.py:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  results = results.append({'Model': model_name, 'Evaluation': eval_result}, ignore_index=True)
+Evaluation: accuracy on test data: 0.8463203463203464
+Evaluations on test data:
+{
+    "accuracy": 0.8463203463203464,
+    "balanced_accuracy": 0.8463203463203464,
+    "mcc": 0.7069430711855968,
+    "roc_auc": 0.9305546823029339,
+    "f1": 0.829232192414431,
+    "precision": 0.9329725228975854,
+    "recall": 0.7462537462537463
+}
+/tmp/ipykernel_3624978/2085143255.py:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  results = results.append({'Model': model_name, 'Evaluation': eval_result}, ignore_index=True)
+Evaluation: accuracy on test data: 0.8613053613053613
+Evaluations on test data:
+{
+    "accuracy": 0.8613053613053613,
+    "balanced_accuracy": 0.8613053613053614,
+    "mcc": 0.7411229848770046,
+    "roc_auc": 0.961435722674484,
+    "f1": 0.8439782730848474,
+    "precision": 0.9644691780821918,
+    "recall": 0.7502497502497503
+}
+/tmp/ipykernel_3624978/2085143255.py:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  results = results.append({'Model': model_name, 'Evaluation': eval_result}, ignore_index=True)
+Evaluation: accuracy on test data: 0.8553113553113553
+Evaluations on test data:
+{
+    "accuracy": 0.8553113553113553,
+    "balanced_accuracy": 0.8553113553113554,
+    "mcc": 0.7239232471410014,
+    "roc_auc": 0.938045415567893,
+    "f1": 0.8400515369041046,
+    "precision": 0.9390946502057613,
+    "recall": 0.7599067599067599
+}
+/tmp/ipykernel_3624978/2085143255.py:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  results = results.append({'Model': model_name, 'Evaluation': eval_result}, ignore_index=True)
+Evaluation: accuracy on test data: 0.8546453546453546
+Evaluations on test data:
+{
+    "accuracy": 0.8546453546453546,
+    "balanced_accuracy": 0.8546453546453546,
+    "mcc": 0.7228538607711172,
+    "roc_auc": 0.9375860569666764,
+    "f1": 0.8391376451077943,
+    "precision": 0.9393564356435643,
+    "recall": 0.7582417582417582
+}
+/tmp/ipykernel_3624978/2085143255.py:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  results = results.append({'Model': model_name, 'Evaluation': eval_result}, ignore_index=True)
+Evaluation: accuracy on test data: 0.8614718614718615
+Evaluations on test data:
+{
+    "accuracy": 0.8614718614718615,
+    "balanced_accuracy": 0.8614718614718615,
+    "mcc": 0.740949374063438,
+    "roc_auc": 0.9046451938559831,
+    "f1": 0.8444278234854151,
+    "precision": 0.9628997867803838,
+    "recall": 0.7519147519147519
+}
+/tmp/ipykernel_3624978/2085143255.py:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  results = results.append({'Model': model_name, 'Evaluation': eval_result}, ignore_index=True)
+Evaluation: accuracy on test data: 0.8578088578088578
+Evaluations on test data:
+{
+    "accuracy": 0.8578088578088578,
+    "balanced_accuracy": 0.8578088578088578,
+    "mcc": 0.7372429603136902,
+    "roc_auc": 0.9617392264744913,
+    "f1": 0.8383800151400455,
+    "precision": 0.9710653222270934,
+    "recall": 0.7375957375957376
+}
+/tmp/ipykernel_3624978/2085143255.py:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  results = results.append({'Model': model_name, 'Evaluation': eval_result}, ignore_index=True)
+Evaluation: accuracy on test data: 0.8619713619713619
+Evaluations on test data:
+{
+    "accuracy": 0.8619713619713619,
+    "balanced_accuracy": 0.861971361971362,
+    "mcc": 0.7423737770295685,
+    "roc_auc": 0.9527965097395666,
+    "f1": 0.8447856206702864,
+    "precision": 0.9649272882805817,
+    "recall": 0.7512487512487512
+}
+/tmp/ipykernel_3624978/2085143255.py:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  results = results.append({'Model': model_name, 'Evaluation': eval_result}, ignore_index=True)
+Evaluation: accuracy on test data: 0.8514818514818515
+Evaluations on test data:
+{
+    "accuracy": 0.8514818514818515,
+    "balanced_accuracy": 0.8514818514818514,
+    "mcc": 0.7291804253195859,
+    "roc_auc": 0.9607630686551766,
+    "f1": 0.8287250384024577,
+    "precision": 0.9786848072562359,
+    "recall": 0.7186147186147186
+}
+/tmp/ipykernel_3624978/2085143255.py:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  results = results.append({'Model': model_name, 'Evaluation': eval_result}, ignore_index=True)
+Evaluation: accuracy on test data: 0.8519813519813519
+Evaluations on test data:
+{
+    "accuracy": 0.8519813519813519,
+    "balanced_accuracy": 0.8519813519813519,
+    "mcc": 0.7293218533016024,
+    "roc_auc": 0.9617966670913722,
+    "f1": 0.8297261061099407,
+    "precision": 0.9765554553651938,
+    "recall": 0.7212787212787213
+}
+/tmp/ipykernel_3624978/2085143255.py:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  results = results.append({'Model': model_name, 'Evaluation': eval_result}, ignore_index=True)</code></pre>
+</div>
+</div>
+<div id="6a099d00-7759-4543-8404-da063eff01e2" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Model</th>
+<th data-quarto-table-cell-role="th">Evaluation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif_BAG_L1</td>
+<td>{'accuracy': 0.8591408591408591, 'balanced_accuracy': 0.8591408591408591, 'mcc': 0.7333692346586707, 'roc_auc': 0.9238014178074118, 'f1': 0.8433333333333334, 'precision': 0.9499374217772215, 'recall': 0.7582417582417582}</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist_BAG_L1</td>
+<td>{'accuracy': 0.8546453546453546, 'balanced_accuracy': 0.8546453546453547, 'mcc': 0.7243419861043393, 'roc_auc': 0.9035307017324999, 'f1': 0.8382434685936633, 'precision': 0.9448621553884712, 'recall': 0.7532467532467533}</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT_BAG_L1</td>
+<td>{'accuracy': 0.8576423576423576, 'balanced_accuracy': 0.8576423576423576, 'mcc': 0.7357286217082192, 'roc_auc': 0.9497830951377405, 'f1': 0.8387705072600414, 'precision': 0.9669565217391304, 'recall': 0.7405927405927406}</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM_BAG_L1</td>
+<td>{'accuracy': 0.8519813519813519, 'balanced_accuracy': 0.8519813519813519, 'mcc': 0.7293218533016024, 'roc_auc': 0.9617966670913722, 'f1': 0.8297261061099407, 'precision': 0.9765554553651938, 'recall': 0.7212787212787213}</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini_BAG_L1</td>
+<td>{'accuracy': 0.8463203463203464, 'balanced_accuracy': 0.8463203463203464, 'mcc': 0.7069430711855968, 'roc_auc': 0.9305546823029339, 'f1': 0.829232192414431, 'precision': 0.9329725228975854, 'recall': 0.7462537462537463}</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr_BAG_L1</td>
+<td>{'accuracy': 0.8463203463203464, 'balanced_accuracy': 0.8463203463203464, 'mcc': 0.7069430711855968, 'roc_auc': 0.9305546823029339, 'f1': 0.829232192414431, 'precision': 0.9329725228975854, 'recall': 0.7462537462537463}</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost_BAG_L1</td>
+<td>{'accuracy': 0.8613053613053613, 'balanced_accuracy': 0.8613053613053614, 'mcc': 0.7411229848770046, 'roc_auc': 0.961435722674484, 'f1': 0.8439782730848474, 'precision': 0.9644691780821918, 'recall': 0.7502497502497503}</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini_BAG_L1</td>
+<td>{'accuracy': 0.8553113553113553, 'balanced_accuracy': 0.8553113553113554, 'mcc': 0.7239232471410014, 'roc_auc': 0.938045415567893, 'f1': 0.8400515369041046, 'precision': 0.9390946502057613, 'recall': 0.7599067599067599}</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr_BAG_L1</td>
+<td>{'accuracy': 0.8546453546453546, 'balanced_accuracy': 0.8546453546453546, 'mcc': 0.7228538607711172, 'roc_auc': 0.9375860569666764, 'f1': 0.8391376451077943, 'precision': 0.9393564356435643, 'recall': 0.7582417582417582}</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI_BAG_L1</td>
+<td>{'accuracy': 0.8614718614718615, 'balanced_accuracy': 0.8614718614718615, 'mcc': 0.740949374063438, 'roc_auc': 0.9046451938559831, 'f1': 0.8444278234854151, 'precision': 0.9628997867803838, 'recall': 0.7519147519147519}</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost_BAG_L1</td>
+<td>{'accuracy': 0.8578088578088578, 'balanced_accuracy': 0.8578088578088578, 'mcc': 0.7372429603136902, 'roc_auc': 0.9617392264744913, 'f1': 0.8383800151400455, 'precision': 0.9710653222270934, 'recall': 0.7375957375957376}</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch_BAG_L1</td>
+<td>{'accuracy': 0.8619713619713619, 'balanced_accuracy': 0.861971361971362, 'mcc': 0.7423737770295685, 'roc_auc': 0.9527965097395666, 'f1': 0.8447856206702864, 'precision': 0.9649272882805817, 'recall': 0.7512487512487512}</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge_BAG_L1</td>
+<td>{'accuracy': 0.8514818514818515, 'balanced_accuracy': 0.8514818514818514, 'mcc': 0.7291804253195859, 'roc_auc': 0.9607630686551766, 'f1': 0.8287250384024577, 'precision': 0.9786848072562359, 'recall': 0.7186147186147186}</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>{'accuracy': 0.8519813519813519, 'balanced_accuracy': 0.8519813519813519, 'mcc': 0.7293218533016024, 'roc_auc': 0.9617966670913722, 'f1': 0.8297261061099407, 'precision': 0.9765554553651938, 'recall': 0.7212787212787213}</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cf03616b-9f06-4333-b9d4-d080a2346ae4" class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="153">
+<pre><code>[{'model': 'KNeighborsUnif_BAG_L1',
+  'acc': 0.8541458541458542,
+  'pre': 0.9411032766486935,
+  'rec': 0.7555777555777555,
+  'f1': 0.838197266346509,
+  'auc': 0.9230023500752773},
+ {'model': 'KNeighborsDist_BAG_L1',
+  'acc': 0.8481518481518482,
+  'pre': 0.933997509339975,
+  'rec': 0.7492507492507493,
+  'f1': 0.8314855875831486,
+  'auc': 0.8990750064676138},
+ {'model': 'LightGBMXT_BAG_L1',
+  'acc': 0.8571428571428571,
+  'pre': 0.9669133652590335,
+  'rec': 0.7395937395937396,
+  'f1': 0.8381132075471698,
+  'auc': 0.9521417088849656},
+ {'model': 'LightGBM_BAG_L1',
+  'acc': 0.8486513486513486,
+  'pre': 0.9746146872166818,
+  'rec': 0.7159507159507159,
+  'f1': 0.8254943367248992,
+  'auc': 0.9625852003474381},
+ {'model': 'RandomForestGini_BAG_L1',
+  'acc': 0.8426573426573427,
+  'pre': 0.925206611570248,
+  'rec': 0.7455877455877455,
+  'f1': 0.825742209109349,
+  'auc': 0.9291861984169677},
+ {'model': 'RandomForestEntr_BAG_L1',
+  'acc': 0.8426573426573427,
+  'pre': 0.925206611570248,
+  'rec': 0.7455877455877455,
+  'f1': 0.825742209109349,
+  'auc': 0.9291861984169677},
+ {'model': 'CatBoost_BAG_L1',
+  'acc': 0.8594738594738595,
+  'pre': 0.965101249461439,
+  'rec': 0.745920745920746,
+  'f1': 0.8414725770097672,
+  'auc': 0.9625810420016214},
+ {'model': 'ExtraTreesGini_BAG_L1',
+  'acc': 0.8498168498168498,
+  'pre': 0.9317714755445952,
+  'rec': 0.7549117549117549,
+  'f1': 0.8340691685062547,
+  'auc': 0.9354622511465667},
+ {'model': 'ExtraTreesEntr_BAG_L1',
+  'acc': 0.8491508491508492,
+  'pre': 0.9298892988929889,
+  'rec': 0.7552447552447552,
+  'f1': 0.8335170893054022,
+  'auc': 0.9351754916190481},
+ {'model': 'NeuralNetFastAI_BAG_L1',
+  'acc': 0.8596403596403597,
+  'pre': 0.9651162790697675,
+  'rec': 0.7462537462537463,
+  'f1': 0.8416901408450705,
+  'auc': 0.9173069133109093},
+ {'model': 'XGBoost_BAG_L1',
+  'acc': 0.8533133533133533,
+  'pre': 0.9715555555555555,
+  'rec': 0.7279387279387279,
+  'f1': 0.8322863125832858,
+  'auc': 0.9626036634028641},
+ {'model': 'NeuralNetTorch_BAG_L1',
+  'acc': 0.8596403596403597,
+  'pre': 0.9655172413793104,
+  'rec': 0.745920745920746,
+  'f1': 0.8416306594025925,
+  'auc': 0.9554923930548306},
+ {'model': 'LightGBMLarge_BAG_L1',
+  'acc': 0.846986346986347,
+  'pre': 0.9771062271062271,
+  'rec': 0.7106227106227107,
+  'f1': 0.8228262965105071,
+  'auc': 0.9620277602295586},
+ {'model': 'WeightedEnsemble_L2',
+  'acc': 0.855977355977356,
+  'pre': 0.9684487291849255,
+  'rec': 0.7359307359307359,
+  'f1': 0.836329233680227,
+  'auc': 0.9624103834893047}]</code></pre>
 </div>
 </div>
 
