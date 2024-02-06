@@ -130,8 +130,8 @@ def train_and_evaluate_model(data, model, optimizer, num_epochs=400):
     model.eval()
     pred = model(data).argmax(dim=1)
     yyhat = pred[data.test_mask]
-    
-    return yyhat
+    yhat_ = model(data)[:,-1][data.test_mask] 
+    return yyhat, yhat_
 
 # # 모델과 옵티마이저 생성
 # model = GCN1()
@@ -141,12 +141,12 @@ def train_and_evaluate_model(data, model, optimizer, num_epochs=400):
 # yyhat = train_and_evaluate_model(data, model, optimizer)
 
 
-def evaluation(y, yhat):
+def evaluation(y, yhat, yhat_):
     acc = sklearn.metrics.accuracy_score(y,yhat)
     pre = sklearn.metrics.precision_score(y,yhat)
     rec = sklearn.metrics.recall_score(y,yhat)
     f1 = sklearn.metrics.f1_score(y,yhat)
-    auc = sklearn.metrics.roc_auc_score(y,yhat)
+    auc = sklearn.metrics.roc_auc_score(y,yhat_)
     return {'acc':acc,'pre':pre,'rec':rec,'f1':f1,'auc':auc}
     
 
@@ -158,7 +158,7 @@ def proposed_df(fraudTrain, fraud_rate, test_fraud_rate):
     df2, mask = concat(df_tr, df_tst)
     df2['index'] = df2.index
     df3 = df2.reset_index()
-    return df3, mask
+    return df3, df_tr, df_tst, mask
 
 
 import pandas as pd
@@ -177,7 +177,7 @@ def try_1(df, fraud_rate, test_fraud_rate, theta, gamma, prev_results=None):
     else:
         df_results = prev_results.copy()
     
-    df, mask = proposed_df(df, fraud_rate, test_fraud_rate)
+    df, df_tr, df_tst, mask = proposed_df(df, fraud_rate, test_fraud_rate)
     
     groups = df.groupby('cc_num')
     edge_index = np.array([item for sublist in (compute_time_difference(group) for _, group in groups) for item in sublist])
@@ -192,8 +192,9 @@ def try_1(df, fraud_rate, test_fraud_rate, theta, gamma, prev_results=None):
     model = GCN1()
     optimizer = torch.optim.Adam(model.parameters(), lr=0.01, weight_decay=5e-4)
     yy = (data.y[data.test_mask]).numpy()
-    yyhat = train_and_evaluate_model(data, model, optimizer)
-    eval = evaluation(yy, yyhat)
+    yyhat, yyhat_ = train_and_evaluate_model(data, model, optimizer)
+    yyhat_ = yyhat_.detach().numpy()
+    eval = evaluation(yy, yyhat, yyhat_)
     
     result = {
         'model': 'GCN',
@@ -206,10 +207,10 @@ def try_1(df, fraud_rate, test_fraud_rate, theta, gamma, prev_results=None):
         'graph_based': True,
         'method': 'Proposed',
         'throw_rate': fraud_rate,
-        'train_size': len(df),
-        'train_cols': [col for col in df.columns if col != 'is_fraud'],
-        'train_frate': df.is_fraud.mean(),
-        'test_size': len(df),
+        'train_size': len(df_tr),
+        'train_cols': 'amt',
+        'train_frate': df_tr.is_fraud.mean(),
+        'test_size': len(df_tst),
         'test_frate': test_fraud_rate,
         'hyper_params': None,
         'theta': theta,
