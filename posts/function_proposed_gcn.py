@@ -305,7 +305,7 @@ def try_3(df, n, fraud_rate, test_fraud_rate, theta, gamma, prev_results=None):
         
     dfn = df[::n]
     dfn = dfn.reset_index(drop=True)
-    df_trn, df_tstn = sklearn.model_selection.train_test_split(df)
+    df_trn, df_tstn = sklearn.model_selection.train_test_split(dfn)
     
 
    
@@ -347,6 +347,72 @@ def try_3(df, n, fraud_rate, test_fraud_rate, theta, gamma, prev_results=None):
         'train_frate': df_tr.is_fraud.mean(),
         'test_size': len(df_tst),
         'test_frate': test_fraud_rate,
+        'hyper_params': None,
+        'theta': theta,
+        'gamma': gamma
+    }
+    
+    df_results = df_results.append(result, ignore_index=True)
+    
+    return df_results
+
+def try_4(df, n, theta, gamma, prev_results=None):
+    if prev_results is None:
+        df_results = pd.DataFrame(columns=[
+            'model', 'time', 'acc', 'pre', 'rec', 'f1', 'auc', 'graph_based', 
+            'method', 'throw_rate', 'train_size', 'train_cols', 'train_frate', 
+            'test_size', 'test_frate', 'hyper_params', 'theta', 'gamma'
+        ])
+    else:
+        df_results = prev_results
+    
+    df50 = throw(df,0.5)
+    df_tr, df_tst = sklearn.model_selection.train_test_split(df50)
+        
+    dfn = df[::n]
+    dfn = dfn.reset_index(drop=True)
+    df_trn, df_tstn = sklearn.model_selection.train_test_split(dfn)
+    
+
+   
+    df2, mask = concat(df_tr, df_tstn)
+    df2['index'] = df2.index
+    df = df2.reset_index()
+
+    
+    groups = df.groupby('cc_num')
+    edge_index = np.array([item for sublist in (compute_time_difference(group) for _, group in groups) for item in sublist])
+    edge_index = edge_index.astype(np.float64)
+    edge_index[:,2] = (np.exp(-edge_index[:,2]/(theta)) != 1)*(np.exp(-edge_index[:,2]/(theta))).tolist()
+    edge_index = torch.tensor([(int(row[0]), int(row[1])) for row in edge_index if row[2] > gamma], dtype=torch.long).t()
+    
+    x = torch.tensor(df['amt'].values, dtype=torch.float).reshape(-1,1)
+    y = torch.tensor(df['is_fraud'].values,dtype=torch.int64)
+    data = torch_geometric.data.Data(x=x, edge_index = edge_index, y=y, train_mask = mask[0], test_mask= mask[1])
+    
+    model = GCN1()
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.01, weight_decay=5e-4)
+    yy = (data.y[data.test_mask]).numpy()
+    yyhat, yyhat_ = train_and_evaluate_model(data, model, optimizer)
+    yyhat_ = yyhat_.detach().numpy()
+    eval = evaluation(yy, yyhat, yyhat_)
+    
+    result = {
+        'model': 'GCN',
+        'time': None,
+        'acc': eval['acc'],
+        'pre': eval['pre'],
+        'rec': eval['rec'],
+        'f1': eval['f1'],
+        'auc': eval['auc'],
+        'graph_based': True,
+        'method': 'Proposed',
+        'throw_rate': df.is_fraud.mean(),
+        'train_size': len(df_tr),
+        'train_cols': 'amt',
+        'train_frate': df_tr.is_fraud.mean(),
+        'test_size': len(df_tstn),
+        'test_frate':  df_tstn.is_fraud.mean(),
         'hyper_params': None,
         'theta': theta,
         'gamma': gamma
