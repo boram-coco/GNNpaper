@@ -221,7 +221,7 @@ def auto_amt_nb3(fraudTrain, n):
     dfn = fraudTrain[::n]
     dfnn = dfn[~dfn.index.isin(df_tr.index)]
     dfnn = dfnn.reset_index(drop=True)
-    dfn = dfn.reset_index(drop=True)
+    
     df_trn, df_tstn = sklearn.model_selection.train_test_split(dfnn)
     
     dff = pd.concat([df_tr, df_tstn])
@@ -275,6 +275,96 @@ def auto_amt_nb3(fraudTrain, n):
         graph_based.append(False) 
         method.append('Auto_not_best') 
         throw_rate = dff.is_fraud.mean()
+        train_size.append(len(tr))
+        train_cols.append([col for col in tr.columns if col != 'is_fraud'])
+        train_frate.append(tr.is_fraud.mean())
+        test_size.append(len(tst))
+        test_frate.append(tst.is_fraud.mean())
+        hyper_params.append(None)
+        
+    df_results = pd.DataFrame(dict(
+        model=model,
+        time=time_diff,
+        acc=acc,
+        pre=pre,
+        rec=rec,
+        f1=f1,
+        auc=auc,
+        graph_based=graph_based,
+        method=method,
+        throw_rate=throw_rate,  
+        train_size=train_size,
+        train_cols=train_cols,
+        train_frate=train_frate,
+        test_size=test_size,
+        test_frate=test_frate,
+        hyper_params=hyper_params
+    ))    
+    ymdhms = datetime.datetime.fromtimestamp(time.time()).strftime('%Y%m%d-%H%M%S') 
+    df_results.to_csv(f'../results/{ymdhms}-Autogluon_nb.csv',index=False)
+    return df_results
+
+
+def auto_amt_nb4(fraudTrain, fraudrate):
+    
+    
+    df = fraudTrain[["amt","is_fraud"]]   
+    
+      
+    df = throw(df,fraudrate)
+    df_tr, df_tstn = sklearn.model_selection.train_test_split(df)
+    
+   
+     
+    tr = TabularDataset(df_tr)
+    tst = TabularDataset(df_tstn)
+    predictr = TabularPredictor(label="is_fraud", verbosity=0)
+    t1 = time.time()
+    predictr.fit(tr) #presets='best_quality'
+    t2 = time.time()
+    time_diff = t2 - t1
+    models = predictr._trainer.model_graph.nodes
+    results = []
+    for model_name in models:
+    # 모델 평가
+        eval_result = predictr.evaluate(tst, model=model_name)
+
+    # 결과를 데이터프레임에 추가
+        results.append({'model': model_name, 
+                        'acc': eval_result['accuracy'], 
+                        'pre': eval_result['precision'], 
+                        'rec': eval_result['recall'], 
+                        'f1': eval_result['f1'], 
+                        'auc': eval_result['roc_auc']})
+        
+    model = []
+    time_diff = []
+    acc = []
+    pre = []
+    rec = []
+    f1 = [] 
+    auc = [] 
+    graph_based = []
+    method = [] 
+    train_size = []
+    train_cols = []
+    train_frate = []
+    test_size = []
+    test_frate = []
+    hyper_params = [] 
+    
+    for result in results:
+        model_name = result['model']
+        model.append(model_name)
+        time_diff.append(None)  # 각 모델별로 학습한 시간을 나타내고 싶은데 잘 안됨
+        acc.append(result['acc']) 
+        pre.append(result['pre'])
+        rec.append(result['rec'])
+        f1.append(result['f1'])
+        auc.append(result['auc'])
+        graph_based.append(False) 
+        method.append('Auto_not_best') 
+        throw_rate = df.is_fraud.mean()
         train_size.append(len(tr))
         train_cols.append([col for col in tr.columns if col != 'is_fraud'])
         train_frate.append(tr.is_fraud.mean())
