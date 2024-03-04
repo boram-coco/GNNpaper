@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="김보람">
-<meta name="dcterms.date" content="2024-02-28">
+<meta name="dcterms.date" content="2024-02-22">
 
 <title>GNNpaper - [Proposed] df0.052~df0.098</title>
 <style>
@@ -169,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 28, 2024</p>
+        <p class="date">February 22, 2024</p>
       </div>
     </div>
     
@@ -335,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="4a98cd08-af2a-4ebd-8f4b-934f1298b770" class="cell">
+<div id="4a98cd08-af2a-4ebd-8f4b-934f1298b770" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.06</span>,<span class="fl">1e7</span>,<span class="fl">0.8</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.062</span>,<span class="fl">1e7</span>,<span class="fl">0.8</span>, prev_results<span class="op">=</span>df_results)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.064</span>,<span class="fl">1e7</span>,<span class="fl">0.8</span>, prev_results<span class="op">=</span>df_results)</span>
@@ -345,6 +345,145 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>df_results.to_csv(<span class="ss">f'../results/</span><span class="sc">{</span>ymdhms<span class="sc">}</span><span class="ss">-proposed.csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+<th data-quarto-table-cell-role="th">theta</th>
+<th data-quarto-table-cell-role="th">gamma</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.962398</td>
+<td>0.758350</td>
+<td>0.526244</td>
+<td>0.621328</td>
+<td>0.978301</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.060</td>
+<td>75075</td>
+<td>amt</td>
+<td>0.060460</td>
+<td>25025</td>
+<td>0.058621</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.961764</td>
+<td>0.771543</td>
+<td>0.524523</td>
+<td>0.624493</td>
+<td>0.981432</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.062</td>
+<td>72653</td>
+<td>amt</td>
+<td>0.062461</td>
+<td>24218</td>
+<td>0.060616</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.956822</td>
+<td>0.727837</td>
+<td>0.537656</td>
+<td>0.618456</td>
+<td>0.976182</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.064</td>
+<td>70383</td>
+<td>amt</td>
+<td>0.063638</td>
+<td>23461</td>
+<td>0.065087</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.960308</td>
+<td>0.778878</td>
+<td>0.597847</td>
+<td>0.676460</td>
+<td>0.982205</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.066</td>
+<td>68250</td>
+<td>amt</td>
+<td>0.064864</td>
+<td>22750</td>
+<td>0.069407</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.962683</td>
+<td>0.783048</td>
+<td>0.648840</td>
+<td>0.709655</td>
+<td>0.981907</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.068</td>
+<td>66243</td>
+<td>amt</td>
+<td>0.067237</td>
+<td>22081</td>
+<td>0.070287</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.8</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
 </div>
 <div id="a0f3d0f0-5fa6-4d4b-a639-dcacd3b318db" class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.07</span>,<span class="fl">1e7</span>,<span class="fl">0.8</span>)</span>
