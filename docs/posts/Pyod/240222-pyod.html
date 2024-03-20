@@ -1098,6 +1098,1291 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 </div>
 </div>
 </div>
+<div id="2670d1f6-a8f7-4595-87aa-9e17999426d3" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.00573</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7fb788701670&gt;
+Traceback (most recent call last):
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
+    self._make_module_from_path(filepath)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
+    module = module_class(filepath, prefix, user_api, internal_api)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
+    self.version = self.get_version()
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
+    config = get_config().split()
+AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ECOD</td>
+<td>0.350781</td>
+<td>0.989826</td>
+<td>0.120474</td>
+<td>0.120952</td>
+<td>0.120712</td>
+<td>0.557912</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.00573</td>
+<td>786126</td>
+<td>[amt]</td>
+<td>0.005715</td>
+<td>262042</td>
+<td>0.005774</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>GMM</td>
+<td>0.236045</td>
+<td>0.992898</td>
+<td>0.382114</td>
+<td>0.372769</td>
+<td>0.377384</td>
+<td>0.684634</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.00573</td>
+<td>786126</td>
+<td>[amt]</td>
+<td>0.005715</td>
+<td>262042</td>
+<td>0.005774</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>HBOS</td>
+<td>0.902830</td>
+<td>0.993978</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499875</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.00573</td>
+<td>786126</td>
+<td>[amt]</td>
+<td>0.005715</td>
+<td>262042</td>
+<td>0.005774</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>IForest</td>
+<td>18.316931</td>
+<td>0.992913</td>
+<td>0.381706</td>
+<td>0.366821</td>
+<td>0.374115</td>
+<td>0.681685</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.00573</td>
+<td>786126</td>
+<td>[amt]</td>
+<td>0.005715</td>
+<td>262042</td>
+<td>0.005774</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>INNE</td>
+<td>25.323826</td>
+<td>0.992921</td>
+<td>0.375727</td>
+<td>0.341705</td>
+<td>0.357909</td>
+<td>0.669204</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.00573</td>
+<td>786126</td>
+<td>[amt]</td>
+<td>0.005715</td>
+<td>262042</td>
+<td>0.005774</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>KNN</td>
+<td>1.392572</td>
+<td>0.992047</td>
+<td>0.299085</td>
+<td>0.280899</td>
+<td>0.289707</td>
+<td>0.638538</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.00573</td>
+<td>786126</td>
+<td>[amt]</td>
+<td>0.005715</td>
+<td>262042</td>
+<td>0.005774</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>LODA</td>
+<td>2.211522</td>
+<td>0.993978</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499875</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.00573</td>
+<td>786126</td>
+<td>[amt]</td>
+<td>0.005715</td>
+<td>262042</td>
+<td>0.005774</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>LOF</td>
+<td>2.140320</td>
+<td>0.988784</td>
+<td>0.000700</td>
+<td>0.000661</td>
+<td>0.000680</td>
+<td>0.497592</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.00573</td>
+<td>786126</td>
+<td>[amt]</td>
+<td>0.005715</td>
+<td>262042</td>
+<td>0.005774</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>MCD</td>
+<td>0.158081</td>
+<td>0.992898</td>
+<td>0.382114</td>
+<td>0.372769</td>
+<td>0.377384</td>
+<td>0.684634</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.00573</td>
+<td>786126</td>
+<td>[amt]</td>
+<td>0.005715</td>
+<td>262042</td>
+<td>0.005774</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>PCA</td>
+<td>0.048425</td>
+<td>0.992898</td>
+<td>0.382114</td>
+<td>0.372769</td>
+<td>0.377384</td>
+<td>0.684634</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.00573</td>
+<td>786126</td>
+<td>[amt]</td>
+<td>0.005715</td>
+<td>262042</td>
+<td>0.005774</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>ROD</td>
+<td>15.528072</td>
+<td>0.989330</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.497538</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.00573</td>
+<td>786126</td>
+<td>[amt]</td>
+<td>0.005715</td>
+<td>262042</td>
+<td>0.005774</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="0bfc7fb8-18d3-419b-9491-42d247012f5b" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.006</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7fb797b45430&gt;
+Traceback (most recent call last):
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
+    self._make_module_from_path(filepath)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
+    module = module_class(filepath, prefix, user_api, internal_api)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
+    self.version = self.get_version()
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
+    config = get_config().split()
+AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ECOD</td>
+<td>0.162771</td>
+<td>0.989463</td>
+<td>0.124495</td>
+<td>0.121631</td>
+<td>0.123046</td>
+<td>0.558200</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.005974</td>
+<td>250250</td>
+<td>0.006078</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>GMM</td>
+<td>0.169849</td>
+<td>0.992663</td>
+<td>0.397926</td>
+<td>0.403682</td>
+<td>0.400783</td>
+<td>0.699973</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.005974</td>
+<td>250250</td>
+<td>0.006078</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>HBOS</td>
+<td>0.021995</td>
+<td>0.993634</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499855</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.005974</td>
+<td>250250</td>
+<td>0.006078</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>IForest</td>
+<td>17.540598</td>
+<td>0.992675</td>
+<td>0.396962</td>
+<td>0.395135</td>
+<td>0.396046</td>
+<td>0.695732</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.005974</td>
+<td>250250</td>
+<td>0.006078</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>INNE</td>
+<td>26.054414</td>
+<td>0.989822</td>
+<td>0.168605</td>
+<td>0.171598</td>
+<td>0.170088</td>
+<td>0.583212</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.005974</td>
+<td>250250</td>
+<td>0.006078</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>KNN</td>
+<td>1.361148</td>
+<td>0.991524</td>
+<td>0.304688</td>
+<td>0.307692</td>
+<td>0.306183</td>
+<td>0.651699</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.005974</td>
+<td>250250</td>
+<td>0.006078</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>LODA</td>
+<td>2.033969</td>
+<td>0.993634</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499855</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.005974</td>
+<td>250250</td>
+<td>0.006078</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>LOF</td>
+<td>2.033125</td>
+<td>0.987644</td>
+<td>0.001902</td>
+<td>0.001972</td>
+<td>0.001937</td>
+<td>0.497822</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.005974</td>
+<td>250250</td>
+<td>0.006078</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>MCD</td>
+<td>0.153317</td>
+<td>0.992663</td>
+<td>0.397926</td>
+<td>0.403682</td>
+<td>0.400783</td>
+<td>0.699973</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.005974</td>
+<td>250250</td>
+<td>0.006078</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>PCA</td>
+<td>0.044844</td>
+<td>0.992663</td>
+<td>0.397926</td>
+<td>0.403682</td>
+<td>0.400783</td>
+<td>0.699973</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.005974</td>
+<td>250250</td>
+<td>0.006078</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>ROD</td>
+<td>14.036913</td>
+<td>0.984663</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.495342</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.005974</td>
+<td>250250</td>
+<td>0.006078</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="006c8b9a-3a9c-4923-8175-2646646a8b08" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.007</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7fb7833da940&gt;
+Traceback (most recent call last):
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
+    self._make_module_from_path(filepath)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
+    module = module_class(filepath, prefix, user_api, internal_api)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
+    self.version = self.get_version()
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
+    config = get_config().split()
+AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ECOD</td>
+<td>0.137144</td>
+<td>0.988294</td>
+<td>0.157548</td>
+<td>0.162364</td>
+<td>0.159920</td>
+<td>0.578182</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.007</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.007046</td>
+<td>214500</td>
+<td>0.006862</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>GMM</td>
+<td>0.156920</td>
+<td>0.991977</td>
+<td>0.417055</td>
+<td>0.425272</td>
+<td>0.421123</td>
+<td>0.710582</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.007</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.007046</td>
+<td>214500</td>
+<td>0.006862</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>HBOS</td>
+<td>0.019263</td>
+<td>0.992429</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499643</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.007</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.007046</td>
+<td>214500</td>
+<td>0.006862</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>IForest</td>
+<td>15.022478</td>
+<td>0.992005</td>
+<td>0.418071</td>
+<td>0.421196</td>
+<td>0.419628</td>
+<td>0.708572</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.007</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.007046</td>
+<td>214500</td>
+<td>0.006862</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>INNE</td>
+<td>22.330099</td>
+<td>0.992051</td>
+<td>0.416368</td>
+<td>0.394022</td>
+<td>0.404887</td>
+<td>0.695103</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.007</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.007046</td>
+<td>214500</td>
+<td>0.006862</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>KNN</td>
+<td>1.042205</td>
+<td>0.990620</td>
+<td>0.318059</td>
+<td>0.320652</td>
+<td>0.319350</td>
+<td>0.657951</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.007</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.007046</td>
+<td>214500</td>
+<td>0.006862</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>LODA</td>
+<td>1.774493</td>
+<td>0.992429</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499643</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.007</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.007046</td>
+<td>214500</td>
+<td>0.006862</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>LOF</td>
+<td>1.573942</td>
+<td>0.986527</td>
+<td>0.002107</td>
+<td>0.002038</td>
+<td>0.002072</td>
+<td>0.497684</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.007</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.007046</td>
+<td>214500</td>
+<td>0.006862</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>MCD</td>
+<td>0.127130</td>
+<td>0.991977</td>
+<td>0.417055</td>
+<td>0.425272</td>
+<td>0.421123</td>
+<td>0.710582</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.007</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.007046</td>
+<td>214500</td>
+<td>0.006862</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>PCA</td>
+<td>0.037109</td>
+<td>0.991977</td>
+<td>0.417055</td>
+<td>0.425272</td>
+<td>0.421123</td>
+<td>0.710582</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.007</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.007046</td>
+<td>214500</td>
+<td>0.006862</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>ROD</td>
+<td>15.755857</td>
+<td>0.982065</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.494426</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.007</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.007046</td>
+<td>214500</td>
+<td>0.006862</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="99b91209-745f-4400-b8ae-98b1018b46ba" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.008</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7fb797b45430&gt;
+Traceback (most recent call last):
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
+    self._make_module_from_path(filepath)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
+    module = module_class(filepath, prefix, user_api, internal_api)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
+    self.version = self.get_version()
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
+    config = get_config().split()
+AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ECOD</td>
+<td>0.119038</td>
+<td>0.987053</td>
+<td>0.194964</td>
+<td>0.203367</td>
+<td>0.199077</td>
+<td>0.598335</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.008</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008029</td>
+<td>187688</td>
+<td>0.007912</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>GMM</td>
+<td>0.144922</td>
+<td>0.991166</td>
+<td>0.442448</td>
+<td>0.447811</td>
+<td>0.445114</td>
+<td>0.721655</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.008</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008029</td>
+<td>187688</td>
+<td>0.007912</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>HBOS</td>
+<td>0.016834</td>
+<td>0.991758</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499834</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.008</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008029</td>
+<td>187688</td>
+<td>0.007912</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>IForest</td>
+<td>13.051786</td>
+<td>0.991182</td>
+<td>0.443106</td>
+<td>0.445791</td>
+<td>0.444444</td>
+<td>0.720662</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.008</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008029</td>
+<td>187688</td>
+<td>0.007912</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>INNE</td>
+<td>19.702755</td>
+<td>0.991315</td>
+<td>0.449265</td>
+<td>0.432323</td>
+<td>0.440631</td>
+<td>0.714048</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.008</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008029</td>
+<td>187688</td>
+<td>0.007912</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>KNN</td>
+<td>0.860021</td>
+<td>0.989717</td>
+<td>0.352747</td>
+<td>0.358923</td>
+<td>0.355808</td>
+<td>0.676835</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.008</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008029</td>
+<td>187688</td>
+<td>0.007912</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>LODA</td>
+<td>1.489719</td>
+<td>0.991758</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499834</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.008</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008029</td>
+<td>187688</td>
+<td>0.007912</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>LOF</td>
+<td>1.370956</td>
+<td>0.984426</td>
+<td>0.000694</td>
+<td>0.000673</td>
+<td>0.000684</td>
+<td>0.496473</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.008</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008029</td>
+<td>187688</td>
+<td>0.007912</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>MCD</td>
+<td>0.113501</td>
+<td>0.991166</td>
+<td>0.442448</td>
+<td>0.447811</td>
+<td>0.445114</td>
+<td>0.721655</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.008</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008029</td>
+<td>187688</td>
+<td>0.007912</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>PCA</td>
+<td>0.032855</td>
+<td>0.991166</td>
+<td>0.442448</td>
+<td>0.447811</td>
+<td>0.445114</td>
+<td>0.721655</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.008</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008029</td>
+<td>187688</td>
+<td>0.007912</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>ROD</td>
+<td>14.830936</td>
+<td>0.981533</td>
+<td>0.000504</td>
+<td>0.000673</td>
+<td>0.000577</td>
+<td>0.495015</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.008</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008029</td>
+<td>187688</td>
+<td>0.007912</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="59db7c25-a26a-40cc-9c5c-7b513b165298" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.009</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7fb7833daee0&gt;
+Traceback (most recent call last):
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
+    self._make_module_from_path(filepath)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
+    module = module_class(filepath, prefix, user_api, internal_api)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
+    self.version = self.get_version()
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
+    config = get_config().split()
+AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ECOD</td>
+<td>0.102734</td>
+<td>0.985980</td>
+<td>0.213324</td>
+<td>0.213181</td>
+<td>0.213253</td>
+<td>0.603055</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>GMM</td>
+<td>0.139226</td>
+<td>0.990787</td>
+<td>0.482782</td>
+<td>0.471419</td>
+<td>0.477033</td>
+<td>0.733439</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>HBOS</td>
+<td>0.014991</td>
+<td>0.990775</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499843</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>IForest</td>
+<td>11.497505</td>
+<td>0.990757</td>
+<td>0.480916</td>
+<td>0.466039</td>
+<td>0.473361</td>
+<td>0.730758</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>INNE</td>
+<td>16.159571</td>
+<td>0.989606</td>
+<td>0.413937</td>
+<td>0.399462</td>
+<td>0.406571</td>
+<td>0.697188</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>KNN</td>
+<td>0.733732</td>
+<td>0.989187</td>
+<td>0.392250</td>
+<td>0.388030</td>
+<td>0.390128</td>
+<td>0.691311</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>LODA</td>
+<td>1.380267</td>
+<td>0.990775</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499843</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>LOF</td>
+<td>1.171791</td>
+<td>0.982414</td>
+<td>0.001378</td>
+<td>0.001345</td>
+<td>0.001361</td>
+<td>0.496291</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>MCD</td>
+<td>0.101797</td>
+<td>0.990787</td>
+<td>0.482782</td>
+<td>0.471419</td>
+<td>0.477033</td>
+<td>0.733439</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>PCA</td>
+<td>0.029553</td>
+<td>0.990787</td>
+<td>0.482782</td>
+<td>0.471419</td>
+<td>0.477033</td>
+<td>0.733439</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>ROD</td>
+<td>15.238129</td>
+<td>0.978524</td>
+<td>0.000477</td>
+<td>0.000672</td>
+<td>0.000558</td>
+<td>0.493995</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 
 
 </section>
