@@ -1,0 +1,3612 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.538">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="김보람">
+<meta name="dcterms.date" content="2024-02-16">
+
+<title>GNNpaper - [Autogluon] df50_tr, df00_tst(인덱스안겹치게)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">GNNpaper</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">Boram-coco</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">[Autogluon] df50_tr, df00_tst(인덱스안겹치게)</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>김보람 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 16, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="imports" class="level1">
+<h1>imports</h1>
+<div id="4eb91738-6398-4ffc-bbec-fc48fcc8f249" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b62fd4fe-e850-4d9a-9708-55fb40e73485" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>run ..<span class="op">/</span>functions<span class="op">-</span>auto.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="9f8b4812-1b25-44e2-bc14-438f74d7e911" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b862979e-7581-4645-80cd-fd67df2128ac" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb3(fraudTrain,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.879249</td>
+<td>0.012610</td>
+<td>0.888889</td>
+<td>0.024868</td>
+<td>0.949737</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.130216</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.500722</td>
+<td>25979</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.873359</td>
+<td>0.011736</td>
+<td>0.866667</td>
+<td>0.023159</td>
+<td>0.933409</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.130216</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.500722</td>
+<td>25979</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.898880</td>
+<td>0.014662</td>
+<td>0.866667</td>
+<td>0.028835</td>
+<td>0.971228</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.130216</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.500722</td>
+<td>25979</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.916933</td>
+<td>0.017360</td>
+<td>0.844444</td>
+<td>0.034020</td>
+<td>0.966410</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.130216</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.500722</td>
+<td>25979</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.858424</td>
+<td>0.010773</td>
+<td>0.888889</td>
+<td>0.021288</td>
+<td>0.951358</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.130216</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.500722</td>
+<td>25979</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.858424</td>
+<td>0.010773</td>
+<td>0.888889</td>
+<td>0.021288</td>
+<td>0.951358</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.130216</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.500722</td>
+<td>25979</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.887717</td>
+<td>0.013550</td>
+<td>0.888889</td>
+<td>0.026693</td>
+<td>0.971177</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.130216</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.500722</td>
+<td>25979</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.865006</td>
+<td>0.011293</td>
+<td>0.888889</td>
+<td>0.022303</td>
+<td>0.951483</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.130216</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.500722</td>
+<td>25979</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.865353</td>
+<td>0.011322</td>
+<td>0.888889</td>
+<td>0.022359</td>
+<td>0.951533</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.130216</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.500722</td>
+<td>25979</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.972555</td>
+<td>0.047425</td>
+<td>0.777778</td>
+<td>0.089400</td>
+<td>0.902764</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.130216</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.500722</td>
+<td>25979</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.904230</td>
+<td>0.016238</td>
+<td>0.911111</td>
+<td>0.031907</td>
+<td>0.970587</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.130216</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.500722</td>
+<td>25979</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.879711</td>
+<td>0.012658</td>
+<td>0.888889</td>
+<td>0.024961</td>
+<td>0.969850</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.130216</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.500722</td>
+<td>25979</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.885985</td>
+<td>0.013347</td>
+<td>0.888889</td>
+<td>0.026298</td>
+<td>0.966353</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.130216</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.500722</td>
+<td>25979</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.885985</td>
+<td>0.013347</td>
+<td>0.888889</td>
+<td>0.026298</td>
+<td>0.966353</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.130216</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.500722</td>
+<td>25979</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="8d2e25ea-9fe6-4c95-a70d-19b880d18287" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb3(fraudTrain,<span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.874177</td>
+<td>0.011187</td>
+<td>0.82</td>
+<td>0.022073</td>
+<td>0.915025</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.121136</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>28874</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.867597</td>
+<td>0.010889</td>
+<td>0.84</td>
+<td>0.021500</td>
+<td>0.879684</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.121136</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>28874</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.887719</td>
+<td>0.013118</td>
+<td>0.86</td>
+<td>0.025841</td>
+<td>0.939287</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.121136</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>28874</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.900256</td>
+<td>0.014080</td>
+<td>0.82</td>
+<td>0.027684</td>
+<td>0.950563</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.121136</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>28874</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.850177</td>
+<td>0.009858</td>
+<td>0.86</td>
+<td>0.019492</td>
+<td>0.922707</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.121136</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>28874</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.850177</td>
+<td>0.009858</td>
+<td>0.86</td>
+<td>0.019492</td>
+<td>0.922707</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.121136</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>28874</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.894542</td>
+<td>0.013641</td>
+<td>0.84</td>
+<td>0.026846</td>
+<td>0.944163</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.121136</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>28874</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.858939</td>
+<td>0.010226</td>
+<td>0.84</td>
+<td>0.020207</td>
+<td>0.926876</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.121136</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>28874</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.857415</td>
+<td>0.010354</td>
+<td>0.86</td>
+<td>0.020462</td>
+<td>0.927769</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.121136</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>28874</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.966059</td>
+<td>0.038690</td>
+<td>0.78</td>
+<td>0.073724</td>
+<td>0.881693</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.121136</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>28874</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.898282</td>
+<td>0.013809</td>
+<td>0.82</td>
+<td>0.027161</td>
+<td>0.948738</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.121136</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>28874</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.873554</td>
+<td>0.011927</td>
+<td>0.88</td>
+<td>0.023536</td>
+<td>0.931455</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.121136</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>28874</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.854644</td>
+<td>0.010158</td>
+<td>0.86</td>
+<td>0.020079</td>
+<td>0.948439</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.121136</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>28874</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.887719</td>
+<td>0.013118</td>
+<td>0.86</td>
+<td>0.025841</td>
+<td>0.939287</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.121136</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>28874</td>
+<td>0.001732</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="9314d42c-331f-4881-9a3f-509e24ace8ad" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb3(fraudTrain,<span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.877723</td>
+<td>0.011463</td>
+<td>0.867925</td>
+<td>0.022627</td>
+<td>0.938723</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.110627</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>32500</td>
+<td>0.001631</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.872523</td>
+<td>0.011233</td>
+<td>0.886792</td>
+<td>0.022186</td>
+<td>0.905154</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.110627</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>32500</td>
+<td>0.001631</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.886615</td>
+<td>0.011828</td>
+<td>0.830189</td>
+<td>0.023324</td>
+<td>0.953249</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.110627</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>32500</td>
+<td>0.001631</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.901815</td>
+<td>0.013941</td>
+<td>0.849057</td>
+<td>0.027431</td>
+<td>0.951902</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.110627</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>32500</td>
+<td>0.001631</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.852031</td>
+<td>0.009691</td>
+<td>0.886792</td>
+<td>0.019172</td>
+<td>0.938571</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.110627</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>32500</td>
+<td>0.001631</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.852031</td>
+<td>0.009691</td>
+<td>0.886792</td>
+<td>0.019172</td>
+<td>0.938571</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.110627</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>32500</td>
+<td>0.001631</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.895200</td>
+<td>0.013070</td>
+<td>0.849057</td>
+<td>0.025744</td>
+<td>0.954593</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.110627</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>32500</td>
+<td>0.001631</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.861200</td>
+<td>0.010325</td>
+<td>0.886792</td>
+<td>0.020413</td>
+<td>0.940397</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.110627</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>32500</td>
+<td>0.001631</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.859754</td>
+<td>0.010433</td>
+<td>0.905660</td>
+<td>0.020627</td>
+<td>0.940878</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.110627</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>32500</td>
+<td>0.001631</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.965723</td>
+<td>0.035871</td>
+<td>0.773585</td>
+<td>0.068562</td>
+<td>0.911700</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.110627</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>32500</td>
+<td>0.001631</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.900123</td>
+<td>0.013707</td>
+<td>0.849057</td>
+<td>0.026978</td>
+<td>0.951934</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.110627</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>32500</td>
+<td>0.001631</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.872031</td>
+<td>0.010491</td>
+<td>0.830189</td>
+<td>0.020721</td>
+<td>0.950526</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.110627</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>32500</td>
+<td>0.001631</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.856338</td>
+<td>0.010395</td>
+<td>0.924528</td>
+<td>0.020558</td>
+<td>0.952042</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.110627</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>32500</td>
+<td>0.001631</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.886615</td>
+<td>0.011828</td>
+<td>0.830189</td>
+<td>0.023324</td>
+<td>0.953249</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.110627</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>32500</td>
+<td>0.001631</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="b8a57855-87ce-42aa-9f88-a4d133b80117" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb3(fraudTrain,<span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.876482</td>
+<td>0.010799</td>
+<td>0.909091</td>
+<td>0.021345</td>
+<td>0.956152</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.09959</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>37120</td>
+<td>0.001482</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.870878</td>
+<td>0.010537</td>
+<td>0.927273</td>
+<td>0.020838</td>
+<td>0.938730</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.09959</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>37120</td>
+<td>0.001482</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.887204</td>
+<td>0.011584</td>
+<td>0.890909</td>
+<td>0.022870</td>
+<td>0.968425</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.09959</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>37120</td>
+<td>0.001482</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.901239</td>
+<td>0.013473</td>
+<td>0.909091</td>
+<td>0.026553</td>
+<td>0.972506</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.09959</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>37120</td>
+<td>0.001482</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.852478</td>
+<td>0.008522</td>
+<td>0.854545</td>
+<td>0.016876</td>
+<td>0.949192</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.09959</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>37120</td>
+<td>0.001482</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.852478</td>
+<td>0.008522</td>
+<td>0.854545</td>
+<td>0.016876</td>
+<td>0.949192</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.09959</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>37120</td>
+<td>0.001482</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.895339</td>
+<td>0.012475</td>
+<td>0.890909</td>
+<td>0.024605</td>
+<td>0.968500</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.09959</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>37120</td>
+<td>0.001482</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.861099</td>
+<td>0.009802</td>
+<td>0.927273</td>
+<td>0.019399</td>
+<td>0.955861</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.09959</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>37120</td>
+<td>0.001482</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.859914</td>
+<td>0.009720</td>
+<td>0.927273</td>
+<td>0.019238</td>
+<td>0.955636</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.09959</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>37120</td>
+<td>0.001482</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.964952</td>
+<td>0.034380</td>
+<td>0.836364</td>
+<td>0.066045</td>
+<td>0.920807</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.09959</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>37120</td>
+<td>0.001482</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.899569</td>
+<td>0.013252</td>
+<td>0.909091</td>
+<td>0.026123</td>
+<td>0.970747</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.09959</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>37120</td>
+<td>0.001482</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.873788</td>
+<td>0.010571</td>
+<td>0.909091</td>
+<td>0.020899</td>
+<td>0.965852</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.09959</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>37120</td>
+<td>0.001482</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.856681</td>
+<td>0.009503</td>
+<td>0.927273</td>
+<td>0.018812</td>
+<td>0.969404</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.09959</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>37120</td>
+<td>0.001482</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.887204</td>
+<td>0.011584</td>
+<td>0.890909</td>
+<td>0.022870</td>
+<td>0.968425</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.09959</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>37120</td>
+<td>0.001482</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="4a91102b-e4ea-4c5f-b4e0-ccf553ab0ac1" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb3(fraudTrain,<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.874137</td>
+<td>0.008019</td>
+<td>0.830189</td>
+<td>0.015884</td>
+<td>0.937849</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.087758</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>43317</td>
+<td>0.001224</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.869382</td>
+<td>0.007729</td>
+<td>0.830189</td>
+<td>0.015315</td>
+<td>0.893165</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.087758</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>43317</td>
+<td>0.001224</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.883256</td>
+<td>0.009412</td>
+<td>0.905660</td>
+<td>0.018630</td>
+<td>0.958809</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.087758</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>43317</td>
+<td>0.001224</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.898631</td>
+<td>0.010163</td>
+<td>0.849057</td>
+<td>0.020085</td>
+<td>0.959119</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.087758</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>43317</td>
+<td>0.001224</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.850821</td>
+<td>0.006924</td>
+<td>0.849057</td>
+<td>0.013736</td>
+<td>0.934247</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.087758</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>43317</td>
+<td>0.001224</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.850821</td>
+<td>0.006924</td>
+<td>0.849057</td>
+<td>0.013736</td>
+<td>0.934247</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.087758</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>43317</td>
+<td>0.001224</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.890897</td>
+<td>0.009654</td>
+<td>0.867925</td>
+<td>0.019095</td>
+<td>0.960948</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.087758</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>43317</td>
+<td>0.001224</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.860124</td>
+<td>0.007382</td>
+<td>0.849057</td>
+<td>0.014637</td>
+<td>0.943165</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.087758</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>43317</td>
+<td>0.001224</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.858577</td>
+<td>0.007461</td>
+<td>0.867925</td>
+<td>0.014796</td>
+<td>0.943959</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.087758</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>43317</td>
+<td>0.001224</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.964933</td>
+<td>0.025873</td>
+<td>0.754717</td>
+<td>0.050031</td>
+<td>0.892303</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.087758</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>43317</td>
+<td>0.001224</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.896461</td>
+<td>0.009951</td>
+<td>0.849057</td>
+<td>0.019672</td>
+<td>0.962487</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.087758</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>43317</td>
+<td>0.001224</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.869705</td>
+<td>0.008440</td>
+<td>0.905660</td>
+<td>0.016725</td>
+<td>0.954613</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.087758</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>43317</td>
+<td>0.001224</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.852437</td>
+<td>0.007000</td>
+<td>0.849057</td>
+<td>0.013885</td>
+<td>0.957977</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.087758</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>43317</td>
+<td>0.001224</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.883256</td>
+<td>0.009412</td>
+<td>0.905660</td>
+<td>0.018630</td>
+<td>0.958809</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.087758</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>43317</td>
+<td>0.001224</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="f515a601-fb96-41f5-907a-f283b0f8e806" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb3(fraudTrain,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.875715</td>
+<td>0.007542</td>
+<td>0.844828</td>
+<td>0.014950</td>
+<td>0.929305</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.075408</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>51953</td>
+<td>0.001116</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.870383</td>
+<td>0.006651</td>
+<td>0.775862</td>
+<td>0.013189</td>
+<td>0.884344</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.075408</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>51953</td>
+<td>0.001116</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.886128</td>
+<td>0.008392</td>
+<td>0.862069</td>
+<td>0.016622</td>
+<td>0.952711</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.075408</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>51953</td>
+<td>0.001116</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.900814</td>
+<td>0.009625</td>
+<td>0.862069</td>
+<td>0.019037</td>
+<td>0.953027</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.075408</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>51953</td>
+<td>0.001116</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.851481</td>
+<td>0.005808</td>
+<td>0.775862</td>
+<td>0.011530</td>
+<td>0.913896</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.075408</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>51953</td>
+<td>0.001116</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.851481</td>
+<td>0.005808</td>
+<td>0.775862</td>
+<td>0.011530</td>
+<td>0.913896</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.075408</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>51953</td>
+<td>0.001116</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.894000</td>
+<td>0.009011</td>
+<td>0.862069</td>
+<td>0.017835</td>
+<td>0.953981</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.075408</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>51953</td>
+<td>0.001116</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.860874</td>
+<td>0.006198</td>
+<td>0.775862</td>
+<td>0.012298</td>
+<td>0.923907</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.075408</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>51953</td>
+<td>0.001116</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.858911</td>
+<td>0.006247</td>
+<td>0.793103</td>
+<td>0.012396</td>
+<td>0.918441</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.075408</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>51953</td>
+<td>0.001116</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.964391</td>
+<td>0.023404</td>
+<td>0.758621</td>
+<td>0.045408</td>
+<td>0.879963</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.075408</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>51953</td>
+<td>0.001116</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.898273</td>
+<td>0.009386</td>
+<td>0.862069</td>
+<td>0.018570</td>
+<td>0.958326</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.075408</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>51953</td>
+<td>0.001116</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.872616</td>
+<td>0.007508</td>
+<td>0.862069</td>
+<td>0.014885</td>
+<td>0.946564</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.075408</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>51953</td>
+<td>0.001116</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.854888</td>
+<td>0.006986</td>
+<td>0.913793</td>
+<td>0.013865</td>
+<td>0.953422</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.075408</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>51953</td>
+<td>0.001116</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.886128</td>
+<td>0.008392</td>
+<td>0.862069</td>
+<td>0.016622</td>
+<td>0.952711</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.075408</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>51953</td>
+<td>0.001116</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="69c6c114-56e8-4480-bfd3-821665c54ad7" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb3(fraudTrain,<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.878261</td>
+<td>0.009905</td>
+<td>0.858696</td>
+<td>0.019584</td>
+<td>0.949991</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.062595</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>64975</td>
+<td>0.001416</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.871551</td>
+<td>0.009508</td>
+<td>0.869565</td>
+<td>0.018810</td>
+<td>0.907794</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.062595</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>64975</td>
+<td>0.001416</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.887526</td>
+<td>0.011508</td>
+<td>0.923913</td>
+<td>0.022733</td>
+<td>0.967389</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.062595</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>64975</td>
+<td>0.001416</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.902501</td>
+<td>0.012951</td>
+<td>0.902174</td>
+<td>0.025535</td>
+<td>0.968831</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.062595</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>64975</td>
+<td>0.001416</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.853267</td>
+<td>0.008434</td>
+<td>0.880435</td>
+<td>0.016708</td>
+<td>0.953115</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.062595</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>64975</td>
+<td>0.001416</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.853267</td>
+<td>0.008434</td>
+<td>0.880435</td>
+<td>0.016708</td>
+<td>0.953115</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.062595</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>64975</td>
+<td>0.001416</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.895052</td>
+<td>0.012466</td>
+<td>0.934783</td>
+<td>0.024603</td>
+<td>0.967842</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.062595</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>64975</td>
+<td>0.001416</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.862393</td>
+<td>0.009098</td>
+<td>0.891304</td>
+<td>0.018012</td>
+<td>0.955096</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.062595</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>64975</td>
+<td>0.001416</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.860839</td>
+<td>0.008997</td>
+<td>0.891304</td>
+<td>0.017814</td>
+<td>0.954854</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.062595</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>64975</td>
+<td>0.001416</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.964648</td>
+<td>0.028645</td>
+<td>0.728261</td>
+<td>0.055121</td>
+<td>0.894850</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.062595</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>64975</td>
+<td>0.001416</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.900808</td>
+<td>0.012732</td>
+<td>0.902174</td>
+<td>0.025110</td>
+<td>0.971516</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.062595</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>64975</td>
+<td>0.001416</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.874536</td>
+<td>0.010328</td>
+<td>0.923913</td>
+<td>0.020428</td>
+<td>0.962570</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.062595</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>64975</td>
+<td>0.001416</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.857176</td>
+<td>0.008978</td>
+<td>0.913043</td>
+<td>0.017782</td>
+<td>0.967857</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.062595</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>64975</td>
+<td>0.001416</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.887526</td>
+<td>0.011508</td>
+<td>0.923913</td>
+<td>0.022733</td>
+<td>0.967389</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.062595</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>64975</td>
+<td>0.001416</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="9eb1f10d-12c4-4ee9-80d4-2a6824584f45" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb3(fraudTrain,<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.876099</td>
+<td>0.008607</td>
+<td>0.808696</td>
+<td>0.017033</td>
+<td>0.917166</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04866</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>86634</td>
+<td>0.001327</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.869532</td>
+<td>0.008090</td>
+<td>0.800000</td>
+<td>0.016018</td>
+<td>0.881220</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04866</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>86634</td>
+<td>0.001327</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.884537</td>
+<td>0.009718</td>
+<td>0.852174</td>
+<td>0.019218</td>
+<td>0.946323</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04866</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>86634</td>
+<td>0.001327</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.900974</td>
+<td>0.010865</td>
+<td>0.817391</td>
+<td>0.021444</td>
+<td>0.942743</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04866</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>86634</td>
+<td>0.001327</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.849874</td>
+<td>0.007338</td>
+<td>0.834783</td>
+<td>0.014548</td>
+<td>0.913884</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04866</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>86634</td>
+<td>0.001327</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.849874</td>
+<td>0.007338</td>
+<td>0.834783</td>
+<td>0.014548</td>
+<td>0.913884</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04866</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>86634</td>
+<td>0.001327</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.892860</td>
+<td>0.010153</td>
+<td>0.826087</td>
+<td>0.020059</td>
+<td>0.945748</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04866</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>86634</td>
+<td>0.001327</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.859420</td>
+<td>0.007672</td>
+<td>0.817391</td>
+<td>0.015202</td>
+<td>0.924942</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04866</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>86634</td>
+<td>0.001327</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.857862</td>
+<td>0.007589</td>
+<td>0.817391</td>
+<td>0.015038</td>
+<td>0.922470</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04866</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>86634</td>
+<td>0.001327</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.964564</td>
+<td>0.025987</td>
+<td>0.704348</td>
+<td>0.050124</td>
+<td>0.875116</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04866</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>86634</td>
+<td>0.001327</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.898666</td>
+<td>0.010730</td>
+<td>0.826087</td>
+<td>0.021184</td>
+<td>0.944612</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04866</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>86634</td>
+<td>0.001327</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.870640</td>
+<td>0.008595</td>
+<td>0.843478</td>
+<td>0.017016</td>
+<td>0.940737</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04866</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>86634</td>
+<td>0.001327</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.854526</td>
+<td>0.007881</td>
+<td>0.869565</td>
+<td>0.015621</td>
+<td>0.944683</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04866</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>86634</td>
+<td>0.001327</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.884537</td>
+<td>0.009718</td>
+<td>0.852174</td>
+<td>0.019218</td>
+<td>0.946323</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04866</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>86634</td>
+<td>0.001327</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="dcb5c2e7-91dd-4b95-9074-75d9d760d1dc" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb3(fraudTrain,<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.876329</td>
+<td>0.010057</td>
+<td>0.853403</td>
+<td>0.019880</td>
+<td>0.940776</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.034037</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>129958</td>
+<td>0.00147</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.870120</td>
+<td>0.009523</td>
+<td>0.848168</td>
+<td>0.018834</td>
+<td>0.899999</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.034037</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>129958</td>
+<td>0.00147</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.885655</td>
+<td>0.010936</td>
+<td>0.858639</td>
+<td>0.021596</td>
+<td>0.957858</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.034037</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>129958</td>
+<td>0.00147</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.901230</td>
+<td>0.012642</td>
+<td>0.858639</td>
+<td>0.024916</td>
+<td>0.960897</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.034037</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>129958</td>
+<td>0.00147</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.850298</td>
+<td>0.008220</td>
+<td>0.842932</td>
+<td>0.016282</td>
+<td>0.938020</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.034037</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>129958</td>
+<td>0.00147</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.850298</td>
+<td>0.008220</td>
+<td>0.842932</td>
+<td>0.016282</td>
+<td>0.938020</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.034037</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>129958</td>
+<td>0.00147</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.893450</td>
+<td>0.011867</td>
+<td>0.869110</td>
+<td>0.023415</td>
+<td>0.959107</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.034037</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>129958</td>
+<td>0.00147</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.860224</td>
+<td>0.008907</td>
+<td>0.853403</td>
+<td>0.017630</td>
+<td>0.942457</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.034037</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>129958</td>
+<td>0.00147</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.858339</td>
+<td>0.008789</td>
+<td>0.853403</td>
+<td>0.017400</td>
+<td>0.941254</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.034037</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>129958</td>
+<td>0.00147</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.964689</td>
+<td>0.029324</td>
+<td>0.717277</td>
+<td>0.056344</td>
+<td>0.885715</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.034037</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>129958</td>
+<td>0.00147</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.898883</td>
+<td>0.012351</td>
+<td>0.858639</td>
+<td>0.024352</td>
+<td>0.960772</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.034037</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>129958</td>
+<td>0.00147</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.872605</td>
+<td>0.010059</td>
+<td>0.879581</td>
+<td>0.019891</td>
+<td>0.954369</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.034037</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>129958</td>
+<td>0.00147</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.855746</td>
+<td>0.009152</td>
+<td>0.905759</td>
+<td>0.018122</td>
+<td>0.959191</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.034037</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>129958</td>
+<td>0.00147</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.885655</td>
+<td>0.010936</td>
+<td>0.858639</td>
+<td>0.021596</td>
+<td>0.957858</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.034037</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>129958</td>
+<td>0.00147</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="571eccd2-5029-499d-b702-532ace22a80e" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb3(fraudTrain,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.877495</td>
+<td>0.009873</td>
+<td>0.870879</td>
+<td>0.019525</td>
+<td>0.948684</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.018233</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>259892</td>
+<td>0.001401</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.871720</td>
+<td>0.009198</td>
+<td>0.848901</td>
+<td>0.018199</td>
+<td>0.918947</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.018233</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>259892</td>
+<td>0.001401</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.886530</td>
+<td>0.010783</td>
+<td>0.881868</td>
+<td>0.021306</td>
+<td>0.962850</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.018233</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>259892</td>
+<td>0.001401</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.901794</td>
+<td>0.012668</td>
+<td>0.898352</td>
+<td>0.024984</td>
+<td>0.965630</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.018233</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>259892</td>
+<td>0.001401</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.852231</td>
+<td>0.008197</td>
+<td>0.870879</td>
+<td>0.016241</td>
+<td>0.947700</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.018233</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>259892</td>
+<td>0.001401</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.852231</td>
+<td>0.008197</td>
+<td>0.870879</td>
+<td>0.016241</td>
+<td>0.947700</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.018233</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>259892</td>
+<td>0.001401</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.894133</td>
+<td>0.011691</td>
+<td>0.892857</td>
+<td>0.023079</td>
+<td>0.964489</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.018233</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>259892</td>
+<td>0.001401</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.861489</td>
+<td>0.008713</td>
+<td>0.868132</td>
+<td>0.017254</td>
+<td>0.950016</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.018233</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>259892</td>
+<td>0.001401</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.860046</td>
+<td>0.008597</td>
+<td>0.865385</td>
+<td>0.017026</td>
+<td>0.950198</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.018233</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>259892</td>
+<td>0.001401</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.965355</td>
+<td>0.029412</td>
+<td>0.741758</td>
+<td>0.056580</td>
+<td>0.893303</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.018233</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>259892</td>
+<td>0.001401</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.899735</td>
+<td>0.012448</td>
+<td>0.901099</td>
+<td>0.024556</td>
+<td>0.965800</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.018233</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>259892</td>
+<td>0.001401</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.872970</td>
+<td>0.009819</td>
+<td>0.898352</td>
+<td>0.019425</td>
+<td>0.958730</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.018233</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>259892</td>
+<td>0.001401</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.856540</td>
+<td>0.008964</td>
+<td>0.925824</td>
+<td>0.017756</td>
+<td>0.963436</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.018233</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>259892</td>
+<td>0.001401</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.886530</td>
+<td>0.010783</td>
+<td>0.881868</td>
+<td>0.021306</td>
+<td>0.962850</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.018233</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>259892</td>
+<td>0.001401</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

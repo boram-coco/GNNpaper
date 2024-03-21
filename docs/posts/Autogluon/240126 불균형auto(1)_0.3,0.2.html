@@ -1,0 +1,2324 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.538">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="김보람">
+<meta name="dcterms.date" content="2024-01-26">
+
+<title>GNNpaper - [Autogluon] 불균형 데이터</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">GNNpaper</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">Boram-coco</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">[Autogluon] 불균형 데이터</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>김보람 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 26, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<table class="table">
+<thead>
+<tr class="header">
+<th>구분</th>
+<th>throw</th>
+<th>split</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0.2</td>
+<td>0.2</td>
+<td>df02</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>df50</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>0.3</td>
+<td>0.05</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>0.3</td>
+<td>0.005</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>0.3</td>
+<td>0.0005</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>0.1</td>
+<td>0.05</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>0.1</td>
+<td>0.005</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>0.1</td>
+<td>0.0005</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div id="7799dec0-0419-4c9e-a18f-dc7d7ada53b9" class="cell" data-execution_count="64">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>lst <span class="op">=</span> [result1,result2,result3,result4,result5,result6,result7,result8]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="87f65c04-f2ff-4139-a49c-84f6a7172c17" class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.concat(lst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="65">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">accuracy_score</th>
+<th data-quarto-table-cell-role="th">precision_score</th>
+<th data-quarto-table-cell-role="th">recall_score</th>
+<th data-quarto-table-cell-role="th">f1_score</th>
+<th data-quarto-table-cell-role="th">roc_auc_score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.974359</td>
+<td>0.946741</td>
+<td>0.991674</td>
+<td>0.968686</td>
+<td>0.977246</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.906260</td>
+<td>0.047538</td>
+<td>0.933333</td>
+<td>0.090468</td>
+<td>0.919729</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.927905</td>
+<td>0.394945</td>
+<td>0.833333</td>
+<td>0.535906</td>
+<td>0.883106</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.921079</td>
+<td>0.054217</td>
+<td>0.900000</td>
+<td>0.102273</td>
+<td>0.910592</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.932234</td>
+<td>0.004902</td>
+<td>0.666667</td>
+<td>0.009732</td>
+<td>0.799517</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.972361</td>
+<td>0.729977</td>
+<td>0.708889</td>
+<td>0.719278</td>
+<td>0.847551</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.986513</td>
+<td>0.231579</td>
+<td>0.733333</td>
+<td>0.352000</td>
+<td>0.860559</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.986069</td>
+<td>0.228956</td>
+<td>0.755556</td>
+<td>0.351421</td>
+<td>0.871391</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<section id="imports" class="level1">
+<h1>imports</h1>
+<div id="4eb91738-6398-4ffc-bbec-fc48fcc8f249" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xgboost <span class="im">as</span> xgb</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># sklearn</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> model_selection <span class="co"># split함수이용</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> ensemble <span class="co"># RF,GBM</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> metrics</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> precision_score, recall_score, f1_score</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> GaussianNB</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># gnn</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch_geometric</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch_geometric.nn <span class="im">import</span> GCNConv</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># autogluon</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> autogluon.tabular <span class="im">import</span> TabularDataset, TabularPredictor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="2774d96b-b24a-492b-a587-2815ff6e3ead" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> throw(df, fraud_rate):  <span class="co"># 사기 거래 비율에 맞춰 버려지는 함수!</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        df1 <span class="op">=</span> df[df[<span class="st">'is_fraud'</span>] <span class="op">==</span> <span class="dv">1</span>].copy()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        df0 <span class="op">=</span> df[df[<span class="st">'is_fraud'</span>] <span class="op">==</span> <span class="dv">0</span>].copy()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        df0_downsample <span class="op">=</span> (<span class="bu">len</span>(df1) <span class="op">*</span> (<span class="dv">1</span><span class="op">-</span>fraud_rate)) <span class="op">/</span> (<span class="bu">len</span>(df0) <span class="op">*</span> fraud_rate)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        df0_down <span class="op">=</span> df0.sample(frac<span class="op">=</span>df0_downsample, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        df_p <span class="op">=</span> pd.concat([df1, df0_down])</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> df_p</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> split_dataframe(data_frame, test_fraud_rate, test_rate<span class="op">=</span><span class="fl">0.3</span>):</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> <span class="bu">len</span>(data_frame)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 사기 거래와 정상 거래를 분리</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        fraud_data <span class="op">=</span> data_frame[data_frame[<span class="st">'is_fraud'</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        normal_data <span class="op">=</span> data_frame[data_frame[<span class="st">'is_fraud'</span>] <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 테스트 데이터 크기 계산</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        test_samples <span class="op">=</span> <span class="bu">int</span>(test_fraud_rate <span class="op">*</span> (n <span class="op">*</span> test_rate))</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        remaining_test_samples <span class="op">=</span> <span class="bu">int</span>(n <span class="op">*</span> test_rate) <span class="op">-</span> test_samples</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 사기 거래 및 정상 거래에서 무작위로 테스트 데이터 추출</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        test_fraud_data <span class="op">=</span> fraud_data.sample(n<span class="op">=</span>test_samples, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        test_normal_data <span class="op">=</span> normal_data.sample(n<span class="op">=</span>remaining_test_samples, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 테스트 데이터 합치기</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        test_data <span class="op">=</span> pd.concat([test_normal_data, test_fraud_data])</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 훈련 데이터 생성</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        train_data <span class="op">=</span> data_frame[<span class="op">~</span>data_frame.index.isin(test_data.index)]</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> train_data, test_data</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> concat(df_tr, df_tst):   </span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> pd.concat([df_tr, df_tst])</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        train_mask <span class="op">=</span> np.concatenate((np.full(<span class="bu">len</span>(df_tr), <span class="va">True</span>), np.full(<span class="bu">len</span>(df_tst), <span class="va">False</span>)))    <span class="co"># index꼬이는거 방지하기 위해서? ★ (이거,, 훔,,?(</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        test_mask <span class="op">=</span>  np.concatenate((np.full(<span class="bu">len</span>(df_tr), <span class="va">False</span>), np.full(<span class="bu">len</span>(df_tst), <span class="va">True</span>))) </span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> (train_mask, test_mask)</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> df, mask</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> evaluation(y, yhat):</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>        metrics <span class="op">=</span> [sklearn.metrics.accuracy_score,</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>                   sklearn.metrics.precision_score,</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>                   sklearn.metrics.recall_score,</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>                   sklearn.metrics.f1_score,</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>                   sklearn.metrics.roc_auc_score]</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.DataFrame({m.<span class="va">__name__</span>:[m(y,yhat).<span class="bu">round</span>(<span class="dv">6</span>)] <span class="cf">for</span> m <span class="kw">in</span> metrics})</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> compute_time_difference(group):</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> <span class="bu">len</span>(group)</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> []</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>                time_difference <span class="op">=</span> <span class="bu">abs</span>((group.iloc[i].trans_date_trans_time <span class="op">-</span> group.iloc[j].trans_date_trans_time).total_seconds())</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>                result.append([group.iloc[i].name, group.iloc[j].name, time_difference])</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> edge_index_save(df, unique_col, theta, gamma):</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>        groups <span class="op">=</span> df.groupby(unique_col)</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>        edge_index <span class="op">=</span> np.array([item <span class="cf">for</span> sublist <span class="kw">in</span> (compute_time_difference(group) <span class="cf">for</span> _, group <span class="kw">in</span> groups) <span class="cf">for</span> item <span class="kw">in</span> sublist])</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>        edge_index <span class="op">=</span> edge_index.astype(np.float64)</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>        filename <span class="op">=</span> <span class="ss">f"edge_index_attempt</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>save_attempt<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span><span class="bu">str</span>(unique_col)<span class="sc">.</span>replace(<span class="st">' '</span>, <span class="st">''</span>)<span class="sc">.</span>replace(<span class="st">'_'</span>, <span class="st">''</span>)<span class="sc">}</span><span class="ss">.npy"</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> os.path.exists(filename):</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.save_attempt <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>            filename <span class="op">=</span> <span class="ss">f"edge_index_attempt</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>save_attempt<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span><span class="bu">str</span>(unique_col)<span class="sc">.</span>replace(<span class="st">' '</span>, <span class="st">''</span>)<span class="sc">.</span>replace(<span class="st">'_'</span>, <span class="st">''</span>)<span class="sc">}</span><span class="ss">.npy"</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>        np.save(filename, edge_index)</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>        <span class="co">#tetha = edge_index_plust_itme[:,].mean()</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>        edge_index[:,<span class="dv">2</span>] <span class="op">=</span> (np.exp(<span class="op">-</span>edge_index[:,<span class="dv">2</span>]<span class="op">/</span>(theta)) <span class="op">!=</span> <span class="dv">1</span>)<span class="op">*</span>(np.exp(<span class="op">-</span>edge_index[:,<span class="dv">2</span>]<span class="op">/</span>(theta))).tolist()</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>        edge_index <span class="op">=</span> torch.tensor([(<span class="bu">int</span>(row[<span class="dv">0</span>]), <span class="bu">int</span>(row[<span class="dv">1</span>])) <span class="cf">for</span> row <span class="kw">in</span> edge_index <span class="cf">if</span> row[<span class="dv">2</span>] <span class="op">&gt;</span> gamma], dtype<span class="op">=</span>torch.<span class="bu">long</span>).t()</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> edge_index</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> edge_index(df, unique_col, theta, gamma):</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>        groups <span class="op">=</span> df.groupby(unique_col)</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>        edge_index <span class="op">=</span> np.array([item <span class="cf">for</span> sublist <span class="kw">in</span> (compute_time_difference(group) <span class="cf">for</span> _, group <span class="kw">in</span> groups) <span class="cf">for</span> item <span class="kw">in</span> sublist])</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>        edge_index <span class="op">=</span> edge_index.astype(np.float64)</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>       <span class="co"># filename = f"edge_index_attempt{self.save_attempt}_{str(unique_col).replace(' ', '').replace('_', '')}.npy"</span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>        <span class="co"># while os.path.exists(filename):</span></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     self.save_attempt += 1</span></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     filename = f"edge_index_attempt{self.save_attempt}_{str(unique_col).replace(' ', '').replace('_', '')}.npy"</span></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>        <span class="co"># np.save(filename, edge_index)</span></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>        <span class="co">#tetha = edge_index_plust_itme[:,].mean()</span></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>        edge_index[:,<span class="dv">2</span>] <span class="op">=</span> (np.exp(<span class="op">-</span>edge_index[:,<span class="dv">2</span>]<span class="op">/</span>(theta)) <span class="op">!=</span> <span class="dv">1</span>)<span class="op">*</span>(np.exp(<span class="op">-</span>edge_index[:,<span class="dv">2</span>]<span class="op">/</span>(theta))).tolist()</span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>        edge_index <span class="op">=</span> torch.tensor([(<span class="bu">int</span>(row[<span class="dv">0</span>]), <span class="bu">int</span>(row[<span class="dv">1</span>])) <span class="cf">for</span> row <span class="kw">in</span> edge_index <span class="cf">if</span> row[<span class="dv">2</span>] <span class="op">&gt;</span> gamma], dtype<span class="op">=</span>torch.<span class="bu">long</span>).t()</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> edge_index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="9f8b4812-1b25-44e2-bc14-438f74d7e911" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fraudTrain <span class="op">=</span> pd.read_csv(<span class="st">"~/Desktop/fraudTrain.csv"</span>).iloc[:,<span class="dv">1</span>:]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fraudTrain <span class="op">=</span> fraudTrain.assign(trans_date_trans_time<span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> x: pd.to_datetime(x), fraudTrain.trans_date_trans_time)))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>fraudTrain</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">trans_date_trans_time</th>
+<th data-quarto-table-cell-role="th">cc_num</th>
+<th data-quarto-table-cell-role="th">merchant</th>
+<th data-quarto-table-cell-role="th">category</th>
+<th data-quarto-table-cell-role="th">amt</th>
+<th data-quarto-table-cell-role="th">first</th>
+<th data-quarto-table-cell-role="th">last</th>
+<th data-quarto-table-cell-role="th">gender</th>
+<th data-quarto-table-cell-role="th">street</th>
+<th data-quarto-table-cell-role="th">city</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">lat</th>
+<th data-quarto-table-cell-role="th">long</th>
+<th data-quarto-table-cell-role="th">city_pop</th>
+<th data-quarto-table-cell-role="th">job</th>
+<th data-quarto-table-cell-role="th">dob</th>
+<th data-quarto-table-cell-role="th">trans_num</th>
+<th data-quarto-table-cell-role="th">unix_time</th>
+<th data-quarto-table-cell-role="th">merch_lat</th>
+<th data-quarto-table-cell-role="th">merch_long</th>
+<th data-quarto-table-cell-role="th">is_fraud</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2019-01-01 00:00:00</td>
+<td>2.703190e+15</td>
+<td>fraud_Rippin, Kub and Mann</td>
+<td>misc_net</td>
+<td>4.97</td>
+<td>Jennifer</td>
+<td>Banks</td>
+<td>F</td>
+<td>561 Perry Cove</td>
+<td>Moravian Falls</td>
+<td>...</td>
+<td>36.0788</td>
+<td>-81.1781</td>
+<td>3495</td>
+<td>Psychologist, counselling</td>
+<td>1988-03-09</td>
+<td>0b242abb623afc578575680df30655b9</td>
+<td>1325376018</td>
+<td>36.011293</td>
+<td>-82.048315</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2019-01-01 00:00:00</td>
+<td>6.304230e+11</td>
+<td>fraud_Heller, Gutmann and Zieme</td>
+<td>grocery_pos</td>
+<td>107.23</td>
+<td>Stephanie</td>
+<td>Gill</td>
+<td>F</td>
+<td>43039 Riley Greens Suite 393</td>
+<td>Orient</td>
+<td>...</td>
+<td>48.8878</td>
+<td>-118.2105</td>
+<td>149</td>
+<td>Special educational needs teacher</td>
+<td>1978-06-21</td>
+<td>1f76529f8574734946361c461b024d99</td>
+<td>1325376044</td>
+<td>49.159047</td>
+<td>-118.186462</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2019-01-01 00:00:00</td>
+<td>3.885950e+13</td>
+<td>fraud_Lind-Buckridge</td>
+<td>entertainment</td>
+<td>220.11</td>
+<td>Edward</td>
+<td>Sanchez</td>
+<td>M</td>
+<td>594 White Dale Suite 530</td>
+<td>Malad City</td>
+<td>...</td>
+<td>42.1808</td>
+<td>-112.2620</td>
+<td>4154</td>
+<td>Nature conservation officer</td>
+<td>1962-01-19</td>
+<td>a1a22d70485983eac12b5b88dad1cf95</td>
+<td>1325376051</td>
+<td>43.150704</td>
+<td>-112.154481</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2019-01-01 00:01:00</td>
+<td>3.534090e+15</td>
+<td>fraud_Kutch, Hermiston and Farrell</td>
+<td>gas_transport</td>
+<td>45.00</td>
+<td>Jeremy</td>
+<td>White</td>
+<td>M</td>
+<td>9443 Cynthia Court Apt. 038</td>
+<td>Boulder</td>
+<td>...</td>
+<td>46.2306</td>
+<td>-112.1138</td>
+<td>1939</td>
+<td>Patent attorney</td>
+<td>1967-01-12</td>
+<td>6b849c168bdad6f867558c3793159a81</td>
+<td>1325376076</td>
+<td>47.034331</td>
+<td>-112.561071</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2019-01-01 00:03:00</td>
+<td>3.755340e+14</td>
+<td>fraud_Keeling-Crist</td>
+<td>misc_pos</td>
+<td>41.96</td>
+<td>Tyler</td>
+<td>Garcia</td>
+<td>M</td>
+<td>408 Bradley Rest</td>
+<td>Doe Hill</td>
+<td>...</td>
+<td>38.4207</td>
+<td>-79.4629</td>
+<td>99</td>
+<td>Dance movement psychotherapist</td>
+<td>1986-03-28</td>
+<td>a41d7549acf90789359a9aa5346dcb46</td>
+<td>1325376186</td>
+<td>38.674999</td>
+<td>-78.632459</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1048570</td>
+<td>2020-03-10 16:07:00</td>
+<td>6.011980e+15</td>
+<td>fraud_Fadel Inc</td>
+<td>health_fitness</td>
+<td>77.00</td>
+<td>Haley</td>
+<td>Wagner</td>
+<td>F</td>
+<td>05561 Farrell Crescent</td>
+<td>Annapolis</td>
+<td>...</td>
+<td>39.0305</td>
+<td>-76.5515</td>
+<td>92106</td>
+<td>Accountant, chartered certified</td>
+<td>1943-05-28</td>
+<td>45ecd198c65e81e597db22e8d2ef7361</td>
+<td>1362931649</td>
+<td>38.779464</td>
+<td>-76.317042</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1048571</td>
+<td>2020-03-10 16:07:00</td>
+<td>4.839040e+15</td>
+<td>fraud_Cremin, Hamill and Reichel</td>
+<td>misc_pos</td>
+<td>116.94</td>
+<td>Meredith</td>
+<td>Campbell</td>
+<td>F</td>
+<td>043 Hanson Turnpike</td>
+<td>Hedrick</td>
+<td>...</td>
+<td>41.1826</td>
+<td>-92.3097</td>
+<td>1583</td>
+<td>Geochemist</td>
+<td>1999-06-28</td>
+<td>c00ce51c6ebb7657474a77b9e0b51f34</td>
+<td>1362931670</td>
+<td>41.400318</td>
+<td>-92.726724</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1048572</td>
+<td>2020-03-10 16:08:00</td>
+<td>5.718440e+11</td>
+<td>fraud_O'Connell, Botsford and Hand</td>
+<td>home</td>
+<td>21.27</td>
+<td>Susan</td>
+<td>Mills</td>
+<td>F</td>
+<td>005 Cody Estates</td>
+<td>Louisville</td>
+<td>...</td>
+<td>38.2507</td>
+<td>-85.7476</td>
+<td>736284</td>
+<td>Engineering geologist</td>
+<td>1952-04-02</td>
+<td>17c9dc8b2a6449ca2473726346e58e6c</td>
+<td>1362931711</td>
+<td>37.293339</td>
+<td>-84.798122</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1048573</td>
+<td>2020-03-10 16:08:00</td>
+<td>4.646850e+18</td>
+<td>fraud_Thompson-Gleason</td>
+<td>health_fitness</td>
+<td>9.52</td>
+<td>Julia</td>
+<td>Bell</td>
+<td>F</td>
+<td>576 House Crossroad</td>
+<td>West Sayville</td>
+<td>...</td>
+<td>40.7320</td>
+<td>-73.1000</td>
+<td>4056</td>
+<td>Film/video editor</td>
+<td>1990-06-25</td>
+<td>5ca650881b48a6a38754f841c23b77ab</td>
+<td>1362931718</td>
+<td>39.773077</td>
+<td>-72.213209</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1048574</td>
+<td>2020-03-10 16:08:00</td>
+<td>2.283740e+15</td>
+<td>fraud_Buckridge PLC</td>
+<td>misc_pos</td>
+<td>6.81</td>
+<td>Shannon</td>
+<td>Williams</td>
+<td>F</td>
+<td>9345 Spencer Junctions Suite 183</td>
+<td>Alpharetta</td>
+<td>...</td>
+<td>34.0770</td>
+<td>-84.3033</td>
+<td>165556</td>
+<td>Prison officer</td>
+<td>1997-12-27</td>
+<td>8d0a575fe635bbde12f1a2bffc126731</td>
+<td>1362931730</td>
+<td>33.601468</td>
+<td>-83.891921</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+<p>1048575 rows × 22 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="autogluondf02" class="level1">
+<h1>Autogluon(df02)</h1>
+<div id="c660f6c2-92c5-4e58-8967-8477870828d4" class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fraudTrain <span class="op">=</span> fraudTrain[[<span class="st">"amt"</span>,<span class="st">"is_fraud"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="49bc58b4-948f-42ef-9c3e-d1d2ce72ea0e" class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> auto(df,test_fraud_rate):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    df_tr, df_tst <span class="op">=</span> split_dataframe(df, test_fraud_rate)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    tr <span class="op">=</span> TabularDataset(df_tr)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    tst <span class="op">=</span> TabularDataset(df_tst)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    predictr <span class="op">=</span> TabularPredictor(<span class="st">"is_fraud"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    predictr.fit(tr, presets<span class="op">=</span><span class="st">'best_quality'</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> tst.is_fraud</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    yhat <span class="op">=</span> predictr.predict(tst)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> evaluation(y,yhat)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cfd3c747-4e7e-42fb-9b33-8d526e345213" class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> throw(fraudTrain, <span class="fl">0.2</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tr <span class="op">=</span> TabularDataset(df_tr)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>tst <span class="op">=</span> TabularDataset(df_tst)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TabularPredictor(<span class="st">"is_fraud"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>predictr.fit(tr, presets<span class="op">=</span><span class="st">'best_quality'</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> tst.is_fraud</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(tst)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>result1 <span class="op">=</span> evaluation(y,yhat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240126_034006/"
+Presets specified: ['best_quality']
+Stack configuration (auto_stack=True): num_stack_levels=0, num_bag_folds=8, num_bag_sets=1
+Beginning AutoGluon training ...
+AutoGluon will save models to "AutogluonModels/ag-20240126_034006/"
+AutoGluon Version:  0.8.2
+Python Version:     3.8.18
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #38~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov  2 18:01:13 UTC 2
+Disk Space Avail:   607.91 GB / 982.82 GB (61.9%)
+Train Data Rows:    7007
+Train Data Columns: 21
+Label Column: is_fraud
+Preprocessing data ...
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    2 unique label values:  [1, 0]
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
+Selected class &lt;--&gt; label mapping:  class 1 = 1, class 0 = 0
+Using Feature Generators to preprocess the data ...
+Fitting AutoMLPipelineFeatureGenerator...
+    Available Memory:                    21176.89 MB
+    Train Data (Original)  Memory Usage: 5.95 MB (0.0% of available memory)
+    Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+    Stage 1 Generators:
+        Fitting AsTypeFeatureGenerator...
+            Note: Converting 1 features to boolean dtype as they only contain 2 unique values.
+    Stage 2 Generators:
+        Fitting FillNaFeatureGenerator...
+    Stage 3 Generators:
+        Fitting IdentityFeatureGenerator...
+        Fitting CategoryFeatureGenerator...
+            Fitting CategoryMemoryMinimizeFeatureGenerator...
+        Fitting DatetimeFeatureGenerator...
+        Fitting TextSpecialFeatureGenerator...
+            Fitting BinnedFeatureGenerator...
+            Fitting DropDuplicatesFeatureGenerator...
+        Fitting TextNgramFeatureGenerator...
+            Fitting CountVectorizer for text features: ['street']
+            CountVectorizer fit with vocabulary size = 2
+    Stage 4 Generators:
+        Fitting DropUniqueFeatureGenerator...
+    Stage 5 Generators:
+        Fitting DropDuplicatesFeatureGenerator...
+    Unused Original Features (Count: 1): ['trans_num']
+        These features were not used to generate any of the output features. Add a feature generator compatible with these features to utilize them.
+        Features can also be unused if they carry very little information, such as being categorical but having almost entirely unique values or being duplicates of other features.
+        These features do not need to be present at inference time.
+        ('object', []) : 1 | ['trans_num']
+    Types of features in original data (raw dtype, special dtypes):
+        ('datetime', [])                   : 1 | ['trans_date_trans_time']
+        ('float', [])                      : 6 | ['cc_num', 'amt', 'lat', 'long', 'merch_lat', ...]
+        ('int', [])                        : 3 | ['zip', 'city_pop', 'unix_time']
+        ('object', [])                     : 8 | ['merchant', 'category', 'first', 'last', 'gender', ...]
+        ('object', ['datetime_as_object']) : 1 | ['dob']
+        ('object', ['text'])               : 1 | ['street']
+    Types of features in processed data (raw dtype, special dtypes):
+        ('category', [])                    :  7 | ['merchant', 'category', 'first', 'last', 'city', ...]
+        ('category', ['text_as_category'])  :  1 | ['street']
+        ('float', [])                       :  6 | ['cc_num', 'amt', 'lat', 'long', 'merch_lat', ...]
+        ('int', [])                         :  3 | ['zip', 'city_pop', 'unix_time']
+        ('int', ['binned', 'text_special']) :  8 | ['street.char_count', 'street.word_count', 'street.capital_ratio', 'street.lower_ratio', 'street.digit_ratio', ...]
+        ('int', ['bool'])                   :  1 | ['gender']
+        ('int', ['datetime_as_int'])        : 10 | ['trans_date_trans_time', 'trans_date_trans_time.year', 'trans_date_trans_time.month', 'trans_date_trans_time.day', 'trans_date_trans_time.dayofweek', ...]
+        ('int', ['text_ngram'])             :  1 | ['__nlp__.suite']
+    1.0s = Fit runtime
+    20 features in original data used to generate 37 features in processed data.
+    Train Data (Processed) Memory Usage: 1.25 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 1.01s ...
+AutoGluon will gauge predictive performance using evaluation metric: 'accuracy'
+    To change this, specify the eval_metric parameter of Predictor()
+User-specified model hyperparameters to be fit:
+{
+    'NN_TORCH': {},
+    'GBM': [{'extra_trees': True, 'ag_args': {'name_suffix': 'XT'}}, {}, 'GBMLarge'],
+    'CAT': {},
+    'XGB': {},
+    'FASTAI': {},
+    'RF': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'XT': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'KNN': [{'weights': 'uniform', 'ag_args': {'name_suffix': 'Unif'}}, {'weights': 'distance', 'ag_args': {'name_suffix': 'Dist'}}],
+}
+Fitting 13 L1 models ...
+Fitting model: KNeighborsUnif_BAG_L1 ...
+Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7f36a79fe700&gt;
+Traceback (most recent call last):
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
+    self._make_module_from_path(filepath)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
+    module = module_class(filepath, prefix, user_api, internal_api)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
+    self.version = self.get_version()
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
+    config = get_config().split()
+AttributeError: 'NoneType' object has no attribute 'split'
+    0.84     = Validation score   (accuracy)
+    0.0s     = Training   runtime
+    0.05s    = Validation runtime
+Fitting model: KNeighborsDist_BAG_L1 ...
+Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7f36a79fe700&gt;
+Traceback (most recent call last):
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
+    self._make_module_from_path(filepath)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
+    module = module_class(filepath, prefix, user_api, internal_api)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
+    self.version = self.get_version()
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
+    config = get_config().split()
+AttributeError: 'NoneType' object has no attribute 'split'
+    0.8818   = Validation score   (accuracy)
+    0.0s     = Training   runtime
+    0.04s    = Validation runtime
+Fitting model: LightGBMXT_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9575   = Validation score   (accuracy)
+    1.72s    = Training   runtime
+    0.12s    = Validation runtime
+Fitting model: LightGBM_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9636   = Validation score   (accuracy)
+    1.3s     = Training   runtime
+    0.05s    = Validation runtime
+Fitting model: RandomForestGini_BAG_L1 ...
+    0.9595   = Validation score   (accuracy)
+    0.53s    = Training   runtime
+    0.15s    = Validation runtime
+Fitting model: RandomForestEntr_BAG_L1 ...
+    0.9593   = Validation score   (accuracy)
+    0.47s    = Training   runtime
+    0.17s    = Validation runtime
+Fitting model: CatBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9873   = Validation score   (accuracy)
+    10.94s   = Training   runtime
+    0.11s    = Validation runtime
+Fitting model: ExtraTreesGini_BAG_L1 ...
+    0.9602   = Validation score   (accuracy)
+    0.31s    = Training   runtime
+    0.17s    = Validation runtime
+Fitting model: ExtraTreesEntr_BAG_L1 ...
+    0.9589   = Validation score   (accuracy)
+    0.33s    = Training   runtime
+    0.18s    = Validation runtime
+Fitting model: NeuralNetFastAI_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9235   = Validation score   (accuracy)
+    11.81s   = Training   runtime
+    0.17s    = Validation runtime
+Fitting model: XGBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9747   = Validation score   (accuracy)
+    4.35s    = Training   runtime
+    0.11s    = Validation runtime
+Fitting model: NeuralNetTorch_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8938   = Validation score   (accuracy)
+    31.61s   = Training   runtime
+    0.15s    = Validation runtime
+Fitting model: LightGBMLarge_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.959    = Validation score   (accuracy)
+    4.27s    = Training   runtime
+    0.11s    = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+    0.9873   = Validation score   (accuracy)
+    1.58s    = Training   runtime
+    0.01s    = Validation runtime
+AutoGluon training complete, total runtime = 78.9s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20240126_034006/")</code></pre>
+</div>
+</div>
+</section>
+<section id="autogluondf50" class="level1">
+<h1>Autogluon(df50)</h1>
+<div id="cc88b80a-0944-4231-b2a7-ee23847a3560" class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> throw(fraudTrain, <span class="fl">0.5</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>tr <span class="op">=</span> TabularDataset(df_tr)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>tst <span class="op">=</span> TabularDataset(df_tst)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TabularPredictor(<span class="st">"is_fraud"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>predictr.fit(tr, presets<span class="op">=</span><span class="st">'best_quality'</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> tst.is_fraud</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(tst)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>result2 <span class="op">=</span> evaluation(y,yhat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240126_034125/"
+Presets specified: ['best_quality']
+Stack configuration (auto_stack=True): num_stack_levels=0, num_bag_folds=8, num_bag_sets=1
+Beginning AutoGluon training ...
+AutoGluon will save models to "AutogluonModels/ag-20240126_034125/"
+AutoGluon Version:  0.8.2
+Python Version:     3.8.18
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #38~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov  2 18:01:13 UTC 2
+Disk Space Avail:   607.65 GB / 982.82 GB (61.8%)
+Train Data Rows:    7007
+Train Data Columns: 21
+Label Column: is_fraud
+Preprocessing data ...
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    2 unique label values:  [1, 0]
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
+Selected class &lt;--&gt; label mapping:  class 1 = 1, class 0 = 0
+Using Feature Generators to preprocess the data ...
+Fitting AutoMLPipelineFeatureGenerator...
+    Available Memory:                    21211.51 MB
+    Train Data (Original)  Memory Usage: 5.95 MB (0.0% of available memory)
+    Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+    Stage 1 Generators:
+        Fitting AsTypeFeatureGenerator...
+            Note: Converting 1 features to boolean dtype as they only contain 2 unique values.
+    Stage 2 Generators:
+        Fitting FillNaFeatureGenerator...
+    Stage 3 Generators:
+        Fitting IdentityFeatureGenerator...
+        Fitting CategoryFeatureGenerator...
+            Fitting CategoryMemoryMinimizeFeatureGenerator...
+        Fitting DatetimeFeatureGenerator...
+        Fitting TextSpecialFeatureGenerator...
+            Fitting BinnedFeatureGenerator...
+            Fitting DropDuplicatesFeatureGenerator...
+        Fitting TextNgramFeatureGenerator...
+            Fitting CountVectorizer for text features: ['street']
+            CountVectorizer fit with vocabulary size = 2
+    Stage 4 Generators:
+        Fitting DropUniqueFeatureGenerator...
+    Stage 5 Generators:
+        Fitting DropDuplicatesFeatureGenerator...
+    Unused Original Features (Count: 1): ['trans_num']
+        These features were not used to generate any of the output features. Add a feature generator compatible with these features to utilize them.
+        Features can also be unused if they carry very little information, such as being categorical but having almost entirely unique values or being duplicates of other features.
+        These features do not need to be present at inference time.
+        ('object', []) : 1 | ['trans_num']
+    Types of features in original data (raw dtype, special dtypes):
+        ('datetime', [])                   : 1 | ['trans_date_trans_time']
+        ('float', [])                      : 6 | ['cc_num', 'amt', 'lat', 'long', 'merch_lat', ...]
+        ('int', [])                        : 3 | ['zip', 'city_pop', 'unix_time']
+        ('object', [])                     : 8 | ['merchant', 'category', 'first', 'last', 'gender', ...]
+        ('object', ['datetime_as_object']) : 1 | ['dob']
+        ('object', ['text'])               : 1 | ['street']
+    Types of features in processed data (raw dtype, special dtypes):
+        ('category', [])                    :  7 | ['merchant', 'category', 'first', 'last', 'city', ...]
+        ('category', ['text_as_category'])  :  1 | ['street']
+        ('float', [])                       :  6 | ['cc_num', 'amt', 'lat', 'long', 'merch_lat', ...]
+        ('int', [])                         :  3 | ['zip', 'city_pop', 'unix_time']
+        ('int', ['binned', 'text_special']) :  8 | ['street.char_count', 'street.word_count', 'street.capital_ratio', 'street.lower_ratio', 'street.digit_ratio', ...]
+        ('int', ['bool'])                   :  1 | ['gender']
+        ('int', ['datetime_as_int'])        : 10 | ['trans_date_trans_time', 'trans_date_trans_time.year', 'trans_date_trans_time.month', 'trans_date_trans_time.day', 'trans_date_trans_time.dayofweek', ...]
+        ('int', ['text_ngram'])             :  1 | ['__nlp__.suite']
+    0.7s = Fit runtime
+    20 features in original data used to generate 37 features in processed data.
+    Train Data (Processed) Memory Usage: 1.25 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.76s ...
+AutoGluon will gauge predictive performance using evaluation metric: 'accuracy'
+    To change this, specify the eval_metric parameter of Predictor()
+User-specified model hyperparameters to be fit:
+{
+    'NN_TORCH': {},
+    'GBM': [{'extra_trees': True, 'ag_args': {'name_suffix': 'XT'}}, {}, 'GBMLarge'],
+    'CAT': {},
+    'XGB': {},
+    'FASTAI': {},
+    'RF': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'XT': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'KNN': [{'weights': 'uniform', 'ag_args': {'name_suffix': 'Unif'}}, {'weights': 'distance', 'ag_args': {'name_suffix': 'Dist'}}],
+}
+Fitting 13 L1 models ...
+Fitting model: KNeighborsUnif_BAG_L1 ...
+Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7f368c155f70&gt;
+Traceback (most recent call last):
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
+    self._make_module_from_path(filepath)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
+    module = module_class(filepath, prefix, user_api, internal_api)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
+    self.version = self.get_version()
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
+    config = get_config().split()
+AttributeError: 'NoneType' object has no attribute 'split'
+    0.84     = Validation score   (accuracy)
+    0.0s     = Training   runtime
+    0.04s    = Validation runtime
+Fitting model: KNeighborsDist_BAG_L1 ...
+Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7f368c155310&gt;
+Traceback (most recent call last):
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
+    self._make_module_from_path(filepath)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
+    module = module_class(filepath, prefix, user_api, internal_api)
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
+    self.version = self.get_version()
+  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
+    config = get_config().split()
+AttributeError: 'NoneType' object has no attribute 'split'
+    0.8818   = Validation score   (accuracy)
+    0.0s     = Training   runtime
+    0.04s    = Validation runtime
+Fitting model: LightGBMXT_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9575   = Validation score   (accuracy)
+    1.65s    = Training   runtime
+    0.13s    = Validation runtime
+Fitting model: LightGBM_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9636   = Validation score   (accuracy)
+    1.51s    = Training   runtime
+    0.05s    = Validation runtime
+Fitting model: RandomForestGini_BAG_L1 ...
+    0.9595   = Validation score   (accuracy)
+    0.47s    = Training   runtime
+    0.16s    = Validation runtime
+Fitting model: RandomForestEntr_BAG_L1 ...
+    0.9593   = Validation score   (accuracy)
+    0.53s    = Training   runtime
+    0.16s    = Validation runtime
+Fitting model: CatBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9873   = Validation score   (accuracy)
+    10.84s   = Training   runtime
+    0.1s     = Validation runtime
+Fitting model: ExtraTreesGini_BAG_L1 ...
+    0.9602   = Validation score   (accuracy)
+    0.32s    = Training   runtime
+    0.18s    = Validation runtime
+Fitting model: ExtraTreesEntr_BAG_L1 ...
+    0.9589   = Validation score   (accuracy)
+    0.34s    = Training   runtime
+    0.18s    = Validation runtime
+Fitting model: NeuralNetFastAI_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9235   = Validation score   (accuracy)
+    11.65s   = Training   runtime
+    0.16s    = Validation runtime
+Fitting model: XGBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9747   = Validation score   (accuracy)
+    4.41s    = Training   runtime
+    0.11s    = Validation runtime
+Fitting model: NeuralNetTorch_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8938   = Validation score   (accuracy)
+    30.73s   = Training   runtime
+    0.14s    = Validation runtime
+Fitting model: LightGBMLarge_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.959    = Validation score   (accuracy)
+    4.32s    = Training   runtime
+    0.11s    = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+    0.9873   = Validation score   (accuracy)
+    1.56s    = Training   runtime
+    0.01s    = Validation runtime
+AutoGluon training complete, total runtime = 77.6s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20240126_034125/")</code></pre>
+</div>
+</div>
+</section>
+<section id="autogluon0.3-0.05" class="level1">
+<h1>Autogluon(0.3 / 0.05)</h1>
+<div id="882fa292-f52a-44f7-93e5-a2a2a94f335f" class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> throw(fraudTrain, <span class="fl">0.3</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>result3 <span class="op">=</span> auto(df,<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240126_050219/"
+Presets specified: ['best_quality']
+Stack configuration (auto_stack=True): num_stack_levels=0, num_bag_folds=8, num_bag_sets=1
+Beginning AutoGluon training ...
+AutoGluon will save models to "AutogluonModels/ag-20240126_050219/"
+AutoGluon Version:  0.8.2
+Python Version:     3.8.18
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #38~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov  2 18:01:13 UTC 2
+Disk Space Avail:   606.47 GB / 982.82 GB (61.7%)
+Train Data Rows:    14014
+Train Data Columns: 1
+Label Column: is_fraud
+Preprocessing data ...
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    2 unique label values:  [1, 0]
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
+Selected class &lt;--&gt; label mapping:  class 1 = 1, class 0 = 0
+Using Feature Generators to preprocess the data ...
+Fitting AutoMLPipelineFeatureGenerator...
+    Available Memory:                    21246.58 MB
+    Train Data (Original)  Memory Usage: 0.11 MB (0.0% of available memory)
+    Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+    Stage 1 Generators:
+        Fitting AsTypeFeatureGenerator...
+    Stage 2 Generators:
+        Fitting FillNaFeatureGenerator...
+    Stage 3 Generators:
+        Fitting IdentityFeatureGenerator...
+    Stage 4 Generators:
+        Fitting DropUniqueFeatureGenerator...
+    Stage 5 Generators:
+        Fitting DropDuplicatesFeatureGenerator...
+    Types of features in original data (raw dtype, special dtypes):
+        ('float', []) : 1 | ['amt']
+    Types of features in processed data (raw dtype, special dtypes):
+        ('float', []) : 1 | ['amt']
+    0.0s = Fit runtime
+    1 features in original data used to generate 1 features in processed data.
+    Train Data (Processed) Memory Usage: 0.11 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.03s ...
+AutoGluon will gauge predictive performance using evaluation metric: 'accuracy'
+    To change this, specify the eval_metric parameter of Predictor()
+User-specified model hyperparameters to be fit:
+{
+    'NN_TORCH': {},
+    'GBM': [{'extra_trees': True, 'ag_args': {'name_suffix': 'XT'}}, {}, 'GBMLarge'],
+    'CAT': {},
+    'XGB': {},
+    'FASTAI': {},
+    'RF': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'XT': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'KNN': [{'weights': 'uniform', 'ag_args': {'name_suffix': 'Unif'}}, {'weights': 'distance', 'ag_args': {'name_suffix': 'Dist'}}],
+}
+Fitting 13 L1 models ...
+Fitting model: KNeighborsUnif_BAG_L1 ...
+    0.8836   = Validation score   (accuracy)
+    0.0s     = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: KNeighborsDist_BAG_L1 ...
+    0.8731   = Validation score   (accuracy)
+    0.0s     = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: LightGBMXT_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8884   = Validation score   (accuracy)
+    0.63s    = Training   runtime
+    0.05s    = Validation runtime
+Fitting model: LightGBM_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8961   = Validation score   (accuracy)
+    0.65s    = Training   runtime
+    0.02s    = Validation runtime
+Fitting model: RandomForestGini_BAG_L1 ...
+    0.8669   = Validation score   (accuracy)
+    0.43s    = Training   runtime
+    0.25s    = Validation runtime
+Fitting model: RandomForestEntr_BAG_L1 ...
+    0.8669   = Validation score   (accuracy)
+    0.6s     = Training   runtime
+    0.25s    = Validation runtime
+Fitting model: CatBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8964   = Validation score   (accuracy)
+    1.72s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: ExtraTreesGini_BAG_L1 ...
+    0.8714   = Validation score   (accuracy)
+    0.34s    = Training   runtime
+    0.28s    = Validation runtime
+Fitting model: ExtraTreesEntr_BAG_L1 ...
+    0.8713   = Validation score   (accuracy)
+    0.35s    = Training   runtime
+    0.28s    = Validation runtime
+Fitting model: NeuralNetFastAI_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8827   = Validation score   (accuracy)
+    12.2s    = Training   runtime
+    0.12s    = Validation runtime
+Fitting model: XGBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8958   = Validation score   (accuracy)
+    0.53s    = Training   runtime
+    0.02s    = Validation runtime
+Fitting model: NeuralNetTorch_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8948   = Validation score   (accuracy)
+    18.45s   = Training   runtime
+    0.06s    = Validation runtime
+Fitting model: LightGBMLarge_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8957   = Validation score   (accuracy)
+    0.98s    = Training   runtime
+    0.02s    = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+    0.897    = Validation score   (accuracy)
+    2.89s    = Training   runtime
+    0.02s    = Validation runtime
+AutoGluon training complete, total runtime = 48.89s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20240126_050219/")</code></pre>
+</div>
+</div>
+</section>
+<section id="autogluon0.3-0.005" class="level1">
+<h1>Autogluon(0.3 / 0.005)</h1>
+<div id="9ded02c0-7679-431e-9071-dfce6b5e9129" class="cell" data-execution_count="59">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> throw(fraudTrain, <span class="fl">0.3</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>result4 <span class="op">=</span> auto(df,<span class="fl">0.005</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240126_051650/"
+Presets specified: ['best_quality']
+Stack configuration (auto_stack=True): num_stack_levels=0, num_bag_folds=8, num_bag_sets=1
+Beginning AutoGluon training ...
+AutoGluon will save models to "AutogluonModels/ag-20240126_051650/"
+AutoGluon Version:  0.8.2
+Python Version:     3.8.18
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #38~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov  2 18:01:13 UTC 2
+Disk Space Avail:   604.41 GB / 982.82 GB (61.5%)
+Train Data Rows:    14014
+Train Data Columns: 1
+Label Column: is_fraud
+Preprocessing data ...
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    2 unique label values:  [1, 0]
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
+Selected class &lt;--&gt; label mapping:  class 1 = 1, class 0 = 0
+Using Feature Generators to preprocess the data ...
+Fitting AutoMLPipelineFeatureGenerator...
+    Available Memory:                    22354.36 MB
+    Train Data (Original)  Memory Usage: 0.11 MB (0.0% of available memory)
+    Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+    Stage 1 Generators:
+        Fitting AsTypeFeatureGenerator...
+    Stage 2 Generators:
+        Fitting FillNaFeatureGenerator...
+    Stage 3 Generators:
+        Fitting IdentityFeatureGenerator...
+    Stage 4 Generators:
+        Fitting DropUniqueFeatureGenerator...
+    Stage 5 Generators:
+        Fitting DropDuplicatesFeatureGenerator...
+    Types of features in original data (raw dtype, special dtypes):
+        ('float', []) : 1 | ['amt']
+    Types of features in processed data (raw dtype, special dtypes):
+        ('float', []) : 1 | ['amt']
+    0.0s = Fit runtime
+    1 features in original data used to generate 1 features in processed data.
+    Train Data (Processed) Memory Usage: 0.11 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.02s ...
+AutoGluon will gauge predictive performance using evaluation metric: 'accuracy'
+    To change this, specify the eval_metric parameter of Predictor()
+User-specified model hyperparameters to be fit:
+{
+    'NN_TORCH': {},
+    'GBM': [{'extra_trees': True, 'ag_args': {'name_suffix': 'XT'}}, {}, 'GBMLarge'],
+    'CAT': {},
+    'XGB': {},
+    'FASTAI': {},
+    'RF': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'XT': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'KNN': [{'weights': 'uniform', 'ag_args': {'name_suffix': 'Unif'}}, {'weights': 'distance', 'ag_args': {'name_suffix': 'Dist'}}],
+}
+Fitting 13 L1 models ...
+Fitting model: KNeighborsUnif_BAG_L1 ...
+    0.8747   = Validation score   (accuracy)
+    0.0s     = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: KNeighborsDist_BAG_L1 ...
+    0.8688   = Validation score   (accuracy)
+    0.0s     = Training   runtime
+    0.02s    = Validation runtime
+Fitting model: LightGBMXT_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8874   = Validation score   (accuracy)
+    0.92s    = Training   runtime
+    0.05s    = Validation runtime
+Fitting model: LightGBM_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8931   = Validation score   (accuracy)
+    0.79s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: RandomForestGini_BAG_L1 ...
+    0.8576   = Validation score   (accuracy)
+    0.47s    = Training   runtime
+    0.27s    = Validation runtime
+Fitting model: RandomForestEntr_BAG_L1 ...
+    0.8576   = Validation score   (accuracy)
+    0.54s    = Training   runtime
+    0.25s    = Validation runtime
+Fitting model: CatBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8923   = Validation score   (accuracy)
+    1.99s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: ExtraTreesGini_BAG_L1 ...
+    0.8639   = Validation score   (accuracy)
+    0.34s    = Training   runtime
+    0.3s     = Validation runtime
+Fitting model: ExtraTreesEntr_BAG_L1 ...
+    0.8638   = Validation score   (accuracy)
+    0.39s    = Training   runtime
+    0.29s    = Validation runtime
+Fitting model: NeuralNetFastAI_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.879    = Validation score   (accuracy)
+    12.46s   = Training   runtime
+    0.12s    = Validation runtime
+Fitting model: XGBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8933   = Validation score   (accuracy)
+    0.6s     = Training   runtime
+    0.02s    = Validation runtime
+Fitting model: NeuralNetTorch_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8901   = Validation score   (accuracy)
+    20.35s   = Training   runtime
+    0.07s    = Validation runtime
+Fitting model: LightGBMLarge_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8928   = Validation score   (accuracy)
+    1.06s    = Training   runtime
+    0.02s    = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+    0.8939   = Validation score   (accuracy)
+    2.93s    = Training   runtime
+    0.02s    = Validation runtime
+AutoGluon training complete, total runtime = 51.69s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20240126_051650/")</code></pre>
+</div>
+</div>
+</section>
+<section id="autogluon0.3-0.0005" class="level1">
+<h1>Autogluon(0.3 / 0.0005)</h1>
+<div id="e7ec0e8b-93e0-409b-8450-79fc7dbda741" class="cell" data-execution_count="60">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> throw(fraudTrain, <span class="fl">0.3</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>result5 <span class="op">=</span> auto(df,<span class="fl">0.0005</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240126_051742/"
+Presets specified: ['best_quality']
+Stack configuration (auto_stack=True): num_stack_levels=0, num_bag_folds=8, num_bag_sets=1
+Beginning AutoGluon training ...
+AutoGluon will save models to "AutogluonModels/ag-20240126_051742/"
+AutoGluon Version:  0.8.2
+Python Version:     3.8.18
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #38~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov  2 18:01:13 UTC 2
+Disk Space Avail:   604.11 GB / 982.82 GB (61.5%)
+Train Data Rows:    14014
+Train Data Columns: 1
+Label Column: is_fraud
+Preprocessing data ...
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    2 unique label values:  [1, 0]
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
+Selected class &lt;--&gt; label mapping:  class 1 = 1, class 0 = 0
+Using Feature Generators to preprocess the data ...
+Fitting AutoMLPipelineFeatureGenerator...
+    Available Memory:                    22269.23 MB
+    Train Data (Original)  Memory Usage: 0.11 MB (0.0% of available memory)
+    Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+    Stage 1 Generators:
+        Fitting AsTypeFeatureGenerator...
+    Stage 2 Generators:
+        Fitting FillNaFeatureGenerator...
+    Stage 3 Generators:
+        Fitting IdentityFeatureGenerator...
+    Stage 4 Generators:
+        Fitting DropUniqueFeatureGenerator...
+    Stage 5 Generators:
+        Fitting DropDuplicatesFeatureGenerator...
+    Types of features in original data (raw dtype, special dtypes):
+        ('float', []) : 1 | ['amt']
+    Types of features in processed data (raw dtype, special dtypes):
+        ('float', []) : 1 | ['amt']
+    0.0s = Fit runtime
+    1 features in original data used to generate 1 features in processed data.
+    Train Data (Processed) Memory Usage: 0.11 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.02s ...
+AutoGluon will gauge predictive performance using evaluation metric: 'accuracy'
+    To change this, specify the eval_metric parameter of Predictor()
+User-specified model hyperparameters to be fit:
+{
+    'NN_TORCH': {},
+    'GBM': [{'extra_trees': True, 'ag_args': {'name_suffix': 'XT'}}, {}, 'GBMLarge'],
+    'CAT': {},
+    'XGB': {},
+    'FASTAI': {},
+    'RF': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'XT': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'KNN': [{'weights': 'uniform', 'ag_args': {'name_suffix': 'Unif'}}, {'weights': 'distance', 'ag_args': {'name_suffix': 'Dist'}}],
+}
+Fitting 13 L1 models ...
+Fitting model: KNeighborsUnif_BAG_L1 ...
+    0.8746   = Validation score   (accuracy)
+    0.0s     = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: KNeighborsDist_BAG_L1 ...
+    0.8656   = Validation score   (accuracy)
+    0.0s     = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: LightGBMXT_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8898   = Validation score   (accuracy)
+    0.8s     = Training   runtime
+    0.09s    = Validation runtime
+Fitting model: LightGBM_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.892    = Validation score   (accuracy)
+    0.73s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: RandomForestGini_BAG_L1 ...
+    0.8588   = Validation score   (accuracy)
+    0.49s    = Training   runtime
+    0.26s    = Validation runtime
+Fitting model: RandomForestEntr_BAG_L1 ...
+    0.8588   = Validation score   (accuracy)
+    0.58s    = Training   runtime
+    0.25s    = Validation runtime
+Fitting model: CatBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8931   = Validation score   (accuracy)
+    1.71s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: ExtraTreesGini_BAG_L1 ...
+    0.8638   = Validation score   (accuracy)
+    0.35s    = Training   runtime
+    0.29s    = Validation runtime
+Fitting model: ExtraTreesEntr_BAG_L1 ...
+    0.8643   = Validation score   (accuracy)
+    0.48s    = Training   runtime
+    0.35s    = Validation runtime
+Fitting model: NeuralNetFastAI_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.878    = Validation score   (accuracy)
+    12.93s   = Training   runtime
+    0.13s    = Validation runtime
+Fitting model: XGBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.893    = Validation score   (accuracy)
+    0.5s     = Training   runtime
+    0.02s    = Validation runtime
+Fitting model: NeuralNetTorch_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8905   = Validation score   (accuracy)
+    20.83s   = Training   runtime
+    0.07s    = Validation runtime
+Fitting model: LightGBMLarge_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.8912   = Validation score   (accuracy)
+    0.97s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+    0.8935   = Validation score   (accuracy)
+    3.33s    = Training   runtime
+    0.02s    = Validation runtime
+AutoGluon training complete, total runtime = 52.68s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20240126_051742/")</code></pre>
+</div>
+</div>
+</section>
+<section id="autogluon0.1-0.05" class="level1">
+<h1>Autogluon(0.1 / 0.05)</h1>
+<div id="59e2b570-3894-4799-bd0f-20468fb1b896" class="cell" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> throw(fraudTrain, <span class="fl">0.1</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>result6 <span class="op">=</span> auto(df,<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240126_051835/"
+Presets specified: ['best_quality']
+Stack configuration (auto_stack=True): num_stack_levels=0, num_bag_folds=8, num_bag_sets=1
+Beginning AutoGluon training ...
+AutoGluon will save models to "AutogluonModels/ag-20240126_051835/"
+AutoGluon Version:  0.8.2
+Python Version:     3.8.18
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #38~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov  2 18:01:13 UTC 2
+Disk Space Avail:   603.80 GB / 982.82 GB (61.4%)
+Train Data Rows:    42042
+Train Data Columns: 1
+Label Column: is_fraud
+Preprocessing data ...
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    2 unique label values:  [1, 0]
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
+Selected class &lt;--&gt; label mapping:  class 1 = 1, class 0 = 0
+Using Feature Generators to preprocess the data ...
+Fitting AutoMLPipelineFeatureGenerator...
+    Available Memory:                    22269.36 MB
+    Train Data (Original)  Memory Usage: 0.34 MB (0.0% of available memory)
+    Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+    Stage 1 Generators:
+        Fitting AsTypeFeatureGenerator...
+    Stage 2 Generators:
+        Fitting FillNaFeatureGenerator...
+    Stage 3 Generators:
+        Fitting IdentityFeatureGenerator...
+    Stage 4 Generators:
+        Fitting DropUniqueFeatureGenerator...
+    Stage 5 Generators:
+        Fitting DropDuplicatesFeatureGenerator...
+    Types of features in original data (raw dtype, special dtypes):
+        ('float', []) : 1 | ['amt']
+    Types of features in processed data (raw dtype, special dtypes):
+        ('float', []) : 1 | ['amt']
+    0.0s = Fit runtime
+    1 features in original data used to generate 1 features in processed data.
+    Train Data (Processed) Memory Usage: 0.34 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.03s ...
+AutoGluon will gauge predictive performance using evaluation metric: 'accuracy'
+    To change this, specify the eval_metric parameter of Predictor()
+User-specified model hyperparameters to be fit:
+{
+    'NN_TORCH': {},
+    'GBM': [{'extra_trees': True, 'ag_args': {'name_suffix': 'XT'}}, {}, 'GBMLarge'],
+    'CAT': {},
+    'XGB': {},
+    'FASTAI': {},
+    'RF': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'XT': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'KNN': [{'weights': 'uniform', 'ag_args': {'name_suffix': 'Unif'}}, {'weights': 'distance', 'ag_args': {'name_suffix': 'Dist'}}],
+}
+Fitting 13 L1 models ...
+Fitting model: KNeighborsUnif_BAG_L1 ...
+    0.9448   = Validation score   (accuracy)
+    0.01s    = Training   runtime
+    0.04s    = Validation runtime
+Fitting model: KNeighborsDist_BAG_L1 ...
+    0.9397   = Validation score   (accuracy)
+    0.01s    = Training   runtime
+    0.04s    = Validation runtime
+Fitting model: LightGBMXT_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9454   = Validation score   (accuracy)
+    0.6s     = Training   runtime
+    0.05s    = Validation runtime
+Fitting model: LightGBM_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9527   = Validation score   (accuracy)
+    0.58s    = Training   runtime
+    0.02s    = Validation runtime
+Fitting model: RandomForestGini_BAG_L1 ...
+    0.938    = Validation score   (accuracy)
+    1.19s    = Training   runtime
+    0.68s    = Validation runtime
+Fitting model: RandomForestEntr_BAG_L1 ...
+    0.938    = Validation score   (accuracy)
+    1.08s    = Training   runtime
+    0.68s    = Validation runtime
+Fitting model: CatBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9527   = Validation score   (accuracy)
+    1.48s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: ExtraTreesGini_BAG_L1 ...
+    0.9413   = Validation score   (accuracy)
+    0.5s     = Training   runtime
+    0.83s    = Validation runtime
+Fitting model: ExtraTreesEntr_BAG_L1 ...
+    0.9414   = Validation score   (accuracy)
+    0.45s    = Training   runtime
+    0.78s    = Validation runtime
+Fitting model: NeuralNetFastAI_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9506   = Validation score   (accuracy)
+    37.84s   = Training   runtime
+    0.31s    = Validation runtime
+Fitting model: XGBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9528   = Validation score   (accuracy)
+    0.58s    = Training   runtime
+    0.02s    = Validation runtime
+Fitting model: NeuralNetTorch_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9541   = Validation score   (accuracy)
+    70.34s   = Training   runtime
+    0.2s     = Validation runtime
+Fitting model: LightGBMLarge_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9527   = Validation score   (accuracy)
+    1.0s     = Training   runtime
+    0.05s    = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+    0.9542   = Validation score   (accuracy)
+    7.95s    = Training   runtime
+    0.04s    = Validation runtime
+AutoGluon training complete, total runtime = 135.79s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20240126_051835/")</code></pre>
+</div>
+</div>
+</section>
+<section id="autogluon0.1-0.005" class="level1">
+<h1>Autogluon(0.1 / 0.005)</h1>
+<div id="837c245a-fadd-47af-ad2d-686b691e09d6" class="cell" data-execution_count="62">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> throw(fraudTrain, <span class="fl">0.1</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>result7 <span class="op">=</span> auto(df,<span class="fl">0.005</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240126_052052/"
+Presets specified: ['best_quality']
+Stack configuration (auto_stack=True): num_stack_levels=0, num_bag_folds=8, num_bag_sets=1
+Beginning AutoGluon training ...
+AutoGluon will save models to "AutogluonModels/ag-20240126_052052/"
+AutoGluon Version:  0.8.2
+Python Version:     3.8.18
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #38~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov  2 18:01:13 UTC 2
+Disk Space Avail:   603.34 GB / 982.82 GB (61.4%)
+Train Data Rows:    42042
+Train Data Columns: 1
+Label Column: is_fraud
+Preprocessing data ...
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    2 unique label values:  [1, 0]
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
+Selected class &lt;--&gt; label mapping:  class 1 = 1, class 0 = 0
+Using Feature Generators to preprocess the data ...
+Fitting AutoMLPipelineFeatureGenerator...
+    Available Memory:                    22163.4 MB
+    Train Data (Original)  Memory Usage: 0.34 MB (0.0% of available memory)
+    Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+    Stage 1 Generators:
+        Fitting AsTypeFeatureGenerator...
+    Stage 2 Generators:
+        Fitting FillNaFeatureGenerator...
+    Stage 3 Generators:
+        Fitting IdentityFeatureGenerator...
+    Stage 4 Generators:
+        Fitting DropUniqueFeatureGenerator...
+    Stage 5 Generators:
+        Fitting DropDuplicatesFeatureGenerator...
+    Types of features in original data (raw dtype, special dtypes):
+        ('float', []) : 1 | ['amt']
+    Types of features in processed data (raw dtype, special dtypes):
+        ('float', []) : 1 | ['amt']
+    0.0s = Fit runtime
+    1 features in original data used to generate 1 features in processed data.
+    Train Data (Processed) Memory Usage: 0.34 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.03s ...
+AutoGluon will gauge predictive performance using evaluation metric: 'accuracy'
+    To change this, specify the eval_metric parameter of Predictor()
+User-specified model hyperparameters to be fit:
+{
+    'NN_TORCH': {},
+    'GBM': [{'extra_trees': True, 'ag_args': {'name_suffix': 'XT'}}, {}, 'GBMLarge'],
+    'CAT': {},
+    'XGB': {},
+    'FASTAI': {},
+    'RF': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'XT': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'KNN': [{'weights': 'uniform', 'ag_args': {'name_suffix': 'Unif'}}, {'weights': 'distance', 'ag_args': {'name_suffix': 'Dist'}}],
+}
+Fitting 13 L1 models ...
+Fitting model: KNeighborsUnif_BAG_L1 ...
+    0.9378   = Validation score   (accuracy)
+    0.01s    = Training   runtime
+    0.04s    = Validation runtime
+Fitting model: KNeighborsDist_BAG_L1 ...
+    0.9318   = Validation score   (accuracy)
+    0.01s    = Training   runtime
+    0.04s    = Validation runtime
+Fitting model: LightGBMXT_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9421   = Validation score   (accuracy)
+    0.85s    = Training   runtime
+    0.07s    = Validation runtime
+Fitting model: LightGBM_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9476   = Validation score   (accuracy)
+    0.79s    = Training   runtime
+    0.03s    = Validation runtime
+Fitting model: RandomForestGini_BAG_L1 ...
+    0.9312   = Validation score   (accuracy)
+    1.2s     = Training   runtime
+    0.7s     = Validation runtime
+Fitting model: RandomForestEntr_BAG_L1 ...
+    0.9312   = Validation score   (accuracy)
+    1.11s    = Training   runtime
+    0.7s     = Validation runtime
+Fitting model: CatBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.947    = Validation score   (accuracy)
+    1.55s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: ExtraTreesGini_BAG_L1 ...
+    0.9342   = Validation score   (accuracy)
+    0.49s    = Training   runtime
+    0.85s    = Validation runtime
+Fitting model: ExtraTreesEntr_BAG_L1 ...
+    0.9341   = Validation score   (accuracy)
+    0.48s    = Training   runtime
+    0.8s     = Validation runtime
+Fitting model: NeuralNetFastAI_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9453   = Validation score   (accuracy)
+    38.15s   = Training   runtime
+    0.43s    = Validation runtime
+Fitting model: XGBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9467   = Validation score   (accuracy)
+    0.52s    = Training   runtime
+    0.02s    = Validation runtime
+Fitting model: NeuralNetTorch_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9477   = Validation score   (accuracy)
+    65.84s   = Training   runtime
+    0.18s    = Validation runtime
+Fitting model: LightGBMLarge_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9476   = Validation score   (accuracy)
+    0.93s    = Training   runtime
+    0.05s    = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+    0.9485   = Validation score   (accuracy)
+    7.95s    = Training   runtime
+    0.04s    = Validation runtime
+AutoGluon training complete, total runtime = 131.81s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20240126_052052/")</code></pre>
+</div>
+</div>
+</section>
+<section id="autogluon0.1-0.0005" class="level1">
+<h1>Autogluon(0.1 / 0.0005)</h1>
+<div id="21d0f7a2-88d0-48ed-8dfe-76a57a54ea9b" class="cell" data-execution_count="63">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> throw(fraudTrain, <span class="fl">0.1</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>result8 <span class="op">=</span> auto(df,<span class="fl">0.005</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240126_052304/"
+Presets specified: ['best_quality']
+Stack configuration (auto_stack=True): num_stack_levels=0, num_bag_folds=8, num_bag_sets=1
+Beginning AutoGluon training ...
+AutoGluon will save models to "AutogluonModels/ag-20240126_052304/"
+AutoGluon Version:  0.8.2
+Python Version:     3.8.18
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #38~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov  2 18:01:13 UTC 2
+Disk Space Avail:   602.85 GB / 982.82 GB (61.3%)
+Train Data Rows:    42042
+Train Data Columns: 1
+Label Column: is_fraud
+Preprocessing data ...
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    2 unique label values:  [1, 0]
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
+Selected class &lt;--&gt; label mapping:  class 1 = 1, class 0 = 0
+Using Feature Generators to preprocess the data ...
+Fitting AutoMLPipelineFeatureGenerator...
+    Available Memory:                    22155.39 MB
+    Train Data (Original)  Memory Usage: 0.34 MB (0.0% of available memory)
+    Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+    Stage 1 Generators:
+        Fitting AsTypeFeatureGenerator...
+    Stage 2 Generators:
+        Fitting FillNaFeatureGenerator...
+    Stage 3 Generators:
+        Fitting IdentityFeatureGenerator...
+    Stage 4 Generators:
+        Fitting DropUniqueFeatureGenerator...
+    Stage 5 Generators:
+        Fitting DropDuplicatesFeatureGenerator...
+    Types of features in original data (raw dtype, special dtypes):
+        ('float', []) : 1 | ['amt']
+    Types of features in processed data (raw dtype, special dtypes):
+        ('float', []) : 1 | ['amt']
+    0.0s = Fit runtime
+    1 features in original data used to generate 1 features in processed data.
+    Train Data (Processed) Memory Usage: 0.34 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.04s ...
+AutoGluon will gauge predictive performance using evaluation metric: 'accuracy'
+    To change this, specify the eval_metric parameter of Predictor()
+User-specified model hyperparameters to be fit:
+{
+    'NN_TORCH': {},
+    'GBM': [{'extra_trees': True, 'ag_args': {'name_suffix': 'XT'}}, {}, 'GBMLarge'],
+    'CAT': {},
+    'XGB': {},
+    'FASTAI': {},
+    'RF': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'XT': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'KNN': [{'weights': 'uniform', 'ag_args': {'name_suffix': 'Unif'}}, {'weights': 'distance', 'ag_args': {'name_suffix': 'Dist'}}],
+}
+Fitting 13 L1 models ...
+Fitting model: KNeighborsUnif_BAG_L1 ...
+    0.937    = Validation score   (accuracy)
+    0.01s    = Training   runtime
+    0.04s    = Validation runtime
+Fitting model: KNeighborsDist_BAG_L1 ...
+    0.9317   = Validation score   (accuracy)
+    0.01s    = Training   runtime
+    0.04s    = Validation runtime
+Fitting model: LightGBMXT_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9419   = Validation score   (accuracy)
+    0.92s    = Training   runtime
+    0.07s    = Validation runtime
+Fitting model: LightGBM_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9469   = Validation score   (accuracy)
+    0.65s    = Training   runtime
+    0.03s    = Validation runtime
+Fitting model: RandomForestGini_BAG_L1 ...
+    0.9308   = Validation score   (accuracy)
+    1.23s    = Training   runtime
+    0.7s     = Validation runtime
+Fitting model: RandomForestEntr_BAG_L1 ...
+    0.9308   = Validation score   (accuracy)
+    1.14s    = Training   runtime
+    0.7s     = Validation runtime
+Fitting model: CatBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9465   = Validation score   (accuracy)
+    1.52s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: ExtraTreesGini_BAG_L1 ...
+    0.9341   = Validation score   (accuracy)
+    0.47s    = Training   runtime
+    0.82s    = Validation runtime
+Fitting model: ExtraTreesEntr_BAG_L1 ...
+    0.9341   = Validation score   (accuracy)
+    0.45s    = Training   runtime
+    0.79s    = Validation runtime
+Fitting model: NeuralNetFastAI_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9451   = Validation score   (accuracy)
+    39.1s    = Training   runtime
+    0.32s    = Validation runtime
+Fitting model: XGBoost_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9462   = Validation score   (accuracy)
+    0.6s     = Training   runtime
+    0.02s    = Validation runtime
+Fitting model: NeuralNetTorch_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.948    = Validation score   (accuracy)
+    71.08s   = Training   runtime
+    0.23s    = Validation runtime
+Fitting model: LightGBMLarge_BAG_L1 ...
+    Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+    0.9469   = Validation score   (accuracy)
+    0.84s    = Training   runtime
+    0.05s    = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+    0.9481   = Validation score   (accuracy)
+    7.99s    = Training   runtime
+    0.04s    = Validation runtime
+AutoGluon training complete, total runtime = 138.21s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20240126_052304/")</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
