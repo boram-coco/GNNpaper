@@ -1,1 +1,0 @@
-Sitemap: https://boram-coco.github.io/GNNpaper/sitemap.xml
