@@ -1321,21 +1321,569 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="49790531-0d93-4611-9205-f7a39c901806" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>merged_df[<span class="st">'throw_rate'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>0       0.097074
-1       0.097074
-2       0.097074
-3       0.097074
-4       0.097074
-          ...   
-2693    0.900045
-2694    0.900045
-2695    0.900045
-2696    0.900045
-2697    0.900045
-Name: throw_rate, Length: 2698, dtype: float64</code></pre>
+</section>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2">240326</h2>
+<div id="8ff63231-028b-4bbc-849f-0e0ab9646cd3" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>folder_path <span class="op">=</span> <span class="st">'./results'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="ce8f709c-25e2-44ad-a318-e975858db433" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="op">=</span> []</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="e4f99d46-de3a-4858-99e7-1076c8e2955f" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file_name <span class="kw">in</span> os.listdir(folder_path):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> file_name.endswith(<span class="st">'.csv'</span>):</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> pd.read_csv(os.path.join(folder_path, file_name))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>        all_data.append(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="48f04933-f068-4c58-b03d-a06724868a1f" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> pd.concat(all_data, ignore_index<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="28b8902b-b3ab-4320-a656-5c136431f146" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>merged_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+<th data-quarto-table-cell-role="th">theta</th>
+<th data-quarto-table-cell-role="th">gamma</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ECOD</td>
+<td>0.003704</td>
+<td>0.591404</td>
+<td>0.003553</td>
+<td>0.843750</td>
+<td>0.007076</td>
+<td>0.717359</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.097074</td>
+<td>10010</td>
+<td>['amt']</td>
+<td>0.450350</td>
+<td>37088</td>
+<td>0.001726</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>GMM</td>
+<td>0.082634</td>
+<td>0.692003</td>
+<td>0.003410</td>
+<td>0.609375</td>
+<td>0.006782</td>
+<td>0.650760</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.097074</td>
+<td>10010</td>
+<td>['amt']</td>
+<td>0.450350</td>
+<td>37088</td>
+<td>0.001726</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>HBOS</td>
+<td>0.002123</td>
+<td>0.936368</td>
+<td>0.020868</td>
+<td>0.781250</td>
+<td>0.040650</td>
+<td>0.858943</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.097074</td>
+<td>10010</td>
+<td>['amt']</td>
+<td>0.450350</td>
+<td>37088</td>
+<td>0.001726</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>IForest</td>
+<td>0.144727</td>
+<td>0.815358</td>
+<td>0.007263</td>
+<td>0.781250</td>
+<td>0.014393</td>
+<td>0.798334</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.097074</td>
+<td>10010</td>
+<td>['amt']</td>
+<td>0.450350</td>
+<td>37088</td>
+<td>0.001726</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>INNE</td>
+<td>0.326223</td>
+<td>0.766636</td>
+<td>0.005070</td>
+<td>0.687500</td>
+<td>0.010065</td>
+<td>0.727136</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.097074</td>
+<td>10010</td>
+<td>['amt']</td>
+<td>0.450350</td>
+<td>37088</td>
+<td>0.001726</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1656</td>
+<td>LODA</td>
+<td>1.380267</td>
+<td>0.990775</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499843</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009000</td>
+<td>500499</td>
+<td>['amt']</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1657</td>
+<td>LOF</td>
+<td>1.171791</td>
+<td>0.982414</td>
+<td>0.001378</td>
+<td>0.001345</td>
+<td>0.001361</td>
+<td>0.496291</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009000</td>
+<td>500499</td>
+<td>['amt']</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1658</td>
+<td>MCD</td>
+<td>0.101797</td>
+<td>0.990787</td>
+<td>0.482782</td>
+<td>0.471419</td>
+<td>0.477033</td>
+<td>0.733439</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009000</td>
+<td>500499</td>
+<td>['amt']</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1659</td>
+<td>PCA</td>
+<td>0.029553</td>
+<td>0.990787</td>
+<td>0.482782</td>
+<td>0.471419</td>
+<td>0.477033</td>
+<td>0.733439</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009000</td>
+<td>500499</td>
+<td>['amt']</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1660</td>
+<td>ROD</td>
+<td>15.238129</td>
+<td>0.978524</td>
+<td>0.000477</td>
+<td>0.000672</td>
+<td>0.000558</td>
+<td>0.493995</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009000</td>
+<td>500499</td>
+<td>['amt']</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>1661 rows × 18 columns</p>
+</div>
+</div>
+</div>
+<div id="a0257c0f-2fae-4dee-b6f0-04876bb7e78e" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>merged_df[<span class="st">'train_cols'</span>] <span class="op">=</span> <span class="st">'amt'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="1947f454-4339-4d8c-93f1-986e976352d5" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>merged_df.to_csv(<span class="st">'./results/240326_meged.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="c201f979-db04-479f-9376-071c3913f95c" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>merged_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+<th data-quarto-table-cell-role="th">theta</th>
+<th data-quarto-table-cell-role="th">gamma</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ECOD</td>
+<td>0.003704</td>
+<td>0.591404</td>
+<td>0.003553</td>
+<td>0.843750</td>
+<td>0.007076</td>
+<td>0.717359</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.097074</td>
+<td>10010</td>
+<td>amt</td>
+<td>0.450350</td>
+<td>37088</td>
+<td>0.001726</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>GMM</td>
+<td>0.082634</td>
+<td>0.692003</td>
+<td>0.003410</td>
+<td>0.609375</td>
+<td>0.006782</td>
+<td>0.650760</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.097074</td>
+<td>10010</td>
+<td>amt</td>
+<td>0.450350</td>
+<td>37088</td>
+<td>0.001726</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>HBOS</td>
+<td>0.002123</td>
+<td>0.936368</td>
+<td>0.020868</td>
+<td>0.781250</td>
+<td>0.040650</td>
+<td>0.858943</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.097074</td>
+<td>10010</td>
+<td>amt</td>
+<td>0.450350</td>
+<td>37088</td>
+<td>0.001726</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>IForest</td>
+<td>0.144727</td>
+<td>0.815358</td>
+<td>0.007263</td>
+<td>0.781250</td>
+<td>0.014393</td>
+<td>0.798334</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.097074</td>
+<td>10010</td>
+<td>amt</td>
+<td>0.450350</td>
+<td>37088</td>
+<td>0.001726</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>INNE</td>
+<td>0.326223</td>
+<td>0.766636</td>
+<td>0.005070</td>
+<td>0.687500</td>
+<td>0.010065</td>
+<td>0.727136</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.097074</td>
+<td>10010</td>
+<td>amt</td>
+<td>0.450350</td>
+<td>37088</td>
+<td>0.001726</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1656</td>
+<td>LODA</td>
+<td>1.380267</td>
+<td>0.990775</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499843</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009000</td>
+<td>500499</td>
+<td>amt</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1657</td>
+<td>LOF</td>
+<td>1.171791</td>
+<td>0.982414</td>
+<td>0.001378</td>
+<td>0.001345</td>
+<td>0.001361</td>
+<td>0.496291</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009000</td>
+<td>500499</td>
+<td>amt</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1658</td>
+<td>MCD</td>
+<td>0.101797</td>
+<td>0.990787</td>
+<td>0.482782</td>
+<td>0.471419</td>
+<td>0.477033</td>
+<td>0.733439</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009000</td>
+<td>500499</td>
+<td>amt</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1659</td>
+<td>PCA</td>
+<td>0.029553</td>
+<td>0.990787</td>
+<td>0.482782</td>
+<td>0.471419</td>
+<td>0.477033</td>
+<td>0.733439</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009000</td>
+<td>500499</td>
+<td>amt</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1660</td>
+<td>ROD</td>
+<td>15.238129</td>
+<td>0.978524</td>
+<td>0.000477</td>
+<td>0.000672</td>
+<td>0.000558</td>
+<td>0.493995</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009000</td>
+<td>500499</td>
+<td>amt</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>1661 rows × 18 columns</p>
+</div>
 </div>
 </div>
 

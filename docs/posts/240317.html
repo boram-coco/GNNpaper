@@ -189,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="ed305934-254b-4bc7-baf9-c6f3dedd58b2" class="cell" data-execution_count="13">
+<div id="ed305934-254b-4bc7-baf9-c6f3dedd58b2" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn</span>
@@ -203,11 +203,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> interact, widgets</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># import graft</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="d69cd35f-80d2-4253-bafb-d76499b02b05" class="cell" data-execution_count="14">
+<div id="d69cd35f-80d2-4253-bafb-d76499b02b05" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'./fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="26b5dc47-6f14-42e2-a0c3-ac245067bcc1" class="cell" data-execution_count="15">
+<div id="26b5dc47-6f14-42e2-a0c3-ac245067bcc1" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> fraudTrain[fraudTrain.is_fraud <span class="op">==</span> <span class="dv">1</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fraud1_cc_num <span class="op">=</span> df[<span class="st">'cc_num'</span>].unique()</span>
@@ -216,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>cc_num_value_sort <span class="op">=</span> df_fraud.groupby(<span class="st">"cc_num"</span>)[<span class="st">"is_fraud"</span>].agg([<span class="st">'sum'</span>]).reset_index().sort_values(by<span class="op">=</span><span class="st">'sum'</span>,ascending<span class="op">=</span><span class="va">False</span>)[<span class="st">'cc_num'</span>].tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e86fbac3-1e0f-4804-8879-92c4fd62d216" class="cell" data-tags="[]" data-execution_count="23">
+<div id="e86fbac3-1e0f-4804-8879-92c4fd62d216" class="cell" data-tags="[]" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> interact, widgets</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -238,14 +238,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>interact(plot_fraud_over_time, cc_num<span class="op">=</span>widgets.Dropdown(options<span class="op">=</span>[<span class="st">''</span>] <span class="op">+</span> cc_num_value_sort, value<span class="op">=</span><span class="fl">4.503100e+18</span>, description<span class="op">=</span><span class="st">'cc_num:'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"1f08924b27ea473790c30c5fe278b801","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+{"model_id":"296e795fdacf4c209c8a1a4a77cb0e9c","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>&lt;function __main__.plot_fraud_over_time(cc_num=4.5031e+18)&gt;</code></pre>
 </div>
 </div>
-<div id="5fae4197-b16f-4a80-a111-f8ba7984cf71" class="cell" data-execution_count="64">
+<div id="5fae4197-b16f-4a80-a111-f8ba7984cf71" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -261,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>시각화 함수를 plot_fraud_over_time.pkl 파일로 저장했습니다.</code></pre>
 </div>
 </div>
-<div id="ededdb51-f3ea-4d71-91e3-c4c9208862b7" class="cell" data-tags="[]" data-execution_count="12">
+<div id="ededdb51-f3ea-4d71-91e3-c4c9208862b7" class="cell" data-tags="[]" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> widgets, interact</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
@@ -303,10 +303,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>interact(plot_fraud_over_time, cc_num<span class="op">=</span>cc_num_dropdown)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"808bff8a8b80425486d99ca2dff171b4","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+{"model_id":"6278a01eef464762ada4dd9ff25e6aea","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="29">
 <pre><code>&lt;function __main__.plot_fraud_over_time(cc_num)&gt;</code></pre>
 </div>
 </div>
