@@ -190,7 +190,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="imports" class="level1">
 <h1>imports</h1>
-<div id="4eb91738-6398-4ffc-bbec-fc48fcc8f249" class="cell" data-execution_count="1">
+<div id="4eb91738-6398-4ffc-bbec-fc48fcc8f249" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn</span>
@@ -200,10 +200,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="290df976-de65-4a67-828b-b8fe594538d9" class="cell" data-execution_count="2">
+<div id="290df976-de65-4a67-828b-b8fe594538d9" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>run ..<span class="op">/</span>function_proposed_gcn.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fdfecbba-4a62-4ef9-9c6e-238b71f1fb62" class="cell" data-execution_count="3">
+<div id="fdfecbba-4a62-4ef9-9c6e-238b71f1fb62" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -505,6 +505,180 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>None</td>
 <td>11406996</td>
 <td>0.7</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="a9a7cb40-4b87-44f4-916b-7e28bd9a1fda" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_5(fraudTrain, <span class="dv">10</span>,<span class="fl">1e+7</span>,<span class="fl">0.8</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_5(fraudTrain, <span class="dv">9</span>,<span class="fl">1e+7</span>,<span class="fl">0.8</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_5(fraudTrain, <span class="dv">8</span>,<span class="fl">1e+7</span>,<span class="fl">0.8</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_5(fraudTrain, <span class="dv">7</span>,<span class="fl">1e+7</span>,<span class="fl">0.8</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_5(fraudTrain, <span class="dv">6</span>,<span class="fl">1e+7</span>,<span class="fl">0.8</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_5(fraudTrain, <span class="dv">5</span>,<span class="fl">1e+7</span>,<span class="fl">0.8</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>ymdhms <span class="op">=</span> datetime.datetime.fromtimestamp(time.time()).strftime(<span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">-%H%M%S'</span>) </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>df_results.to_csv(<span class="ss">f'../results/</span><span class="sc">{</span>ymdhms<span class="sc">}</span><span class="ss">-proposed.csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+<th data-quarto-table-cell-role="th">theta</th>
+<th data-quarto-table-cell-role="th">gamma</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.927785</td>
+<td>0.017810</td>
+<td>0.971429</td>
+<td>0.034979</td>
+<td>0.980290</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.129162</td>
+<td>9009</td>
+<td>amt</td>
+<td>0.497724</td>
+<td>25978</td>
+<td>0.001347</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.928067</td>
+<td>0.019376</td>
+<td>0.953488</td>
+<td>0.037981</td>
+<td>0.977006</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.120661</td>
+<td>9009</td>
+<td>amt</td>
+<td>0.502609</td>
+<td>28874</td>
+<td>0.001489</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.920646</td>
+<td>0.012639</td>
+<td>0.970588</td>
+<td>0.024953</td>
+<td>0.971934</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.109181</td>
+<td>9009</td>
+<td>amt</td>
+<td>0.499278</td>
+<td>32500</td>
+<td>0.001046</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.925283</td>
+<td>0.016329</td>
+<td>0.938776</td>
+<td>0.032100</td>
+<td>0.973764</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.098058</td>
+<td>9009</td>
+<td>amt</td>
+<td>0.496725</td>
+<td>37127</td>
+<td>0.001320</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.922988</td>
+<td>0.017389</td>
+<td>0.967213</td>
+<td>0.034163</td>
+<td>0.977288</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.087737</td>
+<td>9009</td>
+<td>amt</td>
+<td>0.502831</td>
+<td>43318</td>
+<td>0.001408</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.918906</td>
+<td>0.015439</td>
+<td>0.942857</td>
+<td>0.030380</td>
+<td>0.974102</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.075671</td>
+<td>9009</td>
+<td>amt</td>
+<td>0.504274</td>
+<td>51952</td>
+<td>0.001347</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.8</td>
 </tr>
 </tbody>
 </table>

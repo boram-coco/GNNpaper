@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="김보람">
-<meta name="dcterms.date" content="2024-03-14">
+<meta name="dcterms.date" content="2024-03-28">
 
-<title>GNNpaper - 240314 Data정리</title>
+<title>GNNpaper - [Proposed] df0.2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,22 +59,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -107,7 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">GNNpaper</span>
     </a>
   </div>
@@ -128,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Boram-coco</span></a>
   </li>  
   <li class="nav-item compact">
@@ -152,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">240314 Data정리</h1>
+      <h1 class="title">[Proposed] df0.2</h1>
                       </div>
   </div>
     
@@ -169,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">March 14, 2024</p>
+        <p class="date">March 28, 2024</p>
       </div>
     </div>
     
@@ -188,7 +188,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="49c07155-ca97-4994-943a-5ee64f716683" class="cell" data-execution_count="1">
+<section id="imports" class="level1">
+<h1>imports</h1>
+<div id="4eb91738-6398-4ffc-bbec-fc48fcc8f249" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn</span>
@@ -196,36 +198,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time </span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># import graft</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="521c57b7-6614-4bc3-94f7-a7bd6ce17d53" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="290df976-de65-4a67-828b-b8fe594538d9" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>run ..<span class="op">/</span>function_proposed_gcn.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="833f474e-7a7c-4afa-bfe1-88a5118edf6c" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_time_difference(group):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(group)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> []</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            time_difference <span class="op">=</span> <span class="bu">abs</span>(group.iloc[i].trans_date_trans_time.value <span class="op">-</span> group.iloc[j].trans_date_trans_time.value)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            result.append([group.iloc[i].name, group.iloc[j].name, time_difference])</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fdfecbba-4a62-4ef9-9c6e-238b71f1fb62" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="66776804-7a75-499a-a10b-f6db7d36c011" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> fraudTrain[fraudTrain.is_fraud <span class="op">==</span> <span class="dv">1</span>]</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fraud1_cc_num <span class="op">=</span> df[<span class="st">'cc_num'</span>].unique()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df_fraud <span class="op">=</span> fraudTrain[fraudTrain[<span class="st">'cc_num'</span>].isin(fraud1_cc_num)].reset_index()</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df_group <span class="op">=</span> df_fraud.groupby(<span class="st">"cc_num"</span>)[<span class="st">"is_fraud"</span>].agg([<span class="st">'count'</span>, <span class="st">'sum'</span>]).reset_index()</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>df_group.columns <span class="op">=</span> [<span class="st">'cc_num'</span>, <span class="st">'total_transactions'</span>, <span class="st">'fraud_transactions'</span>]</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>first <span class="op">=</span> df_fraud.groupby(<span class="st">'cc_num'</span>)[<span class="st">'first'</span>].first().reset_index() </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>last <span class="op">=</span> df_fraud.groupby(<span class="st">'cc_num'</span>)[<span class="st">'last'</span>].first().reset_index()</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> first[<span class="st">'first'</span>] <span class="op">+</span> <span class="st">' '</span> <span class="op">+</span> last[<span class="st">'last'</span>]</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>df_group[<span class="st">'name'</span>] <span class="op">=</span> name</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>df_group.insert(<span class="dv">1</span>, <span class="st">'name'</span>, df_group.pop(<span class="st">'name'</span>))</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>df_group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="938ade22-d7d9-472c-809e-405a2d86a510" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.2</span>,<span class="fl">1e7</span>,<span class="fl">0.96</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.2</span>,<span class="fl">1e7</span>,<span class="fl">0.94</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.2</span>,<span class="fl">1e7</span>,<span class="fl">0.92</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.2</span>,<span class="fl">1e7</span>,<span class="fl">0.9</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.2</span>,<span class="fl">1e7</span>,<span class="fl">0.88</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.2</span>,<span class="fl">1e7</span>,<span class="fl">0.86</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.2</span>,<span class="fl">1e7</span>,<span class="fl">0.84</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.2</span>,<span class="fl">1e7</span>,<span class="fl">0.82</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.2</span>,<span class="fl">1e7</span>,<span class="fl">0.80</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.2</span>,<span class="fl">1e7</span>,<span class="fl">0.78</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.2</span>,<span class="fl">1e7</span>,<span class="fl">0.76</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.2</span>,<span class="fl">1e7</span>,<span class="fl">0.74</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.2</span>,<span class="fl">1e7</span>,<span class="fl">0.72</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.2</span>,<span class="fl">1e7</span>,<span class="fl">0.7</span>, prev_results<span class="op">=</span>df_results)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>ymdhms <span class="op">=</span> datetime.datetime.fromtimestamp(time.time()).strftime(<span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">-%H%M%S'</span>) </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>df_results.to_csv(<span class="ss">f'../results/</span><span class="sc">{</span>ymdhms<span class="sc">}</span><span class="ss">-proposed.csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
 
@@ -233,337 +234,320 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">cc_num</th>
-<th data-quarto-table-cell-role="th">name</th>
-<th data-quarto-table-cell-role="th">total_transactions</th>
-<th data-quarto-table-cell-role="th">fraud_transactions</th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+<th data-quarto-table-cell-role="th">theta</th>
+<th data-quarto-table-cell-role="th">gamma</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>6.041621e+10</td>
-<td>Mary Diaz</td>
-<td>1242</td>
-<td>9</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.969499</td>
+<td>0.908387</td>
+<td>0.941806</td>
+<td>0.924795</td>
+<td>0.989259</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.2</td>
+<td>22522</td>
+<td>amt</td>
+<td>0.200293</td>
+<td>7508</td>
+<td>0.199121</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.96</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>6.042293e+10</td>
-<td>Jeffrey Powers</td>
-<td>1261</td>
-<td>12</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.965503</td>
+<td>0.901242</td>
+<td>0.935525</td>
+<td>0.918064</td>
+<td>0.987353</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.2</td>
+<td>22522</td>
+<td>amt</td>
+<td>0.197807</td>
+<td>7508</td>
+<td>0.206580</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.94</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>6.042310e+10</td>
-<td>Jason Gray</td>
-<td>423</td>
-<td>10</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.955115</td>
+<td>0.888591</td>
+<td>0.885619</td>
+<td>0.887102</td>
+<td>0.984401</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.2</td>
+<td>22522</td>
+<td>amt</td>
+<td>0.200293</td>
+<td>7508</td>
+<td>0.199121</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.92</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
-<td>6.042785e+10</td>
-<td>Bradley Martinez</td>
-<td>432</td>
-<td>14</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.958977</td>
+<td>0.874307</td>
+<td>0.931714</td>
+<td>0.902098</td>
+<td>0.983667</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.2</td>
+<td>22522</td>
+<td>amt</td>
+<td>0.199050</td>
+<td>7508</td>
+<td>0.202850</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.90</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
-<td>6.049060e+10</td>
-<td>Karen Johnson</td>
-<td>827</td>
-<td>10</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.949254</td>
+<td>0.850236</td>
+<td>0.919057</td>
+<td>0.883308</td>
+<td>0.980431</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.2</td>
+<td>22522</td>
+<td>amt</td>
+<td>0.197007</td>
+<td>7508</td>
+<td>0.208977</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.88</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
+<td data-quarto-table-cell-role="th">5</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.948055</td>
+<td>0.821918</td>
+<td>0.938137</td>
+<td>0.876190</td>
+<td>0.979554</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.2</td>
+<td>22522</td>
+<td>amt</td>
+<td>0.201359</td>
+<td>7508</td>
+<td>0.195924</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.86</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">591</td>
-<td>4.906630e+18</td>
-<td>Charles Moreno</td>
-<td>2103</td>
-<td>11</td>
+<td data-quarto-table-cell-role="th">6</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.948189</td>
+<td>0.826012</td>
+<td>0.941991</td>
+<td>0.880197</td>
+<td>0.981559</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.2</td>
+<td>22522</td>
+<td>amt</td>
+<td>0.199316</td>
+<td>7508</td>
+<td>0.202051</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.84</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">592</td>
-<td>4.911820e+18</td>
-<td>Jeremy Chavez</td>
-<td>9</td>
-<td>9</td>
+<td data-quarto-table-cell-role="th">7</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.928476</td>
+<td>0.813968</td>
+<td>0.840105</td>
+<td>0.826830</td>
+<td>0.972653</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.2</td>
+<td>22522</td>
+<td>amt</td>
+<td>0.198917</td>
+<td>7508</td>
+<td>0.203250</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.82</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">593</td>
-<td>4.956830e+18</td>
-<td>Kenneth Robinson</td>
-<td>2090</td>
-<td>10</td>
+<td data-quarto-table-cell-role="th">8</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.936867</td>
+<td>0.810303</td>
+<td>0.892523</td>
+<td>0.849428</td>
+<td>0.976111</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.2</td>
+<td>22522</td>
+<td>amt</td>
+<td>0.200160</td>
+<td>7508</td>
+<td>0.199521</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.80</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">594</td>
-<td>4.973530e+18</td>
-<td>Mary Rodriguez</td>
-<td>860</td>
-<td>10</td>
+<td data-quarto-table-cell-role="th">9</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.937400</td>
+<td>0.805353</td>
+<td>0.898236</td>
+<td>0.849262</td>
+<td>0.974586</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.2</td>
+<td>22522</td>
+<td>amt</td>
+<td>0.201225</td>
+<td>7508</td>
+<td>0.196324</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.78</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">595</td>
-<td>4.992350e+18</td>
-<td>Benjamin Kim</td>
-<td>1689</td>
-<td>8</td>
-</tr>
-</tbody>
-</table>
-
-<p>596 rows × 4 columns</p>
-</div>
-</div>
-</div>
-<div id="4804b6fe-256b-4a16-be12-c23ca9be707e" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(df_group[<span class="st">'fraud_transactions'</span>] <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
-<pre><code>0</code></pre>
-</div>
-</div>
-<div id="31c0ece2-44ef-42a8-aff9-dabb1a3b6e43" class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_group[df_group[<span class="st">'cc_num'</span>] <span class="op">==</span> <span class="fl">180068e+9</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">cc_num</th>
-<th data-quarto-table-cell-role="th">name</th>
-<th data-quarto-table-cell-role="th">total_transactions</th>
-<th data-quarto-table-cell-role="th">fraud_transactions</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">160</td>
-<td>1.800680e+14</td>
-<td>Mary Juarez</td>
-<td>2093</td>
-<td>22</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div id="ece076b4-8c53-49bd-8508-0cafe1d7b8b3" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_group.to_csv(<span class="st">'df_group_ccnum'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="eb8e6467-b006-416c-9fbe-2b17bd122dba" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_fraud.is_fraud.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>0.009219716623428457</code></pre>
-</div>
-</div>
-<div id="cb19d2b8-0b8e-45e1-ab2a-6031539ef006" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_group[<span class="st">'fraud_transactions'</span>].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>6006</code></pre>
-</div>
-</div>
-<hr>
-<div id="fa67da75-2122-420b-a37a-c3e9dec755ec" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_group[<span class="st">'ratio of fraudulent transactions per cc_num'</span>] <span class="op">=</span> df_group[<span class="st">'fraud_transactions'</span>] <span class="op">/</span> df_group[<span class="st">'total_transactions'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="68aa07ae-14ce-44f5-b8a4-356039f82fa4" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">cc_num</th>
-<th data-quarto-table-cell-role="th">name</th>
-<th data-quarto-table-cell-role="th">total_transactions</th>
-<th data-quarto-table-cell-role="th">fraud_transactions</th>
-<th data-quarto-table-cell-role="th">ratio of fraudulent transactions per cc_num</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>6.041621e+10</td>
-<td>Mary Diaz</td>
-<td>1242</td>
-<td>9</td>
-<td>0.007246</td>
+<td data-quarto-table-cell-role="th">10</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.937134</td>
+<td>0.793696</td>
+<td>0.925184</td>
+<td>0.854411</td>
+<td>0.974375</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.2</td>
+<td>22522</td>
+<td>amt</td>
+<td>0.200204</td>
+<td>7508</td>
+<td>0.199387</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.76</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>6.042293e+10</td>
-<td>Jeffrey Powers</td>
-<td>1261</td>
-<td>12</td>
-<td>0.009516</td>
+<td data-quarto-table-cell-role="th">11</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.923015</td>
+<td>0.799333</td>
+<td>0.812331</td>
+<td>0.805780</td>
+<td>0.968231</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.2</td>
+<td>22522</td>
+<td>amt</td>
+<td>0.201137</td>
+<td>7508</td>
+<td>0.196590</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.74</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>6.042310e+10</td>
-<td>Jason Gray</td>
-<td>423</td>
-<td>10</td>
-<td>0.023641</td>
+<td data-quarto-table-cell-role="th">12</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.912360</td>
+<td>0.774086</td>
+<td>0.785570</td>
+<td>0.779786</td>
+<td>0.961307</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.2</td>
+<td>22522</td>
+<td>amt</td>
+<td>0.200826</td>
+<td>7508</td>
+<td>0.197523</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.72</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>6.042785e+10</td>
-<td>Bradley Martinez</td>
-<td>432</td>
-<td>14</td>
-<td>0.032407</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>6.049060e+10</td>
-<td>Karen Johnson</td>
-<td>827</td>
-<td>10</td>
-<td>0.012092</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">591</td>
-<td>4.906630e+18</td>
-<td>Charles Moreno</td>
-<td>2103</td>
-<td>11</td>
-<td>0.005231</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">592</td>
-<td>4.911820e+18</td>
-<td>Jeremy Chavez</td>
-<td>9</td>
-<td>9</td>
-<td>1.000000</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">593</td>
-<td>4.956830e+18</td>
-<td>Kenneth Robinson</td>
-<td>2090</td>
-<td>10</td>
-<td>0.004785</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">594</td>
-<td>4.973530e+18</td>
-<td>Mary Rodriguez</td>
-<td>860</td>
-<td>10</td>
-<td>0.011628</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">595</td>
-<td>4.992350e+18</td>
-<td>Benjamin Kim</td>
-<td>1689</td>
-<td>8</td>
-<td>0.004737</td>
-</tr>
-</tbody>
-</table>
-
-<p>596 rows × 5 columns</p>
-</div>
-</div>
-</div>
-<div id="104395de-a76c-405c-a5f7-38308bc10281" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_group.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="28">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">cc_num</th>
-<th data-quarto-table-cell-role="th">total_transactions</th>
-<th data-quarto-table-cell-role="th">fraud_transactions</th>
-<th data-quarto-table-cell-role="th">ratio of fraudulent transactions per cc_num</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">count</td>
-<td>5.960000e+02</td>
-<td>596.000000</td>
-<td>596.000000</td>
-<td>596.000000</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">mean</td>
-<td>4.235681e+17</td>
-<td>1093.003356</td>
-<td>10.077181</td>
-<td>0.102714</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">std</td>
-<td>1.311573e+18</td>
-<td>701.358772</td>
-<td>3.254589</td>
-<td>0.286436</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">min</td>
-<td>6.041621e+10</td>
-<td>7.000000</td>
-<td>2.000000</td>
-<td>0.000792</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">25%</td>
-<td>1.800348e+14</td>
-<td>429.000000</td>
-<td>8.000000</td>
-<td>0.006349</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">50%</td>
-<td>3.525630e+15</td>
-<td>867.500000</td>
-<td>10.000000</td>
-<td>0.009679</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">75%</td>
-<td>4.741782e+15</td>
-<td>1645.250000</td>
-<td>12.000000</td>
-<td>0.018946</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">max</td>
-<td>4.992350e+18</td>
-<td>4173.000000</td>
-<td>24.000000</td>
-<td>1.000000</td>
+<td data-quarto-table-cell-role="th">13</td>
+<td>GCN</td>
+<td>None</td>
+<td>0.904635</td>
+<td>0.780702</td>
+<td>0.747416</td>
+<td>0.763696</td>
+<td>0.962761</td>
+<td>True</td>
+<td>Proposed</td>
+<td>0.2</td>
+<td>22522</td>
+<td>amt</td>
+<td>0.197940</td>
+<td>7508</td>
+<td>0.206180</td>
+<td>None</td>
+<td>10000000.0</td>
+<td>0.70</td>
 </tr>
 </tbody>
 </table>
@@ -571,133 +555,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="f1fdc454-1d87-46ec-8214-88fee792be91" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_group.sort_values(by<span class="op">=</span><span class="st">'fraud_transactions'</span>, ascending<span class="op">=</span><span class="va">False</span>).reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="31">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">index</th>
-<th data-quarto-table-cell-role="th">cc_num</th>
-<th data-quarto-table-cell-role="th">name</th>
-<th data-quarto-table-cell-role="th">total_transactions</th>
-<th data-quarto-table-cell-role="th">fraud_transactions</th>
-<th data-quarto-table-cell-role="th">ratio of fraudulent transactions per cc_num</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>179</td>
-<td>2.131740e+14</td>
-<td>Joseph Wagner</td>
-<td>2474</td>
-<td>24</td>
-<td>0.009701</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>278</td>
-<td>3.506040e+15</td>
-<td>Christine Burns</td>
-<td>2072</td>
-<td>23</td>
-<td>0.011100</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>160</td>
-<td>1.800680e+14</td>
-<td>Mary Juarez</td>
-<td>2093</td>
-<td>22</td>
-<td>0.010511</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>493</td>
-<td>6.011380e+15</td>
-<td>Martin Duarte</td>
-<td>1639</td>
-<td>22</td>
-<td>0.013423</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>163</td>
-<td>1.800850e+14</td>
-<td>David Kirby</td>
-<td>1657</td>
-<td>21</td>
-<td>0.012674</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">591</td>
-<td>573</td>
-<td>4.503100e+18</td>
-<td>Katherine Tucker</td>
-<td>1250</td>
-<td>2</td>
-<td>0.001600</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">592</td>
-<td>327</td>
-<td>3.546670e+15</td>
-<td>Jordan May</td>
-<td>824</td>
-<td>2</td>
-<td>0.002427</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">593</td>
-<td>485</td>
-<td>6.011110e+15</td>
-<td>Rebecca Erickson</td>
-<td>2525</td>
-<td>2</td>
-<td>0.000792</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">594</td>
-<td>360</td>
-<td>3.576430e+15</td>
-<td>Jessica Ward</td>
-<td>2478</td>
-<td>2</td>
-<td>0.000807</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">595</td>
-<td>88</td>
-<td>4.809700e+12</td>
-<td>Sabrina Nolan</td>
-<td>1624</td>
-<td>2</td>
-<td>0.001232</td>
-</tr>
-</tbody>
-</table>
-
-<p>596 rows × 6 columns</p>
-</div>
-</div>
+<div id="47082b94-3d54-4f02-92a4-e4242d5c7fab" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_results <span class="op">=</span> try_6(fraudTrain, <span class="fl">0.009</span>,<span class="fl">1e7</span>,<span class="fl">0.8</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ymdhms <span class="op">=</span> datetime.datetime.fromtimestamp(time.time()).strftime(<span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">-%H%M%S'</span>) </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df_results.to_csv(<span class="ss">f'../results/</span><span class="sc">{</span>ymdhms<span class="sc">}</span><span class="ss">-proposed.csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
