@@ -200,14 +200,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b62fd4fe-e850-4d9a-9708-55fb40e73485" class="cell" data-execution_count="2">
+<div id="b62fd4fe-e850-4d9a-9708-55fb40e73485" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>run ..<span class="op">/</span>functions.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="4b5f3a51-e915-4d52-ac44-86e2353bd695" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> auto_amt(fraudTrain, fraud_rate, test_fraud_rate):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> fraudTrain[[<span class="st">"amt"</span>,<span class="st">"is_fraud"</span>]]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> throw(df, fraud_rate)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    df_tr, df_tst <span class="op">=</span> df_tr, df_tst <span class="op">=</span> split_dataframe(df, test_fraud_rate)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    df_tr, df_tst <span class="op">=</span> split_dataframe(df, test_fraud_rate)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    tr <span class="op">=</span> TabularDataset(df_tr)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    tst <span class="op">=</span> TabularDataset(df_tst)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    predictr <span class="op">=</span> TabularPredictor(label<span class="op">=</span><span class="st">"is_fraud"</span>, verbosity<span class="op">=</span><span class="dv">0</span>)</span>
@@ -287,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>    df_results.to_csv(<span class="ss">f'../results/</span><span class="sc">{</span>ymdhms<span class="sc">}</span><span class="ss">-Autogluon.csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="9f8b4812-1b25-44e2-bc14-438f74d7e911" class="cell" data-execution_count="6">
+<div id="9f8b4812-1b25-44e2-bc14-438f74d7e911" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -3327,6 +3327,6829 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
+</div>
+<div id="e6a1255c-2d01-4168-a411-516a8a54f189" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> auto_amt3232(fraudTrain, fraud_rate, test_fraud_rate):</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> fraudTrain[[<span class="st">"amt"</span>,<span class="st">"is_fraud"</span>]]</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> throw(df, fraud_rate)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    df_tr, df_tst <span class="op">=</span> split_dataframe(df, test_fraud_rate)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    tr <span class="op">=</span> TabularDataset(df_tr)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    tst <span class="op">=</span> TabularDataset(df_tst)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    predictr <span class="op">=</span> TabularPredictor(label<span class="op">=</span><span class="st">"is_fraud"</span>, verbosity<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    t1 <span class="op">=</span> time.time()</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    predictr.fit(tr)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    t2 <span class="op">=</span> time.time()</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    time_diff <span class="op">=</span> t2 <span class="op">-</span> t1</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> predictr._trainer.model_graph.nodes</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> []</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> model_name <span class="kw">in</span> models:</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 모델 평가</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        eval_result <span class="op">=</span> predictr.evaluate(tst, model<span class="op">=</span>model_name)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 결과를 데이터프레임에 추가</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        results.append({<span class="st">'model'</span>: model_name, </span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'acc'</span>: eval_result[<span class="st">'accuracy'</span>], </span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'pre'</span>: eval_result[<span class="st">'precision'</span>], </span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'rec'</span>: eval_result[<span class="st">'recall'</span>], </span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'f1'</span>: eval_result[<span class="st">'f1'</span>], </span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'auc'</span>: eval_result[<span class="st">'roc_auc'</span>]})</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> []</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>    time_diff <span class="op">=</span> []</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> []</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    pre <span class="op">=</span> []</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    rec <span class="op">=</span> []</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    f1 <span class="op">=</span> [] </span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>    auc <span class="op">=</span> [] </span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>    graph_based <span class="op">=</span> []</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>    method <span class="op">=</span> [] </span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    throw_rate <span class="op">=</span> [] </span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    train_size <span class="op">=</span> []</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>    train_cols <span class="op">=</span> []</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>    train_frate <span class="op">=</span> []</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>    test_size <span class="op">=</span> []</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>    test_frate <span class="op">=</span> []</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>    hyper_params <span class="op">=</span> [] </span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> result <span class="kw">in</span> results:</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>        model_name <span class="op">=</span> result[<span class="st">'model'</span>]</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>        model.append(model_name)</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>        time_diff.append(<span class="va">None</span>)  <span class="co"># 각 모델별로 학습한 시간을 나타내고 싶은데 잘 안됨</span></span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>        acc.append(result[<span class="st">'acc'</span>]) </span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>        pre.append(result[<span class="st">'pre'</span>])</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>        rec.append(result[<span class="st">'rec'</span>])</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>        f1.append(result[<span class="st">'f1'</span>])</span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>        auc.append(result[<span class="st">'auc'</span>])</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>        graph_based.append(<span class="va">False</span>) </span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>        method.append(<span class="st">'Autogluon'</span>) </span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>        throw_rate.append(df.is_fraud.mean())</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>        train_size.append(<span class="bu">len</span>(tr))</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>        train_cols.append([col <span class="cf">for</span> col <span class="kw">in</span> tr.columns <span class="cf">if</span> col <span class="op">!=</span> <span class="st">'is_fraud'</span>])</span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>        train_frate.append(tr.is_fraud.mean())</span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>        test_size.append(<span class="bu">len</span>(tst))</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>        test_frate.append(tst.is_fraud.mean())</span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>        hyper_params.append(<span class="va">None</span>)</span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>    df_results <span class="op">=</span> pd.DataFrame(<span class="bu">dict</span>(</span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span>model,</span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>        time<span class="op">=</span>time_diff,</span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>        acc<span class="op">=</span>acc,</span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>        pre<span class="op">=</span>pre,</span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>        rec<span class="op">=</span>rec,</span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a>        f1<span class="op">=</span>f1,</span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a>        auc<span class="op">=</span>auc,</span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a>        graph_based<span class="op">=</span>graph_based,</span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a>        method<span class="op">=</span>method,</span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a>        throw_rate<span class="op">=</span>throw_rate,  </span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a>        train_size<span class="op">=</span>train_size,</span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>        train_cols<span class="op">=</span>train_cols,</span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a>        train_frate<span class="op">=</span>train_frate,</span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a>        test_size<span class="op">=</span>test_size,</span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a>        test_frate<span class="op">=</span>test_frate,</span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a>        hyper_params<span class="op">=</span>hyper_params</span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a>    ))    </span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a>    ymdhms <span class="op">=</span> datetime.datetime.fromtimestamp(time.time()).strftime(<span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">-%H%M%S'</span>) </span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a>    df_results.to_csv(<span class="ss">f'../results/</span><span class="sc">{</span>ymdhms<span class="sc">}</span><span class="ss">-Autogluon.csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="c534e667-a659-4743-b029-8fe5e602108e" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>auto_amt3232(fraudTrain, <span class="fl">0.0999445</span>,<span class="fl">0.001793686</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.981195</td>
+<td>0.072423</td>
+<td>0.81250</td>
+<td>0.132992</td>
+<td>0.954993</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.099945</td>
+<td>42066</td>
+<td>[amt]</td>
+<td>0.142015</td>
+<td>18027</td>
+<td>0.001775</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.976480</td>
+<td>0.058559</td>
+<td>0.81250</td>
+<td>0.109244</td>
+<td>0.933824</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.099945</td>
+<td>42066</td>
+<td>[amt]</td>
+<td>0.142015</td>
+<td>18027</td>
+<td>0.001775</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.981472</td>
+<td>0.073446</td>
+<td>0.81250</td>
+<td>0.134715</td>
+<td>0.979718</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.099945</td>
+<td>42066</td>
+<td>[amt]</td>
+<td>0.142015</td>
+<td>18027</td>
+<td>0.001775</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.988573</td>
+<td>0.115044</td>
+<td>0.81250</td>
+<td>0.201550</td>
+<td>0.982587</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.099945</td>
+<td>42066</td>
+<td>[amt]</td>
+<td>0.142015</td>
+<td>18027</td>
+<td>0.001775</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.973429</td>
+<td>0.048485</td>
+<td>0.75000</td>
+<td>0.091082</td>
+<td>0.958581</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.099945</td>
+<td>42066</td>
+<td>[amt]</td>
+<td>0.142015</td>
+<td>18027</td>
+<td>0.001775</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.973429</td>
+<td>0.048485</td>
+<td>0.75000</td>
+<td>0.091082</td>
+<td>0.958581</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.099945</td>
+<td>42066</td>
+<td>[amt]</td>
+<td>0.142015</td>
+<td>18027</td>
+<td>0.001775</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.984634</td>
+<td>0.087542</td>
+<td>0.81250</td>
+<td>0.158055</td>
+<td>0.985574</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.099945</td>
+<td>42066</td>
+<td>[amt]</td>
+<td>0.142015</td>
+<td>18027</td>
+<td>0.001775</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.975315</td>
+<td>0.057816</td>
+<td>0.84375</td>
+<td>0.108216</td>
+<td>0.961006</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.099945</td>
+<td>42066</td>
+<td>[amt]</td>
+<td>0.142015</td>
+<td>18027</td>
+<td>0.001775</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.975426</td>
+<td>0.056156</td>
+<td>0.81250</td>
+<td>0.105051</td>
+<td>0.973764</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.099945</td>
+<td>42066</td>
+<td>[amt]</td>
+<td>0.142015</td>
+<td>18027</td>
+<td>0.001775</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.979087</td>
+<td>0.069825</td>
+<td>0.87500</td>
+<td>0.129330</td>
+<td>0.977548</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.099945</td>
+<td>42066</td>
+<td>[amt]</td>
+<td>0.142015</td>
+<td>18027</td>
+<td>0.001775</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.984634</td>
+<td>0.087542</td>
+<td>0.81250</td>
+<td>0.158055</td>
+<td>0.984246</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.099945</td>
+<td>42066</td>
+<td>[amt]</td>
+<td>0.142015</td>
+<td>18027</td>
+<td>0.001775</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.982748</td>
+<td>0.081081</td>
+<td>0.84375</td>
+<td>0.147945</td>
+<td>0.984233</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.099945</td>
+<td>42066</td>
+<td>[amt]</td>
+<td>0.142015</td>
+<td>18027</td>
+<td>0.001775</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.998225</td>
+<td>0.000000</td>
+<td>0.00000</td>
+<td>0.000000</td>
+<td>0.982663</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.099945</td>
+<td>42066</td>
+<td>[amt]</td>
+<td>0.142015</td>
+<td>18027</td>
+<td>0.001775</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.983968</td>
+<td>0.086817</td>
+<td>0.84375</td>
+<td>0.157434</td>
+<td>0.984870</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.099945</td>
+<td>42066</td>
+<td>[amt]</td>
+<td>0.142015</td>
+<td>18027</td>
+<td>0.001775</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="5b9c63f7-7f62-48ae-8bd2-5f6603958f7d" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>auto_amt3232(fraudTrain, <span class="fl">0.1070228</span>,<span class="fl">0.00179</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.976240</td>
+<td>0.061611</td>
+<td>0.866667</td>
+<td>0.115044</td>
+<td>0.967928</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.107023</td>
+<td>39284</td>
+<td>[amt]</td>
+<td>0.152123</td>
+<td>16835</td>
+<td>0.001782</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.973032</td>
+<td>0.054622</td>
+<td>0.866667</td>
+<td>0.102767</td>
+<td>0.945613</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.107023</td>
+<td>39284</td>
+<td>[amt]</td>
+<td>0.152123</td>
+<td>16835</td>
+<td>0.001782</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.978319</td>
+<td>0.064935</td>
+<td>0.833333</td>
+<td>0.120482</td>
+<td>0.978299</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.107023</td>
+<td>39284</td>
+<td>[amt]</td>
+<td>0.152123</td>
+<td>16835</td>
+<td>0.001782</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.998218</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.985720</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.107023</td>
+<td>39284</td>
+<td>[amt]</td>
+<td>0.152123</td>
+<td>16835</td>
+<td>0.001782</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.969112</td>
+<td>0.044610</td>
+<td>0.800000</td>
+<td>0.084507</td>
+<td>0.973492</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.107023</td>
+<td>39284</td>
+<td>[amt]</td>
+<td>0.152123</td>
+<td>16835</td>
+<td>0.001782</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.969112</td>
+<td>0.044610</td>
+<td>0.800000</td>
+<td>0.084507</td>
+<td>0.973492</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.107023</td>
+<td>39284</td>
+<td>[amt]</td>
+<td>0.152123</td>
+<td>16835</td>
+<td>0.001782</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.980042</td>
+<td>0.072626</td>
+<td>0.866667</td>
+<td>0.134021</td>
+<td>0.981814</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.107023</td>
+<td>39284</td>
+<td>[amt]</td>
+<td>0.152123</td>
+<td>16835</td>
+<td>0.001782</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.971785</td>
+<td>0.052314</td>
+<td>0.866667</td>
+<td>0.098672</td>
+<td>0.974188</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.107023</td>
+<td>39284</td>
+<td>[amt]</td>
+<td>0.152123</td>
+<td>16835</td>
+<td>0.001782</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.971250</td>
+<td>0.051383</td>
+<td>0.866667</td>
+<td>0.097015</td>
+<td>0.974387</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.107023</td>
+<td>39284</td>
+<td>[amt]</td>
+<td>0.152123</td>
+<td>16835</td>
+<td>0.001782</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.977844</td>
+<td>0.065823</td>
+<td>0.866667</td>
+<td>0.122353</td>
+<td>0.979648</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.107023</td>
+<td>39284</td>
+<td>[amt]</td>
+<td>0.152123</td>
+<td>16835</td>
+<td>0.001782</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.984794</td>
+<td>0.093525</td>
+<td>0.866667</td>
+<td>0.168831</td>
+<td>0.981732</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.107023</td>
+<td>39284</td>
+<td>[amt]</td>
+<td>0.152123</td>
+<td>16835</td>
+<td>0.001782</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.982002</td>
+<td>0.080000</td>
+<td>0.866667</td>
+<td>0.146479</td>
+<td>0.985676</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.107023</td>
+<td>39284</td>
+<td>[amt]</td>
+<td>0.152123</td>
+<td>16835</td>
+<td>0.001782</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.998218</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.986131</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.107023</td>
+<td>39284</td>
+<td>[amt]</td>
+<td>0.152123</td>
+<td>16835</td>
+<td>0.001782</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.982002</td>
+<td>0.080000</td>
+<td>0.866667</td>
+<td>0.146479</td>
+<td>0.985676</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.107023</td>
+<td>39284</td>
+<td>[amt]</td>
+<td>0.152123</td>
+<td>16835</td>
+<td>0.001782</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="d2596a39-6e82-40d7-9f36-6344223e821e" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>auto_amt3232(fraudTrain, <span class="fl">0.064833958</span>, <span class="fl">0.001793686</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.985787</td>
+<td>0.086124</td>
+<td>0.734694</td>
+<td>0.154176</td>
+<td>0.934529</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.064834</td>
+<td>64846</td>
+<td>[amt]</td>
+<td>0.091864</td>
+<td>27791</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.982656</td>
+<td>0.071287</td>
+<td>0.734694</td>
+<td>0.129964</td>
+<td>0.911683</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.064834</td>
+<td>64846</td>
+<td>[amt]</td>
+<td>0.091864</td>
+<td>27791</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.998237</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.815224</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.064834</td>
+<td>64846</td>
+<td>[amt]</td>
+<td>0.091864</td>
+<td>27791</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.998237</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.970991</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.064834</td>
+<td>64846</td>
+<td>[amt]</td>
+<td>0.091864</td>
+<td>27791</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.980965</td>
+<td>0.062044</td>
+<td>0.693878</td>
+<td>0.113903</td>
+<td>0.932850</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.064834</td>
+<td>64846</td>
+<td>[amt]</td>
+<td>0.091864</td>
+<td>27791</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.981253</td>
+<td>0.062963</td>
+<td>0.693878</td>
+<td>0.115450</td>
+<td>0.932751</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.064834</td>
+<td>64846</td>
+<td>[amt]</td>
+<td>0.091864</td>
+<td>27791</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.988018</td>
+<td>0.101124</td>
+<td>0.734694</td>
+<td>0.177778</td>
+<td>0.953292</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.064834</td>
+<td>64846</td>
+<td>[amt]</td>
+<td>0.091864</td>
+<td>27791</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.982476</td>
+<td>0.070588</td>
+<td>0.734694</td>
+<td>0.128801</td>
+<td>0.933157</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.064834</td>
+<td>64846</td>
+<td>[amt]</td>
+<td>0.091864</td>
+<td>27791</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.982260</td>
+<td>0.069767</td>
+<td>0.734694</td>
+<td>0.127434</td>
+<td>0.932447</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.064834</td>
+<td>64846</td>
+<td>[amt]</td>
+<td>0.091864</td>
+<td>27791</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.976251</td>
+<td>0.056604</td>
+<td>0.795918</td>
+<td>0.105691</td>
+<td>0.948178</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.064834</td>
+<td>64846</td>
+<td>[amt]</td>
+<td>0.091864</td>
+<td>27791</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.988018</td>
+<td>0.101124</td>
+<td>0.734694</td>
+<td>0.177778</td>
+<td>0.961558</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.064834</td>
+<td>64846</td>
+<td>[amt]</td>
+<td>0.091864</td>
+<td>27791</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.988054</td>
+<td>0.099150</td>
+<td>0.714286</td>
+<td>0.174129</td>
+<td>0.970019</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.064834</td>
+<td>64846</td>
+<td>[amt]</td>
+<td>0.091864</td>
+<td>27791</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.998237</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.973787</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.064834</td>
+<td>64846</td>
+<td>[amt]</td>
+<td>0.091864</td>
+<td>27791</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.988378</td>
+<td>0.101744</td>
+<td>0.714286</td>
+<td>0.178117</td>
+<td>0.967477</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.064834</td>
+<td>64846</td>
+<td>[amt]</td>
+<td>0.091864</td>
+<td>27791</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="caa1371b-0963-4ce5-874e-e12632b20eeb" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> auto_amt7(fraudTrain, fraud_rate, n):</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> fraudTrain[[<span class="st">"amt"</span>,<span class="st">"is_fraud"</span>]]</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> throw(df, fraud_rate)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    df_tr, df_tst <span class="op">=</span> sklearn.model_selection.train_test_split(df)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    dfn <span class="op">=</span> fraudTrain[::n]</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    dfn <span class="op">=</span> dfn[[<span class="st">"amt"</span>,<span class="st">"is_fraud"</span>]]</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    dfnn <span class="op">=</span> dfn[<span class="op">~</span>dfn.index.isin(df_tr.index)]</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    dfnn <span class="op">=</span> dfnn.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    df_trn, df_tstn <span class="op">=</span> sklearn.model_selection.train_test_split(dfnn)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    tr <span class="op">=</span> TabularDataset(df_tr)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    tst <span class="op">=</span> TabularDataset(df_tstn)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    predictr <span class="op">=</span> TabularPredictor(label<span class="op">=</span><span class="st">"is_fraud"</span>, verbosity<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    t1 <span class="op">=</span> time.time()</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    predictr.fit(tr)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    t2 <span class="op">=</span> time.time()</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    time_diff <span class="op">=</span> t2 <span class="op">-</span> t1</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> predictr._trainer.model_graph.nodes</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> []</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> model_name <span class="kw">in</span> models:</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 모델 평가</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>        eval_result <span class="op">=</span> predictr.evaluate(tst, model<span class="op">=</span>model_name)</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 결과를 데이터프레임에 추가</span></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>        results.append({<span class="st">'model'</span>: model_name, </span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'acc'</span>: eval_result[<span class="st">'accuracy'</span>], </span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'pre'</span>: eval_result[<span class="st">'precision'</span>], </span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'rec'</span>: eval_result[<span class="st">'recall'</span>], </span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'f1'</span>: eval_result[<span class="st">'f1'</span>], </span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'auc'</span>: eval_result[<span class="st">'roc_auc'</span>]})</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> []</span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>    time_diff <span class="op">=</span> []</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> []</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>    pre <span class="op">=</span> []</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    rec <span class="op">=</span> []</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    f1 <span class="op">=</span> [] </span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>    auc <span class="op">=</span> [] </span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>    graph_based <span class="op">=</span> []</span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>    method <span class="op">=</span> [] </span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>    throw_rate <span class="op">=</span> [] </span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>    train_size <span class="op">=</span> []</span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>    train_cols <span class="op">=</span> []</span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>    train_frate <span class="op">=</span> []</span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>    test_size <span class="op">=</span> []</span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>    test_frate <span class="op">=</span> []</span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>    hyper_params <span class="op">=</span> [] </span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> result <span class="kw">in</span> results:</span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>        model_name <span class="op">=</span> result[<span class="st">'model'</span>]</span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a>        model.append(model_name)</span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a>        time_diff.append(<span class="va">None</span>)  <span class="co"># 각 모델별로 학습한 시간을 나타내고 싶은데 잘 안됨</span></span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>        acc.append(result[<span class="st">'acc'</span>]) </span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a>        pre.append(result[<span class="st">'pre'</span>])</span>
+<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a>        rec.append(result[<span class="st">'rec'</span>])</span>
+<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a>        f1.append(result[<span class="st">'f1'</span>])</span>
+<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a>        auc.append(result[<span class="st">'auc'</span>])</span>
+<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a>        graph_based.append(<span class="va">False</span>) </span>
+<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a>        method.append(<span class="st">'Autogluon'</span>) </span>
+<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a>        throw_rate.append(df.is_fraud.mean())</span>
+<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a>        train_size.append(<span class="bu">len</span>(tr))</span>
+<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a>        train_cols.append([col <span class="cf">for</span> col <span class="kw">in</span> tr.columns <span class="cf">if</span> col <span class="op">!=</span> <span class="st">'is_fraud'</span>])</span>
+<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a>        train_frate.append(tr.is_fraud.mean())</span>
+<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a>        test_size.append(<span class="bu">len</span>(tst))</span>
+<span id="cb19-68"><a href="#cb19-68" aria-hidden="true" tabindex="-1"></a>        test_frate.append(tst.is_fraud.mean())</span>
+<span id="cb19-69"><a href="#cb19-69" aria-hidden="true" tabindex="-1"></a>        hyper_params.append(<span class="va">None</span>)</span>
+<span id="cb19-70"><a href="#cb19-70" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb19-71"><a href="#cb19-71" aria-hidden="true" tabindex="-1"></a>    df_results <span class="op">=</span> pd.DataFrame(<span class="bu">dict</span>(</span>
+<span id="cb19-72"><a href="#cb19-72" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span>model,</span>
+<span id="cb19-73"><a href="#cb19-73" aria-hidden="true" tabindex="-1"></a>        time<span class="op">=</span>time_diff,</span>
+<span id="cb19-74"><a href="#cb19-74" aria-hidden="true" tabindex="-1"></a>        acc<span class="op">=</span>acc,</span>
+<span id="cb19-75"><a href="#cb19-75" aria-hidden="true" tabindex="-1"></a>        pre<span class="op">=</span>pre,</span>
+<span id="cb19-76"><a href="#cb19-76" aria-hidden="true" tabindex="-1"></a>        rec<span class="op">=</span>rec,</span>
+<span id="cb19-77"><a href="#cb19-77" aria-hidden="true" tabindex="-1"></a>        f1<span class="op">=</span>f1,</span>
+<span id="cb19-78"><a href="#cb19-78" aria-hidden="true" tabindex="-1"></a>        auc<span class="op">=</span>auc,</span>
+<span id="cb19-79"><a href="#cb19-79" aria-hidden="true" tabindex="-1"></a>        graph_based<span class="op">=</span>graph_based,</span>
+<span id="cb19-80"><a href="#cb19-80" aria-hidden="true" tabindex="-1"></a>        method<span class="op">=</span>method,</span>
+<span id="cb19-81"><a href="#cb19-81" aria-hidden="true" tabindex="-1"></a>        throw_rate<span class="op">=</span>throw_rate,  </span>
+<span id="cb19-82"><a href="#cb19-82" aria-hidden="true" tabindex="-1"></a>        train_size<span class="op">=</span>train_size,</span>
+<span id="cb19-83"><a href="#cb19-83" aria-hidden="true" tabindex="-1"></a>        train_cols<span class="op">=</span>train_cols,</span>
+<span id="cb19-84"><a href="#cb19-84" aria-hidden="true" tabindex="-1"></a>        train_frate<span class="op">=</span>train_frate,</span>
+<span id="cb19-85"><a href="#cb19-85" aria-hidden="true" tabindex="-1"></a>        test_size<span class="op">=</span>test_size,</span>
+<span id="cb19-86"><a href="#cb19-86" aria-hidden="true" tabindex="-1"></a>        test_frate<span class="op">=</span>test_frate,</span>
+<span id="cb19-87"><a href="#cb19-87" aria-hidden="true" tabindex="-1"></a>        hyper_params<span class="op">=</span>hyper_params</span>
+<span id="cb19-88"><a href="#cb19-88" aria-hidden="true" tabindex="-1"></a>    ))    </span>
+<span id="cb19-89"><a href="#cb19-89" aria-hidden="true" tabindex="-1"></a>    ymdhms <span class="op">=</span> datetime.datetime.fromtimestamp(time.time()).strftime(<span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">-%H%M%S'</span>) </span>
+<span id="cb19-90"><a href="#cb19-90" aria-hidden="true" tabindex="-1"></a>    df_results.to_csv(<span class="ss">f'../results/</span><span class="sc">{</span>ymdhms<span class="sc">}</span><span class="ss">-Autogluon.csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-91"><a href="#cb19-91" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="bf716c95-b938-457f-a2ca-cba9b555fbf2" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.9</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.672506</td>
+<td>0.005239</td>
+<td>1.000000</td>
+<td>0.010424</td>
+<td>0.917769</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>[amt]</td>
+<td>0.901679</td>
+<td>26089</td>
+<td>0.001725</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.667024</td>
+<td>0.005040</td>
+<td>0.977778</td>
+<td>0.010028</td>
+<td>0.897686</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>[amt]</td>
+<td>0.901679</td>
+<td>26089</td>
+<td>0.001725</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.618728</td>
+<td>0.004404</td>
+<td>0.977778</td>
+<td>0.008769</td>
+<td>0.961423</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>[amt]</td>
+<td>0.901679</td>
+<td>26089</td>
+<td>0.001725</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.631837</td>
+<td>0.004663</td>
+<td>1.000000</td>
+<td>0.009283</td>
+<td>0.965210</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>[amt]</td>
+<td>0.901679</td>
+<td>26089</td>
+<td>0.001725</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.643681</td>
+<td>0.004817</td>
+<td>1.000000</td>
+<td>0.009589</td>
+<td>0.926060</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>[amt]</td>
+<td>0.901679</td>
+<td>26089</td>
+<td>0.001725</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.643681</td>
+<td>0.004817</td>
+<td>1.000000</td>
+<td>0.009589</td>
+<td>0.926060</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>[amt]</td>
+<td>0.901679</td>
+<td>26089</td>
+<td>0.001725</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.646096</td>
+<td>0.004850</td>
+<td>1.000000</td>
+<td>0.009654</td>
+<td>0.971513</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>[amt]</td>
+<td>0.901679</td>
+<td>26089</td>
+<td>0.001725</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.654260</td>
+<td>0.004964</td>
+<td>1.000000</td>
+<td>0.009879</td>
+<td>0.940197</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>[amt]</td>
+<td>0.901679</td>
+<td>26089</td>
+<td>0.001725</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.652267</td>
+<td>0.004936</td>
+<td>1.000000</td>
+<td>0.009823</td>
+<td>0.940543</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>[amt]</td>
+<td>0.901679</td>
+<td>26089</td>
+<td>0.001725</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.401280</td>
+<td>0.002873</td>
+<td>1.000000</td>
+<td>0.005729</td>
+<td>0.923193</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>[amt]</td>
+<td>0.901679</td>
+<td>26089</td>
+<td>0.001725</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.623634</td>
+<td>0.004562</td>
+<td>1.000000</td>
+<td>0.009083</td>
+<td>0.960137</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>[amt]</td>
+<td>0.901679</td>
+<td>26089</td>
+<td>0.001725</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.395032</td>
+<td>0.002843</td>
+<td>1.000000</td>
+<td>0.005670</td>
+<td>0.922903</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>[amt]</td>
+<td>0.901679</td>
+<td>26089</td>
+<td>0.001725</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.653877</td>
+<td>0.004959</td>
+<td>1.000000</td>
+<td>0.009868</td>
+<td>0.955960</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>[amt]</td>
+<td>0.901679</td>
+<td>26089</td>
+<td>0.001725</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.626854</td>
+<td>0.004601</td>
+<td>1.000000</td>
+<td>0.009160</td>
+<td>0.965830</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>[amt]</td>
+<td>0.901679</td>
+<td>26089</td>
+<td>0.001725</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="f9dd7886-e4e3-4e04-a284-1bcf157082be" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.8</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.736519</td>
+<td>0.007369</td>
+<td>1.000000</td>
+<td>0.014630</td>
+<td>0.935672</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.800053</td>
+<td>5630</td>
+<td>[amt]</td>
+<td>0.794671</td>
+<td>26074</td>
+<td>0.001956</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.737555</td>
+<td>0.007112</td>
+<td>0.960784</td>
+<td>0.014119</td>
+<td>0.919264</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.800053</td>
+<td>5630</td>
+<td>[amt]</td>
+<td>0.794671</td>
+<td>26074</td>
+<td>0.001956</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.759300</td>
+<td>0.007749</td>
+<td>0.960784</td>
+<td>0.015375</td>
+<td>0.945454</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.800053</td>
+<td>5630</td>
+<td>[amt]</td>
+<td>0.794671</td>
+<td>26074</td>
+<td>0.001956</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.716346</td>
+<td>0.006848</td>
+<td>1.000000</td>
+<td>0.013604</td>
+<td>0.968619</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.800053</td>
+<td>5630</td>
+<td>[amt]</td>
+<td>0.794671</td>
+<td>26074</td>
+<td>0.001956</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.721217</td>
+<td>0.006698</td>
+<td>0.960784</td>
+<td>0.013303</td>
+<td>0.941450</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.800053</td>
+<td>5630</td>
+<td>[amt]</td>
+<td>0.794671</td>
+<td>26074</td>
+<td>0.001956</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.721217</td>
+<td>0.006698</td>
+<td>0.960784</td>
+<td>0.013303</td>
+<td>0.941450</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.800053</td>
+<td>5630</td>
+<td>[amt]</td>
+<td>0.794671</td>
+<td>26074</td>
+<td>0.001956</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.735599</td>
+<td>0.007201</td>
+<td>0.980392</td>
+<td>0.014298</td>
+<td>0.969321</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.800053</td>
+<td>5630</td>
+<td>[amt]</td>
+<td>0.794671</td>
+<td>26074</td>
+<td>0.001956</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.731994</td>
+<td>0.006965</td>
+<td>0.960784</td>
+<td>0.013830</td>
+<td>0.949904</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.800053</td>
+<td>5630</td>
+<td>[amt]</td>
+<td>0.794671</td>
+<td>26074</td>
+<td>0.001956</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.730690</td>
+<td>0.006932</td>
+<td>0.960784</td>
+<td>0.013764</td>
+<td>0.950366</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.800053</td>
+<td>5630</td>
+<td>[amt]</td>
+<td>0.794671</td>
+<td>26074</td>
+<td>0.001956</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.167945</td>
+<td>0.002345</td>
+<td>1.000000</td>
+<td>0.004680</td>
+<td>0.798758</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.800053</td>
+<td>5630</td>
+<td>[amt]</td>
+<td>0.794671</td>
+<td>26074</td>
+<td>0.001956</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.720948</td>
+<td>0.006961</td>
+<td>1.000000</td>
+<td>0.013825</td>
+<td>0.959575</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.800053</td>
+<td>5630</td>
+<td>[amt]</td>
+<td>0.794671</td>
+<td>26074</td>
+<td>0.001956</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.757881</td>
+<td>0.007704</td>
+<td>0.960784</td>
+<td>0.015286</td>
+<td>0.941510</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.800053</td>
+<td>5630</td>
+<td>[amt]</td>
+<td>0.794671</td>
+<td>26074</td>
+<td>0.001956</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.716346</td>
+<td>0.006848</td>
+<td>1.000000</td>
+<td>0.013604</td>
+<td>0.967254</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.800053</td>
+<td>5630</td>
+<td>[amt]</td>
+<td>0.794671</td>
+<td>26074</td>
+<td>0.001956</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.716346</td>
+<td>0.006848</td>
+<td>1.000000</td>
+<td>0.013604</td>
+<td>0.968619</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.800053</td>
+<td>5630</td>
+<td>[amt]</td>
+<td>0.794671</td>
+<td>26074</td>
+<td>0.001956</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="77cbd27c-a524-40da-84e9-e625a8c2a4d2" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.7</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.791355</td>
+<td>0.006768</td>
+<td>0.880952</td>
+<td>0.013433</td>
+<td>0.929165</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.7</td>
+<td>6435</td>
+<td>[amt]</td>
+<td>0.699301</td>
+<td>26049</td>
+<td>0.001612</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.794963</td>
+<td>0.006886</td>
+<td>0.880952</td>
+<td>0.013666</td>
+<td>0.907111</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.7</td>
+<td>6435</td>
+<td>[amt]</td>
+<td>0.699301</td>
+<td>26049</td>
+<td>0.001612</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.816884</td>
+<td>0.007705</td>
+<td>0.880952</td>
+<td>0.015277</td>
+<td>0.931731</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.7</td>
+<td>6435</td>
+<td>[amt]</td>
+<td>0.699301</td>
+<td>26049</td>
+<td>0.001612</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.747937</td>
+<td>0.006057</td>
+<td>0.952381</td>
+<td>0.012037</td>
+<td>0.957331</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.7</td>
+<td>6435</td>
+<td>[amt]</td>
+<td>0.699301</td>
+<td>26049</td>
+<td>0.001612</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.779185</td>
+<td>0.006568</td>
+<td>0.904762</td>
+<td>0.013040</td>
+<td>0.935909</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.7</td>
+<td>6435</td>
+<td>[amt]</td>
+<td>0.699301</td>
+<td>26049</td>
+<td>0.001612</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.779185</td>
+<td>0.006568</td>
+<td>0.904762</td>
+<td>0.013040</td>
+<td>0.935909</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.7</td>
+<td>6435</td>
+<td>[amt]</td>
+<td>0.699301</td>
+<td>26049</td>
+<td>0.001612</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.798841</td>
+<td>0.007205</td>
+<td>0.904762</td>
+<td>0.014296</td>
+<td>0.920304</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.7</td>
+<td>6435</td>
+<td>[amt]</td>
+<td>0.699301</td>
+<td>26049</td>
+<td>0.001612</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.784713</td>
+<td>0.006735</td>
+<td>0.904762</td>
+<td>0.013371</td>
+<td>0.937763</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.7</td>
+<td>6435</td>
+<td>[amt]</td>
+<td>0.699301</td>
+<td>26049</td>
+<td>0.001612</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.784790</td>
+<td>0.006738</td>
+<td>0.904762</td>
+<td>0.013376</td>
+<td>0.938921</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.7</td>
+<td>6435</td>
+<td>[amt]</td>
+<td>0.699301</td>
+<td>26049</td>
+<td>0.001612</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.638105</td>
+<td>0.003807</td>
+<td>0.857143</td>
+<td>0.007580</td>
+<td>0.893476</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.7</td>
+<td>6435</td>
+<td>[amt]</td>
+<td>0.699301</td>
+<td>26049</td>
+<td>0.001612</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.777381</td>
+<td>0.006684</td>
+<td>0.928571</td>
+<td>0.013272</td>
+<td>0.952882</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.7</td>
+<td>6435</td>
+<td>[amt]</td>
+<td>0.699301</td>
+<td>26049</td>
+<td>0.001612</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.792238</td>
+<td>0.007159</td>
+<td>0.928571</td>
+<td>0.014208</td>
+<td>0.933392</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.7</td>
+<td>6435</td>
+<td>[amt]</td>
+<td>0.699301</td>
+<td>26049</td>
+<td>0.001612</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.752428</td>
+<td>0.006166</td>
+<td>0.952381</td>
+<td>0.012253</td>
+<td>0.953565</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.7</td>
+<td>6435</td>
+<td>[amt]</td>
+<td>0.699301</td>
+<td>26049</td>
+<td>0.001612</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.756497</td>
+<td>0.006114</td>
+<td>0.928571</td>
+<td>0.012148</td>
+<td>0.956620</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.7</td>
+<td>6435</td>
+<td>[amt]</td>
+<td>0.699301</td>
+<td>26049</td>
+<td>0.001612</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="23e62c37-7a43-4c5e-885c-775c87a8c165" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.6</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.830637</td>
+<td>0.010559</td>
+<td>0.94</td>
+<td>0.020884</td>
+<td>0.951753</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.6</td>
+<td>7507</td>
+<td>[amt]</td>
+<td>0.605568</td>
+<td>26021</td>
+<td>0.001922</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.840552</td>
+<td>0.010742</td>
+<td>0.90</td>
+<td>0.021231</td>
+<td>0.927416</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.6</td>
+<td>7507</td>
+<td>[amt]</td>
+<td>0.605568</td>
+<td>26021</td>
+<td>0.001922</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.847239</td>
+<td>0.011451</td>
+<td>0.92</td>
+<td>0.022621</td>
+<td>0.951173</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.6</td>
+<td>7507</td>
+<td>[amt]</td>
+<td>0.605568</td>
+<td>26021</td>
+<td>0.001922</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.817263</td>
+<td>0.009794</td>
+<td>0.94</td>
+<td>0.019385</td>
+<td>0.964784</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.6</td>
+<td>7507</td>
+<td>[amt]</td>
+<td>0.605568</td>
+<td>26021</td>
+<td>0.001922</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.823335</td>
+<td>0.009916</td>
+<td>0.92</td>
+<td>0.019620</td>
+<td>0.948598</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.6</td>
+<td>7507</td>
+<td>[amt]</td>
+<td>0.605568</td>
+<td>26021</td>
+<td>0.001922</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.823335</td>
+<td>0.009916</td>
+<td>0.92</td>
+<td>0.019620</td>
+<td>0.948598</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.6</td>
+<td>7507</td>
+<td>[amt]</td>
+<td>0.605568</td>
+<td>26021</td>
+<td>0.001922</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.811575</td>
+<td>0.009699</td>
+<td>0.96</td>
+<td>0.019204</td>
+<td>0.956254</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.6</td>
+<td>7507</td>
+<td>[amt]</td>
+<td>0.605568</td>
+<td>26021</td>
+<td>0.001922</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.829561</td>
+<td>0.010275</td>
+<td>0.92</td>
+<td>0.020323</td>
+<td>0.953836</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.6</td>
+<td>7507</td>
+<td>[amt]</td>
+<td>0.605568</td>
+<td>26021</td>
+<td>0.001922</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.830368</td>
+<td>0.010543</td>
+<td>0.94</td>
+<td>0.020852</td>
+<td>0.953754</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.6</td>
+<td>7507</td>
+<td>[amt]</td>
+<td>0.605568</td>
+<td>26021</td>
+<td>0.001922</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.965028</td>
+<td>0.038627</td>
+<td>0.72</td>
+<td>0.073320</td>
+<td>0.884173</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.6</td>
+<td>7507</td>
+<td>[amt]</td>
+<td>0.605568</td>
+<td>26021</td>
+<td>0.001922</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.846854</td>
+<td>0.011423</td>
+<td>0.92</td>
+<td>0.022566</td>
+<td>0.966859</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.6</td>
+<td>7507</td>
+<td>[amt]</td>
+<td>0.605568</td>
+<td>26021</td>
+<td>0.001922</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.967296</td>
+<td>0.041237</td>
+<td>0.72</td>
+<td>0.078007</td>
+<td>0.913944</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.6</td>
+<td>7507</td>
+<td>[amt]</td>
+<td>0.605568</td>
+<td>26021</td>
+<td>0.001922</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.819915</td>
+<td>0.009937</td>
+<td>0.94</td>
+<td>0.019665</td>
+<td>0.961775</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.6</td>
+<td>7507</td>
+<td>[amt]</td>
+<td>0.605568</td>
+<td>26021</td>
+<td>0.001922</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.809846</td>
+<td>0.009612</td>
+<td>0.96</td>
+<td>0.019033</td>
+<td>0.949810</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.6</td>
+<td>7507</td>
+<td>[amt]</td>
+<td>0.605568</td>
+<td>26021</td>
+<td>0.001922</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="e4536373-5cf8-4a42-9855-b993165949e4" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.5</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.875755</td>
+<td>0.007702</td>
+<td>0.78125</td>
+<td>0.015253</td>
+<td>0.884682</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.5</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.867634</td>
+<td>0.007517</td>
+<td>0.81250</td>
+<td>0.014895</td>
+<td>0.880694</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.5</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.883877</td>
+<td>0.008237</td>
+<td>0.78125</td>
+<td>0.016303</td>
+<td>0.923171</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.5</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.896732</td>
+<td>0.009256</td>
+<td>0.78125</td>
+<td>0.018295</td>
+<td>0.939773</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.5</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.849698</td>
+<td>0.006875</td>
+<td>0.84375</td>
+<td>0.013640</td>
+<td>0.909261</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.5</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.849698</td>
+<td>0.006875</td>
+<td>0.84375</td>
+<td>0.013640</td>
+<td>0.909261</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.5</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.890651</td>
+<td>0.008744</td>
+<td>0.78125</td>
+<td>0.017295</td>
+<td>0.930557</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.5</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.857896</td>
+<td>0.007004</td>
+<td>0.81250</td>
+<td>0.013889</td>
+<td>0.918836</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.5</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.855818</td>
+<td>0.007166</td>
+<td>0.84375</td>
+<td>0.014211</td>
+<td>0.909375</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.5</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.965706</td>
+<td>0.025414</td>
+<td>0.71875</td>
+<td>0.049093</td>
+<td>0.823335</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.5</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.895616</td>
+<td>0.009158</td>
+<td>0.78125</td>
+<td>0.018103</td>
+<td>0.940320</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.5</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.883030</td>
+<td>0.007856</td>
+<td>0.75000</td>
+<td>0.015549</td>
+<td>0.921634</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.5</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.852200</td>
+<td>0.006736</td>
+<td>0.81250</td>
+<td>0.013361</td>
+<td>0.939314</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.5</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.883877</td>
+<td>0.008237</td>
+<td>0.78125</td>
+<td>0.016303</td>
+<td>0.923171</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.5</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="314b74b2-efdf-4488-944b-99c41af3ba5f" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.4</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.915320</td>
+<td>0.013098</td>
+<td>0.743590</td>
+<td>0.025743</td>
+<td>0.925259</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.4</td>
+<td>11261</td>
+<td>[amt]</td>
+<td>0.402806</td>
+<td>25921</td>
+<td>0.001505</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.903129</td>
+<td>0.012234</td>
+<td>0.794872</td>
+<td>0.024096</td>
+<td>0.888333</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.4</td>
+<td>11261</td>
+<td>[amt]</td>
+<td>0.402806</td>
+<td>25921</td>
+<td>0.001505</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.973651</td>
+<td>0.036023</td>
+<td>0.641026</td>
+<td>0.068213</td>
+<td>0.899727</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.4</td>
+<td>11261</td>
+<td>[amt]</td>
+<td>0.402806</td>
+<td>25921</td>
+<td>0.001505</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.935342</td>
+<td>0.017678</td>
+<td>0.769231</td>
+<td>0.034562</td>
+<td>0.958900</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.4</td>
+<td>11261</td>
+<td>[amt]</td>
+<td>0.402806</td>
+<td>25921</td>
+<td>0.001505</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.884997</td>
+<td>0.009993</td>
+<td>0.769231</td>
+<td>0.019730</td>
+<td>0.918495</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.4</td>
+<td>11261</td>
+<td>[amt]</td>
+<td>0.402806</td>
+<td>25921</td>
+<td>0.001505</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.884997</td>
+<td>0.009993</td>
+<td>0.769231</td>
+<td>0.019730</td>
+<td>0.918495</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.4</td>
+<td>11261</td>
+<td>[amt]</td>
+<td>0.402806</td>
+<td>25921</td>
+<td>0.001505</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.952702</td>
+<td>0.021757</td>
+<td>0.692308</td>
+<td>0.042188</td>
+<td>0.957907</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.4</td>
+<td>11261</td>
+<td>[amt]</td>
+<td>0.402806</td>
+<td>25921</td>
+<td>0.001505</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.893870</td>
+<td>0.011527</td>
+<td>0.820513</td>
+<td>0.022735</td>
+<td>0.940706</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.4</td>
+<td>11261</td>
+<td>[amt]</td>
+<td>0.402806</td>
+<td>25921</td>
+<td>0.001505</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.893870</td>
+<td>0.011527</td>
+<td>0.820513</td>
+<td>0.022735</td>
+<td>0.940206</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.4</td>
+<td>11261</td>
+<td>[amt]</td>
+<td>0.402806</td>
+<td>25921</td>
+<td>0.001505</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.972763</td>
+<td>0.034868</td>
+<td>0.641026</td>
+<td>0.066138</td>
+<td>0.883521</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.4</td>
+<td>11261</td>
+<td>[amt]</td>
+<td>0.402806</td>
+<td>25921</td>
+<td>0.001505</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.920181</td>
+<td>0.014354</td>
+<td>0.769231</td>
+<td>0.028182</td>
+<td>0.955367</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.4</td>
+<td>11261</td>
+<td>[amt]</td>
+<td>0.402806</td>
+<td>25921</td>
+<td>0.001505</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.947649</td>
+<td>0.019679</td>
+<td>0.692308</td>
+<td>0.038271</td>
+<td>0.958331</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.4</td>
+<td>11261</td>
+<td>[amt]</td>
+<td>0.402806</td>
+<td>25921</td>
+<td>0.001505</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.949809</td>
+<td>0.019787</td>
+<td>0.666667</td>
+<td>0.038433</td>
+<td>0.956469</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.4</td>
+<td>11261</td>
+<td>[amt]</td>
+<td>0.402806</td>
+<td>25921</td>
+<td>0.001505</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.933143</td>
+<td>0.016000</td>
+<td>0.717949</td>
+<td>0.031302</td>
+<td>0.961509</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.4</td>
+<td>11261</td>
+<td>[amt]</td>
+<td>0.402806</td>
+<td>25921</td>
+<td>0.001505</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="c8a3fd7f-6ab6-425c-a180-ec4408b1633e" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.3</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.943677</td>
+<td>0.014986</td>
+<td>0.709677</td>
+<td>0.029353</td>
+<td>0.926230</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.3</td>
+<td>15015</td>
+<td>[amt]</td>
+<td>0.30303</td>
+<td>25833</td>
+<td>0.0012</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.933535</td>
+<td>0.013279</td>
+<td>0.741935</td>
+<td>0.026092</td>
+<td>0.891977</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.3</td>
+<td>15015</td>
+<td>[amt]</td>
+<td>0.30303</td>
+<td>25833</td>
+<td>0.0012</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.968025</td>
+<td>0.026222</td>
+<td>0.709677</td>
+<td>0.050575</td>
+<td>0.930069</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.3</td>
+<td>15015</td>
+<td>[amt]</td>
+<td>0.30303</td>
+<td>25833</td>
+<td>0.0012</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.967871</td>
+<td>0.027219</td>
+<td>0.741935</td>
+<td>0.052511</td>
+<td>0.964841</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.3</td>
+<td>15015</td>
+<td>[amt]</td>
+<td>0.30303</td>
+<td>25833</td>
+<td>0.0012</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.922154</td>
+<td>0.011352</td>
+<td>0.741935</td>
+<td>0.022363</td>
+<td>0.950148</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.3</td>
+<td>15015</td>
+<td>[amt]</td>
+<td>0.30303</td>
+<td>25833</td>
+<td>0.0012</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.922154</td>
+<td>0.011352</td>
+<td>0.741935</td>
+<td>0.022363</td>
+<td>0.950148</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.3</td>
+<td>15015</td>
+<td>[amt]</td>
+<td>0.30303</td>
+<td>25833</td>
+<td>0.0012</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.976116</td>
+<td>0.033439</td>
+<td>0.677419</td>
+<td>0.063733</td>
+<td>0.945809</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.3</td>
+<td>15015</td>
+<td>[amt]</td>
+<td>0.30303</td>
+<td>25833</td>
+<td>0.0012</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.928696</td>
+<td>0.012386</td>
+<td>0.741935</td>
+<td>0.024364</td>
+<td>0.952060</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.3</td>
+<td>15015</td>
+<td>[amt]</td>
+<td>0.30303</td>
+<td>25833</td>
+<td>0.0012</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.929277</td>
+<td>0.012486</td>
+<td>0.741935</td>
+<td>0.024560</td>
+<td>0.952507</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.3</td>
+<td>15015</td>
+<td>[amt]</td>
+<td>0.30303</td>
+<td>25833</td>
+<td>0.0012</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.975729</td>
+<td>0.032915</td>
+<td>0.677419</td>
+<td>0.062780</td>
+<td>0.885792</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.3</td>
+<td>15015</td>
+<td>[amt]</td>
+<td>0.30303</td>
+<td>25833</td>
+<td>0.0012</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.957458</td>
+<td>0.021505</td>
+<td>0.774194</td>
+<td>0.041848</td>
+<td>0.964256</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.3</td>
+<td>15015</td>
+<td>[amt]</td>
+<td>0.30303</td>
+<td>25833</td>
+<td>0.0012</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.975690</td>
+<td>0.034321</td>
+<td>0.709677</td>
+<td>0.065476</td>
+<td>0.958467</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.3</td>
+<td>15015</td>
+<td>[amt]</td>
+<td>0.30303</td>
+<td>25833</td>
+<td>0.0012</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.966516</td>
+<td>0.026136</td>
+<td>0.741935</td>
+<td>0.050494</td>
+<td>0.964247</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.3</td>
+<td>15015</td>
+<td>[amt]</td>
+<td>0.30303</td>
+<td>25833</td>
+<td>0.0012</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.967871</td>
+<td>0.027219</td>
+<td>0.741935</td>
+<td>0.052511</td>
+<td>0.964841</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.3</td>
+<td>15015</td>
+<td>[amt]</td>
+<td>0.30303</td>
+<td>25833</td>
+<td>0.0012</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="41b39faf-efdc-4f2f-92e0-7d59457e8a18" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.2</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.965722</td>
+<td>0.020362</td>
+<td>0.580645</td>
+<td>0.039344</td>
+<td>0.890223</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.2</td>
+<td>22522</td>
+<td>[amt]</td>
+<td>0.201536</td>
+<td>25643</td>
+<td>0.001209</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.956869</td>
+<td>0.017071</td>
+<td>0.612903</td>
+<td>0.033217</td>
+<td>0.894275</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.2</td>
+<td>22522</td>
+<td>[amt]</td>
+<td>0.201536</td>
+<td>25643</td>
+<td>0.001209</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.973911</td>
+<td>0.026706</td>
+<td>0.580645</td>
+<td>0.051064</td>
+<td>0.943387</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.2</td>
+<td>22522</td>
+<td>[amt]</td>
+<td>0.201536</td>
+<td>25643</td>
+<td>0.001209</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.983231</td>
+<td>0.037123</td>
+<td>0.516129</td>
+<td>0.069264</td>
+<td>0.950423</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.2</td>
+<td>22522</td>
+<td>[amt]</td>
+<td>0.201536</td>
+<td>25643</td>
+<td>0.001209</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.948875</td>
+<td>0.014416</td>
+<td>0.612903</td>
+<td>0.028169</td>
+<td>0.918144</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.2</td>
+<td>22522</td>
+<td>[amt]</td>
+<td>0.201536</td>
+<td>25643</td>
+<td>0.001209</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.948875</td>
+<td>0.014416</td>
+<td>0.612903</td>
+<td>0.028169</td>
+<td>0.918144</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.2</td>
+<td>22522</td>
+<td>[amt]</td>
+<td>0.201536</td>
+<td>25643</td>
+<td>0.001209</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.978279</td>
+<td>0.030357</td>
+<td>0.548387</td>
+<td>0.057530</td>
+<td>0.953229</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.2</td>
+<td>22522</td>
+<td>[amt]</td>
+<td>0.201536</td>
+<td>25643</td>
+<td>0.001209</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.953516</td>
+<td>0.017456</td>
+<td>0.677419</td>
+<td>0.034036</td>
+<td>0.920250</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.2</td>
+<td>22522</td>
+<td>[amt]</td>
+<td>0.201536</td>
+<td>25643</td>
+<td>0.001209</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.954179</td>
+<td>0.017707</td>
+<td>0.677419</td>
+<td>0.034511</td>
+<td>0.921158</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.2</td>
+<td>22522</td>
+<td>[amt]</td>
+<td>0.201536</td>
+<td>25643</td>
+<td>0.001209</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.969582</td>
+<td>0.024142</td>
+<td>0.612903</td>
+<td>0.046455</td>
+<td>0.792421</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.2</td>
+<td>22522</td>
+<td>[amt]</td>
+<td>0.201536</td>
+<td>25643</td>
+<td>0.001209</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.981047</td>
+<td>0.034765</td>
+<td>0.548387</td>
+<td>0.065385</td>
+<td>0.956875</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.2</td>
+<td>22522</td>
+<td>[amt]</td>
+<td>0.201536</td>
+<td>25643</td>
+<td>0.001209</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.971025</td>
+<td>0.025333</td>
+<td>0.612903</td>
+<td>0.048656</td>
+<td>0.943575</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.2</td>
+<td>22522</td>
+<td>[amt]</td>
+<td>0.201536</td>
+<td>25643</td>
+<td>0.001209</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.983231</td>
+<td>0.037123</td>
+<td>0.516129</td>
+<td>0.069264</td>
+<td>0.945461</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.2</td>
+<td>22522</td>
+<td>[amt]</td>
+<td>0.201536</td>
+<td>25643</td>
+<td>0.001209</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.980034</td>
+<td>0.033010</td>
+<td>0.548387</td>
+<td>0.062271</td>
+<td>0.954090</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.2</td>
+<td>22522</td>
+<td>[amt]</td>
+<td>0.201536</td>
+<td>25643</td>
+<td>0.001209</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="02cd6947-9d49-4a38-b040-f35caebd4d2e" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.1</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.984394</td>
+<td>0.068796</td>
+<td>0.700</td>
+<td>0.125280</td>
+<td>0.944695</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.1</td>
+<td>45045</td>
+<td>[amt]</td>
+<td>0.100477</td>
+<td>25054</td>
+<td>0.001597</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.981959</td>
+<td>0.056034</td>
+<td>0.650</td>
+<td>0.103175</td>
+<td>0.930740</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.1</td>
+<td>45045</td>
+<td>[amt]</td>
+<td>0.100477</td>
+<td>25054</td>
+<td>0.001597</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.979604</td>
+<td>0.047985</td>
+<td>0.625</td>
+<td>0.089127</td>
+<td>0.963419</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.1</td>
+<td>45045</td>
+<td>[amt]</td>
+<td>0.100477</td>
+<td>25054</td>
+<td>0.001597</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.990740</td>
+<td>0.103306</td>
+<td>0.625</td>
+<td>0.177305</td>
+<td>0.980154</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.1</td>
+<td>45045</td>
+<td>[amt]</td>
+<td>0.100477</td>
+<td>25054</td>
+<td>0.001597</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.978167</td>
+<td>0.043243</td>
+<td>0.600</td>
+<td>0.080672</td>
+<td>0.963541</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.1</td>
+<td>45045</td>
+<td>[amt]</td>
+<td>0.100477</td>
+<td>25054</td>
+<td>0.001597</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.978167</td>
+<td>0.043243</td>
+<td>0.600</td>
+<td>0.080672</td>
+<td>0.963541</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.1</td>
+<td>45045</td>
+<td>[amt]</td>
+<td>0.100477</td>
+<td>25054</td>
+<td>0.001597</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.985551</td>
+<td>0.078534</td>
+<td>0.750</td>
+<td>0.142180</td>
+<td>0.979492</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.1</td>
+<td>45045</td>
+<td>[amt]</td>
+<td>0.100477</td>
+<td>25054</td>
+<td>0.001597</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.980003</td>
+<td>0.050682</td>
+<td>0.650</td>
+<td>0.094033</td>
+<td>0.965148</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.1</td>
+<td>45045</td>
+<td>[amt]</td>
+<td>0.100477</td>
+<td>25054</td>
+<td>0.001597</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.980283</td>
+<td>0.051383</td>
+<td>0.650</td>
+<td>0.095238</td>
+<td>0.964879</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.1</td>
+<td>45045</td>
+<td>[amt]</td>
+<td>0.100477</td>
+<td>25054</td>
+<td>0.001597</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.977249</td>
+<td>0.052365</td>
+<td>0.775</td>
+<td>0.098101</td>
+<td>0.958697</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.1</td>
+<td>45045</td>
+<td>[amt]</td>
+<td>0.100477</td>
+<td>25054</td>
+<td>0.001597</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.985511</td>
+<td>0.078329</td>
+<td>0.750</td>
+<td>0.141844</td>
+<td>0.980592</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.1</td>
+<td>45045</td>
+<td>[amt]</td>
+<td>0.100477</td>
+<td>25054</td>
+<td>0.001597</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.987467</td>
+<td>0.087349</td>
+<td>0.725</td>
+<td>0.155914</td>
+<td>0.978420</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.1</td>
+<td>45045</td>
+<td>[amt]</td>
+<td>0.100477</td>
+<td>25054</td>
+<td>0.001597</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.990740</td>
+<td>0.103306</td>
+<td>0.625</td>
+<td>0.177305</td>
+<td>0.979973</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.1</td>
+<td>45045</td>
+<td>[amt]</td>
+<td>0.100477</td>
+<td>25054</td>
+<td>0.001597</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.988265</td>
+<td>0.090323</td>
+<td>0.700</td>
+<td>0.160000</td>
+<td>0.977690</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.1</td>
+<td>45045</td>
+<td>[amt]</td>
+<td>0.100477</td>
+<td>25054</td>
+<td>0.001597</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="aadf2787-5e1d-46af-b88d-e3b8d74c5527" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.09</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.984480</td>
+<td>0.057500</td>
+<td>0.696970</td>
+<td>0.106236</td>
+<td>0.933013</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.09</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.091171</td>
+<td>24935</td>
+<td>0.001323</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.981352</td>
+<td>0.046218</td>
+<td>0.666667</td>
+<td>0.086444</td>
+<td>0.935943</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.09</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.091171</td>
+<td>24935</td>
+<td>0.001323</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.978223</td>
+<td>0.031250</td>
+<td>0.515152</td>
+<td>0.058925</td>
+<td>0.943419</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.09</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.091171</td>
+<td>24935</td>
+<td>0.001323</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.986044</td>
+<td>0.063712</td>
+<td>0.696970</td>
+<td>0.116751</td>
+<td>0.977783</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.09</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.091171</td>
+<td>24935</td>
+<td>0.001323</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.979467</td>
+<td>0.040307</td>
+<td>0.636364</td>
+<td>0.075812</td>
+<td>0.933916</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.09</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.091171</td>
+<td>24935</td>
+<td>0.001323</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.979467</td>
+<td>0.040307</td>
+<td>0.636364</td>
+<td>0.075812</td>
+<td>0.933916</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.09</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.091171</td>
+<td>24935</td>
+<td>0.001323</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.983437</td>
+<td>0.051887</td>
+<td>0.666667</td>
+<td>0.096280</td>
+<td>0.968604</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.09</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.091171</td>
+<td>24935</td>
+<td>0.001323</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.980630</td>
+<td>0.044534</td>
+<td>0.666667</td>
+<td>0.083491</td>
+<td>0.947426</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.09</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.091171</td>
+<td>24935</td>
+<td>0.001323</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.980549</td>
+<td>0.044355</td>
+<td>0.666667</td>
+<td>0.083176</td>
+<td>0.947402</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.09</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.091171</td>
+<td>24935</td>
+<td>0.001323</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.976980</td>
+<td>0.039182</td>
+<td>0.696970</td>
+<td>0.074194</td>
+<td>0.954669</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.09</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.091171</td>
+<td>24935</td>
+<td>0.001323</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.985041</td>
+<td>0.059585</td>
+<td>0.696970</td>
+<td>0.109785</td>
+<td>0.978302</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.09</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.091171</td>
+<td>24935</td>
+<td>0.001323</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.986605</td>
+<td>0.063768</td>
+<td>0.666667</td>
+<td>0.116402</td>
+<td>0.974966</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.09</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.091171</td>
+<td>24935</td>
+<td>0.001323</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.986044</td>
+<td>0.063712</td>
+<td>0.696970</td>
+<td>0.116751</td>
+<td>0.977874</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.09</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.091171</td>
+<td>24935</td>
+<td>0.001323</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.986004</td>
+<td>0.061111</td>
+<td>0.666667</td>
+<td>0.111959</td>
+<td>0.976728</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.09</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.091171</td>
+<td>24935</td>
+<td>0.001323</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="35068813-8ab1-424d-a6f1-d1283743c471" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.08</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.985838</td>
+<td>0.058333</td>
+<td>0.636364</td>
+<td>0.106870</td>
+<td>0.888590</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.08</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.081128</td>
+<td>24785</td>
+<td>0.001331</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.982974</td>
+<td>0.040189</td>
+<td>0.515152</td>
+<td>0.074561</td>
+<td>0.869726</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.08</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.081128</td>
+<td>24785</td>
+<td>0.001331</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.978414</td>
+<td>0.041971</td>
+<td>0.696970</td>
+<td>0.079174</td>
+<td>0.947827</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.08</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.081128</td>
+<td>24785</td>
+<td>0.001331</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.990962</td>
+<td>0.079295</td>
+<td>0.545455</td>
+<td>0.138462</td>
+<td>0.956390</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.08</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.081128</td>
+<td>24785</td>
+<td>0.001331</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.981804</td>
+<td>0.037611</td>
+<td>0.515152</td>
+<td>0.070103</td>
+<td>0.889501</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.08</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.081128</td>
+<td>24785</td>
+<td>0.001331</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.981804</td>
+<td>0.037611</td>
+<td>0.515152</td>
+<td>0.070103</td>
+<td>0.889501</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.08</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.081128</td>
+<td>24785</td>
+<td>0.001331</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.986605</td>
+<td>0.061584</td>
+<td>0.636364</td>
+<td>0.112299</td>
+<td>0.940663</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.08</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.081128</td>
+<td>24785</td>
+<td>0.001331</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.982328</td>
+<td>0.038724</td>
+<td>0.515152</td>
+<td>0.072034</td>
+<td>0.892195</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.08</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.081128</td>
+<td>24785</td>
+<td>0.001331</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.982207</td>
+<td>0.040541</td>
+<td>0.545455</td>
+<td>0.075472</td>
+<td>0.892584</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.08</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.081128</td>
+<td>24785</td>
+<td>0.001331</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.979625</td>
+<td>0.042636</td>
+<td>0.666667</td>
+<td>0.080146</td>
+<td>0.896268</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.08</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.081128</td>
+<td>24785</td>
+<td>0.001331</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.986605</td>
+<td>0.061584</td>
+<td>0.636364</td>
+<td>0.112299</td>
+<td>0.947377</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.08</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.081128</td>
+<td>24785</td>
+<td>0.001331</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.987331</td>
+<td>0.062305</td>
+<td>0.606061</td>
+<td>0.112994</td>
+<td>0.955241</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.08</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.081128</td>
+<td>24785</td>
+<td>0.001331</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.992213</td>
+<td>0.091837</td>
+<td>0.545455</td>
+<td>0.157205</td>
+<td>0.945912</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.08</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.081128</td>
+<td>24785</td>
+<td>0.001331</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.987775</td>
+<td>0.055921</td>
+<td>0.515152</td>
+<td>0.100890</td>
+<td>0.950111</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.08</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.081128</td>
+<td>24785</td>
+<td>0.001331</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="0dee9c9c-0d64-4761-96b8-d4272e71f440" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.07</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.986713</td>
+<td>0.067647</td>
+<td>0.696970</td>
+<td>0.123324</td>
+<td>0.860245</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.07</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.070707</td>
+<td>24611</td>
+<td>0.001341</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.984844</td>
+<td>0.057292</td>
+<td>0.666667</td>
+<td>0.105516</td>
+<td>0.859447</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.07</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.070707</td>
+<td>24611</td>
+<td>0.001341</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.992930</td>
+<td>0.106145</td>
+<td>0.575758</td>
+<td>0.179245</td>
+<td>0.936256</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.07</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.070707</td>
+<td>24611</td>
+<td>0.001341</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.987120</td>
+<td>0.069697</td>
+<td>0.696970</td>
+<td>0.126722</td>
+<td>0.966536</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.07</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.070707</td>
+<td>24611</td>
+<td>0.001341</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.984032</td>
+<td>0.050000</td>
+<td>0.606061</td>
+<td>0.092379</td>
+<td>0.862851</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.07</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.070707</td>
+<td>24611</td>
+<td>0.001341</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.984032</td>
+<td>0.050000</td>
+<td>0.606061</td>
+<td>0.092379</td>
+<td>0.862851</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.07</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.070707</td>
+<td>24611</td>
+<td>0.001341</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.986185</td>
+<td>0.065156</td>
+<td>0.696970</td>
+<td>0.119171</td>
+<td>0.966158</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.07</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.070707</td>
+<td>24611</td>
+<td>0.001341</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.984722</td>
+<td>0.054545</td>
+<td>0.636364</td>
+<td>0.100478</td>
+<td>0.877480</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.07</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.070707</td>
+<td>24611</td>
+<td>0.001341</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.984763</td>
+<td>0.056995</td>
+<td>0.666667</td>
+<td>0.105012</td>
+<td>0.876873</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.07</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.070707</td>
+<td>24611</td>
+<td>0.001341</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.977327</td>
+<td>0.043478</td>
+<td>0.757576</td>
+<td>0.082237</td>
+<td>0.927294</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.07</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.070707</td>
+<td>24611</td>
+<td>0.001341</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.986185</td>
+<td>0.065156</td>
+<td>0.696970</td>
+<td>0.119171</td>
+<td>0.955735</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.07</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.070707</td>
+<td>24611</td>
+<td>0.001341</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.989314</td>
+<td>0.080292</td>
+<td>0.666667</td>
+<td>0.143322</td>
+<td>0.966986</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.07</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.070707</td>
+<td>24611</td>
+<td>0.001341</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.987120</td>
+<td>0.069697</td>
+<td>0.696970</td>
+<td>0.126722</td>
+<td>0.966438</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.07</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.070707</td>
+<td>24611</td>
+<td>0.001341</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.989314</td>
+<td>0.080292</td>
+<td>0.666667</td>
+<td>0.143322</td>
+<td>0.966986</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.07</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.070707</td>
+<td>24611</td>
+<td>0.001341</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="59d57b9b-efa8-47e8-bcbe-c70c98a6ba8b" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.06</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.988407</td>
+<td>0.056537</td>
+<td>0.516129</td>
+<td>0.101911</td>
+<td>0.817115</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.06</td>
+<td>75075</td>
+<td>[amt]</td>
+<td>0.060326</td>
+<td>24324</td>
+<td>0.001274</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.987009</td>
+<td>0.044728</td>
+<td>0.451613</td>
+<td>0.081395</td>
+<td>0.816728</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.06</td>
+<td>75075</td>
+<td>[amt]</td>
+<td>0.060326</td>
+<td>24324</td>
+<td>0.001274</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.987831</td>
+<td>0.044674</td>
+<td>0.419355</td>
+<td>0.080745</td>
+<td>0.923696</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.06</td>
+<td>75075</td>
+<td>[amt]</td>
+<td>0.060326</td>
+<td>24324</td>
+<td>0.001274</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.990832</td>
+<td>0.071429</td>
+<td>0.516129</td>
+<td>0.125490</td>
+<td>0.953651</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.06</td>
+<td>75075</td>
+<td>[amt]</td>
+<td>0.060326</td>
+<td>24324</td>
+<td>0.001274</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.985940</td>
+<td>0.033033</td>
+<td>0.354839</td>
+<td>0.060440</td>
+<td>0.817714</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.06</td>
+<td>75075</td>
+<td>[amt]</td>
+<td>0.060326</td>
+<td>24324</td>
+<td>0.001274</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.985940</td>
+<td>0.033033</td>
+<td>0.354839</td>
+<td>0.060440</td>
+<td>0.817714</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.06</td>
+<td>75075</td>
+<td>[amt]</td>
+<td>0.060326</td>
+<td>24324</td>
+<td>0.001274</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.988119</td>
+<td>0.058219</td>
+<td>0.548387</td>
+<td>0.105263</td>
+<td>0.929765</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.06</td>
+<td>75075</td>
+<td>[amt]</td>
+<td>0.060326</td>
+<td>24324</td>
+<td>0.001274</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.987050</td>
+<td>0.041935</td>
+<td>0.419355</td>
+<td>0.076246</td>
+<td>0.845766</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.06</td>
+<td>75075</td>
+<td>[amt]</td>
+<td>0.060326</td>
+<td>24324</td>
+<td>0.001274</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.987091</td>
+<td>0.039088</td>
+<td>0.387097</td>
+<td>0.071006</td>
+<td>0.845899</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.06</td>
+<td>75075</td>
+<td>[amt]</td>
+<td>0.060326</td>
+<td>24324</td>
+<td>0.001274</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.979280</td>
+<td>0.035363</td>
+<td>0.580645</td>
+<td>0.066667</td>
+<td>0.907383</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.06</td>
+<td>75075</td>
+<td>[amt]</td>
+<td>0.060326</td>
+<td>24324</td>
+<td>0.001274</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.988160</td>
+<td>0.058419</td>
+<td>0.548387</td>
+<td>0.105590</td>
+<td>0.943379</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.06</td>
+<td>75075</td>
+<td>[amt]</td>
+<td>0.060326</td>
+<td>24324</td>
+<td>0.001274</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.988900</td>
+<td>0.062271</td>
+<td>0.548387</td>
+<td>0.111842</td>
+<td>0.932266</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.06</td>
+<td>75075</td>
+<td>[amt]</td>
+<td>0.060326</td>
+<td>24324</td>
+<td>0.001274</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.990832</td>
+<td>0.071429</td>
+<td>0.516129</td>
+<td>0.125490</td>
+<td>0.954257</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.06</td>
+<td>75075</td>
+<td>[amt]</td>
+<td>0.060326</td>
+<td>24324</td>
+<td>0.001274</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.991284</td>
+<td>0.075117</td>
+<td>0.516129</td>
+<td>0.131148</td>
+<td>0.937845</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.06</td>
+<td>75075</td>
+<td>[amt]</td>
+<td>0.060326</td>
+<td>24324</td>
+<td>0.001274</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cd742711-5780-4e67-8ad0-fb069936c9d2" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.05</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.989523</td>
+<td>0.070039</td>
+<td>0.600000</td>
+<td>0.125436</td>
+<td>0.883888</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.05</td>
+<td>90090</td>
+<td>[amt]</td>
+<td>0.050117</td>
+<td>23958</td>
+<td>0.001252</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.989148</td>
+<td>0.064394</td>
+<td>0.566667</td>
+<td>0.115646</td>
+<td>0.865053</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.05</td>
+<td>90090</td>
+<td>[amt]</td>
+<td>0.050117</td>
+<td>23958</td>
+<td>0.001252</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.998748</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.798688</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.05</td>
+<td>90090</td>
+<td>[amt]</td>
+<td>0.050117</td>
+<td>23958</td>
+<td>0.001252</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.991193</td>
+<td>0.082949</td>
+<td>0.600000</td>
+<td>0.145749</td>
+<td>0.977357</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.05</td>
+<td>90090</td>
+<td>[amt]</td>
+<td>0.050117</td>
+<td>23958</td>
+<td>0.001252</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.988647</td>
+<td>0.055147</td>
+<td>0.500000</td>
+<td>0.099338</td>
+<td>0.903842</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.05</td>
+<td>90090</td>
+<td>[amt]</td>
+<td>0.050117</td>
+<td>23958</td>
+<td>0.001252</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.988647</td>
+<td>0.055147</td>
+<td>0.500000</td>
+<td>0.099338</td>
+<td>0.903842</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.05</td>
+<td>90090</td>
+<td>[amt]</td>
+<td>0.050117</td>
+<td>23958</td>
+<td>0.001252</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.990817</td>
+<td>0.083333</td>
+<td>0.633333</td>
+<td>0.147287</td>
+<td>0.970471</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.05</td>
+<td>90090</td>
+<td>[amt]</td>
+<td>0.050117</td>
+<td>23958</td>
+<td>0.001252</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.988939</td>
+<td>0.063197</td>
+<td>0.566667</td>
+<td>0.113712</td>
+<td>0.933406</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.05</td>
+<td>90090</td>
+<td>[amt]</td>
+<td>0.050117</td>
+<td>23958</td>
+<td>0.001252</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.988939</td>
+<td>0.063197</td>
+<td>0.566667</td>
+<td>0.113712</td>
+<td>0.947400</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.05</td>
+<td>90090</td>
+<td>[amt]</td>
+<td>0.050117</td>
+<td>23958</td>
+<td>0.001252</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.994991</td>
+<td>0.131148</td>
+<td>0.533333</td>
+<td>0.210526</td>
+<td>0.925528</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.05</td>
+<td>90090</td>
+<td>[amt]</td>
+<td>0.050117</td>
+<td>23958</td>
+<td>0.001252</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.988605</td>
+<td>0.070671</td>
+<td>0.666667</td>
+<td>0.127796</td>
+<td>0.961842</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.05</td>
+<td>90090</td>
+<td>[amt]</td>
+<td>0.050117</td>
+<td>23958</td>
+<td>0.001252</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.989982</td>
+<td>0.080000</td>
+<td>0.666667</td>
+<td>0.142857</td>
+<td>0.968028</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.05</td>
+<td>90090</td>
+<td>[amt]</td>
+<td>0.050117</td>
+<td>23958</td>
+<td>0.001252</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.993071</td>
+<td>0.100000</td>
+<td>0.566667</td>
+<td>0.170000</td>
+<td>0.977875</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.05</td>
+<td>90090</td>
+<td>[amt]</td>
+<td>0.050117</td>
+<td>23958</td>
+<td>0.001252</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.990108</td>
+<td>0.077551</td>
+<td>0.633333</td>
+<td>0.138182</td>
+<td>0.968740</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.05</td>
+<td>90090</td>
+<td>[amt]</td>
+<td>0.050117</td>
+<td>23958</td>
+<td>0.001252</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="da508c86-0191-4ddc-82d7-67b8ea6632fa" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.04</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.990849</td>
+<td>0.090909</td>
+<td>0.588235</td>
+<td>0.157480</td>
+<td>0.897267</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>23386</td>
+<td>0.001454</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.989951</td>
+<td>0.082988</td>
+<td>0.588235</td>
+<td>0.145455</td>
+<td>0.881324</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>23386</td>
+<td>0.001454</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.998546</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.804711</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>23386</td>
+<td>0.001454</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.993415</td>
+<td>0.100000</td>
+<td>0.441176</td>
+<td>0.163043</td>
+<td>0.975969</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>23386</td>
+<td>0.001454</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.989438</td>
+<td>0.075697</td>
+<td>0.558824</td>
+<td>0.133333</td>
+<td>0.940680</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>23386</td>
+<td>0.001454</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.989438</td>
+<td>0.075697</td>
+<td>0.558824</td>
+<td>0.133333</td>
+<td>0.940680</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>23386</td>
+<td>0.001454</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.994056</td>
+<td>0.116788</td>
+<td>0.470588</td>
+<td>0.187135</td>
+<td>0.942605</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>23386</td>
+<td>0.001454</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.989951</td>
+<td>0.079498</td>
+<td>0.558824</td>
+<td>0.139194</td>
+<td>0.954682</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>23386</td>
+<td>0.001454</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.990165</td>
+<td>0.084746</td>
+<td>0.588235</td>
+<td>0.148148</td>
+<td>0.941717</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>23386</td>
+<td>0.001454</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.994655</td>
+<td>0.104348</td>
+<td>0.352941</td>
+<td>0.161074</td>
+<td>0.927658</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>23386</td>
+<td>0.001454</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.989053</td>
+<td>0.082707</td>
+<td>0.647059</td>
+<td>0.146667</td>
+<td>0.963589</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>23386</td>
+<td>0.001454</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.989695</td>
+<td>0.084337</td>
+<td>0.617647</td>
+<td>0.148410</td>
+<td>0.976645</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>23386</td>
+<td>0.001454</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.993415</td>
+<td>0.100000</td>
+<td>0.441176</td>
+<td>0.163043</td>
+<td>0.974090</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>23386</td>
+<td>0.001454</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.989695</td>
+<td>0.084337</td>
+<td>0.617647</td>
+<td>0.148410</td>
+<td>0.976645</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>23386</td>
+<td>0.001454</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="bf0fcc0f-55b0-4f2d-a95b-4f265b5bf7b5" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.03</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.993414</td>
+<td>0.100000</td>
+<td>0.388889</td>
+<td>0.159091</td>
+<td>0.748364</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>22472</td>
+<td>0.001602</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.992569</td>
+<td>0.071895</td>
+<td>0.305556</td>
+<td>0.116402</td>
+<td>0.718609</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>22472</td>
+<td>0.001602</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.998398</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.726936</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>22472</td>
+<td>0.001602</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.997553</td>
+<td>0.228571</td>
+<td>0.222222</td>
+<td>0.225352</td>
+<td>0.943845</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>22472</td>
+<td>0.001602</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.991857</td>
+<td>0.059880</td>
+<td>0.277778</td>
+<td>0.098522</td>
+<td>0.781299</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>22472</td>
+<td>0.001602</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.991857</td>
+<td>0.059880</td>
+<td>0.277778</td>
+<td>0.098522</td>
+<td>0.781299</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>22472</td>
+<td>0.001602</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.995105</td>
+<td>0.106383</td>
+<td>0.277778</td>
+<td>0.153846</td>
+<td>0.921011</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>22472</td>
+<td>0.001602</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.992257</td>
+<td>0.068750</td>
+<td>0.305556</td>
+<td>0.112245</td>
+<td>0.795583</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>22472</td>
+<td>0.001602</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.992213</td>
+<td>0.073620</td>
+<td>0.333333</td>
+<td>0.120603</td>
+<td>0.795305</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>22472</td>
+<td>0.001602</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.995372</td>
+<td>0.138298</td>
+<td>0.361111</td>
+<td>0.200000</td>
+<td>0.933157</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>22472</td>
+<td>0.001602</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.989632</td>
+<td>0.073593</td>
+<td>0.472222</td>
+<td>0.127341</td>
+<td>0.944720</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>22472</td>
+<td>0.001602</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.993325</td>
+<td>0.109589</td>
+<td>0.444444</td>
+<td>0.175824</td>
+<td>0.947783</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>22472</td>
+<td>0.001602</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.998398</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.952792</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>22472</td>
+<td>0.001602</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.993414</td>
+<td>0.105634</td>
+<td>0.416667</td>
+<td>0.168539</td>
+<td>0.944971</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>22472</td>
+<td>0.001602</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="7220d5c8-3a56-41f6-a73e-569da3c4faa0" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.02</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.994176</td>
+<td>0.137931</td>
+<td>0.444444</td>
+<td>0.210526</td>
+<td>0.850648</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.02</td>
+<td>225225</td>
+<td>[amt]</td>
+<td>0.019873</td>
+<td>20605</td>
+<td>0.001747</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.993351</td>
+<td>0.108527</td>
+<td>0.388889</td>
+<td>0.169697</td>
+<td>0.850201</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.02</td>
+<td>225225</td>
+<td>[amt]</td>
+<td>0.019873</td>
+<td>20605</td>
+<td>0.001747</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.998253</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.808323</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.02</td>
+<td>225225</td>
+<td>[amt]</td>
+<td>0.019873</td>
+<td>20605</td>
+<td>0.001747</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.997282</td>
+<td>0.222222</td>
+<td>0.222222</td>
+<td>0.222222</td>
+<td>0.979879</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.02</td>
+<td>225225</td>
+<td>[amt]</td>
+<td>0.019873</td>
+<td>20605</td>
+<td>0.001747</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.993157</td>
+<td>0.086614</td>
+<td>0.305556</td>
+<td>0.134969</td>
+<td>0.865468</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.02</td>
+<td>225225</td>
+<td>[amt]</td>
+<td>0.019873</td>
+<td>20605</td>
+<td>0.001747</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.993157</td>
+<td>0.086614</td>
+<td>0.305556</td>
+<td>0.134969</td>
+<td>0.865468</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.02</td>
+<td>225225</td>
+<td>[amt]</td>
+<td>0.019873</td>
+<td>20605</td>
+<td>0.001747</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.994856</td>
+<td>0.135417</td>
+<td>0.361111</td>
+<td>0.196970</td>
+<td>0.959905</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.02</td>
+<td>225225</td>
+<td>[amt]</td>
+<td>0.019873</td>
+<td>20605</td>
+<td>0.001747</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.993351</td>
+<td>0.108527</td>
+<td>0.388889</td>
+<td>0.169697</td>
+<td>0.879890</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.02</td>
+<td>225225</td>
+<td>[amt]</td>
+<td>0.019873</td>
+<td>20605</td>
+<td>0.001747</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.993303</td>
+<td>0.101562</td>
+<td>0.361111</td>
+<td>0.158537</td>
+<td>0.867600</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.02</td>
+<td>225225</td>
+<td>[amt]</td>
+<td>0.019873</td>
+<td>20605</td>
+<td>0.001747</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.995001</td>
+<td>0.154639</td>
+<td>0.416667</td>
+<td>0.225564</td>
+<td>0.955167</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.02</td>
+<td>225225</td>
+<td>[amt]</td>
+<td>0.019873</td>
+<td>20605</td>
+<td>0.001747</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.997185</td>
+<td>0.210526</td>
+<td>0.222222</td>
+<td>0.216216</td>
+<td>0.964940</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.02</td>
+<td>225225</td>
+<td>[amt]</td>
+<td>0.019873</td>
+<td>20605</td>
+<td>0.001747</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.995438</td>
+<td>0.184783</td>
+<td>0.472222</td>
+<td>0.265625</td>
+<td>0.976525</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.02</td>
+<td>225225</td>
+<td>[amt]</td>
+<td>0.019873</td>
+<td>20605</td>
+<td>0.001747</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.998253</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.980291</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.02</td>
+<td>225225</td>
+<td>[amt]</td>
+<td>0.019873</td>
+<td>20605</td>
+<td>0.001747</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.995438</td>
+<td>0.184783</td>
+<td>0.472222</td>
+<td>0.265625</td>
+<td>0.976525</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.02</td>
+<td>225225</td>
+<td>[amt]</td>
+<td>0.019873</td>
+<td>20605</td>
+<td>0.001747</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="211ffee4-d816-4f1c-8a4e-e695796b0bfd" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.01</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.995750</td>
+<td>0.288462</td>
+<td>0.357143</td>
+<td>0.319149</td>
+<td>0.778281</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.01</td>
+<td>450450</td>
+<td>[amt]</td>
+<td>0.010037</td>
+<td>15059</td>
+<td>0.002789</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.995086</td>
+<td>0.233333</td>
+<td>0.333333</td>
+<td>0.274510</td>
+<td>0.766844</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.01</td>
+<td>450450</td>
+<td>[amt]</td>
+<td>0.010037</td>
+<td>15059</td>
+<td>0.002789</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.997211</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.722844</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.01</td>
+<td>450450</td>
+<td>[amt]</td>
+<td>0.010037</td>
+<td>15059</td>
+<td>0.002789</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.996348</td>
+<td>0.275862</td>
+<td>0.190476</td>
+<td>0.225352</td>
+<td>0.970487</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.01</td>
+<td>450450</td>
+<td>[amt]</td>
+<td>0.010037</td>
+<td>15059</td>
+<td>0.002789</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.994555</td>
+<td>0.187500</td>
+<td>0.285714</td>
+<td>0.226415</td>
+<td>0.867535</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.01</td>
+<td>450450</td>
+<td>[amt]</td>
+<td>0.010037</td>
+<td>15059</td>
+<td>0.002789</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.994555</td>
+<td>0.187500</td>
+<td>0.285714</td>
+<td>0.226415</td>
+<td>0.867535</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.01</td>
+<td>450450</td>
+<td>[amt]</td>
+<td>0.010037</td>
+<td>15059</td>
+<td>0.002789</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.996215</td>
+<td>0.222222</td>
+<td>0.142857</td>
+<td>0.173913</td>
+<td>0.917539</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.01</td>
+<td>450450</td>
+<td>[amt]</td>
+<td>0.010037</td>
+<td>15059</td>
+<td>0.002789</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.994887</td>
+<td>0.222222</td>
+<td>0.333333</td>
+<td>0.266667</td>
+<td>0.894749</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.01</td>
+<td>450450</td>
+<td>[amt]</td>
+<td>0.010037</td>
+<td>15059</td>
+<td>0.002789</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.995086</td>
+<td>0.233333</td>
+<td>0.333333</td>
+<td>0.274510</td>
+<td>0.895466</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.01</td>
+<td>450450</td>
+<td>[amt]</td>
+<td>0.010037</td>
+<td>15059</td>
+<td>0.002789</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.996879</td>
+<td>0.380952</td>
+<td>0.190476</td>
+<td>0.253968</td>
+<td>0.911898</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.01</td>
+<td>450450</td>
+<td>[amt]</td>
+<td>0.010037</td>
+<td>15059</td>
+<td>0.002789</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.996148</td>
+<td>0.214286</td>
+<td>0.142857</td>
+<td>0.171429</td>
+<td>0.944878</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.01</td>
+<td>450450</td>
+<td>[amt]</td>
+<td>0.010037</td>
+<td>15059</td>
+<td>0.002789</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.995418</td>
+<td>0.245283</td>
+<td>0.309524</td>
+<td>0.273684</td>
+<td>0.964096</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.01</td>
+<td>450450</td>
+<td>[amt]</td>
+<td>0.010037</td>
+<td>15059</td>
+<td>0.002789</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.997211</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.970680</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.01</td>
+<td>450450</td>
+<td>[amt]</td>
+<td>0.010037</td>
+<td>15059</td>
+<td>0.002789</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.995484</td>
+<td>0.240000</td>
+<td>0.285714</td>
+<td>0.260870</td>
+<td>0.962590</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.01</td>
+<td>450450</td>
+<td>[amt]</td>
+<td>0.010037</td>
+<td>15059</td>
+<td>0.002789</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="07e00e2b-b348-4d4a-9d15-143d46e2e67a" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.009</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.995779</td>
+<td>0.146341</td>
+<td>0.206897</td>
+<td>0.171429</td>
+<td>0.750397</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.00211</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.995124</td>
+<td>0.148148</td>
+<td>0.275862</td>
+<td>0.192771</td>
+<td>0.716125</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.00211</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.997890</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.759775</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.00211</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.997890</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.955511</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.00211</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.994032</td>
+<td>0.092308</td>
+<td>0.206897</td>
+<td>0.127660</td>
+<td>0.761099</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.00211</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.994032</td>
+<td>0.092308</td>
+<td>0.206897</td>
+<td>0.127660</td>
+<td>0.761099</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.00211</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.997890</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.818552</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.00211</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.994687</td>
+<td>0.120690</td>
+<td>0.241379</td>
+<td>0.160920</td>
+<td>0.763472</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.00211</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.994760</td>
+<td>0.122807</td>
+<td>0.241379</td>
+<td>0.162791</td>
+<td>0.763820</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.00211</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.997890</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.917705</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.00211</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.996580</td>
+<td>0.178571</td>
+<td>0.172414</td>
+<td>0.175439</td>
+<td>0.939455</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.00211</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.997162</td>
+<td>0.187500</td>
+<td>0.103448</td>
+<td>0.133333</td>
+<td>0.941711</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.00211</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.997890</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.944964</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.00211</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.997162</td>
+<td>0.187500</td>
+<td>0.103448</td>
+<td>0.133333</td>
+<td>0.941711</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.009</td>
+<td>500499</td>
+<td>[amt]</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.00211</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cad2c574-628a-42e4-b829-a47b31ad2418" class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.008</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="4e833401-d378-4624-84f4-675bdc360ec8" class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.007</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="4230b358-f7da-4920-b09a-19beb759fdfd" class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.006</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cd5738b7-c991-4238-a78d-7d3fc8f4dd0f" class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.005</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="7106636f-a9bc-4abb-96ad-a0b8e9179b2e" class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.004</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="14dc42be-e389-43ee-a106-65f3e4293427" class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.003</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="1483a3a4-a25d-4e92-9e7f-6673efe73fcf" class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.002</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="2d0c2fa9-1213-4c4f-ae20-9188f474a60c" class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.001</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

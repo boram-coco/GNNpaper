@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="김보람">
-<meta name="dcterms.date" content="2024-03-07">
+<meta name="dcterms.date" content="2024-04-03">
 
-<title>GNNpaper - 240307 결과 정리</title>
+<title>GNNpaper - 240403 결과 정리</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -152,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">240307 결과 정리</h1>
+      <h1 class="title">240403 결과 정리</h1>
                       </div>
   </div>
     
@@ -169,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">March 7, 2024</p>
+        <p class="date">April 3, 2024</p>
       </div>
     </div>
     
@@ -194,13 +194,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="section" class="level2">
 <h2 class="anchored" data-anchor-id="section">240220</h2>
-<div id="de6a4446-4d95-4779-afbc-aa0149089d20" class="cell" data-execution_count="2">
+<div id="de6a4446-4d95-4779-afbc-aa0149089d20" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>folder_path <span class="op">=</span> <span class="st">'./results'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="62cf100f-5cbe-4fe3-aa3f-78ca16b4c5da" class="cell" data-execution_count="4">
+<div id="62cf100f-5cbe-4fe3-aa3f-78ca16b4c5da" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="op">=</span> []</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="91404788-a555-4f3a-b1c9-d88d5090e0cf" class="cell" data-execution_count="5">
+<div id="91404788-a555-4f3a-b1c9-d88d5090e0cf" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file_name <span class="kw">in</span> os.listdir(folder_path):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> file_name.endswith(<span class="st">'.csv'</span>):</span>
@@ -1885,6 +1885,299 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>1661 rows × 18 columns</p>
 </div>
 </div>
+</div>
+</section>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3">240403</h2>
+<div id="76d45d8b-b90d-482e-86d1-e4117d989e1d" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>folder_path <span class="op">=</span> <span class="st">'./results'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="d5f645f5-e29c-42b5-af98-bc10b1dbf2af" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="op">=</span> []</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="ef62113b-338b-4358-b025-8bb530bd20d8" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file_name <span class="kw">in</span> os.listdir(folder_path):</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> file_name.endswith(<span class="st">'.csv'</span>):</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> pd.read_csv(os.path.join(folder_path, file_name))</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>        all_data.append(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="67f6319a-25a5-4c88-b523-ac3b7f4a8f01" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> pd.concat(all_data, ignore_index<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="1fd3ba78-67c7-4b91-8e59-faed64514fbb" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>merged_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+<th data-quarto-table-cell-role="th">theta</th>
+<th data-quarto-table-cell-role="th">gamma</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ECOD</td>
+<td>0.003704</td>
+<td>0.591404</td>
+<td>0.003553</td>
+<td>0.843750</td>
+<td>0.007076</td>
+<td>0.717359</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.097074</td>
+<td>10010</td>
+<td>['amt']</td>
+<td>0.450350</td>
+<td>37088</td>
+<td>0.001726</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>GMM</td>
+<td>0.082634</td>
+<td>0.692003</td>
+<td>0.003410</td>
+<td>0.609375</td>
+<td>0.006782</td>
+<td>0.650760</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.097074</td>
+<td>10010</td>
+<td>['amt']</td>
+<td>0.450350</td>
+<td>37088</td>
+<td>0.001726</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>HBOS</td>
+<td>0.002123</td>
+<td>0.936368</td>
+<td>0.020868</td>
+<td>0.781250</td>
+<td>0.040650</td>
+<td>0.858943</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.097074</td>
+<td>10010</td>
+<td>['amt']</td>
+<td>0.450350</td>
+<td>37088</td>
+<td>0.001726</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>IForest</td>
+<td>0.144727</td>
+<td>0.815358</td>
+<td>0.007263</td>
+<td>0.781250</td>
+<td>0.014393</td>
+<td>0.798334</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.097074</td>
+<td>10010</td>
+<td>['amt']</td>
+<td>0.450350</td>
+<td>37088</td>
+<td>0.001726</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>INNE</td>
+<td>0.326223</td>
+<td>0.766636</td>
+<td>0.005070</td>
+<td>0.687500</td>
+<td>0.010065</td>
+<td>0.727136</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.097074</td>
+<td>10010</td>
+<td>['amt']</td>
+<td>0.450350</td>
+<td>37088</td>
+<td>0.001726</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1643</td>
+<td>LODA</td>
+<td>1.380267</td>
+<td>0.990775</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499843</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009000</td>
+<td>500499</td>
+<td>['amt']</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1644</td>
+<td>LOF</td>
+<td>1.171791</td>
+<td>0.982414</td>
+<td>0.001378</td>
+<td>0.001345</td>
+<td>0.001361</td>
+<td>0.496291</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009000</td>
+<td>500499</td>
+<td>['amt']</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1645</td>
+<td>MCD</td>
+<td>0.101797</td>
+<td>0.990787</td>
+<td>0.482782</td>
+<td>0.471419</td>
+<td>0.477033</td>
+<td>0.733439</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009000</td>
+<td>500499</td>
+<td>['amt']</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1646</td>
+<td>PCA</td>
+<td>0.029553</td>
+<td>0.990787</td>
+<td>0.482782</td>
+<td>0.471419</td>
+<td>0.477033</td>
+<td>0.733439</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009000</td>
+<td>500499</td>
+<td>['amt']</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1647</td>
+<td>ROD</td>
+<td>15.238129</td>
+<td>0.978524</td>
+<td>0.000477</td>
+<td>0.000672</td>
+<td>0.000558</td>
+<td>0.493995</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.009000</td>
+<td>500499</td>
+<td>['amt']</td>
+<td>0.009029</td>
+<td>166834</td>
+<td>0.008913</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>1648 rows × 18 columns</p>
+</div>
+</div>
+</div>
+<div id="da20d3b0-ea59-4913-a0bb-9dce96b3144b" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>merged_df.to_csv(<span class="st">'./results/240403_meged.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
