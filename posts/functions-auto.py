@@ -122,7 +122,7 @@ def auto_amt_nb(fraudTrain, n):
     df_results.to_csv(f'../results/{ymdhms}-Autogluon_nb.csv',index=False)
     return df_results
 
-def auto_amt_nb2(fraudTrain, n):
+def auto_amt_nb2(fraudTrain, n):  # 인덱스 겹치네..
     
     df = fraudTrain[["amt","is_fraud"]]   
     df50 = throw(df,0.5)
@@ -212,7 +212,7 @@ def auto_amt_nb2(fraudTrain, n):
     df_results.to_csv(f'../results/{ymdhms}-Autogluon_nb.csv',index=False)
     return df_results
 
-def auto_amt_nb3(fraudTrain, n):
+def auto_amt_nb3(fraudTrain, n):  #인덱스 안겹침!
     
     df = fraudTrain[["amt","is_fraud"]]   
     df50 = throw(df,0.5)

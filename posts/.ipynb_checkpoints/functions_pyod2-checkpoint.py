@@ -261,7 +261,7 @@ def pyod_preprocess2(fraudTrain,n):
 
 def pyod_preprocess3(fraudTrain,n):
  
-    df50 = throw(fraudTrain,0.45)
+    df50 = throw(fraudTrain,0.5)
     df_tr, df_tstn = sklearn.model_selection.train_test_split(df50)
         
     dfn = fraudTrain[::n]
@@ -269,14 +269,14 @@ def pyod_preprocess3(fraudTrain,n):
     dfnn = dfnn.reset_index(drop=True)
     df_trn, df_tstn = sklearn.model_selection.train_test_split(dfnn)
     
-    dff = pd.concat([df_tr, df_tstn])
+    df = pd.concat([df_tr, df_tstn])
 
      
     X = pd.DataFrame(df_tr['amt'])
     y = pd.DataFrame(df_tr['is_fraud'])
     XX = pd.DataFrame(df_tstn['amt'])
     yy = pd.DataFrame(df_tstn['is_fraud'])
-    throw_rate = dff.is_fraud.mean()
+    throw_rate = df.is_fraud.mean()
     fraud_ratio = df_tr.is_fraud.mean()
     predictors = {
 #######    'ABOD': ABOD(contamination=fraud_ratio),
@@ -289,9 +289,9 @@ def pyod_preprocess3(fraudTrain,n):
 #######    'COPOD': COPOD(contamination=fraud_ratio),
 #    'DeepSVDD': DeepSVDD(contamination=fraud_ratio),
 #    'DIF': DIF(contamination=fraud_ratio),    
-    'ECOD': ECOD(contamination=fraud_ratio),
+#    'ECOD': ECOD(contamination=fraud_ratio),
 #    'FeatureBagging': FeatureBagging(contamination=fraud_ratio),
-    'GMM': GMM(contamination=fraud_ratio),
+#    'GMM': GMM(contamination=fraud_ratio),
     'HBOS': HBOS(contamination=fraud_ratio),
     'IForest': IForest(contamination=fraud_ratio),
     'INNE': INNE(contamination=fraud_ratio),
@@ -306,7 +306,7 @@ def pyod_preprocess3(fraudTrain,n):
 #    'LUNAR': LUNAR(contamination=fraud_ratio),
     'LODA': LODA(contamination=fraud_ratio),
 #    'LSCP': LSCP(contamination=fraud_ratio),
-    'MAD': MAD(contamination=fraud_ratio),
+####    'MAD': MAD(contamination=fraud_ratio),
     'MCD': MCD(contamination=fraud_ratio),
 #    'MO_GAAL': MO_GAAL(contamination=fraud_ratio),
     'OCSVM': OCSVM(contamination=fraud_ratio),
@@ -384,6 +384,60 @@ def pyod_preprocess4(fraudTrain,fraudrate):
 }
     return X, XX, y, yy, predictors, throw_rate
 
+def pyod_preprocess10(fraudTrain, fraud_rate, test_fraud_rate):
+    df = throw(fraudTrain, fraud_rate)
+    df_tr, df_tst = split_dataframe(df, test_fraud_rate) 
+    X = pd.DataFrame(df_tr['amt'])
+    y = pd.DataFrame(df_tr['is_fraud'])
+    XX = pd.DataFrame(df_tst['amt'])
+    yy = pd.DataFrame(df_tst['is_fraud'])
+    throw_rate = df.is_fraud.mean()
+    fraud_ratio = df_tr.is_fraud.mean()
+    predictors = {
+    'ABOD': ABOD(contamination=fraud_ratio),
+#    'ALAD': ALAD(contamination=fraud_ratio),
+#    'AnoGAN': AnoGAN(contamination=fraud_ratio),
+#    'AutoEncoder':AutoEncoder(contamination=fraud_ratio),
+##    'CBLOF': CBLOF(contamination=fraud_ratio,n_clusters=2),
+##    'COF': COF(contamination=fraud_ratio),
+##    'CD': CD(contamination=fraud_ratio),
+    'COPOD': COPOD(contamination=fraud_ratio),
+#    'DeepSVDD': DeepSVDD(contamination=fraud_ratio),
+#    'DIF': DIF(contamination=fraud_ratio),    
+    'ECOD': ECOD(contamination=fraud_ratio),
+#    'FeatureBagging': FeatureBagging(contamination=fraud_ratio),
+    'GMM': GMM(contamination=fraud_ratio),
+    'HBOS': HBOS(contamination=fraud_ratio),
+    'IForest': IForest(contamination=fraud_ratio),
+    'INNE': INNE(contamination=fraud_ratio),
+    'KDE': KDE(contamination=fraud_ratio),
+    'KNN': KNN(contamination=fraud_ratio),
+####    'KPCA': KPCA(contamination=fraud_ratio),
+#    'PyODKernelPCA': PyODKernelPCA(contamination=fraud_ratio),
+##    'LMDD': LMDD(contamination=fraud_ratio),
+    'LODA': LODA(contamination=fraud_ratio),
+    'LOF': LOF(contamination=fraud_ratio),
+####    'LOCI': LOCI(contamination=fraud_ratio),
+#    'LUNAR': LUNAR(contamination=fraud_ratio),
+    'LODA': LODA(contamination=fraud_ratio),
+#    'LSCP': LSCP(contamination=fraud_ratio),
+#    'MAD': MAD(contamination=fraud_ratio),
+    'MCD': MCD(contamination=fraud_ratio),
+#    'MO_GAAL': MO_GAAL(contamination=fraud_ratio),
+    'OCSVM': OCSVM(contamination=fraud_ratio),
+    'PCA': PCA(contamination=fraud_ratio),
+###    'QMCD': QMCD(contamination=fraud_ratio),
+####    'RGraph': RGraph(contamination=fraud_ratio),
+    'ROD': ROD(contamination=fraud_ratio),
+##    'Sampling': Sampling(contamination=fraud_ratio),
+##   'SOD': SOD(contamination=fraud_ratio),
+#    'SO_GAAL': SO_GAAL(contamination=fraud_ratio),
+####    'SOS': SOS(contamination=fraud_ratio),
+#    'SUOD': SUOD(contamination=fraud_ratio),
+#    'VAE': VAE(contamination=fraud_ratio),
+#    'XGBOD': XGBOD(contamination=fraud_ratio),  
+}
+    return X, XX, y, yy, predictors, fraud_rate
 
 
 
@@ -437,9 +491,9 @@ def pyod(X,XX,y,yy,predictors,throw_rate):
         throw_rate = throw_rate,
         train_size = train_size,
         train_cols = train_cols,
-        train_frate = train_frate,
+        train_frate = np.array(y).mean(),
         test_size = test_size,
-        test_frate = test_frate,
+        test_frate = np.array(yy).mean(),
         hyper_params = hyper_params
     ))
     ymdhms = datetime.datetime.fromtimestamp(time.time()).strftime('%Y%m%d-%H%M%S') 
