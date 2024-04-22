@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="김보람">
-<meta name="dcterms.date" content="2024-03-27">
+<meta name="dcterms.date" content="2024-04-03">
 
-<title>GNNpaper - [Autogluon] (‘best_quality’)</title>
+<title>GNNpaper - [Autogluon] 비율 다르게</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -152,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">[Autogluon] (‘best_quality’)</h1>
+      <h1 class="title">[Autogluon] 비율 다르게</h1>
                       </div>
   </div>
     
@@ -169,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">March 27, 2024</p>
+        <p class="date">April 3, 2024</p>
       </div>
     </div>
     
@@ -188,9 +188,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<p>1</p>
+<p>2(4/5)</p>
 <section id="imports" class="level1">
 <h1>imports</h1>
-<div id="4eb91738-6398-4ffc-bbec-fc48fcc8f249" class="cell" data-execution_count="1">
+<div id="4eb91738-6398-4ffc-bbec-fc48fcc8f249" class="cell" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn</span>
@@ -200,10 +202,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b62fd4fe-e850-4d9a-9708-55fb40e73485" class="cell" data-execution_count="6">
+<div id="b62fd4fe-e850-4d9a-9708-55fb40e73485" class="cell" data-execution_count="69">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>run ..<span class="op">/</span>functions.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="4b5f3a51-e915-4d52-ac44-86e2353bd695" class="cell" data-execution_count="5">
+<div id="4b5f3a51-e915-4d52-ac44-86e2353bd695" class="cell" data-execution_count="70">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> auto_amt(fraudTrain, fraud_rate, test_fraud_rate):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> fraudTrain[[<span class="st">"amt"</span>,<span class="st">"is_fraud"</span>]]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> throw(df, fraud_rate)</span>
@@ -287,16 +289,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>    df_results.to_csv(<span class="ss">f'../results/</span><span class="sc">{</span>ymdhms<span class="sc">}</span><span class="ss">-Autogluon.csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="9f8b4812-1b25-44e2-bc14-438f74d7e911" class="cell" data-execution_count="4">
+<div id="9f8b4812-1b25-44e2-bc14-438f74d7e911" class="cell" data-execution_count="71">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="시도10.3-0.05" class="level1">
 <h1>시도1(0.3 / 0.05)</h1>
-<div id="73d1ccb4-e739-4afb-82df-fd9bae4b7a5f" class="cell" data-execution_count="5">
+<div id="73d1ccb4-e739-4afb-82df-fd9bae4b7a5f" class="cell" data-execution_count="72">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>auto_amt(fraudTrain, <span class="fl">0.3</span>, <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="72">
 <div>
 
 
@@ -498,11 +500,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">9</td>
 <td>NeuralNetFastAI_BAG_L1</td>
 <td>None</td>
-<td>0.960539</td>
-<td>0.581395</td>
+<td>0.960706</td>
+<td>0.582902</td>
 <td>0.750000</td>
-<td>0.655022</td>
-<td>0.902893</td>
+<td>0.655977</td>
+<td>0.902438</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.3</td>
@@ -536,11 +538,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">11</td>
 <td>NeuralNetTorch_BAG_L1</td>
 <td>None</td>
-<td>0.943057</td>
-<td>0.460674</td>
-<td>0.820000</td>
-<td>0.589928</td>
-<td>0.953835</td>
+<td>0.944722</td>
+<td>0.469582</td>
+<td>0.823333</td>
+<td>0.598063</td>
+<td>0.953194</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.3</td>
@@ -574,11 +576,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">13</td>
 <td>WeightedEnsemble_L2</td>
 <td>None</td>
-<td>0.929071</td>
-<td>0.400316</td>
+<td>0.929404</td>
+<td>0.401587</td>
 <td>0.843333</td>
-<td>0.542918</td>
-<td>0.960483</td>
+<td>0.544086</td>
+<td>0.960148</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.3</td>
@@ -595,9 +597,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="1af213a7-84fd-4be0-aab4-317e5d5da54c" class="cell">
+<div id="1af213a7-84fd-4be0-aab4-317e5d5da54c" class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>auto_amt(fraudTrain, <span class="fl">0.3</span>, <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="73">
 <div>
 
 
@@ -899,9 +901,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="시도20.3-0.005" class="level1">
 <h1>시도2(0.3 / 0.005)</h1>
-<div id="3e0229f1-f01b-43f5-90c4-6cc31d9a4f42" class="cell" data-execution_count="7">
+<div id="3e0229f1-f01b-43f5-90c4-6cc31d9a4f42" class="cell" data-execution_count="74">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>auto_amt(fraudTrain, <span class="fl">0.3</span>, <span class="fl">0.005</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="74">
 <div>
 
 
@@ -1103,11 +1105,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">9</td>
 <td>NeuralNetFastAI_BAG_L1</td>
 <td>None</td>
-<td>0.972028</td>
-<td>0.140625</td>
+<td>0.971861</td>
+<td>0.139896</td>
 <td>0.900000</td>
-<td>0.243243</td>
-<td>0.960648</td>
+<td>0.242152</td>
+<td>0.960732</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.3</td>
@@ -1141,11 +1143,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">11</td>
 <td>NeuralNetTorch_BAG_L1</td>
 <td>None</td>
-<td>0.947386</td>
-<td>0.079412</td>
+<td>0.946720</td>
+<td>0.078488</td>
 <td>0.900000</td>
-<td>0.145946</td>
-<td>0.982039</td>
+<td>0.144385</td>
+<td>0.981939</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.3</td>
@@ -1179,11 +1181,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">13</td>
 <td>WeightedEnsemble_L2</td>
 <td>None</td>
-<td>0.924409</td>
-<td>0.058333</td>
+<td>0.925241</td>
+<td>0.058947</td>
 <td>0.933333</td>
-<td>0.109804</td>
-<td>0.984711</td>
+<td>0.110891</td>
+<td>0.985009</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.3</td>
@@ -1203,9 +1205,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="시도30.2-0.05" class="level1">
 <h1>시도3(0.2 / 0.05)</h1>
-<div id="8bbfa859-9cfa-4b8f-ab3a-89257832035f" class="cell" data-execution_count="8">
+<div id="8bbfa859-9cfa-4b8f-ab3a-89257832035f" class="cell" data-execution_count="75">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>auto_amt(fraudTrain, <span class="fl">0.2</span>, <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="75">
 <div>
 
 
@@ -1407,11 +1409,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">9</td>
 <td>NeuralNetFastAI_BAG_L1</td>
 <td>None</td>
-<td>0.965812</td>
-<td>0.632959</td>
+<td>0.965923</td>
+<td>0.634146</td>
 <td>0.751111</td>
-<td>0.686992</td>
-<td>0.911427</td>
+<td>0.687691</td>
+<td>0.912636</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.2</td>
@@ -1445,11 +1447,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">11</td>
 <td>NeuralNetTorch_BAG_L1</td>
 <td>None</td>
-<td>0.966367</td>
-<td>0.638941</td>
+<td>0.966922</td>
+<td>0.645038</td>
 <td>0.751111</td>
-<td>0.690501</td>
-<td>0.954791</td>
+<td>0.694045</td>
+<td>0.955267</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.2</td>
@@ -1483,11 +1485,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">13</td>
 <td>WeightedEnsemble_L2</td>
 <td>None</td>
-<td>0.965812</td>
-<td>0.632959</td>
+<td>0.965923</td>
+<td>0.634146</td>
 <td>0.751111</td>
-<td>0.686992</td>
-<td>0.911427</td>
+<td>0.687691</td>
+<td>0.912636</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.2</td>
@@ -1507,9 +1509,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="시도40.2-0.005" class="level1">
 <h1>시도4(0.2 / 0.005)</h1>
-<div id="3169fd84-fa85-4cf3-bbef-56bc2aceb6c7" class="cell" data-execution_count="9">
+<div id="3169fd84-fa85-4cf3-bbef-56bc2aceb6c7" class="cell" data-execution_count="76">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>auto_amt(fraudTrain, <span class="fl">0.2</span>, <span class="fl">0.005</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="76">
 <div>
 
 
@@ -1711,11 +1713,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">9</td>
 <td>NeuralNetFastAI_BAG_L1</td>
 <td>None</td>
-<td>0.976468</td>
-<td>0.147679</td>
+<td>0.976246</td>
+<td>0.146444</td>
 <td>0.777778</td>
-<td>0.248227</td>
-<td>0.913550</td>
+<td>0.246479</td>
+<td>0.913692</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.2</td>
@@ -1749,11 +1751,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">11</td>
 <td>NeuralNetTorch_BAG_L1</td>
 <td>None</td>
-<td>0.977134</td>
-<td>0.151515</td>
+<td>0.977356</td>
+<td>0.152838</td>
 <td>0.777778</td>
-<td>0.253623</td>
-<td>0.965063</td>
+<td>0.255474</td>
+<td>0.965145</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.2</td>
@@ -1791,7 +1793,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.151515</td>
 <td>0.777778</td>
 <td>0.253623</td>
-<td>0.965353</td>
+<td>0.966387</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.2</td>
@@ -1811,9 +1813,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="시도50.2-0.0005" class="level1">
 <h1>시도5(0.2 / 0.0005)</h1>
-<div id="ebebd662-751e-40f8-a8f5-d61cb97c3a55" class="cell" data-execution_count="10">
+<div id="ebebd662-751e-40f8-a8f5-d61cb97c3a55" class="cell" data-execution_count="77">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>auto_amt(fraudTrain, <span class="fl">0.2</span>, <span class="fl">0.0005</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="77">
 <div>
 
 
@@ -2015,11 +2017,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">9</td>
 <td>NeuralNetFastAI_BAG_L1</td>
 <td>None</td>
-<td>0.976690</td>
-<td>0.014151</td>
+<td>0.977023</td>
+<td>0.014354</td>
 <td>0.75</td>
-<td>0.027778</td>
-<td>0.897252</td>
+<td>0.028169</td>
+<td>0.896974</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.2</td>
@@ -2053,11 +2055,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">11</td>
 <td>NeuralNetTorch_BAG_L1</td>
 <td>None</td>
-<td>0.978910</td>
-<td>0.015625</td>
+<td>0.977800</td>
+<td>0.014851</td>
 <td>0.75</td>
-<td>0.030612</td>
-<td>0.989561</td>
+<td>0.029126</td>
+<td>0.987646</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.2</td>
@@ -2091,11 +2093,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">13</td>
 <td>WeightedEnsemble_L2</td>
 <td>None</td>
-<td>0.967588</td>
-<td>0.010204</td>
+<td>0.977800</td>
+<td>0.014851</td>
 <td>0.75</td>
-<td>0.020134</td>
-<td>0.984814</td>
+<td>0.029126</td>
+<td>0.987285</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.2</td>
@@ -2115,9 +2117,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="시도60.5-0.5" class="level1">
 <h1>시도6(0.5 / 0.5)</h1>
-<div id="5ac79126-337d-4215-91e4-e065e2e697bf" class="cell" data-execution_count="11">
+<div id="5ac79126-337d-4215-91e4-e065e2e697bf" class="cell" data-execution_count="78">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>auto_amt(fraudTrain, <span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="78">
 <div>
 
 
@@ -2323,7 +2325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.961918</td>
 <td>0.757357</td>
 <td>0.847468</td>
-<td>0.895867</td>
+<td>0.895469</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.5</td>
@@ -2357,11 +2359,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">11</td>
 <td>NeuralNetTorch_BAG_L1</td>
 <td>None</td>
-<td>0.880655</td>
-<td>0.869542</td>
-<td>0.895614</td>
-<td>0.882385</td>
-<td>0.952822</td>
+<td>0.882043</td>
+<td>0.877193</td>
+<td>0.888395</td>
+<td>0.882759</td>
+<td>0.951968</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.5</td>
@@ -2399,7 +2401,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.901036</td>
 <td>0.869517</td>
 <td>0.884996</td>
-<td>0.958770</td>
+<td>0.958680</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.5</td>
@@ -2419,9 +2421,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="시도70.5-0.05" class="level1">
 <h1>시도7(0.5 / 0.05)</h1>
-<div id="dc25b546-d60f-4a48-a2bc-481337b98154" class="cell" data-execution_count="12">
+<div id="dc25b546-d60f-4a48-a2bc-481337b98154" class="cell" data-execution_count="79">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>auto_amt(fraudTrain, <span class="fl">0.5</span>, <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="79">
 <div>
 
 
@@ -2623,11 +2625,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">9</td>
 <td>NeuralNetFastAI_BAG_L1</td>
 <td>None</td>
-<td>0.947544</td>
-<td>0.483146</td>
+<td>0.947266</td>
+<td>0.481343</td>
 <td>0.716667</td>
-<td>0.577181</td>
-<td>0.880083</td>
+<td>0.575893</td>
+<td>0.879567</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.5</td>
@@ -2661,11 +2663,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">11</td>
 <td>NeuralNetTorch_BAG_L1</td>
 <td>None</td>
-<td>0.808770</td>
-<td>0.200236</td>
+<td>0.806273</td>
+<td>0.198135</td>
 <td>0.944444</td>
-<td>0.330418</td>
-<td>0.949717</td>
+<td>0.327553</td>
+<td>0.950334</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.5</td>
@@ -2684,7 +2686,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.165029</td>
 <td>0.933333</td>
 <td>0.280467</td>
-<td>0.955093</td>
+<td>0.955094</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.5</td>
@@ -2703,7 +2705,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.189616</td>
 <td>0.933333</td>
 <td>0.315197</td>
-<td>0.956457</td>
+<td>0.956412</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.5</td>
@@ -2723,9 +2725,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="시도80.5-0.005" class="level1">
 <h1>시도8(0.5 / 0.005)</h1>
-<div id="3005ff4e-a233-45f8-8abd-ac06c1d6b757" class="cell" data-execution_count="13">
+<div id="3005ff4e-a233-45f8-8abd-ac06c1d6b757" class="cell" data-execution_count="80">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>auto_amt(fraudTrain, <span class="fl">0.5</span>, <span class="fl">0.005</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="80">
 <div>
 
 
@@ -2927,11 +2929,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">9</td>
 <td>NeuralNetFastAI_BAG_L1</td>
 <td>None</td>
-<td>0.954482</td>
-<td>0.089888</td>
+<td>0.953927</td>
+<td>0.088889</td>
 <td>0.888889</td>
-<td>0.163265</td>
-<td>0.944367</td>
+<td>0.161616</td>
+<td>0.944460</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.5</td>
@@ -2965,11 +2967,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">11</td>
 <td>NeuralNetTorch_BAG_L1</td>
 <td>None</td>
-<td>0.793783</td>
-<td>0.023653</td>
+<td>0.794616</td>
+<td>0.023747</td>
 <td>1.000000</td>
-<td>0.046213</td>
-<td>0.976197</td>
+<td>0.046392</td>
+<td>0.975546</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.5</td>
@@ -3027,9 +3029,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="시도90.5-0.0005" class="level1">
 <h1>시도9(0.5 / 0.0005)</h1>
-<div id="a5558820-1be3-4cc6-935b-0be6403a8d5d" class="cell" data-execution_count="14">
+<div id="a5558820-1be3-4cc6-935b-0be6403a8d5d" class="cell" data-execution_count="81">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>auto_amt(fraudTrain, <span class="fl">0.5</span>, <span class="fl">0.0005</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="81">
 <div>
 
 
@@ -3231,10 +3233,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">9</td>
 <td>NeuralNetFastAI_BAG_L1</td>
 <td>None</td>
-<td>0.953095</td>
-<td>0.005882</td>
+<td>0.953372</td>
+<td>0.005917</td>
 <td>1.0</td>
-<td>0.011696</td>
+<td>0.011765</td>
 <td>0.993059</td>
 <td>False</td>
 <td>Autogluon</td>
@@ -3269,10 +3271,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">11</td>
 <td>NeuralNetTorch_BAG_L1</td>
 <td>None</td>
-<td>0.786567</td>
-<td>0.001299</td>
+<td>0.788232</td>
+<td>0.001309</td>
 <td>1.0</td>
-<td>0.002594</td>
+<td>0.002614</td>
 <td>0.992782</td>
 <td>False</td>
 <td>Autogluon</td>
@@ -3328,7 +3330,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="e6a1255c-2d01-4168-a411-516a8a54f189" class="cell" data-execution_count="2">
+<div id="e6a1255c-2d01-4168-a411-516a8a54f189" class="cell" data-execution_count="82">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> auto_amt3232(fraudTrain, fraud_rate, test_fraud_rate):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> fraudTrain[[<span class="st">"amt"</span>,<span class="st">"is_fraud"</span>]]</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> throw(df, fraud_rate)</span>
@@ -3412,9 +3414,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a>    df_results.to_csv(<span class="ss">f'../results/</span><span class="sc">{</span>ymdhms<span class="sc">}</span><span class="ss">-Autogluon.csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="c534e667-a659-4743-b029-8fe5e602108e" class="cell" data-execution_count="9">
+<div id="c534e667-a659-4743-b029-8fe5e602108e" class="cell" data-execution_count="83">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>auto_amt3232(fraudTrain, <span class="fl">0.0999445</span>,<span class="fl">0.001793686</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="83">
 <div>
 
 
@@ -3578,11 +3580,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">7</td>
 <td>ExtraTreesGini</td>
 <td>None</td>
-<td>0.975315</td>
-<td>0.057816</td>
-<td>0.84375</td>
-<td>0.108216</td>
-<td>0.961006</td>
+<td>0.974982</td>
+<td>0.055202</td>
+<td>0.81250</td>
+<td>0.103380</td>
+<td>0.960420</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.099945</td>
@@ -3597,11 +3599,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">8</td>
 <td>ExtraTreesEntr</td>
 <td>None</td>
-<td>0.975426</td>
-<td>0.056156</td>
-<td>0.81250</td>
-<td>0.105051</td>
-<td>0.973764</td>
+<td>0.974316</td>
+<td>0.051975</td>
+<td>0.78125</td>
+<td>0.097466</td>
+<td>0.972911</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.099945</td>
@@ -3673,11 +3675,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">12</td>
 <td>LightGBMLarge</td>
 <td>None</td>
-<td>0.998225</td>
-<td>0.000000</td>
-<td>0.00000</td>
-<td>0.000000</td>
-<td>0.982663</td>
+<td>0.988573</td>
+<td>0.115044</td>
+<td>0.81250</td>
+<td>0.201550</td>
+<td>0.982494</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.099945</td>
@@ -3713,9 +3715,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="5b9c63f7-7f62-48ae-8bd2-5f6603958f7d" class="cell" data-execution_count="8">
+<div id="5b9c63f7-7f62-48ae-8bd2-5f6603958f7d" class="cell" data-execution_count="84">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>auto_amt3232(fraudTrain, <span class="fl">0.1070228</span>,<span class="fl">0.00179</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="84">
 <div>
 
 
@@ -3803,11 +3805,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">3</td>
 <td>LightGBM</td>
 <td>None</td>
-<td>0.998218</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.985720</td>
+<td>0.986219</td>
+<td>0.099206</td>
+<td>0.833333</td>
+<td>0.177305</td>
+<td>0.985903</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.107023</td>
@@ -3879,11 +3881,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">7</td>
 <td>ExtraTreesGini</td>
 <td>None</td>
-<td>0.971785</td>
-<td>0.052314</td>
+<td>0.972676</td>
+<td>0.053942</td>
 <td>0.866667</td>
-<td>0.098672</td>
-<td>0.974188</td>
+<td>0.101562</td>
+<td>0.974579</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.107023</td>
@@ -3898,11 +3900,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">8</td>
 <td>ExtraTreesEntr</td>
 <td>None</td>
-<td>0.971250</td>
-<td>0.051383</td>
+<td>0.971666</td>
+<td>0.052104</td>
 <td>0.866667</td>
-<td>0.097015</td>
-<td>0.974387</td>
+<td>0.098299</td>
+<td>0.974854</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.107023</td>
@@ -3974,11 +3976,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">12</td>
 <td>LightGBMLarge</td>
 <td>None</td>
-<td>0.998218</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.986131</td>
+<td>0.986219</td>
+<td>0.099206</td>
+<td>0.833333</td>
+<td>0.177305</td>
+<td>0.986075</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.107023</td>
@@ -4014,9 +4016,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="d2596a39-6e82-40d7-9f36-6344223e821e" class="cell" data-execution_count="9">
+<div id="d2596a39-6e82-40d7-9f36-6344223e821e" class="cell" data-execution_count="85">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>auto_amt3232(fraudTrain, <span class="fl">0.064833958</span>, <span class="fl">0.001793686</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="85">
 <div>
 
 
@@ -4085,11 +4087,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">2</td>
 <td>LightGBMXT</td>
 <td>None</td>
-<td>0.998237</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.815224</td>
+<td>0.980893</td>
+<td>0.061818</td>
+<td>0.693878</td>
+<td>0.113523</td>
+<td>0.949445</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.064834</td>
@@ -4104,11 +4106,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">3</td>
 <td>LightGBM</td>
 <td>None</td>
-<td>0.998237</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.970991</td>
+<td>0.988090</td>
+<td>0.101695</td>
+<td>0.734694</td>
+<td>0.178660</td>
+<td>0.974126</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.064834</td>
@@ -4123,11 +4125,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">4</td>
 <td>RandomForestGini</td>
 <td>None</td>
-<td>0.980965</td>
-<td>0.062044</td>
+<td>0.981217</td>
+<td>0.062847</td>
 <td>0.693878</td>
-<td>0.113903</td>
-<td>0.932850</td>
+<td>0.115254</td>
+<td>0.932317</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.064834</td>
@@ -4142,11 +4144,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">5</td>
 <td>RandomForestEntr</td>
 <td>None</td>
-<td>0.981253</td>
-<td>0.062963</td>
+<td>0.981217</td>
+<td>0.062847</td>
 <td>0.693878</td>
-<td>0.115450</td>
-<td>0.932751</td>
+<td>0.115254</td>
+<td>0.932317</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.064834</td>
@@ -4180,11 +4182,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">7</td>
 <td>ExtraTreesGini</td>
 <td>None</td>
-<td>0.982476</td>
-<td>0.070588</td>
+<td>0.982009</td>
+<td>0.068834</td>
 <td>0.734694</td>
-<td>0.128801</td>
-<td>0.933157</td>
+<td>0.125874</td>
+<td>0.932034</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.064834</td>
@@ -4199,11 +4201,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">8</td>
 <td>ExtraTreesEntr</td>
 <td>None</td>
-<td>0.982260</td>
-<td>0.069767</td>
+<td>0.982009</td>
+<td>0.068834</td>
 <td>0.734694</td>
-<td>0.127434</td>
-<td>0.932447</td>
+<td>0.125874</td>
+<td>0.940181</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.064834</td>
@@ -4275,11 +4277,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">12</td>
 <td>LightGBMLarge</td>
 <td>None</td>
-<td>0.998237</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.973787</td>
+<td>0.988090</td>
+<td>0.101695</td>
+<td>0.734694</td>
+<td>0.178660</td>
+<td>0.973781</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.064834</td>
@@ -4294,11 +4296,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">13</td>
 <td>WeightedEnsemble_L2</td>
 <td>None</td>
-<td>0.988378</td>
-<td>0.101744</td>
+<td>0.988593</td>
+<td>0.103550</td>
 <td>0.714286</td>
-<td>0.178117</td>
-<td>0.967477</td>
+<td>0.180879</td>
+<td>0.971726</td>
 <td>False</td>
 <td>Autogluon</td>
 <td>0.064834</td>
@@ -4315,7 +4317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="caa1371b-0963-4ce5-874e-e12632b20eeb" class="cell" data-execution_count="13">
+<div id="caa1371b-0963-4ce5-874e-e12632b20eeb" class="cell" data-execution_count="86">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> auto_amt7(fraudTrain, fraud_rate, n):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> fraudTrain[[<span class="st">"amt"</span>,<span class="st">"is_fraud"</span>]]</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> throw(df, fraud_rate)</span>
@@ -4327,90 +4329,91 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    dfnn <span class="op">=</span> dfnn.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    df_trn, df_tstn <span class="op">=</span> sklearn.model_selection.train_test_split(dfnn)</span>
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    tr <span class="op">=</span> TabularDataset(df_tr)</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    tst <span class="op">=</span> TabularDataset(df_tstn)</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    predictr <span class="op">=</span> TabularPredictor(label<span class="op">=</span><span class="st">"is_fraud"</span>, verbosity<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    t1 <span class="op">=</span> time.time()</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    predictr.fit(tr)</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    t2 <span class="op">=</span> time.time()</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    time_diff <span class="op">=</span> t2 <span class="op">-</span> t1</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> predictr._trainer.model_graph.nodes</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> []</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> model_name <span class="kw">in</span> models:</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 모델 평가</span></span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>        eval_result <span class="op">=</span> predictr.evaluate(tst, model<span class="op">=</span>model_name)</span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 결과를 데이터프레임에 추가</span></span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>        results.append({<span class="st">'model'</span>: model_name, </span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'acc'</span>: eval_result[<span class="st">'accuracy'</span>], </span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'pre'</span>: eval_result[<span class="st">'precision'</span>], </span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'rec'</span>: eval_result[<span class="st">'recall'</span>], </span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'f1'</span>: eval_result[<span class="st">'f1'</span>], </span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'auc'</span>: eval_result[<span class="st">'roc_auc'</span>]})</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> []</span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>    time_diff <span class="op">=</span> []</span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> []</span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>    pre <span class="op">=</span> []</span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    rec <span class="op">=</span> []</span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    f1 <span class="op">=</span> [] </span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>    auc <span class="op">=</span> [] </span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>    graph_based <span class="op">=</span> []</span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>    method <span class="op">=</span> [] </span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>    throw_rate <span class="op">=</span> [] </span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>    train_size <span class="op">=</span> []</span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>    train_cols <span class="op">=</span> []</span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>    train_frate <span class="op">=</span> []</span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>    test_size <span class="op">=</span> []</span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>    test_frate <span class="op">=</span> []</span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>    hyper_params <span class="op">=</span> [] </span>
-<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> result <span class="kw">in</span> results:</span>
-<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>        model_name <span class="op">=</span> result[<span class="st">'model'</span>]</span>
-<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a>        model.append(model_name)</span>
-<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a>        time_diff.append(<span class="va">None</span>)  <span class="co"># 각 모델별로 학습한 시간을 나타내고 싶은데 잘 안됨</span></span>
-<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>        acc.append(result[<span class="st">'acc'</span>]) </span>
-<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a>        pre.append(result[<span class="st">'pre'</span>])</span>
-<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a>        rec.append(result[<span class="st">'rec'</span>])</span>
-<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a>        f1.append(result[<span class="st">'f1'</span>])</span>
-<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a>        auc.append(result[<span class="st">'auc'</span>])</span>
-<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a>        graph_based.append(<span class="va">False</span>) </span>
-<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a>        method.append(<span class="st">'Autogluon'</span>) </span>
-<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a>        throw_rate.append(df.is_fraud.mean())</span>
-<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a>        train_size.append(<span class="bu">len</span>(tr))</span>
-<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a>        train_cols.append([col <span class="cf">for</span> col <span class="kw">in</span> tr.columns <span class="cf">if</span> col <span class="op">!=</span> <span class="st">'is_fraud'</span>])</span>
-<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a>        train_frate.append(tr.is_fraud.mean())</span>
-<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a>        test_size.append(<span class="bu">len</span>(tst))</span>
-<span id="cb19-68"><a href="#cb19-68" aria-hidden="true" tabindex="-1"></a>        test_frate.append(tst.is_fraud.mean())</span>
-<span id="cb19-69"><a href="#cb19-69" aria-hidden="true" tabindex="-1"></a>        hyper_params.append(<span class="va">None</span>)</span>
-<span id="cb19-70"><a href="#cb19-70" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb19-71"><a href="#cb19-71" aria-hidden="true" tabindex="-1"></a>    df_results <span class="op">=</span> pd.DataFrame(<span class="bu">dict</span>(</span>
-<span id="cb19-72"><a href="#cb19-72" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span>model,</span>
-<span id="cb19-73"><a href="#cb19-73" aria-hidden="true" tabindex="-1"></a>        time<span class="op">=</span>time_diff,</span>
-<span id="cb19-74"><a href="#cb19-74" aria-hidden="true" tabindex="-1"></a>        acc<span class="op">=</span>acc,</span>
-<span id="cb19-75"><a href="#cb19-75" aria-hidden="true" tabindex="-1"></a>        pre<span class="op">=</span>pre,</span>
-<span id="cb19-76"><a href="#cb19-76" aria-hidden="true" tabindex="-1"></a>        rec<span class="op">=</span>rec,</span>
-<span id="cb19-77"><a href="#cb19-77" aria-hidden="true" tabindex="-1"></a>        f1<span class="op">=</span>f1,</span>
-<span id="cb19-78"><a href="#cb19-78" aria-hidden="true" tabindex="-1"></a>        auc<span class="op">=</span>auc,</span>
-<span id="cb19-79"><a href="#cb19-79" aria-hidden="true" tabindex="-1"></a>        graph_based<span class="op">=</span>graph_based,</span>
-<span id="cb19-80"><a href="#cb19-80" aria-hidden="true" tabindex="-1"></a>        method<span class="op">=</span>method,</span>
-<span id="cb19-81"><a href="#cb19-81" aria-hidden="true" tabindex="-1"></a>        throw_rate<span class="op">=</span>throw_rate,  </span>
-<span id="cb19-82"><a href="#cb19-82" aria-hidden="true" tabindex="-1"></a>        train_size<span class="op">=</span>train_size,</span>
-<span id="cb19-83"><a href="#cb19-83" aria-hidden="true" tabindex="-1"></a>        train_cols<span class="op">=</span>train_cols,</span>
-<span id="cb19-84"><a href="#cb19-84" aria-hidden="true" tabindex="-1"></a>        train_frate<span class="op">=</span>train_frate,</span>
-<span id="cb19-85"><a href="#cb19-85" aria-hidden="true" tabindex="-1"></a>        test_size<span class="op">=</span>test_size,</span>
-<span id="cb19-86"><a href="#cb19-86" aria-hidden="true" tabindex="-1"></a>        test_frate<span class="op">=</span>test_frate,</span>
-<span id="cb19-87"><a href="#cb19-87" aria-hidden="true" tabindex="-1"></a>        hyper_params<span class="op">=</span>hyper_params</span>
-<span id="cb19-88"><a href="#cb19-88" aria-hidden="true" tabindex="-1"></a>    ))    </span>
-<span id="cb19-89"><a href="#cb19-89" aria-hidden="true" tabindex="-1"></a>    ymdhms <span class="op">=</span> datetime.datetime.fromtimestamp(time.time()).strftime(<span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">-%H%M%S'</span>) </span>
-<span id="cb19-90"><a href="#cb19-90" aria-hidden="true" tabindex="-1"></a>    df_results.to_csv(<span class="ss">f'../results/</span><span class="sc">{</span>ymdhms<span class="sc">}</span><span class="ss">-Autogluon.csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb19-91"><a href="#cb19-91" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.concat([df_tr,df_tstn])</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    tr <span class="op">=</span> TabularDataset(df_tr)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    tst <span class="op">=</span> TabularDataset(df_tstn)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    predictr <span class="op">=</span> TabularPredictor(label<span class="op">=</span><span class="st">"is_fraud"</span>, verbosity<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    t1 <span class="op">=</span> time.time()</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    predictr.fit(tr)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    t2 <span class="op">=</span> time.time()</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    time_diff <span class="op">=</span> t2 <span class="op">-</span> t1</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> predictr._trainer.model_graph.nodes</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> []</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> model_name <span class="kw">in</span> models:</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 모델 평가</span></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>        eval_result <span class="op">=</span> predictr.evaluate(tst, model<span class="op">=</span>model_name)</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 결과를 데이터프레임에 추가</span></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>        results.append({<span class="st">'model'</span>: model_name, </span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'acc'</span>: eval_result[<span class="st">'accuracy'</span>], </span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'pre'</span>: eval_result[<span class="st">'precision'</span>], </span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'rec'</span>: eval_result[<span class="st">'recall'</span>], </span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'f1'</span>: eval_result[<span class="st">'f1'</span>], </span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'auc'</span>: eval_result[<span class="st">'roc_auc'</span>]})</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> []</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>    time_diff <span class="op">=</span> []</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> []</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    pre <span class="op">=</span> []</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    rec <span class="op">=</span> []</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>    f1 <span class="op">=</span> [] </span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>    auc <span class="op">=</span> [] </span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>    graph_based <span class="op">=</span> []</span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>    method <span class="op">=</span> [] </span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>    throw_rate <span class="op">=</span> [] </span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>    train_size <span class="op">=</span> []</span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>    train_cols <span class="op">=</span> []</span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>    train_frate <span class="op">=</span> []</span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>    test_size <span class="op">=</span> []</span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>    test_frate <span class="op">=</span> []</span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>    hyper_params <span class="op">=</span> [] </span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> result <span class="kw">in</span> results:</span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a>        model_name <span class="op">=</span> result[<span class="st">'model'</span>]</span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a>        model.append(model_name)</span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>        time_diff.append(<span class="va">None</span>)  <span class="co"># 각 모델별로 학습한 시간을 나타내고 싶은데 잘 안됨</span></span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a>        acc.append(result[<span class="st">'acc'</span>]) </span>
+<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a>        pre.append(result[<span class="st">'pre'</span>])</span>
+<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a>        rec.append(result[<span class="st">'rec'</span>])</span>
+<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a>        f1.append(result[<span class="st">'f1'</span>])</span>
+<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a>        auc.append(result[<span class="st">'auc'</span>])</span>
+<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a>        graph_based.append(<span class="va">False</span>) </span>
+<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a>        method.append(<span class="st">'Autogluon'</span>) </span>
+<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a>        throw_rate.append(df.is_fraud.mean())</span>
+<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a>        train_size.append(<span class="bu">len</span>(tr))</span>
+<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a>        train_cols.append([col <span class="cf">for</span> col <span class="kw">in</span> tr.columns <span class="cf">if</span> col <span class="op">!=</span> <span class="st">'is_fraud'</span>])</span>
+<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a>        train_frate.append(tr.is_fraud.mean())</span>
+<span id="cb19-68"><a href="#cb19-68" aria-hidden="true" tabindex="-1"></a>        test_size.append(<span class="bu">len</span>(tst))</span>
+<span id="cb19-69"><a href="#cb19-69" aria-hidden="true" tabindex="-1"></a>        test_frate.append(tst.is_fraud.mean())</span>
+<span id="cb19-70"><a href="#cb19-70" aria-hidden="true" tabindex="-1"></a>        hyper_params.append(<span class="va">None</span>)</span>
+<span id="cb19-71"><a href="#cb19-71" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb19-72"><a href="#cb19-72" aria-hidden="true" tabindex="-1"></a>    df_results <span class="op">=</span> pd.DataFrame(<span class="bu">dict</span>(</span>
+<span id="cb19-73"><a href="#cb19-73" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span>model,</span>
+<span id="cb19-74"><a href="#cb19-74" aria-hidden="true" tabindex="-1"></a>        time<span class="op">=</span>time_diff,</span>
+<span id="cb19-75"><a href="#cb19-75" aria-hidden="true" tabindex="-1"></a>        acc<span class="op">=</span>acc,</span>
+<span id="cb19-76"><a href="#cb19-76" aria-hidden="true" tabindex="-1"></a>        pre<span class="op">=</span>pre,</span>
+<span id="cb19-77"><a href="#cb19-77" aria-hidden="true" tabindex="-1"></a>        rec<span class="op">=</span>rec,</span>
+<span id="cb19-78"><a href="#cb19-78" aria-hidden="true" tabindex="-1"></a>        f1<span class="op">=</span>f1,</span>
+<span id="cb19-79"><a href="#cb19-79" aria-hidden="true" tabindex="-1"></a>        auc<span class="op">=</span>auc,</span>
+<span id="cb19-80"><a href="#cb19-80" aria-hidden="true" tabindex="-1"></a>        graph_based<span class="op">=</span>graph_based,</span>
+<span id="cb19-81"><a href="#cb19-81" aria-hidden="true" tabindex="-1"></a>        method<span class="op">=</span>method,</span>
+<span id="cb19-82"><a href="#cb19-82" aria-hidden="true" tabindex="-1"></a>        throw_rate<span class="op">=</span>throw_rate,  </span>
+<span id="cb19-83"><a href="#cb19-83" aria-hidden="true" tabindex="-1"></a>        train_size<span class="op">=</span>train_size,</span>
+<span id="cb19-84"><a href="#cb19-84" aria-hidden="true" tabindex="-1"></a>        train_cols<span class="op">=</span>train_cols,</span>
+<span id="cb19-85"><a href="#cb19-85" aria-hidden="true" tabindex="-1"></a>        train_frate<span class="op">=</span>train_frate,</span>
+<span id="cb19-86"><a href="#cb19-86" aria-hidden="true" tabindex="-1"></a>        test_size<span class="op">=</span>test_size,</span>
+<span id="cb19-87"><a href="#cb19-87" aria-hidden="true" tabindex="-1"></a>        test_frate<span class="op">=</span>test_frate,</span>
+<span id="cb19-88"><a href="#cb19-88" aria-hidden="true" tabindex="-1"></a>        hyper_params<span class="op">=</span>hyper_params</span>
+<span id="cb19-89"><a href="#cb19-89" aria-hidden="true" tabindex="-1"></a>    ))    </span>
+<span id="cb19-90"><a href="#cb19-90" aria-hidden="true" tabindex="-1"></a>    ymdhms <span class="op">=</span> datetime.datetime.fromtimestamp(time.time()).strftime(<span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">-%H%M%S'</span>) </span>
+<span id="cb19-91"><a href="#cb19-91" aria-hidden="true" tabindex="-1"></a>    df_results.to_csv(<span class="ss">f'../results/</span><span class="sc">{</span>ymdhms<span class="sc">}</span><span class="ss">-Autogluon.csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-92"><a href="#cb19-92" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="bf716c95-b938-457f-a2ca-cba9b555fbf2" class="cell" data-execution_count="14">
+<div id="a7fdf4f1-78f1-46f4-93fe-2f65463d5a33" class="cell" data-execution_count="87">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.9</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="87">
 <div>
 
 
@@ -4448,7 +4451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.917769</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.900045</td>
+<td>0.14656</td>
 <td>5004</td>
 <td>[amt]</td>
 <td>0.901679</td>
@@ -4467,7 +4470,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.897686</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.900045</td>
+<td>0.14656</td>
 <td>5004</td>
 <td>[amt]</td>
 <td>0.901679</td>
@@ -4486,7 +4489,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.961423</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.900045</td>
+<td>0.14656</td>
 <td>5004</td>
 <td>[amt]</td>
 <td>0.901679</td>
@@ -4505,7 +4508,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.965210</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.900045</td>
+<td>0.14656</td>
 <td>5004</td>
 <td>[amt]</td>
 <td>0.901679</td>
@@ -4524,7 +4527,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.926060</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.900045</td>
+<td>0.14656</td>
 <td>5004</td>
 <td>[amt]</td>
 <td>0.901679</td>
@@ -4543,7 +4546,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.926060</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.900045</td>
+<td>0.14656</td>
 <td>5004</td>
 <td>[amt]</td>
 <td>0.901679</td>
@@ -4562,7 +4565,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.971513</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.900045</td>
+<td>0.14656</td>
 <td>5004</td>
 <td>[amt]</td>
 <td>0.901679</td>
@@ -4581,7 +4584,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.940197</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.900045</td>
+<td>0.14656</td>
 <td>5004</td>
 <td>[amt]</td>
 <td>0.901679</td>
@@ -4600,7 +4603,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.940543</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.900045</td>
+<td>0.14656</td>
 <td>5004</td>
 <td>[amt]</td>
 <td>0.901679</td>
@@ -4619,7 +4622,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.923193</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.900045</td>
+<td>0.14656</td>
 <td>5004</td>
 <td>[amt]</td>
 <td>0.901679</td>
@@ -4638,7 +4641,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.960137</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.900045</td>
+<td>0.14656</td>
 <td>5004</td>
 <td>[amt]</td>
 <td>0.901679</td>
@@ -4657,7 +4660,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.922903</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.900045</td>
+<td>0.14656</td>
 <td>5004</td>
 <td>[amt]</td>
 <td>0.901679</td>
@@ -4676,7 +4679,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.955960</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.900045</td>
+<td>0.14656</td>
 <td>5004</td>
 <td>[amt]</td>
 <td>0.901679</td>
@@ -4695,7 +4698,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.965830</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.900045</td>
+<td>0.14656</td>
 <td>5004</td>
 <td>[amt]</td>
 <td>0.901679</td>
@@ -4709,9 +4712,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="f9dd7886-e4e3-4e04-a284-1bcf157082be" class="cell" data-execution_count="15">
+<div id="f9dd7886-e4e3-4e04-a284-1bcf157082be" class="cell" data-execution_count="88">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.8</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="88">
 <div>
 
 
@@ -4749,7 +4752,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.935672</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.800053</td>
+<td>0.142726</td>
 <td>5630</td>
 <td>[amt]</td>
 <td>0.794671</td>
@@ -4768,7 +4771,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.919264</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.800053</td>
+<td>0.142726</td>
 <td>5630</td>
 <td>[amt]</td>
 <td>0.794671</td>
@@ -4787,7 +4790,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.945454</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.800053</td>
+<td>0.142726</td>
 <td>5630</td>
 <td>[amt]</td>
 <td>0.794671</td>
@@ -4806,7 +4809,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.968619</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.800053</td>
+<td>0.142726</td>
 <td>5630</td>
 <td>[amt]</td>
 <td>0.794671</td>
@@ -4825,7 +4828,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.941450</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.800053</td>
+<td>0.142726</td>
 <td>5630</td>
 <td>[amt]</td>
 <td>0.794671</td>
@@ -4844,7 +4847,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.941450</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.800053</td>
+<td>0.142726</td>
 <td>5630</td>
 <td>[amt]</td>
 <td>0.794671</td>
@@ -4863,7 +4866,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.969321</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.800053</td>
+<td>0.142726</td>
 <td>5630</td>
 <td>[amt]</td>
 <td>0.794671</td>
@@ -4882,7 +4885,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.949904</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.800053</td>
+<td>0.142726</td>
 <td>5630</td>
 <td>[amt]</td>
 <td>0.794671</td>
@@ -4901,7 +4904,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.950366</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.800053</td>
+<td>0.142726</td>
 <td>5630</td>
 <td>[amt]</td>
 <td>0.794671</td>
@@ -4920,7 +4923,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.798758</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.800053</td>
+<td>0.142726</td>
 <td>5630</td>
 <td>[amt]</td>
 <td>0.794671</td>
@@ -4939,7 +4942,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.959575</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.800053</td>
+<td>0.142726</td>
 <td>5630</td>
 <td>[amt]</td>
 <td>0.794671</td>
@@ -4958,7 +4961,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.941510</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.800053</td>
+<td>0.142726</td>
 <td>5630</td>
 <td>[amt]</td>
 <td>0.794671</td>
@@ -4977,7 +4980,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.967254</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.800053</td>
+<td>0.142726</td>
 <td>5630</td>
 <td>[amt]</td>
 <td>0.794671</td>
@@ -4996,7 +4999,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.968619</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.800053</td>
+<td>0.142726</td>
 <td>5630</td>
 <td>[amt]</td>
 <td>0.794671</td>
@@ -5010,9 +5013,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="77cbd27c-a524-40da-84e9-e625a8c2a4d2" class="cell" data-execution_count="16">
+<div id="77cbd27c-a524-40da-84e9-e625a8c2a4d2" class="cell" data-execution_count="89">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.7</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="89">
 <div>
 
 
@@ -5050,7 +5053,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.929165</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.7</td>
+<td>0.139823</td>
 <td>6435</td>
 <td>[amt]</td>
 <td>0.699301</td>
@@ -5069,7 +5072,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.907111</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.7</td>
+<td>0.139823</td>
 <td>6435</td>
 <td>[amt]</td>
 <td>0.699301</td>
@@ -5088,7 +5091,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.931731</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.7</td>
+<td>0.139823</td>
 <td>6435</td>
 <td>[amt]</td>
 <td>0.699301</td>
@@ -5107,7 +5110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.957331</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.7</td>
+<td>0.139823</td>
 <td>6435</td>
 <td>[amt]</td>
 <td>0.699301</td>
@@ -5126,7 +5129,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.935909</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.7</td>
+<td>0.139823</td>
 <td>6435</td>
 <td>[amt]</td>
 <td>0.699301</td>
@@ -5145,7 +5148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.935909</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.7</td>
+<td>0.139823</td>
 <td>6435</td>
 <td>[amt]</td>
 <td>0.699301</td>
@@ -5164,7 +5167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.920304</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.7</td>
+<td>0.139823</td>
 <td>6435</td>
 <td>[amt]</td>
 <td>0.699301</td>
@@ -5183,7 +5186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.937763</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.7</td>
+<td>0.139823</td>
 <td>6435</td>
 <td>[amt]</td>
 <td>0.699301</td>
@@ -5202,7 +5205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.938921</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.7</td>
+<td>0.139823</td>
 <td>6435</td>
 <td>[amt]</td>
 <td>0.699301</td>
@@ -5221,7 +5224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.893476</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.7</td>
+<td>0.139823</td>
 <td>6435</td>
 <td>[amt]</td>
 <td>0.699301</td>
@@ -5240,7 +5243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.952882</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.7</td>
+<td>0.139823</td>
 <td>6435</td>
 <td>[amt]</td>
 <td>0.699301</td>
@@ -5259,7 +5262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.933392</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.7</td>
+<td>0.139823</td>
 <td>6435</td>
 <td>[amt]</td>
 <td>0.699301</td>
@@ -5278,7 +5281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.953565</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.7</td>
+<td>0.139823</td>
 <td>6435</td>
 <td>[amt]</td>
 <td>0.699301</td>
@@ -5297,7 +5300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.956620</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.7</td>
+<td>0.139823</td>
 <td>6435</td>
 <td>[amt]</td>
 <td>0.699301</td>
@@ -5311,9 +5314,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="23e62c37-7a43-4c5e-885c-775c87a8c165" class="cell" data-execution_count="17">
+<div id="23e62c37-7a43-4c5e-885c-775c87a8c165" class="cell" data-execution_count="90">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.6</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="90">
 <div>
 
 
@@ -5351,7 +5354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.951753</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.6</td>
+<td>0.137079</td>
 <td>7507</td>
 <td>[amt]</td>
 <td>0.605568</td>
@@ -5370,7 +5373,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.927416</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.6</td>
+<td>0.137079</td>
 <td>7507</td>
 <td>[amt]</td>
 <td>0.605568</td>
@@ -5389,7 +5392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.951173</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.6</td>
+<td>0.137079</td>
 <td>7507</td>
 <td>[amt]</td>
 <td>0.605568</td>
@@ -5408,7 +5411,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.964784</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.6</td>
+<td>0.137079</td>
 <td>7507</td>
 <td>[amt]</td>
 <td>0.605568</td>
@@ -5427,7 +5430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.948598</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.6</td>
+<td>0.137079</td>
 <td>7507</td>
 <td>[amt]</td>
 <td>0.605568</td>
@@ -5446,7 +5449,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.948598</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.6</td>
+<td>0.137079</td>
 <td>7507</td>
 <td>[amt]</td>
 <td>0.605568</td>
@@ -5465,7 +5468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.956254</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.6</td>
+<td>0.137079</td>
 <td>7507</td>
 <td>[amt]</td>
 <td>0.605568</td>
@@ -5484,7 +5487,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.953836</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.6</td>
+<td>0.137079</td>
 <td>7507</td>
 <td>[amt]</td>
 <td>0.605568</td>
@@ -5503,7 +5506,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.953754</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.6</td>
+<td>0.137079</td>
 <td>7507</td>
 <td>[amt]</td>
 <td>0.605568</td>
@@ -5522,7 +5525,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.884173</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.6</td>
+<td>0.137079</td>
 <td>7507</td>
 <td>[amt]</td>
 <td>0.605568</td>
@@ -5541,7 +5544,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.966859</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.6</td>
+<td>0.137079</td>
 <td>7507</td>
 <td>[amt]</td>
 <td>0.605568</td>
@@ -5560,7 +5563,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.913944</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.6</td>
+<td>0.137079</td>
 <td>7507</td>
 <td>[amt]</td>
 <td>0.605568</td>
@@ -5579,7 +5582,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.961775</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.6</td>
+<td>0.137079</td>
 <td>7507</td>
 <td>[amt]</td>
 <td>0.605568</td>
@@ -5598,7 +5601,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.949810</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.6</td>
+<td>0.137079</td>
 <td>7507</td>
 <td>[amt]</td>
 <td>0.605568</td>
@@ -5612,9 +5615,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="e4536373-5cf8-4a42-9855-b993165949e4" class="cell" data-execution_count="18">
+<div id="e4536373-5cf8-4a42-9855-b993165949e4" class="cell" data-execution_count="91">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.5</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="91">
 <div>
 
 
@@ -5652,7 +5655,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.884682</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.5</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
 <td>0.50383</td>
@@ -5671,7 +5674,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.880694</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.5</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
 <td>0.50383</td>
@@ -5690,7 +5693,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.923171</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.5</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
 <td>0.50383</td>
@@ -5709,7 +5712,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.939773</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.5</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
 <td>0.50383</td>
@@ -5728,7 +5731,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.909261</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.5</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
 <td>0.50383</td>
@@ -5747,7 +5750,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.909261</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.5</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
 <td>0.50383</td>
@@ -5766,7 +5769,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.930557</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.5</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
 <td>0.50383</td>
@@ -5785,7 +5788,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.918836</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.5</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
 <td>0.50383</td>
@@ -5804,7 +5807,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.909375</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.5</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
 <td>0.50383</td>
@@ -5823,7 +5826,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.823335</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.5</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
 <td>0.50383</td>
@@ -5842,7 +5845,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.940320</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.5</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
 <td>0.50383</td>
@@ -5861,7 +5864,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.921634</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.5</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
 <td>0.50383</td>
@@ -5880,7 +5883,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.939314</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.5</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
 <td>0.50383</td>
@@ -5899,7 +5902,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.923171</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.5</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
 <td>0.50383</td>
@@ -5913,9 +5916,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="314b74b2-efdf-4488-944b-99c41af3ba5f" class="cell" data-execution_count="19">
+<div id="314b74b2-efdf-4488-944b-99c41af3ba5f" class="cell" data-execution_count="92">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.4</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="92">
 <div>
 
 
@@ -5953,7 +5956,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.925259</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.4</td>
+<td>0.123043</td>
 <td>11261</td>
 <td>[amt]</td>
 <td>0.402806</td>
@@ -5972,7 +5975,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.888333</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.4</td>
+<td>0.123043</td>
 <td>11261</td>
 <td>[amt]</td>
 <td>0.402806</td>
@@ -5991,7 +5994,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.899727</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.4</td>
+<td>0.123043</td>
 <td>11261</td>
 <td>[amt]</td>
 <td>0.402806</td>
@@ -6010,7 +6013,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.958900</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.4</td>
+<td>0.123043</td>
 <td>11261</td>
 <td>[amt]</td>
 <td>0.402806</td>
@@ -6029,7 +6032,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.918495</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.4</td>
+<td>0.123043</td>
 <td>11261</td>
 <td>[amt]</td>
 <td>0.402806</td>
@@ -6048,7 +6051,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.918495</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.4</td>
+<td>0.123043</td>
 <td>11261</td>
 <td>[amt]</td>
 <td>0.402806</td>
@@ -6067,7 +6070,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.957907</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.4</td>
+<td>0.123043</td>
 <td>11261</td>
 <td>[amt]</td>
 <td>0.402806</td>
@@ -6086,7 +6089,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.940706</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.4</td>
+<td>0.123043</td>
 <td>11261</td>
 <td>[amt]</td>
 <td>0.402806</td>
@@ -6105,7 +6108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.940206</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.4</td>
+<td>0.123043</td>
 <td>11261</td>
 <td>[amt]</td>
 <td>0.402806</td>
@@ -6124,7 +6127,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.883521</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.4</td>
+<td>0.123043</td>
 <td>11261</td>
 <td>[amt]</td>
 <td>0.402806</td>
@@ -6143,7 +6146,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.955367</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.4</td>
+<td>0.123043</td>
 <td>11261</td>
 <td>[amt]</td>
 <td>0.402806</td>
@@ -6162,7 +6165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.958331</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.4</td>
+<td>0.123043</td>
 <td>11261</td>
 <td>[amt]</td>
 <td>0.402806</td>
@@ -6181,7 +6184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.956469</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.4</td>
+<td>0.123043</td>
 <td>11261</td>
 <td>[amt]</td>
 <td>0.402806</td>
@@ -6200,7 +6203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.961509</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.4</td>
+<td>0.123043</td>
 <td>11261</td>
 <td>[amt]</td>
 <td>0.402806</td>
@@ -6214,9 +6217,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="c8a3fd7f-6ab6-425c-a180-ec4408b1633e" class="cell" data-execution_count="20">
+<div id="c8a3fd7f-6ab6-425c-a180-ec4408b1633e" class="cell" data-execution_count="93">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.3</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="93">
 <div>
 
 
@@ -6254,7 +6257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.926230</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.3</td>
+<td>0.112147</td>
 <td>15015</td>
 <td>[amt]</td>
 <td>0.30303</td>
@@ -6273,7 +6276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.891977</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.3</td>
+<td>0.112147</td>
 <td>15015</td>
 <td>[amt]</td>
 <td>0.30303</td>
@@ -6292,7 +6295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.930069</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.3</td>
+<td>0.112147</td>
 <td>15015</td>
 <td>[amt]</td>
 <td>0.30303</td>
@@ -6311,7 +6314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.964841</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.3</td>
+<td>0.112147</td>
 <td>15015</td>
 <td>[amt]</td>
 <td>0.30303</td>
@@ -6330,7 +6333,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.950148</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.3</td>
+<td>0.112147</td>
 <td>15015</td>
 <td>[amt]</td>
 <td>0.30303</td>
@@ -6349,7 +6352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.950148</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.3</td>
+<td>0.112147</td>
 <td>15015</td>
 <td>[amt]</td>
 <td>0.30303</td>
@@ -6368,7 +6371,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.945809</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.3</td>
+<td>0.112147</td>
 <td>15015</td>
 <td>[amt]</td>
 <td>0.30303</td>
@@ -6387,7 +6390,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.952060</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.3</td>
+<td>0.112147</td>
 <td>15015</td>
 <td>[amt]</td>
 <td>0.30303</td>
@@ -6406,7 +6409,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.952507</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.3</td>
+<td>0.112147</td>
 <td>15015</td>
 <td>[amt]</td>
 <td>0.30303</td>
@@ -6425,7 +6428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.885792</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.3</td>
+<td>0.112147</td>
 <td>15015</td>
 <td>[amt]</td>
 <td>0.30303</td>
@@ -6444,7 +6447,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.964256</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.3</td>
+<td>0.112147</td>
 <td>15015</td>
 <td>[amt]</td>
 <td>0.30303</td>
@@ -6463,7 +6466,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.958467</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.3</td>
+<td>0.112147</td>
 <td>15015</td>
 <td>[amt]</td>
 <td>0.30303</td>
@@ -6482,7 +6485,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.964247</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.3</td>
+<td>0.112147</td>
 <td>15015</td>
 <td>[amt]</td>
 <td>0.30303</td>
@@ -6501,7 +6504,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.964841</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.3</td>
+<td>0.112147</td>
 <td>15015</td>
 <td>[amt]</td>
 <td>0.30303</td>
@@ -6515,9 +6518,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="41b39faf-efdc-4f2f-92e0-7d59457e8a18" class="cell" data-execution_count="21">
+<div id="41b39faf-efdc-4f2f-92e0-7d59457e8a18" class="cell" data-execution_count="94">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.2</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="94">
 <div>
 
 
@@ -6555,7 +6558,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.890223</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.2</td>
+<td>0.094882</td>
 <td>22522</td>
 <td>[amt]</td>
 <td>0.201536</td>
@@ -6574,7 +6577,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.894275</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.2</td>
+<td>0.094882</td>
 <td>22522</td>
 <td>[amt]</td>
 <td>0.201536</td>
@@ -6593,7 +6596,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.943387</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.2</td>
+<td>0.094882</td>
 <td>22522</td>
 <td>[amt]</td>
 <td>0.201536</td>
@@ -6612,7 +6615,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.950423</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.2</td>
+<td>0.094882</td>
 <td>22522</td>
 <td>[amt]</td>
 <td>0.201536</td>
@@ -6631,7 +6634,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.918144</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.2</td>
+<td>0.094882</td>
 <td>22522</td>
 <td>[amt]</td>
 <td>0.201536</td>
@@ -6650,7 +6653,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.918144</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.2</td>
+<td>0.094882</td>
 <td>22522</td>
 <td>[amt]</td>
 <td>0.201536</td>
@@ -6669,7 +6672,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.953229</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.2</td>
+<td>0.094882</td>
 <td>22522</td>
 <td>[amt]</td>
 <td>0.201536</td>
@@ -6688,7 +6691,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.920250</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.2</td>
+<td>0.094882</td>
 <td>22522</td>
 <td>[amt]</td>
 <td>0.201536</td>
@@ -6707,7 +6710,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.921158</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.2</td>
+<td>0.094882</td>
 <td>22522</td>
 <td>[amt]</td>
 <td>0.201536</td>
@@ -6726,7 +6729,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.792421</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.2</td>
+<td>0.094882</td>
 <td>22522</td>
 <td>[amt]</td>
 <td>0.201536</td>
@@ -6745,7 +6748,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.956875</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.2</td>
+<td>0.094882</td>
 <td>22522</td>
 <td>[amt]</td>
 <td>0.201536</td>
@@ -6764,7 +6767,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.943575</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.2</td>
+<td>0.094882</td>
 <td>22522</td>
 <td>[amt]</td>
 <td>0.201536</td>
@@ -6783,7 +6786,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.945461</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.2</td>
+<td>0.094882</td>
 <td>22522</td>
 <td>[amt]</td>
 <td>0.201536</td>
@@ -6802,7 +6805,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.954090</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.2</td>
+<td>0.094882</td>
 <td>22522</td>
 <td>[amt]</td>
 <td>0.201536</td>
@@ -6816,9 +6819,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="02cd6947-9d49-4a38-b040-f35caebd4d2e" class="cell" data-execution_count="22">
+<div id="02cd6947-9d49-4a38-b040-f35caebd4d2e" class="cell" data-execution_count="95">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.1</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="95">
 <div>
 
 
@@ -6856,7 +6859,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.944695</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.1</td>
+<td>0.065136</td>
 <td>45045</td>
 <td>[amt]</td>
 <td>0.100477</td>
@@ -6875,7 +6878,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.930740</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.1</td>
+<td>0.065136</td>
 <td>45045</td>
 <td>[amt]</td>
 <td>0.100477</td>
@@ -6894,7 +6897,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.963419</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.1</td>
+<td>0.065136</td>
 <td>45045</td>
 <td>[amt]</td>
 <td>0.100477</td>
@@ -6913,7 +6916,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.980154</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.1</td>
+<td>0.065136</td>
 <td>45045</td>
 <td>[amt]</td>
 <td>0.100477</td>
@@ -6932,7 +6935,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.963541</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.1</td>
+<td>0.065136</td>
 <td>45045</td>
 <td>[amt]</td>
 <td>0.100477</td>
@@ -6951,7 +6954,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.963541</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.1</td>
+<td>0.065136</td>
 <td>45045</td>
 <td>[amt]</td>
 <td>0.100477</td>
@@ -6970,7 +6973,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.979492</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.1</td>
+<td>0.065136</td>
 <td>45045</td>
 <td>[amt]</td>
 <td>0.100477</td>
@@ -6989,7 +6992,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.965148</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.1</td>
+<td>0.065136</td>
 <td>45045</td>
 <td>[amt]</td>
 <td>0.100477</td>
@@ -7008,7 +7011,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.964879</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.1</td>
+<td>0.065136</td>
 <td>45045</td>
 <td>[amt]</td>
 <td>0.100477</td>
@@ -7027,7 +7030,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.958697</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.1</td>
+<td>0.065136</td>
 <td>45045</td>
 <td>[amt]</td>
 <td>0.100477</td>
@@ -7046,7 +7049,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.980592</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.1</td>
+<td>0.065136</td>
 <td>45045</td>
 <td>[amt]</td>
 <td>0.100477</td>
@@ -7065,7 +7068,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.978420</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.1</td>
+<td>0.065136</td>
 <td>45045</td>
 <td>[amt]</td>
 <td>0.100477</td>
@@ -7084,7 +7087,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.979973</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.1</td>
+<td>0.065136</td>
 <td>45045</td>
 <td>[amt]</td>
 <td>0.100477</td>
@@ -7103,7 +7106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.977690</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.1</td>
+<td>0.065136</td>
 <td>45045</td>
 <td>[amt]</td>
 <td>0.100477</td>
@@ -7117,9 +7120,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="aadf2787-5e1d-46af-b88d-e3b8d74c5527" class="cell" data-execution_count="23">
+<div id="aadf2787-5e1d-46af-b88d-e3b8d74c5527" class="cell" data-execution_count="96">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.09</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="96">
 <div>
 
 
@@ -7157,7 +7160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.933013</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.09</td>
+<td>0.061293</td>
 <td>50049</td>
 <td>[amt]</td>
 <td>0.091171</td>
@@ -7176,7 +7179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.935943</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.09</td>
+<td>0.061293</td>
 <td>50049</td>
 <td>[amt]</td>
 <td>0.091171</td>
@@ -7195,7 +7198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.943419</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.09</td>
+<td>0.061293</td>
 <td>50049</td>
 <td>[amt]</td>
 <td>0.091171</td>
@@ -7214,7 +7217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.977783</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.09</td>
+<td>0.061293</td>
 <td>50049</td>
 <td>[amt]</td>
 <td>0.091171</td>
@@ -7233,7 +7236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.933916</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.09</td>
+<td>0.061293</td>
 <td>50049</td>
 <td>[amt]</td>
 <td>0.091171</td>
@@ -7252,7 +7255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.933916</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.09</td>
+<td>0.061293</td>
 <td>50049</td>
 <td>[amt]</td>
 <td>0.091171</td>
@@ -7271,7 +7274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.968604</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.09</td>
+<td>0.061293</td>
 <td>50049</td>
 <td>[amt]</td>
 <td>0.091171</td>
@@ -7290,7 +7293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.947426</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.09</td>
+<td>0.061293</td>
 <td>50049</td>
 <td>[amt]</td>
 <td>0.091171</td>
@@ -7309,7 +7312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.947402</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.09</td>
+<td>0.061293</td>
 <td>50049</td>
 <td>[amt]</td>
 <td>0.091171</td>
@@ -7328,7 +7331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.954669</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.09</td>
+<td>0.061293</td>
 <td>50049</td>
 <td>[amt]</td>
 <td>0.091171</td>
@@ -7347,7 +7350,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.978302</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.09</td>
+<td>0.061293</td>
 <td>50049</td>
 <td>[amt]</td>
 <td>0.091171</td>
@@ -7366,7 +7369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.974966</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.09</td>
+<td>0.061293</td>
 <td>50049</td>
 <td>[amt]</td>
 <td>0.091171</td>
@@ -7385,7 +7388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.977874</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.09</td>
+<td>0.061293</td>
 <td>50049</td>
 <td>[amt]</td>
 <td>0.091171</td>
@@ -7404,7 +7407,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.976728</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.09</td>
+<td>0.061293</td>
 <td>50049</td>
 <td>[amt]</td>
 <td>0.091171</td>
@@ -7418,9 +7421,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="35068813-8ab1-424d-a6f1-d1283743c471" class="cell" data-execution_count="24">
+<div id="35068813-8ab1-424d-a6f1-d1283743c471" class="cell" data-execution_count="97">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.08</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div class="cell-output cell-output-display" data-execution_count="97">
 <div>
 
 
@@ -7458,7 +7461,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.888590</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.08</td>
+<td>0.056739</td>
 <td>56306</td>
 <td>[amt]</td>
 <td>0.081128</td>
@@ -7477,7 +7480,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.869726</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.08</td>
+<td>0.056739</td>
 <td>56306</td>
 <td>[amt]</td>
 <td>0.081128</td>
@@ -7496,7 +7499,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.947827</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.08</td>
+<td>0.056739</td>
 <td>56306</td>
 <td>[amt]</td>
 <td>0.081128</td>
@@ -7515,7 +7518,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.956390</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.08</td>
+<td>0.056739</td>
 <td>56306</td>
 <td>[amt]</td>
 <td>0.081128</td>
@@ -7534,7 +7537,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.889501</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.08</td>
+<td>0.056739</td>
 <td>56306</td>
 <td>[amt]</td>
 <td>0.081128</td>
@@ -7553,7 +7556,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.889501</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.08</td>
+<td>0.056739</td>
 <td>56306</td>
 <td>[amt]</td>
 <td>0.081128</td>
@@ -7572,7 +7575,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.940663</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.08</td>
+<td>0.056739</td>
 <td>56306</td>
 <td>[amt]</td>
 <td>0.081128</td>
@@ -7591,7 +7594,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.892195</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.08</td>
+<td>0.056739</td>
 <td>56306</td>
 <td>[amt]</td>
 <td>0.081128</td>
@@ -7610,7 +7613,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.892584</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.08</td>
+<td>0.056739</td>
 <td>56306</td>
 <td>[amt]</td>
 <td>0.081128</td>
@@ -7629,7 +7632,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.896268</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.08</td>
+<td>0.056739</td>
 <td>56306</td>
 <td>[amt]</td>
 <td>0.081128</td>
@@ -7648,7 +7651,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.947377</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.08</td>
+<td>0.056739</td>
 <td>56306</td>
 <td>[amt]</td>
 <td>0.081128</td>
@@ -7667,7 +7670,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.955241</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.08</td>
+<td>0.056739</td>
 <td>56306</td>
 <td>[amt]</td>
 <td>0.081128</td>
@@ -7686,7 +7689,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.945912</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.08</td>
+<td>0.056739</td>
 <td>56306</td>
 <td>[amt]</td>
 <td>0.081128</td>
@@ -7705,7 +7708,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.950111</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.08</td>
+<td>0.056739</td>
 <td>56306</td>
 <td>[amt]</td>
 <td>0.081128</td>
@@ -7719,9 +7722,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="0dee9c9c-0d64-4761-96b8-d4272e71f440" class="cell" data-execution_count="25">
+<div id="0dee9c9c-0d64-4761-96b8-d4272e71f440" class="cell" data-execution_count="98">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.07</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div class="cell-output cell-output-display" data-execution_count="98">
 <div>
 
 
@@ -7759,7 +7762,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.860245</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.07</td>
+<td>0.051517</td>
 <td>64350</td>
 <td>[amt]</td>
 <td>0.070707</td>
@@ -7778,7 +7781,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.859447</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.07</td>
+<td>0.051517</td>
 <td>64350</td>
 <td>[amt]</td>
 <td>0.070707</td>
@@ -7797,7 +7800,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.936256</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.07</td>
+<td>0.051517</td>
 <td>64350</td>
 <td>[amt]</td>
 <td>0.070707</td>
@@ -7816,7 +7819,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.966536</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.07</td>
+<td>0.051517</td>
 <td>64350</td>
 <td>[amt]</td>
 <td>0.070707</td>
@@ -7835,7 +7838,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.862851</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.07</td>
+<td>0.051517</td>
 <td>64350</td>
 <td>[amt]</td>
 <td>0.070707</td>
@@ -7854,7 +7857,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.862851</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.07</td>
+<td>0.051517</td>
 <td>64350</td>
 <td>[amt]</td>
 <td>0.070707</td>
@@ -7873,7 +7876,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.966158</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.07</td>
+<td>0.051517</td>
 <td>64350</td>
 <td>[amt]</td>
 <td>0.070707</td>
@@ -7892,7 +7895,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.877480</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.07</td>
+<td>0.051517</td>
 <td>64350</td>
 <td>[amt]</td>
 <td>0.070707</td>
@@ -7911,7 +7914,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.876873</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.07</td>
+<td>0.051517</td>
 <td>64350</td>
 <td>[amt]</td>
 <td>0.070707</td>
@@ -7930,7 +7933,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.927294</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.07</td>
+<td>0.051517</td>
 <td>64350</td>
 <td>[amt]</td>
 <td>0.070707</td>
@@ -7949,7 +7952,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.955735</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.07</td>
+<td>0.051517</td>
 <td>64350</td>
 <td>[amt]</td>
 <td>0.070707</td>
@@ -7968,7 +7971,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.966986</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.07</td>
+<td>0.051517</td>
 <td>64350</td>
 <td>[amt]</td>
 <td>0.070707</td>
@@ -7987,7 +7990,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.966438</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.07</td>
+<td>0.051517</td>
 <td>64350</td>
 <td>[amt]</td>
 <td>0.070707</td>
@@ -8006,7 +8009,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.966986</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.07</td>
+<td>0.051517</td>
 <td>64350</td>
 <td>[amt]</td>
 <td>0.070707</td>
@@ -8020,9 +8023,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="59d57b9b-efa8-47e8-bcbe-c70c98a6ba8b" class="cell" data-execution_count="26">
+<div id="59d57b9b-efa8-47e8-bcbe-c70c98a6ba8b" class="cell" data-execution_count="99">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.06</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="26">
+<div class="cell-output cell-output-display" data-execution_count="99">
 <div>
 
 
@@ -8060,7 +8063,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.817115</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.06</td>
+<td>0.045876</td>
 <td>75075</td>
 <td>[amt]</td>
 <td>0.060326</td>
@@ -8079,7 +8082,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.816728</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.06</td>
+<td>0.045876</td>
 <td>75075</td>
 <td>[amt]</td>
 <td>0.060326</td>
@@ -8098,7 +8101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.923696</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.06</td>
+<td>0.045876</td>
 <td>75075</td>
 <td>[amt]</td>
 <td>0.060326</td>
@@ -8117,7 +8120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.953651</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.06</td>
+<td>0.045876</td>
 <td>75075</td>
 <td>[amt]</td>
 <td>0.060326</td>
@@ -8136,7 +8139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.817714</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.06</td>
+<td>0.045876</td>
 <td>75075</td>
 <td>[amt]</td>
 <td>0.060326</td>
@@ -8155,7 +8158,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.817714</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.06</td>
+<td>0.045876</td>
 <td>75075</td>
 <td>[amt]</td>
 <td>0.060326</td>
@@ -8174,7 +8177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.929765</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.06</td>
+<td>0.045876</td>
 <td>75075</td>
 <td>[amt]</td>
 <td>0.060326</td>
@@ -8193,7 +8196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.845766</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.06</td>
+<td>0.045876</td>
 <td>75075</td>
 <td>[amt]</td>
 <td>0.060326</td>
@@ -8212,7 +8215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.845899</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.06</td>
+<td>0.045876</td>
 <td>75075</td>
 <td>[amt]</td>
 <td>0.060326</td>
@@ -8231,7 +8234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.907383</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.06</td>
+<td>0.045876</td>
 <td>75075</td>
 <td>[amt]</td>
 <td>0.060326</td>
@@ -8250,7 +8253,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.943379</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.06</td>
+<td>0.045876</td>
 <td>75075</td>
 <td>[amt]</td>
 <td>0.060326</td>
@@ -8269,7 +8272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.932266</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.06</td>
+<td>0.045876</td>
 <td>75075</td>
 <td>[amt]</td>
 <td>0.060326</td>
@@ -8288,7 +8291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.954257</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.06</td>
+<td>0.045876</td>
 <td>75075</td>
 <td>[amt]</td>
 <td>0.060326</td>
@@ -8307,7 +8310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.937845</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.06</td>
+<td>0.045876</td>
 <td>75075</td>
 <td>[amt]</td>
 <td>0.060326</td>
@@ -8321,9 +8324,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cd742711-5780-4e67-8ad0-fb069936c9d2" class="cell" data-execution_count="27">
+<div id="cd742711-5780-4e67-8ad0-fb069936c9d2" class="cell" data-execution_count="100">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.05</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
+<div class="cell-output cell-output-display" data-execution_count="100">
 <div>
 
 
@@ -8361,7 +8364,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.883888</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.05</td>
+<td>0.039852</td>
 <td>90090</td>
 <td>[amt]</td>
 <td>0.050117</td>
@@ -8380,7 +8383,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.865053</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.05</td>
+<td>0.039852</td>
 <td>90090</td>
 <td>[amt]</td>
 <td>0.050117</td>
@@ -8399,7 +8402,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.798688</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.05</td>
+<td>0.039852</td>
 <td>90090</td>
 <td>[amt]</td>
 <td>0.050117</td>
@@ -8418,7 +8421,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.977357</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.05</td>
+<td>0.039852</td>
 <td>90090</td>
 <td>[amt]</td>
 <td>0.050117</td>
@@ -8437,7 +8440,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.903842</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.05</td>
+<td>0.039852</td>
 <td>90090</td>
 <td>[amt]</td>
 <td>0.050117</td>
@@ -8456,7 +8459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.903842</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.05</td>
+<td>0.039852</td>
 <td>90090</td>
 <td>[amt]</td>
 <td>0.050117</td>
@@ -8475,7 +8478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.970471</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.05</td>
+<td>0.039852</td>
 <td>90090</td>
 <td>[amt]</td>
 <td>0.050117</td>
@@ -8494,7 +8497,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.933406</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.05</td>
+<td>0.039852</td>
 <td>90090</td>
 <td>[amt]</td>
 <td>0.050117</td>
@@ -8513,7 +8516,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.947400</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.05</td>
+<td>0.039852</td>
 <td>90090</td>
 <td>[amt]</td>
 <td>0.050117</td>
@@ -8532,7 +8535,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.925528</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.05</td>
+<td>0.039852</td>
 <td>90090</td>
 <td>[amt]</td>
 <td>0.050117</td>
@@ -8551,7 +8554,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.961842</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.05</td>
+<td>0.039852</td>
 <td>90090</td>
 <td>[amt]</td>
 <td>0.050117</td>
@@ -8570,7 +8573,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.968028</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.05</td>
+<td>0.039852</td>
 <td>90090</td>
 <td>[amt]</td>
 <td>0.050117</td>
@@ -8589,7 +8592,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.977875</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.05</td>
+<td>0.039852</td>
 <td>90090</td>
 <td>[amt]</td>
 <td>0.050117</td>
@@ -8608,7 +8611,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.968740</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.05</td>
+<td>0.039852</td>
 <td>90090</td>
 <td>[amt]</td>
 <td>0.050117</td>
@@ -8622,9 +8625,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="da508c86-0191-4ddc-82d7-67b8ea6632fa" class="cell" data-execution_count="28">
+<div id="da508c86-0191-4ddc-82d7-67b8ea6632fa" class="cell" data-execution_count="101">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.04</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="28">
+<div class="cell-output cell-output-display" data-execution_count="101">
 <div>
 
 
@@ -8662,7 +8665,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.897267</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.04</td>
+<td>0.033471</td>
 <td>112612</td>
 <td>[amt]</td>
 <td>0.04012</td>
@@ -8681,7 +8684,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.881324</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.04</td>
+<td>0.033471</td>
 <td>112612</td>
 <td>[amt]</td>
 <td>0.04012</td>
@@ -8700,7 +8703,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.804711</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.04</td>
+<td>0.033471</td>
 <td>112612</td>
 <td>[amt]</td>
 <td>0.04012</td>
@@ -8719,7 +8722,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.975969</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.04</td>
+<td>0.033471</td>
 <td>112612</td>
 <td>[amt]</td>
 <td>0.04012</td>
@@ -8738,7 +8741,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.940680</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.04</td>
+<td>0.033471</td>
 <td>112612</td>
 <td>[amt]</td>
 <td>0.04012</td>
@@ -8757,7 +8760,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.940680</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.04</td>
+<td>0.033471</td>
 <td>112612</td>
 <td>[amt]</td>
 <td>0.04012</td>
@@ -8776,7 +8779,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.942605</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.04</td>
+<td>0.033471</td>
 <td>112612</td>
 <td>[amt]</td>
 <td>0.04012</td>
@@ -8795,7 +8798,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.954682</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.04</td>
+<td>0.033471</td>
 <td>112612</td>
 <td>[amt]</td>
 <td>0.04012</td>
@@ -8814,7 +8817,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.941717</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.04</td>
+<td>0.033471</td>
 <td>112612</td>
 <td>[amt]</td>
 <td>0.04012</td>
@@ -8833,7 +8836,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.927658</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.04</td>
+<td>0.033471</td>
 <td>112612</td>
 <td>[amt]</td>
 <td>0.04012</td>
@@ -8852,7 +8855,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.963589</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.04</td>
+<td>0.033471</td>
 <td>112612</td>
 <td>[amt]</td>
 <td>0.04012</td>
@@ -8871,7 +8874,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.976645</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.04</td>
+<td>0.033471</td>
 <td>112612</td>
 <td>[amt]</td>
 <td>0.04012</td>
@@ -8890,7 +8893,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.974090</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.04</td>
+<td>0.033471</td>
 <td>112612</td>
 <td>[amt]</td>
 <td>0.04012</td>
@@ -8909,7 +8912,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.976645</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.04</td>
+<td>0.033471</td>
 <td>112612</td>
 <td>[amt]</td>
 <td>0.04012</td>
@@ -8923,9 +8926,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="bf0fcc0f-55b0-4f2d-a95b-4f265b5bf7b5" class="cell" data-execution_count="29">
+<div id="bf0fcc0f-55b0-4f2d-a95b-4f265b5bf7b5" class="cell" data-execution_count="102">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.03</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="29">
+<div class="cell-output cell-output-display" data-execution_count="102">
 <div>
 
 
@@ -8963,7 +8966,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.748364</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.03</td>
+<td>0.026173</td>
 <td>150150</td>
 <td>[amt]</td>
 <td>0.02985</td>
@@ -8982,7 +8985,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.718609</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.03</td>
+<td>0.026173</td>
 <td>150150</td>
 <td>[amt]</td>
 <td>0.02985</td>
@@ -9001,7 +9004,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.726936</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.03</td>
+<td>0.026173</td>
 <td>150150</td>
 <td>[amt]</td>
 <td>0.02985</td>
@@ -9020,7 +9023,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.943845</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.03</td>
+<td>0.026173</td>
 <td>150150</td>
 <td>[amt]</td>
 <td>0.02985</td>
@@ -9039,7 +9042,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.781299</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.03</td>
+<td>0.026173</td>
 <td>150150</td>
 <td>[amt]</td>
 <td>0.02985</td>
@@ -9058,7 +9061,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.781299</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.03</td>
+<td>0.026173</td>
 <td>150150</td>
 <td>[amt]</td>
 <td>0.02985</td>
@@ -9077,7 +9080,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.921011</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.03</td>
+<td>0.026173</td>
 <td>150150</td>
 <td>[amt]</td>
 <td>0.02985</td>
@@ -9096,7 +9099,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.795583</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.03</td>
+<td>0.026173</td>
 <td>150150</td>
 <td>[amt]</td>
 <td>0.02985</td>
@@ -9115,7 +9118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.795305</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.03</td>
+<td>0.026173</td>
 <td>150150</td>
 <td>[amt]</td>
 <td>0.02985</td>
@@ -9134,7 +9137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.933157</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.03</td>
+<td>0.026173</td>
 <td>150150</td>
 <td>[amt]</td>
 <td>0.02985</td>
@@ -9153,7 +9156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.944720</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.03</td>
+<td>0.026173</td>
 <td>150150</td>
 <td>[amt]</td>
 <td>0.02985</td>
@@ -9172,7 +9175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.947783</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.03</td>
+<td>0.026173</td>
 <td>150150</td>
 <td>[amt]</td>
 <td>0.02985</td>
@@ -9191,7 +9194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.952792</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.03</td>
+<td>0.026173</td>
 <td>150150</td>
 <td>[amt]</td>
 <td>0.02985</td>
@@ -9210,7 +9213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.944971</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.03</td>
+<td>0.026173</td>
 <td>150150</td>
 <td>[amt]</td>
 <td>0.02985</td>
@@ -9224,9 +9227,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="7220d5c8-3a56-41f6-a73e-569da3c4faa0" class="cell" data-execution_count="30">
+<div id="7220d5c8-3a56-41f6-a73e-569da3c4faa0" class="cell" data-execution_count="103">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.02</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="30">
+<div class="cell-output cell-output-display" data-execution_count="103">
 <div>
 
 
@@ -9264,7 +9267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.850648</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.02</td>
+<td>0.018354</td>
 <td>225225</td>
 <td>[amt]</td>
 <td>0.019873</td>
@@ -9283,7 +9286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.850201</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.02</td>
+<td>0.018354</td>
 <td>225225</td>
 <td>[amt]</td>
 <td>0.019873</td>
@@ -9302,7 +9305,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.808323</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.02</td>
+<td>0.018354</td>
 <td>225225</td>
 <td>[amt]</td>
 <td>0.019873</td>
@@ -9321,7 +9324,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.979879</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.02</td>
+<td>0.018354</td>
 <td>225225</td>
 <td>[amt]</td>
 <td>0.019873</td>
@@ -9340,7 +9343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.865468</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.02</td>
+<td>0.018354</td>
 <td>225225</td>
 <td>[amt]</td>
 <td>0.019873</td>
@@ -9359,7 +9362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.865468</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.02</td>
+<td>0.018354</td>
 <td>225225</td>
 <td>[amt]</td>
 <td>0.019873</td>
@@ -9378,7 +9381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.959905</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.02</td>
+<td>0.018354</td>
 <td>225225</td>
 <td>[amt]</td>
 <td>0.019873</td>
@@ -9397,7 +9400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.879890</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.02</td>
+<td>0.018354</td>
 <td>225225</td>
 <td>[amt]</td>
 <td>0.019873</td>
@@ -9416,7 +9419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.867600</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.02</td>
+<td>0.018354</td>
 <td>225225</td>
 <td>[amt]</td>
 <td>0.019873</td>
@@ -9435,7 +9438,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.955167</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.02</td>
+<td>0.018354</td>
 <td>225225</td>
 <td>[amt]</td>
 <td>0.019873</td>
@@ -9454,7 +9457,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.964940</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.02</td>
+<td>0.018354</td>
 <td>225225</td>
 <td>[amt]</td>
 <td>0.019873</td>
@@ -9473,7 +9476,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.976525</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.02</td>
+<td>0.018354</td>
 <td>225225</td>
 <td>[amt]</td>
 <td>0.019873</td>
@@ -9492,7 +9495,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.980291</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.02</td>
+<td>0.018354</td>
 <td>225225</td>
 <td>[amt]</td>
 <td>0.019873</td>
@@ -9511,7 +9514,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.976525</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.02</td>
+<td>0.018354</td>
 <td>225225</td>
 <td>[amt]</td>
 <td>0.019873</td>
@@ -9525,9 +9528,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="211ffee4-d816-4f1c-8a4e-e695796b0bfd" class="cell" data-execution_count="31">
+<div id="211ffee4-d816-4f1c-8a4e-e695796b0bfd" class="cell" data-execution_count="104">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.01</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="31">
+<div class="cell-output cell-output-display" data-execution_count="104">
 <div>
 
 
@@ -9565,7 +9568,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.778281</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.01</td>
+<td>0.009802</td>
 <td>450450</td>
 <td>[amt]</td>
 <td>0.010037</td>
@@ -9584,7 +9587,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.766844</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.01</td>
+<td>0.009802</td>
 <td>450450</td>
 <td>[amt]</td>
 <td>0.010037</td>
@@ -9603,7 +9606,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.722844</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.01</td>
+<td>0.009802</td>
 <td>450450</td>
 <td>[amt]</td>
 <td>0.010037</td>
@@ -9622,7 +9625,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.970487</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.01</td>
+<td>0.009802</td>
 <td>450450</td>
 <td>[amt]</td>
 <td>0.010037</td>
@@ -9641,7 +9644,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.867535</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.01</td>
+<td>0.009802</td>
 <td>450450</td>
 <td>[amt]</td>
 <td>0.010037</td>
@@ -9660,7 +9663,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.867535</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.01</td>
+<td>0.009802</td>
 <td>450450</td>
 <td>[amt]</td>
 <td>0.010037</td>
@@ -9679,7 +9682,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.917539</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.01</td>
+<td>0.009802</td>
 <td>450450</td>
 <td>[amt]</td>
 <td>0.010037</td>
@@ -9698,7 +9701,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.894749</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.01</td>
+<td>0.009802</td>
 <td>450450</td>
 <td>[amt]</td>
 <td>0.010037</td>
@@ -9717,7 +9720,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.895466</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.01</td>
+<td>0.009802</td>
 <td>450450</td>
 <td>[amt]</td>
 <td>0.010037</td>
@@ -9736,7 +9739,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.911898</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.01</td>
+<td>0.009802</td>
 <td>450450</td>
 <td>[amt]</td>
 <td>0.010037</td>
@@ -9755,7 +9758,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.944878</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.01</td>
+<td>0.009802</td>
 <td>450450</td>
 <td>[amt]</td>
 <td>0.010037</td>
@@ -9774,7 +9777,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.964096</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.01</td>
+<td>0.009802</td>
 <td>450450</td>
 <td>[amt]</td>
 <td>0.010037</td>
@@ -9793,7 +9796,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.970680</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.01</td>
+<td>0.009802</td>
 <td>450450</td>
 <td>[amt]</td>
 <td>0.010037</td>
@@ -9812,7 +9815,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.962590</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.01</td>
+<td>0.009802</td>
 <td>450450</td>
 <td>[amt]</td>
 <td>0.010037</td>
@@ -9826,9 +9829,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="07e00e2b-b348-4d4a-9d15-143d46e2e67a" class="cell" data-execution_count="32">
+<div id="07e00e2b-b348-4d4a-9d15-143d46e2e67a" class="cell" data-execution_count="105">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.009</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="32">
+<div class="cell-output cell-output-display" data-execution_count="105">
 <div>
 
 
@@ -9866,7 +9869,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.750397</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.009</td>
+<td>0.008901</td>
 <td>500499</td>
 <td>[amt]</td>
 <td>0.009087</td>
@@ -9885,7 +9888,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.716125</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.009</td>
+<td>0.008901</td>
 <td>500499</td>
 <td>[amt]</td>
 <td>0.009087</td>
@@ -9904,7 +9907,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.759775</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.009</td>
+<td>0.008901</td>
 <td>500499</td>
 <td>[amt]</td>
 <td>0.009087</td>
@@ -9923,7 +9926,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.955511</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.009</td>
+<td>0.008901</td>
 <td>500499</td>
 <td>[amt]</td>
 <td>0.009087</td>
@@ -9942,7 +9945,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.761099</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.009</td>
+<td>0.008901</td>
 <td>500499</td>
 <td>[amt]</td>
 <td>0.009087</td>
@@ -9961,7 +9964,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.761099</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.009</td>
+<td>0.008901</td>
 <td>500499</td>
 <td>[amt]</td>
 <td>0.009087</td>
@@ -9980,7 +9983,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.818552</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.009</td>
+<td>0.008901</td>
 <td>500499</td>
 <td>[amt]</td>
 <td>0.009087</td>
@@ -9999,7 +10002,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.763472</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.009</td>
+<td>0.008901</td>
 <td>500499</td>
 <td>[amt]</td>
 <td>0.009087</td>
@@ -10018,7 +10021,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.763820</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.009</td>
+<td>0.008901</td>
 <td>500499</td>
 <td>[amt]</td>
 <td>0.009087</td>
@@ -10037,7 +10040,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.917705</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.009</td>
+<td>0.008901</td>
 <td>500499</td>
 <td>[amt]</td>
 <td>0.009087</td>
@@ -10056,7 +10059,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.939455</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.009</td>
+<td>0.008901</td>
 <td>500499</td>
 <td>[amt]</td>
 <td>0.009087</td>
@@ -10075,7 +10078,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.941711</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.009</td>
+<td>0.008901</td>
 <td>500499</td>
 <td>[amt]</td>
 <td>0.009087</td>
@@ -10094,7 +10097,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.944964</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.009</td>
+<td>0.008901</td>
 <td>500499</td>
 <td>[amt]</td>
 <td>0.009087</td>
@@ -10113,7 +10116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.941711</td>
 <td>False</td>
 <td>Autogluon</td>
-<td>0.009</td>
+<td>0.008901</td>
 <td>500499</td>
 <td>[amt]</td>
 <td>0.009087</td>
@@ -10127,30 +10130,922 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cad2c574-628a-42e4-b829-a47b31ad2418" class="cell">
+<div id="cad2c574-628a-42e4-b829-a47b31ad2418" class="cell" data-execution_count="106">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.008</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="106">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.994738</td>
+<td>0.340426</td>
+<td>0.326531</td>
+<td>0.333333</td>
+<td>0.749046</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007978</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008063</td>
+<td>12162</td>
+<td>0.004029</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.994655</td>
+<td>0.351852</td>
+<td>0.387755</td>
+<td>0.368932</td>
+<td>0.738710</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007978</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008063</td>
+<td>12162</td>
+<td>0.004029</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.995971</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.748396</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007978</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008063</td>
+<td>12162</td>
+<td>0.004029</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.995971</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.952200</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007978</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008063</td>
+<td>12162</td>
+<td>0.004029</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.993915</td>
+<td>0.264151</td>
+<td>0.285714</td>
+<td>0.274510</td>
+<td>0.756577</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007978</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008063</td>
+<td>12162</td>
+<td>0.004029</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.993915</td>
+<td>0.264151</td>
+<td>0.285714</td>
+<td>0.274510</td>
+<td>0.756577</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007978</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008063</td>
+<td>12162</td>
+<td>0.004029</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.995971</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.869176</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007978</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008063</td>
+<td>12162</td>
+<td>0.004029</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.994327</td>
+<td>0.300000</td>
+<td>0.306122</td>
+<td>0.303030</td>
+<td>0.788091</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007978</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008063</td>
+<td>12162</td>
+<td>0.004029</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.994327</td>
+<td>0.300000</td>
+<td>0.306122</td>
+<td>0.303030</td>
+<td>0.797345</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007978</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008063</td>
+<td>12162</td>
+<td>0.004029</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.995971</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.865390</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007978</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008063</td>
+<td>12162</td>
+<td>0.004029</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.994820</td>
+<td>0.305556</td>
+<td>0.224490</td>
+<td>0.258824</td>
+<td>0.931314</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007978</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008063</td>
+<td>12162</td>
+<td>0.004029</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.995478</td>
+<td>0.440000</td>
+<td>0.448980</td>
+<td>0.444444</td>
+<td>0.953280</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007978</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008063</td>
+<td>12162</td>
+<td>0.004029</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.995971</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.952864</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007978</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008063</td>
+<td>12162</td>
+<td>0.004029</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.995395</td>
+<td>0.431373</td>
+<td>0.448980</td>
+<td>0.440000</td>
+<td>0.952930</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007978</td>
+<td>563062</td>
+<td>[amt]</td>
+<td>0.008063</td>
+<td>12162</td>
+<td>0.004029</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div id="4e833401-d378-4624-84f4-675bdc360ec8" class="cell">
+</div>
+</div>
+<div id="4e833401-d378-4624-84f4-675bdc360ec8" class="cell" data-execution_count="107">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.007</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="107">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.995668</td>
+<td>0.380952</td>
+<td>0.205128</td>
+<td>0.266667</td>
+<td>0.788467</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.00703</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.00708</td>
+<td>10156</td>
+<td>0.00384</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.994781</td>
+<td>0.266667</td>
+<td>0.205128</td>
+<td>0.231884</td>
+<td>0.762879</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.00703</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.00708</td>
+<td>10156</td>
+<td>0.00384</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.996160</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.755161</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.00703</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.00708</td>
+<td>10156</td>
+<td>0.00384</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.996160</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.974407</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.00703</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.00708</td>
+<td>10156</td>
+<td>0.00384</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.993698</td>
+<td>0.142857</td>
+<td>0.128205</td>
+<td>0.135135</td>
+<td>0.867785</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.00703</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.00708</td>
+<td>10156</td>
+<td>0.00384</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.993698</td>
+<td>0.142857</td>
+<td>0.128205</td>
+<td>0.135135</td>
+<td>0.867785</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.00703</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.00708</td>
+<td>10156</td>
+<td>0.00384</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.996160</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.875627</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.00703</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.00708</td>
+<td>10156</td>
+<td>0.00384</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.994289</td>
+<td>0.172414</td>
+<td>0.128205</td>
+<td>0.147059</td>
+<td>0.871182</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.00703</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.00708</td>
+<td>10156</td>
+<td>0.00384</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.994191</td>
+<td>0.166667</td>
+<td>0.128205</td>
+<td>0.144928</td>
+<td>0.870942</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.00703</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.00708</td>
+<td>10156</td>
+<td>0.00384</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.995668</td>
+<td>0.380952</td>
+<td>0.205128</td>
+<td>0.266667</td>
+<td>0.960567</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.00703</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.00708</td>
+<td>10156</td>
+<td>0.00384</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.996160</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.964714</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.00703</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.00708</td>
+<td>10156</td>
+<td>0.00384</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.996160</td>
+<td>0.500000</td>
+<td>0.230769</td>
+<td>0.315789</td>
+<td>0.975028</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.00703</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.00708</td>
+<td>10156</td>
+<td>0.00384</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.996160</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.973680</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.00703</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.00708</td>
+<td>10156</td>
+<td>0.00384</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.996160</td>
+<td>0.500000</td>
+<td>0.230769</td>
+<td>0.315789</td>
+<td>0.975028</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.00703</td>
+<td>643500</td>
+<td>[amt]</td>
+<td>0.00708</td>
+<td>10156</td>
+<td>0.00384</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div id="4230b358-f7da-4920-b09a-19beb759fdfd" class="cell">
+</div>
+</div>
+<div id="4230b358-f7da-4920-b09a-19beb759fdfd" class="cell" data-execution_count="108">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.006</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="108">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.994764</td>
+<td>0.434783</td>
+<td>0.277778</td>
+<td>0.338983</td>
+<td>0.758264</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.006006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.006018</td>
+<td>7448</td>
+<td>0.004834</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.994629</td>
+<td>0.388889</td>
+<td>0.194444</td>
+<td>0.259259</td>
+<td>0.758399</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.006006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.006018</td>
+<td>7448</td>
+<td>0.004834</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.995166</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.736733</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.006006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.006018</td>
+<td>7448</td>
+<td>0.004834</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.995166</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.968317</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.006006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.006018</td>
+<td>7448</td>
+<td>0.004834</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.993690</td>
+<td>0.296296</td>
+<td>0.222222</td>
+<td>0.253968</td>
+<td>0.815985</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.006006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.006018</td>
+<td>7448</td>
+<td>0.004834</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.993690</td>
+<td>0.296296</td>
+<td>0.222222</td>
+<td>0.253968</td>
+<td>0.815985</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.006006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.006018</td>
+<td>7448</td>
+<td>0.004834</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.995166</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.844396</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.006006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.006018</td>
+<td>7448</td>
+<td>0.004834</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.994361</td>
+<td>0.350000</td>
+<td>0.194444</td>
+<td>0.250000</td>
+<td>0.845586</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.006006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.006018</td>
+<td>7448</td>
+<td>0.004834</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.994092</td>
+<td>0.333333</td>
+<td>0.222222</td>
+<td>0.266667</td>
+<td>0.858701</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.006006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.006018</td>
+<td>7448</td>
+<td>0.004834</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.995166</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.950426</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.006006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.006018</td>
+<td>7448</td>
+<td>0.004834</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.995166</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.955513</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.006006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.006018</td>
+<td>7448</td>
+<td>0.004834</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.995166</td>
+<td>0.500000</td>
+<td>0.250000</td>
+<td>0.333333</td>
+<td>0.964011</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.006006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.006018</td>
+<td>7448</td>
+<td>0.004834</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.995166</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.965458</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.006006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.006018</td>
+<td>7448</td>
+<td>0.004834</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.995435</td>
+<td>0.600000</td>
+<td>0.166667</td>
+<td>0.260870</td>
+<td>0.926624</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.006006</td>
+<td>750750</td>
+<td>[amt]</td>
+<td>0.006018</td>
+<td>7448</td>
+<td>0.004834</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div id="cd5738b7-c991-4238-a78d-7d3fc8f4dd0f" class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.005</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="7106636f-a9bc-4abb-96ad-a0b8e9179b2e" class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.004</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="14dc42be-e389-43ee-a106-65f3e4293427" class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.003</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="1483a3a4-a25d-4e92-9e7f-6673efe73fcf" class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.002</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="2d0c2fa9-1213-4c4f-ae20-9188f474a60c" class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.001</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<hr>
+<blockquote class="blockquote">
+<p>이 비율부터는 안됨</p>
+</blockquote>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.005</span>, <span class="dv">10</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.004</span>, <span class="dv">10</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.003</span>, <span class="dv">10</span>)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.002</span>, <span class="dv">10</span>)</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>auto_amt7(fraudTrain, <span class="fl">0.001</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>

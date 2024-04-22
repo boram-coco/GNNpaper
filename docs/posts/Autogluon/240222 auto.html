@@ -188,9 +188,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<ol type="1">
+<li><p>2/22</p></li>
+<li><p>4/5</p></li>
+</ol>
 <section id="imports" class="level1">
 <h1>imports</h1>
-<div id="4eb91738-6398-4ffc-bbec-fc48fcc8f249" class="cell" data-execution_count="2">
+<div id="4eb91738-6398-4ffc-bbec-fc48fcc8f249" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn</span>
@@ -200,16 +204,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b62fd4fe-e850-4d9a-9708-55fb40e73485" class="cell" data-execution_count="3">
+<div id="b62fd4fe-e850-4d9a-9708-55fb40e73485" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>run ..<span class="op">/</span>functions<span class="op">-</span>auto.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="9f8b4812-1b25-44e2-bc14-438f74d7e911" class="cell" data-execution_count="4">
+<div id="9f8b4812-1b25-44e2-bc14-438f74d7e911" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b862979e-7581-4645-80cd-fd67df2128ac" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.03</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="ab4ec79e-907a-4c86-a871-70f540d5e7df" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
 <div>
 
 
@@ -240,266 +244,266 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">0</td>
 <td>KNeighborsUnif</td>
 <td>None</td>
-<td>0.979980</td>
-<td>0.721441</td>
-<td>0.545153</td>
-<td>0.621029</td>
-<td>0.862812</td>
+<td>0.971096</td>
+<td>0.755957</td>
+<td>0.617036</td>
+<td>0.679468</td>
+<td>0.884232</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.03</td>
-<td>150150</td>
+<td>0.05</td>
+<td>90090</td>
 <td>[amt]</td>
-<td>0.02997</td>
-<td>50050</td>
-<td>0.03009</td>
+<td>0.050117</td>
+<td>30030</td>
+<td>0.04965</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>KNeighborsDist</td>
 <td>None</td>
-<td>0.978362</td>
-<td>0.688335</td>
-<td>0.513280</td>
-<td>0.588056</td>
-<td>0.849527</td>
+<td>0.969064</td>
+<td>0.730328</td>
+<td>0.597586</td>
+<td>0.657322</td>
+<td>0.872542</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.03</td>
-<td>150150</td>
+<td>0.05</td>
+<td>90090</td>
 <td>[amt]</td>
-<td>0.02997</td>
-<td>50050</td>
-<td>0.03009</td>
+<td>0.050117</td>
+<td>30030</td>
+<td>0.04965</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>LightGBMXT</td>
 <td>None</td>
-<td>0.969910</td>
+<td>0.950350</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.772921</td>
+<td>0.780337</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.03</td>
-<td>150150</td>
+<td>0.05</td>
+<td>90090</td>
 <td>[amt]</td>
-<td>0.02997</td>
-<td>50050</td>
-<td>0.03009</td>
+<td>0.050117</td>
+<td>30030</td>
+<td>0.04965</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>LightGBM</td>
 <td>None</td>
-<td>0.979900</td>
-<td>0.715889</td>
-<td>0.550465</td>
-<td>0.622372</td>
-<td>0.960118</td>
+<td>0.972461</td>
+<td>0.780880</td>
+<td>0.619048</td>
+<td>0.690610</td>
+<td>0.961898</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.03</td>
-<td>150150</td>
+<td>0.05</td>
+<td>90090</td>
 <td>[amt]</td>
-<td>0.02997</td>
-<td>50050</td>
-<td>0.03009</td>
+<td>0.050117</td>
+<td>30030</td>
+<td>0.04965</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>RandomForestGini</td>
 <td>None</td>
-<td>0.977243</td>
-<td>0.665167</td>
-<td>0.490704</td>
-<td>0.564769</td>
-<td>0.880698</td>
+<td>0.966833</td>
+<td>0.706767</td>
+<td>0.567404</td>
+<td>0.629464</td>
+<td>0.898145</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.03</td>
-<td>150150</td>
+<td>0.05</td>
+<td>90090</td>
 <td>[amt]</td>
-<td>0.02997</td>
-<td>50050</td>
-<td>0.03009</td>
+<td>0.050117</td>
+<td>30030</td>
+<td>0.04965</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
 <td>RandomForestEntr</td>
 <td>None</td>
-<td>0.977243</td>
-<td>0.665167</td>
-<td>0.490704</td>
-<td>0.564769</td>
-<td>0.880698</td>
+<td>0.966833</td>
+<td>0.706767</td>
+<td>0.567404</td>
+<td>0.629464</td>
+<td>0.898145</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.03</td>
-<td>150150</td>
+<td>0.05</td>
+<td>90090</td>
 <td>[amt]</td>
-<td>0.02997</td>
-<td>50050</td>
-<td>0.03009</td>
+<td>0.050117</td>
+<td>30030</td>
+<td>0.04965</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
 <td>CatBoost</td>
 <td>None</td>
-<td>0.978402</td>
-<td>0.711864</td>
-<td>0.474104</td>
-<td>0.569151</td>
-<td>0.928810</td>
+<td>0.972228</td>
+<td>0.772162</td>
+<td>0.625084</td>
+<td>0.690882</td>
+<td>0.945505</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.03</td>
-<td>150150</td>
+<td>0.05</td>
+<td>90090</td>
 <td>[amt]</td>
-<td>0.02997</td>
-<td>50050</td>
-<td>0.03009</td>
+<td>0.050117</td>
+<td>30030</td>
+<td>0.04965</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
 <td>ExtraTreesGini</td>
 <td>None</td>
-<td>0.978382</td>
-<td>0.689964</td>
-<td>0.511288</td>
-<td>0.587338</td>
-<td>0.889196</td>
+<td>0.968931</td>
+<td>0.729819</td>
+<td>0.594232</td>
+<td>0.655083</td>
+<td>0.904277</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.03</td>
-<td>150150</td>
+<td>0.05</td>
+<td>90090</td>
 <td>[amt]</td>
-<td>0.02997</td>
-<td>50050</td>
-<td>0.03009</td>
+<td>0.050117</td>
+<td>30030</td>
+<td>0.04965</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
 <td>ExtraTreesEntr</td>
 <td>None</td>
-<td>0.978382</td>
-<td>0.691682</td>
-<td>0.507968</td>
-<td>0.585758</td>
-<td>0.888601</td>
+<td>0.968432</td>
+<td>0.720552</td>
+<td>0.594903</td>
+<td>0.651727</td>
+<td>0.904673</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.03</td>
-<td>150150</td>
+<td>0.05</td>
+<td>90090</td>
 <td>[amt]</td>
-<td>0.02997</td>
-<td>50050</td>
-<td>0.03009</td>
+<td>0.050117</td>
+<td>30030</td>
+<td>0.04965</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
 <td>NeuralNetFastAI</td>
 <td>None</td>
-<td>0.980380</td>
-<td>0.795045</td>
-<td>0.468792</td>
-<td>0.589808</td>
-<td>0.934987</td>
+<td>0.969630</td>
+<td>0.828604</td>
+<td>0.489604</td>
+<td>0.615514</td>
+<td>0.938893</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.03</td>
-<td>150150</td>
+<td>0.05</td>
+<td>90090</td>
 <td>[amt]</td>
-<td>0.02997</td>
-<td>50050</td>
-<td>0.03009</td>
+<td>0.050117</td>
+<td>30030</td>
+<td>0.04965</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
 <td>XGBoost</td>
 <td>None</td>
-<td>0.979161</td>
-<td>0.667632</td>
-<td>0.612218</td>
-<td>0.638725</td>
-<td>0.944957</td>
+<td>0.972761</td>
+<td>0.757066</td>
+<td>0.664655</td>
+<td>0.707857</td>
+<td>0.950286</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.03</td>
-<td>150150</td>
+<td>0.05</td>
+<td>90090</td>
 <td>[amt]</td>
-<td>0.02997</td>
-<td>50050</td>
-<td>0.03009</td>
+<td>0.050117</td>
+<td>30030</td>
+<td>0.04965</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">11</td>
 <td>NeuralNetTorch</td>
 <td>None</td>
-<td>0.980719</td>
-<td>0.800222</td>
-<td>0.478752</td>
-<td>0.599086</td>
-<td>0.951579</td>
+<td>0.973660</td>
+<td>0.789256</td>
+<td>0.640510</td>
+<td>0.707146</td>
+<td>0.957088</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.03</td>
-<td>150150</td>
+<td>0.05</td>
+<td>90090</td>
 <td>[amt]</td>
-<td>0.02997</td>
-<td>50050</td>
-<td>0.03009</td>
+<td>0.050117</td>
+<td>30030</td>
+<td>0.04965</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">12</td>
 <td>LightGBMLarge</td>
 <td>None</td>
-<td>0.969910</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.957630</td>
+<td>0.972294</td>
+<td>0.806512</td>
+<td>0.581489</td>
+<td>0.675760</td>
+<td>0.961096</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.03</td>
-<td>150150</td>
+<td>0.05</td>
+<td>90090</td>
 <td>[amt]</td>
-<td>0.02997</td>
-<td>50050</td>
-<td>0.03009</td>
+<td>0.050117</td>
+<td>30030</td>
+<td>0.04965</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">13</td>
 <td>WeightedEnsemble_L2</td>
 <td>None</td>
-<td>0.980719</td>
-<td>0.800222</td>
-<td>0.478752</td>
-<td>0.599086</td>
-<td>0.951579</td>
+<td>0.973360</td>
+<td>0.778405</td>
+<td>0.647887</td>
+<td>0.707174</td>
+<td>0.954318</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.03</td>
-<td>150150</td>
+<td>0.05</td>
+<td>90090</td>
 <td>[amt]</td>
-<td>0.02997</td>
-<td>50050</td>
-<td>0.03009</td>
+<td>0.050117</td>
+<td>30030</td>
+<td>0.04965</td>
 <td>None</td>
 </tr>
 </tbody>
@@ -508,9 +512,611 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="1c4af404-2305-48c9-9109-3c5e068d2430" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.02</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="bfb1f25c-2720-43d7-9811-e761e83a8e69" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.04</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.976530</td>
+<td>0.742994</td>
+<td>0.623656</td>
+<td>0.678115</td>
+<td>0.881573</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>37538</td>
+<td>0.03964</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.974506</td>
+<td>0.713596</td>
+<td>0.596102</td>
+<td>0.649579</td>
+<td>0.868639</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>37538</td>
+<td>0.03964</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.960360</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.779340</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>37538</td>
+<td>0.03964</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.976903</td>
+<td>0.793201</td>
+<td>0.564516</td>
+<td>0.659600</td>
+<td>0.964415</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>37538</td>
+<td>0.03964</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.972401</td>
+<td>0.686469</td>
+<td>0.559140</td>
+<td>0.616296</td>
+<td>0.898749</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>37538</td>
+<td>0.03964</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.972401</td>
+<td>0.686469</td>
+<td>0.559140</td>
+<td>0.616296</td>
+<td>0.898749</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>37538</td>
+<td>0.03964</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.975145</td>
+<td>0.800650</td>
+<td>0.496640</td>
+<td>0.613024</td>
+<td>0.937925</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>37538</td>
+<td>0.03964</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.974426</td>
+<td>0.717463</td>
+<td>0.585349</td>
+<td>0.644708</td>
+<td>0.903591</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>37538</td>
+<td>0.03964</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.974532</td>
+<td>0.718750</td>
+<td>0.587366</td>
+<td>0.646450</td>
+<td>0.903327</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>37538</td>
+<td>0.03964</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.975811</td>
+<td>0.848558</td>
+<td>0.474462</td>
+<td>0.608621</td>
+<td>0.950357</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>37538</td>
+<td>0.03964</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.977250</td>
+<td>0.732746</td>
+<td>0.670699</td>
+<td>0.700351</td>
+<td>0.950789</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>37538</td>
+<td>0.03964</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.976744</td>
+<td>0.732075</td>
+<td>0.651882</td>
+<td>0.689655</td>
+<td>0.960803</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>37538</td>
+<td>0.03964</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.976903</td>
+<td>0.793201</td>
+<td>0.564516</td>
+<td>0.659600</td>
+<td>0.963280</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>37538</td>
+<td>0.03964</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.976744</td>
+<td>0.732075</td>
+<td>0.651882</td>
+<td>0.689655</td>
+<td>0.960803</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.04</td>
+<td>112612</td>
+<td>[amt]</td>
+<td>0.04012</td>
+<td>37538</td>
+<td>0.03964</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="b862979e-7581-4645-80cd-fd67df2128ac" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.03</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.980180</td>
+<td>0.730503</td>
+<td>0.553150</td>
+<td>0.629574</td>
+<td>0.866336</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>50050</td>
+<td>0.03045</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.978362</td>
+<td>0.693252</td>
+<td>0.519029</td>
+<td>0.593621</td>
+<td>0.850499</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>50050</td>
+<td>0.03045</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.969550</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.773862</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>50050</td>
+<td>0.03045</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.977902</td>
+<td>0.859107</td>
+<td>0.328084</td>
+<td>0.474834</td>
+<td>0.961304</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>50050</td>
+<td>0.03045</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.976743</td>
+<td>0.658730</td>
+<td>0.490157</td>
+<td>0.562077</td>
+<td>0.882488</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>50050</td>
+<td>0.03045</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.976743</td>
+<td>0.658730</td>
+<td>0.490157</td>
+<td>0.562077</td>
+<td>0.882488</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>50050</td>
+<td>0.03045</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.978102</td>
+<td>0.767500</td>
+<td>0.402887</td>
+<td>0.528399</td>
+<td>0.928328</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>50050</td>
+<td>0.03045</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.977902</td>
+<td>0.682373</td>
+<td>0.513123</td>
+<td>0.585768</td>
+<td>0.889230</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>50050</td>
+<td>0.03045</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.977822</td>
+<td>0.682862</td>
+<td>0.507218</td>
+<td>0.582078</td>
+<td>0.890246</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>50050</td>
+<td>0.03045</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.979720</td>
+<td>0.786277</td>
+<td>0.458661</td>
+<td>0.579362</td>
+<td>0.933138</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>50050</td>
+<td>0.03045</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.979461</td>
+<td>0.676387</td>
+<td>0.624016</td>
+<td>0.649147</td>
+<td>0.948446</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>50050</td>
+<td>0.03045</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.981379</td>
+<td>0.759649</td>
+<td>0.568241</td>
+<td>0.650150</td>
+<td>0.961344</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>50050</td>
+<td>0.03045</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.969550</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.959776</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>50050</td>
+<td>0.03045</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.981339</td>
+<td>0.759683</td>
+<td>0.566273</td>
+<td>0.648872</td>
+<td>0.961236</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.03</td>
+<td>150150</td>
+<td>[amt]</td>
+<td>0.02985</td>
+<td>50050</td>
+<td>0.03045</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="1c4af404-2305-48c9-9109-3c5e068d2430" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.02</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 
 
@@ -809,9 +1415,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="2e34c81b-4707-462b-8091-44c1d3794c44" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.01</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div id="2e34c81b-4707-462b-8091-44c1d3794c44" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.01</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
 <div>
 
 
@@ -1110,9 +1716,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="7ad106b1-b9de-4659-b7dc-f6a215461648" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div id="7ad106b1-b9de-4659-b7dc-f6a215461648" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 
 
@@ -1411,9 +2017,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="1709a9d4-638d-4ed2-99c6-9dc041989617" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div id="1709a9d4-638d-4ed2-99c6-9dc041989617" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
 <div>
 
 
@@ -1712,9 +2318,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="f80b1658-648c-44bc-bfda-b23afeffb6e8" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div id="f80b1658-648c-44bc-bfda-b23afeffb6e8" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
 <div>
 
 
@@ -2013,9 +2619,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="8085cd81-0ae7-43a8-a70d-dbedb47ff8dc" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div id="8085cd81-0ae7-43a8-a70d-dbedb47ff8dc" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
 <div>
 
 
@@ -2314,9 +2920,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="38341310-6bf5-4dab-bc4f-fb1f63ad98a7" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div id="38341310-6bf5-4dab-bc4f-fb1f63ad98a7" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
 <div>
 
 
@@ -2615,9 +3221,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="082ce1cf-bba5-4695-b46e-4568f52563d8" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div id="082ce1cf-bba5-4695-b46e-4568f52563d8" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
 <div>
 
 
@@ -2916,9 +3522,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="e6e18025-df4f-4d78-a709-83271e37e633" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div id="e6e18025-df4f-4d78-a709-83271e37e633" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
 <div>
 
 
@@ -3217,9 +3823,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="843b2aa4-72ac-4d79-9633-b1b4bcd3975d" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div id="843b2aa4-72ac-4d79-9633-b1b4bcd3975d" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
 <div>
 
 
@@ -3518,9 +4124,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="db9169de-b43c-485f-9559-b6a39f0c1256" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div id="db9169de-b43c-485f-9559-b6a39f0c1256" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
 <div>
 
 
@@ -3819,9 +4425,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="ee3e6075-0b6d-47e2-a0f4-d8d02ebdf30f" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.00573</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="ee3e6075-0b6d-47e2-a0f4-d8d02ebdf30f" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.00573</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
 <div>
 
 
@@ -3852,266 +4458,266 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">0</td>
 <td>KNeighborsUnif</td>
 <td>None</td>
-<td>0.994127</td>
-<td>0.468541</td>
-<td>0.234584</td>
-<td>0.312640</td>
-<td>0.788411</td>
+<td>0.994280</td>
+<td>0.492372</td>
+<td>0.238575</td>
+<td>0.321412</td>
+<td>0.793867</td>
 <td>False</td>
 <td>Auto_not_best</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005742</td>
+<td>0.005747</td>
 <td>262042</td>
-<td>0.005694</td>
+<td>0.005678</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>KNeighborsDist</td>
 <td>None</td>
-<td>0.993616</td>
-<td>0.405236</td>
-<td>0.259383</td>
-<td>0.316306</td>
-<td>0.756999</td>
+<td>0.993757</td>
+<td>0.419390</td>
+<td>0.258737</td>
+<td>0.320033</td>
+<td>0.760594</td>
 <td>False</td>
 <td>Auto_not_best</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005742</td>
+<td>0.005747</td>
 <td>262042</td>
-<td>0.005694</td>
+<td>0.005678</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>LightGBMXT</td>
 <td>None</td>
-<td>0.994306</td>
+<td>0.994322</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.766146</td>
+<td>0.766981</td>
 <td>False</td>
 <td>Auto_not_best</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005742</td>
+<td>0.005747</td>
 <td>262042</td>
-<td>0.005694</td>
+<td>0.005678</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>LightGBM</td>
 <td>None</td>
-<td>0.994306</td>
+<td>0.994322</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.960438</td>
+<td>0.961932</td>
 <td>False</td>
 <td>Auto_not_best</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005742</td>
+<td>0.005747</td>
 <td>262042</td>
-<td>0.005694</td>
+<td>0.005678</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>RandomForestGini</td>
 <td>None</td>
-<td>0.993222</td>
-<td>0.369963</td>
-<td>0.270777</td>
-<td>0.312693</td>
-<td>0.822914</td>
+<td>0.993249</td>
+<td>0.366318</td>
+<td>0.258737</td>
+<td>0.303269</td>
+<td>0.828518</td>
 <td>False</td>
 <td>Auto_not_best</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005742</td>
+<td>0.005747</td>
 <td>262042</td>
-<td>0.005694</td>
+<td>0.005678</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
 <td>RandomForestEntr</td>
 <td>None</td>
-<td>0.993222</td>
-<td>0.369963</td>
-<td>0.270777</td>
-<td>0.312693</td>
-<td>0.822914</td>
+<td>0.993249</td>
+<td>0.366318</td>
+<td>0.258737</td>
+<td>0.303269</td>
+<td>0.828518</td>
 <td>False</td>
 <td>Auto_not_best</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005742</td>
+<td>0.005747</td>
 <td>262042</td>
-<td>0.005694</td>
+<td>0.005678</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
 <td>CatBoost</td>
 <td>None</td>
-<td>0.994306</td>
+<td>0.994322</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.872162</td>
+<td>0.875439</td>
 <td>False</td>
 <td>Auto_not_best</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005742</td>
+<td>0.005747</td>
 <td>262042</td>
-<td>0.005694</td>
+<td>0.005678</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
 <td>ExtraTreesGini</td>
 <td>None</td>
-<td>0.993627</td>
-<td>0.407292</td>
-<td>0.262064</td>
-<td>0.318923</td>
-<td>0.842939</td>
+<td>0.993673</td>
+<td>0.409382</td>
+<td>0.258065</td>
+<td>0.316570</td>
+<td>0.852918</td>
 <td>False</td>
 <td>Auto_not_best</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005742</td>
+<td>0.005747</td>
 <td>262042</td>
-<td>0.005694</td>
+<td>0.005678</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
 <td>ExtraTreesEntr</td>
 <td>None</td>
-<td>0.993642</td>
-<td>0.409938</td>
-<td>0.265416</td>
-<td>0.322213</td>
-<td>0.844830</td>
+<td>0.993604</td>
+<td>0.400424</td>
+<td>0.254032</td>
+<td>0.310855</td>
+<td>0.854962</td>
 <td>False</td>
 <td>Auto_not_best</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005742</td>
+<td>0.005747</td>
 <td>262042</td>
-<td>0.005694</td>
+<td>0.005678</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
 <td>NeuralNetFastAI</td>
 <td>None</td>
-<td>0.994306</td>
+<td>0.994322</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.920446</td>
+<td>0.892006</td>
 <td>False</td>
 <td>Auto_not_best</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005742</td>
+<td>0.005747</td>
 <td>262042</td>
-<td>0.005694</td>
+<td>0.005678</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
 <td>XGBoost</td>
 <td>None</td>
-<td>0.994306</td>
+<td>0.994322</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.939608</td>
+<td>0.941264</td>
 <td>False</td>
 <td>Auto_not_best</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005742</td>
+<td>0.005747</td>
 <td>262042</td>
-<td>0.005694</td>
+<td>0.005678</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">11</td>
 <td>NeuralNetTorch</td>
 <td>None</td>
-<td>0.994531</td>
-<td>0.557730</td>
-<td>0.191019</td>
-<td>0.284573</td>
-<td>0.957855</td>
+<td>0.994673</td>
+<td>0.605023</td>
+<td>0.178091</td>
+<td>0.275182</td>
+<td>0.955956</td>
 <td>False</td>
 <td>Auto_not_best</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005742</td>
+<td>0.005747</td>
 <td>262042</td>
-<td>0.005694</td>
+<td>0.005678</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">12</td>
 <td>LightGBMLarge</td>
 <td>None</td>
-<td>0.994306</td>
+<td>0.994322</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.960455</td>
+<td>0.961674</td>
 <td>False</td>
 <td>Auto_not_best</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005742</td>
+<td>0.005747</td>
 <td>262042</td>
-<td>0.005694</td>
+<td>0.005678</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">13</td>
 <td>WeightedEnsemble_L2</td>
 <td>None</td>
-<td>0.994531</td>
-<td>0.557730</td>
-<td>0.191019</td>
-<td>0.284573</td>
-<td>0.957855</td>
+<td>0.994673</td>
+<td>0.605023</td>
+<td>0.178091</td>
+<td>0.275182</td>
+<td>0.955956</td>
 <td>False</td>
 <td>Auto_not_best</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005742</td>
+<td>0.005747</td>
 <td>262042</td>
-<td>0.005694</td>
+<td>0.005678</td>
 <td>None</td>
 </tr>
 </tbody>
@@ -4120,9 +4726,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="ec4ba02f-2008-45c0-8cb3-b1dec288ed9c" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.006</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div id="ec4ba02f-2008-45c0-8cb3-b1dec288ed9c" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.006</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
 <div>
 
 
@@ -4421,9 +5027,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="ffaf84ba-6074-443c-864f-f18d08a06522" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.007</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div id="ffaf84ba-6074-443c-864f-f18d08a06522" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.007</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
 <div>
 
 
@@ -4722,9 +5328,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="356be182-abf4-45af-adc7-bdb654d788a6" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.008</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div id="356be182-abf4-45af-adc7-bdb654d788a6" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.008</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
 <div>
 
 
@@ -5023,9 +5629,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="9311807b-0cbf-4d54-bc48-558d1517b316" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.009</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div id="9311807b-0cbf-4d54-bc48-558d1517b316" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb4(fraudTrain,<span class="fl">0.009</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
 <div>
 
 

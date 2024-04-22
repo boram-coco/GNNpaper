@@ -188,10 +188,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<ol type="1">
+<li><p>2/22</p></li>
+<li><p>4/5</p></li>
+<li><p>4/8</p></li>
+</ol>
 <p>ref: <a href="https://pyod.readthedocs.io/en/latest/pyod.models.html#all-models" class="uri">https://pyod.readthedocs.io/en/latest/pyod.models.html#all-models</a></p>
 <section id="imports" class="level1">
 <h1>1. Imports</h1>
-<div id="f4162b18-f612-4403-bf6b-823b6b662ea4" class="cell" data-tags="[]" data-execution_count="1">
+<div id="f4162b18-f612-4403-bf6b-823b6b662ea4" class="cell" data-tags="[]" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn</span>
@@ -199,36 +204,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time </span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e59bf270-951d-4da7-b7bb-09d4227238bd" class="cell" data-tags="[]" data-execution_count="2">
+<div id="e59bf270-951d-4da7-b7bb-09d4227238bd" class="cell" data-tags="[]" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e42d11c8-75b7-4337-b0ac-c715d41b1011" class="cell" data-execution_count="3">
+<div id="e42d11c8-75b7-4337-b0ac-c715d41b1011" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>run ..<span class="op">/</span>functions_pyod2.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="81833a59-fff8-46f3-bd2d-f77279fb7aa9" class="cell" data-execution_count="4">
+<div id="81833a59-fff8-46f3-bd2d-f77279fb7aa9" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="section" class="level1">
 <h1>2.</h1>
-<div id="9330d2a1-940f-4687-869e-fb10f589aa4f" class="cell" data-execution_count="5">
+<div id="9330d2a1-940f-4687-869e-fb10f589aa4f" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.03</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7ff643500d30&gt;
-Traceback (most recent call last):
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
-    self._make_module_from_path(filepath)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
-    module = module_class(filepath, prefix, user_api, internal_api)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
-    self.version = self.get_version()
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
-    config = get_config().split()
-AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 
 
@@ -258,248 +250,210 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>ECOD</td>
-<td>0.330842</td>
-<td>0.964256</td>
-<td>0.408638</td>
-<td>0.406209</td>
-<td>0.407420</td>
-<td>0.693936</td>
+<td>0.030764</td>
+<td>0.963237</td>
+<td>0.386093</td>
+<td>0.389706</td>
+<td>0.387891</td>
+<td>0.685307</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.03</td>
 <td>150150</td>
 <td>[amt]</td>
-<td>0.029917</td>
+<td>0.030037</td>
 <td>50050</td>
-<td>0.03025</td>
+<td>0.02989</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>GMM</td>
-<td>0.171471</td>
-<td>0.971329</td>
-<td>0.525500</td>
-<td>0.537649</td>
-<td>0.531505</td>
-<td>0.761253</td>
+<td>0.029831</td>
+<td>0.969790</td>
+<td>0.494832</td>
+<td>0.512032</td>
+<td>0.503285</td>
+<td>0.747963</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.03</td>
 <td>150150</td>
 <td>[amt]</td>
-<td>0.029917</td>
+<td>0.030037</td>
 <td>50050</td>
-<td>0.03025</td>
+<td>0.02989</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>HBOS</td>
-<td>0.913240</td>
-<td>0.969311</td>
+<td>0.007478</td>
+<td>0.969750</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.499773</td>
+<td>0.499815</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.03</td>
 <td>150150</td>
 <td>[amt]</td>
-<td>0.029917</td>
+<td>0.030037</td>
 <td>50050</td>
-<td>0.03025</td>
+<td>0.02989</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>IForest</td>
-<td>3.476480</td>
-<td>0.971389</td>
-<td>0.526554</td>
-<td>0.536988</td>
-<td>0.531720</td>
-<td>0.760964</td>
+<td>3.284466</td>
+<td>0.969790</td>
+<td>0.494832</td>
+<td>0.512032</td>
+<td>0.503285</td>
+<td>0.747963</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.03</td>
 <td>150150</td>
 <td>[amt]</td>
-<td>0.029917</td>
+<td>0.030037</td>
 <td>50050</td>
-<td>0.03025</td>
+<td>0.02989</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>INNE</td>
-<td>5.219564</td>
-<td>0.971568</td>
-<td>0.529836</td>
-<td>0.533686</td>
-<td>0.531754</td>
-<td>0.759457</td>
+<td>3.445417</td>
+<td>0.969790</td>
+<td>0.494832</td>
+<td>0.512032</td>
+<td>0.503285</td>
+<td>0.747963</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.03</td>
 <td>150150</td>
 <td>[amt]</td>
-<td>0.029917</td>
+<td>0.030037</td>
 <td>50050</td>
-<td>0.03025</td>
+<td>0.02989</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
-<td>KDE</td>
-<td>674.120848</td>
-<td>0.971469</td>
-<td>0.527599</td>
-<td>0.542933</td>
-<td>0.535156</td>
-<td>0.763884</td>
+<td>KNN</td>
+<td>0.179364</td>
+<td>0.969910</td>
+<td>0.496762</td>
+<td>0.512701</td>
+<td>0.504605</td>
+<td>0.748349</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.03</td>
 <td>150150</td>
 <td>[amt]</td>
-<td>0.029917</td>
+<td>0.030037</td>
 <td>50050</td>
-<td>0.03025</td>
+<td>0.02989</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
-<td>KNN</td>
-<td>0.254292</td>
-<td>0.971568</td>
-<td>0.529111</td>
-<td>0.546235</td>
-<td>0.537537</td>
-<td>0.765536</td>
+<td>LODA</td>
+<td>0.237153</td>
+<td>0.969750</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499815</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.03</td>
 <td>150150</td>
 <td>[amt]</td>
-<td>0.029917</td>
+<td>0.030037</td>
 <td>50050</td>
-<td>0.03025</td>
+<td>0.02989</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
-<td>LODA</td>
-<td>2.639494</td>
-<td>0.969311</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.499773</td>
+<td>LOF</td>
+<td>0.298528</td>
+<td>0.933566</td>
+<td>0.026411</td>
+<td>0.034091</td>
+<td>0.029764</td>
+<td>0.497686</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.03</td>
 <td>150150</td>
 <td>[amt]</td>
-<td>0.029917</td>
+<td>0.030037</td>
 <td>50050</td>
-<td>0.03025</td>
+<td>0.02989</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
-<td>LOF</td>
-<td>0.482762</td>
-<td>0.934266</td>
-<td>0.032632</td>
-<td>0.040951</td>
-<td>0.036321</td>
-<td>0.501541</td>
+<td>MCD</td>
+<td>0.027775</td>
+<td>0.969790</td>
+<td>0.494832</td>
+<td>0.512032</td>
+<td>0.503285</td>
+<td>0.747963</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.03</td>
 <td>150150</td>
 <td>[amt]</td>
-<td>0.029917</td>
+<td>0.030037</td>
 <td>50050</td>
-<td>0.03025</td>
+<td>0.02989</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
-<td>MCD</td>
-<td>0.280915</td>
-<td>0.971329</td>
-<td>0.525500</td>
-<td>0.537649</td>
-<td>0.531505</td>
-<td>0.761253</td>
+<td>PCA</td>
+<td>0.009329</td>
+<td>0.968591</td>
+<td>0.474901</td>
+<td>0.480615</td>
+<td>0.477741</td>
+<td>0.732121</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.03</td>
 <td>150150</td>
 <td>[amt]</td>
-<td>0.029917</td>
+<td>0.030037</td>
 <td>50050</td>
-<td>0.03025</td>
+<td>0.02989</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
-<td>OCSVM</td>
-<td>1591.306485</td>
-<td>0.971389</td>
-<td>0.526215</td>
-<td>0.543593</td>
-<td>0.534763</td>
-<td>0.764163</td>
-<td>False</td>
-<td>pyod</td>
-<td>0.03</td>
-<td>150150</td>
-<td>[amt]</td>
-<td>0.029917</td>
-<td>50050</td>
-<td>0.03025</td>
-<td>None</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11</td>
-<td>PCA</td>
-<td>0.028368</td>
-<td>0.970270</td>
-<td>0.508508</td>
-<td>0.513210</td>
-<td>0.510848</td>
-<td>0.748868</td>
-<td>False</td>
-<td>pyod</td>
-<td>0.03</td>
-<td>150150</td>
-<td>[amt]</td>
-<td>0.029917</td>
-<td>50050</td>
-<td>0.03025</td>
-<td>None</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">12</td>
 <td>ROD</td>
-<td>8.423047</td>
-<td>0.939041</td>
-<td>0.000650</td>
-<td>0.000661</td>
-<td>0.000655</td>
-<td>0.484486</td>
+<td>6.908336</td>
+<td>0.940480</td>
+<td>0.000673</td>
+<td>0.000668</td>
+<td>0.000671</td>
+<td>0.485052</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.03</td>
 <td>150150</td>
 <td>[amt]</td>
-<td>0.029917</td>
+<td>0.030037</td>
 <td>50050</td>
-<td>0.03025</td>
+<td>0.02989</td>
 <td>None</td>
 </tr>
 </tbody>
@@ -508,22 +462,9 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 </div>
 </div>
 </div>
-<div id="d3a8965a-ea85-4321-8bee-2ee71ee926a3" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.02</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7ff652a0ee50&gt;
-Traceback (most recent call last):
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
-    self._make_module_from_path(filepath)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
-    module = module_class(filepath, prefix, user_api, internal_api)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
-    self.version = self.get_version()
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
-    config = get_config().split()
-AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div id="d3a8965a-ea85-4321-8bee-2ee71ee926a3" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.02</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
 <div>
 
 
@@ -553,248 +494,210 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>ECOD</td>
-<td>0.048353</td>
-<td>0.973413</td>
-<td>0.342277</td>
-<td>0.345443</td>
-<td>0.343853</td>
-<td>0.665890</td>
+<td>0.042985</td>
+<td>0.973533</td>
+<td>0.346720</td>
+<td>0.338784</td>
+<td>0.342706</td>
+<td>0.662756</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.02</td>
 <td>225225</td>
 <td>[amt]</td>
-<td>0.019944</td>
+<td>0.019878</td>
 <td>75075</td>
-<td>0.020167</td>
+<td>0.020366</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>GMM</td>
-<td>0.122125</td>
-<td>0.980140</td>
-<td>0.507703</td>
-<td>0.500661</td>
-<td>0.504157</td>
-<td>0.745334</td>
+<td>0.039798</td>
+<td>0.979873</td>
+<td>0.506081</td>
+<td>0.489863</td>
+<td>0.497840</td>
+<td>0.739962</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.02</td>
 <td>225225</td>
 <td>[amt]</td>
-<td>0.019944</td>
+<td>0.019878</td>
 <td>75075</td>
-<td>0.020167</td>
+<td>0.020366</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>HBOS</td>
-<td>0.008320</td>
-<td>0.979527</td>
+<td>0.010284</td>
+<td>0.979261</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.499844</td>
+<td>0.499810</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.02</td>
 <td>225225</td>
 <td>[amt]</td>
-<td>0.019944</td>
+<td>0.019878</td>
 <td>75075</td>
-<td>0.020167</td>
+<td>0.020366</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>IForest</td>
-<td>5.214050</td>
-<td>0.980140</td>
-<td>0.507703</td>
-<td>0.500661</td>
-<td>0.504157</td>
-<td>0.745334</td>
+<td>4.639415</td>
+<td>0.980100</td>
+<td>0.511978</td>
+<td>0.489209</td>
+<td>0.500334</td>
+<td>0.739757</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.02</td>
 <td>225225</td>
 <td>[amt]</td>
-<td>0.019944</td>
+<td>0.019878</td>
 <td>75075</td>
-<td>0.020167</td>
+<td>0.020366</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>INNE</td>
-<td>7.442253</td>
-<td>0.978235</td>
-<td>0.458848</td>
-<td>0.441876</td>
-<td>0.450202</td>
-<td>0.715575</td>
+<td>5.045339</td>
+<td>0.980420</td>
+<td>0.520673</td>
+<td>0.485939</td>
+<td>0.502706</td>
+<td>0.738319</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.02</td>
 <td>225225</td>
 <td>[amt]</td>
-<td>0.019944</td>
+<td>0.019878</td>
 <td>75075</td>
-<td>0.020167</td>
+<td>0.020366</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
-<td>KDE</td>
-<td>1384.255661</td>
-<td>0.978741</td>
-<td>0.474439</td>
-<td>0.502642</td>
-<td>0.488133</td>
-<td>0.745591</td>
+<td>KNN</td>
+<td>0.286477</td>
+<td>0.977955</td>
+<td>0.456671</td>
+<td>0.434271</td>
+<td>0.445189</td>
+<td>0.711765</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.02</td>
 <td>225225</td>
 <td>[amt]</td>
-<td>0.019944</td>
+<td>0.019878</td>
 <td>75075</td>
-<td>0.020167</td>
+<td>0.020366</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
-<td>KNN</td>
-<td>0.309763</td>
-<td>0.978222</td>
-<td>0.460689</td>
-<td>0.468296</td>
-<td>0.464461</td>
-<td>0.728506</td>
+<td>LODA</td>
+<td>0.374500</td>
+<td>0.979261</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499810</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.02</td>
 <td>225225</td>
 <td>[amt]</td>
-<td>0.019944</td>
+<td>0.019878</td>
 <td>75075</td>
-<td>0.020167</td>
+<td>0.020366</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
-<td>LODA</td>
-<td>0.619595</td>
-<td>0.979527</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.499844</td>
+<td>LOF</td>
+<td>0.506328</td>
+<td>0.958495</td>
+<td>0.002508</td>
+<td>0.002616</td>
+<td>0.002561</td>
+<td>0.490492</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.02</td>
 <td>225225</td>
 <td>[amt]</td>
-<td>0.019944</td>
+<td>0.019878</td>
 <td>75075</td>
-<td>0.020167</td>
+<td>0.020366</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
-<td>LOF</td>
-<td>0.494502</td>
-<td>0.961292</td>
-<td>0.004979</td>
-<td>0.004624</td>
-<td>0.004795</td>
-<td>0.492803</td>
+<td>MCD</td>
+<td>0.037995</td>
+<td>0.979873</td>
+<td>0.506081</td>
+<td>0.489863</td>
+<td>0.497840</td>
+<td>0.739962</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.02</td>
 <td>225225</td>
 <td>[amt]</td>
-<td>0.019944</td>
+<td>0.019878</td>
 <td>75075</td>
-<td>0.020167</td>
+<td>0.020366</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
-<td>MCD</td>
-<td>0.055974</td>
-<td>0.980140</td>
-<td>0.507703</td>
-<td>0.500661</td>
-<td>0.504157</td>
-<td>0.745334</td>
+<td>PCA</td>
+<td>0.013600</td>
+<td>0.979660</td>
+<td>0.500681</td>
+<td>0.480706</td>
+<td>0.490490</td>
+<td>0.735370</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.02</td>
 <td>225225</td>
 <td>[amt]</td>
-<td>0.019944</td>
+<td>0.019878</td>
 <td>75075</td>
-<td>0.020167</td>
+<td>0.020366</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
-<td>OCSVM</td>
-<td>2769.511098</td>
-<td>0.978701</td>
-<td>0.473586</td>
-<td>0.503303</td>
-<td>0.487992</td>
-<td>0.745894</td>
-<td>False</td>
-<td>pyod</td>
-<td>0.02</td>
-<td>225225</td>
-<td>[amt]</td>
-<td>0.019944</td>
-<td>75075</td>
-<td>0.020167</td>
-<td>None</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11</td>
-<td>PCA</td>
-<td>0.015658</td>
-<td>0.979953</td>
-<td>0.503026</td>
-<td>0.494055</td>
-<td>0.498500</td>
-<td>0.742005</td>
-<td>False</td>
-<td>pyod</td>
-<td>0.02</td>
-<td>225225</td>
-<td>[amt]</td>
-<td>0.019944</td>
-<td>75075</td>
-<td>0.020167</td>
-<td>None</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">12</td>
 <td>ROD</td>
-<td>10.915194</td>
-<td>0.959614</td>
+<td>5.371442</td>
+<td>0.967939</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.489682</td>
+<td>0.494031</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.02</td>
 <td>225225</td>
 <td>[amt]</td>
-<td>0.019944</td>
+<td>0.019878</td>
 <td>75075</td>
-<td>0.020167</td>
+<td>0.020366</td>
 <td>None</td>
 </tr>
 </tbody>
@@ -803,22 +706,9 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 </div>
 </div>
 </div>
-<div id="164d1fde-400c-4739-b703-16e2a87021bd" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.01</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7ff689e4b8b0&gt;
-Traceback (most recent call last):
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
-    self._make_module_from_path(filepath)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
-    module = module_class(filepath, prefix, user_api, internal_api)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
-    self.version = self.get_version()
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
-    config = get_config().split()
-AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div id="164d1fde-400c-4739-b703-16e2a87021bd" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.01</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
 <div>
 
 
@@ -848,248 +738,210 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>ECOD</td>
-<td>0.093907</td>
-<td>0.984555</td>
-<td>0.251647</td>
-<td>0.244089</td>
-<td>0.247811</td>
-<td>0.618222</td>
+<td>0.083728</td>
+<td>0.984695</td>
+<td>0.243837</td>
+<td>0.239372</td>
+<td>0.241584</td>
+<td>0.615868</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.01</td>
 <td>450450</td>
 <td>[amt]</td>
-<td>0.009859</td>
+<td>0.009939</td>
 <td>150150</td>
-<td>0.010423</td>
+<td>0.010183</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>GMM</td>
-<td>0.128739</td>
-<td>0.989491</td>
-<td>0.495641</td>
-<td>0.472204</td>
-<td>0.483639</td>
-<td>0.733572</td>
+<td>0.072678</td>
+<td>0.989331</td>
+<td>0.475715</td>
+<td>0.467626</td>
+<td>0.471636</td>
+<td>0.731162</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.01</td>
 <td>450450</td>
 <td>[amt]</td>
-<td>0.009859</td>
+<td>0.009939</td>
 <td>150150</td>
-<td>0.010423</td>
+<td>0.010183</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>HBOS</td>
-<td>0.013668</td>
-<td>0.989284</td>
+<td>0.017917</td>
+<td>0.989457</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.499852</td>
+<td>0.499818</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.01</td>
 <td>450450</td>
 <td>[amt]</td>
-<td>0.009859</td>
+<td>0.009939</td>
 <td>150150</td>
-<td>0.010423</td>
+<td>0.010183</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>IForest</td>
-<td>10.198188</td>
-<td>0.989624</td>
-<td>0.502383</td>
-<td>0.471565</td>
-<td>0.486486</td>
-<td>0.733323</td>
+<td>10.094498</td>
+<td>0.989351</td>
+<td>0.476667</td>
+<td>0.467626</td>
+<td>0.472103</td>
+<td>0.731172</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.01</td>
 <td>450450</td>
 <td>[amt]</td>
-<td>0.009859</td>
+<td>0.009939</td>
 <td>150150</td>
-<td>0.010423</td>
+<td>0.010183</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>INNE</td>
-<td>16.469790</td>
-<td>0.988372</td>
-<td>0.437886</td>
-<td>0.407668</td>
-<td>0.422237</td>
-<td>0.701078</td>
+<td>11.064828</td>
+<td>0.989404</td>
+<td>0.479223</td>
+<td>0.467626</td>
+<td>0.473353</td>
+<td>0.731199</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.01</td>
 <td>450450</td>
 <td>[amt]</td>
-<td>0.009859</td>
+<td>0.009939</td>
 <td>150150</td>
-<td>0.010423</td>
+<td>0.010183</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
-<td>KDE</td>
-<td>5853.300178</td>
-<td>0.988745</td>
-<td>0.459016</td>
-<td>0.447284</td>
-<td>0.453074</td>
-<td>0.720866</td>
+<td>KNN</td>
+<td>0.667739</td>
+<td>0.987686</td>
+<td>0.394040</td>
+<td>0.389143</td>
+<td>0.391576</td>
+<td>0.691493</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.01</td>
 <td>450450</td>
 <td>[amt]</td>
-<td>0.009859</td>
+<td>0.009939</td>
 <td>150150</td>
-<td>0.010423</td>
+<td>0.010183</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
-<td>KNN</td>
-<td>0.666940</td>
-<td>0.987719</td>
-<td>0.406938</td>
-<td>0.389776</td>
-<td>0.398172</td>
-<td>0.691897</td>
+<td>LODA</td>
+<td>0.684057</td>
+<td>0.989457</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499818</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.01</td>
 <td>450450</td>
 <td>[amt]</td>
-<td>0.009859</td>
+<td>0.009939</td>
 <td>150150</td>
-<td>0.010423</td>
+<td>0.010183</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
-<td>LODA</td>
-<td>1.198275</td>
-<td>0.989284</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.000000</td>
-<td>0.499852</td>
+<td>LOF</td>
+<td>1.079839</td>
+<td>0.980773</td>
+<td>0.002199</td>
+<td>0.001962</td>
+<td>0.002074</td>
+<td>0.496402</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.01</td>
 <td>450450</td>
 <td>[amt]</td>
-<td>0.009859</td>
+<td>0.009939</td>
 <td>150150</td>
-<td>0.010423</td>
+<td>0.010183</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
-<td>LOF</td>
-<td>1.107466</td>
-<td>0.979980</td>
-<td>0.004811</td>
-<td>0.004473</td>
-<td>0.004636</td>
-<td>0.497364</td>
+<td>MCD</td>
+<td>0.083876</td>
+<td>0.989331</td>
+<td>0.475715</td>
+<td>0.467626</td>
+<td>0.471636</td>
+<td>0.731162</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.01</td>
 <td>450450</td>
 <td>[amt]</td>
-<td>0.009859</td>
+<td>0.009939</td>
 <td>150150</td>
-<td>0.010423</td>
+<td>0.010183</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
-<td>MCD</td>
-<td>0.092024</td>
-<td>0.989491</td>
-<td>0.495641</td>
-<td>0.472204</td>
-<td>0.483639</td>
-<td>0.733572</td>
+<td>PCA</td>
+<td>0.029059</td>
+<td>0.989331</td>
+<td>0.475715</td>
+<td>0.467626</td>
+<td>0.471636</td>
+<td>0.731162</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.01</td>
 <td>450450</td>
 <td>[amt]</td>
-<td>0.009859</td>
+<td>0.009939</td>
 <td>150150</td>
-<td>0.010423</td>
+<td>0.010183</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
-<td>OCSVM</td>
-<td>13195.876470</td>
-<td>0.988758</td>
-<td>0.459778</td>
-<td>0.449201</td>
-<td>0.454428</td>
-<td>0.721821</td>
-<td>False</td>
-<td>pyod</td>
-<td>0.01</td>
-<td>450450</td>
-<td>[amt]</td>
-<td>0.009859</td>
-<td>150150</td>
-<td>0.010423</td>
-<td>None</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11</td>
-<td>PCA</td>
-<td>0.026801</td>
-<td>0.989491</td>
-<td>0.495641</td>
-<td>0.472204</td>
-<td>0.483639</td>
-<td>0.733572</td>
-<td>False</td>
-<td>pyod</td>
-<td>0.01</td>
-<td>450450</td>
-<td>[amt]</td>
-<td>0.009859</td>
-<td>150150</td>
-<td>0.010423</td>
-<td>None</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">12</td>
 <td>ROD</td>
-<td>14.318378</td>
-<td>0.980693</td>
-<td>0.001495</td>
-<td>0.001278</td>
-<td>0.001378</td>
-<td>0.496143</td>
+<td>10.545987</td>
+<td>0.975425</td>
+<td>0.000462</td>
+<td>0.000654</td>
+<td>0.000542</td>
+<td>0.493053</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.01</td>
 <td>450450</td>
 <td>[amt]</td>
-<td>0.009859</td>
+<td>0.009939</td>
 <td>150150</td>
-<td>0.010423</td>
+<td>0.010183</td>
 <td>None</td>
 </tr>
 </tbody>
@@ -1098,22 +950,9 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 </div>
 </div>
 </div>
-<div id="2670d1f6-a8f7-4595-87aa-9e17999426d3" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.00573</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7fb788701670&gt;
-Traceback (most recent call last):
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
-    self._make_module_from_path(filepath)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
-    module = module_class(filepath, prefix, user_api, internal_api)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
-    self.version = self.get_version()
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
-    config = get_config().split()
-AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="2670d1f6-a8f7-4595-87aa-9e17999426d3" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.00573</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
 <div>
 
 
@@ -1143,210 +982,210 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>ECOD</td>
-<td>0.350781</td>
-<td>0.989826</td>
-<td>0.120474</td>
-<td>0.120952</td>
-<td>0.120712</td>
-<td>0.557912</td>
+<td>0.157627</td>
+<td>0.989803</td>
+<td>0.118100</td>
+<td>0.124157</td>
+<td>0.121053</td>
+<td>0.559442</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005715</td>
+<td>0.005755</td>
 <td>262042</td>
-<td>0.005774</td>
+<td>0.005656</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>GMM</td>
-<td>0.236045</td>
-<td>0.992898</td>
-<td>0.382114</td>
-<td>0.372769</td>
-<td>0.377384</td>
-<td>0.684634</td>
+<td>0.144377</td>
+<td>0.992887</td>
+<td>0.376615</td>
+<td>0.393387</td>
+<td>0.384818</td>
+<td>0.694842</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005715</td>
+<td>0.005755</td>
 <td>262042</td>
-<td>0.005774</td>
+<td>0.005656</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>HBOS</td>
-<td>0.902830</td>
-<td>0.993978</td>
+<td>0.023745</td>
+<td>0.993982</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.499875</td>
+<td>0.499818</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005715</td>
+<td>0.005755</td>
 <td>262042</td>
-<td>0.005774</td>
+<td>0.005656</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>IForest</td>
-<td>18.316931</td>
-<td>0.992913</td>
-<td>0.381706</td>
-<td>0.366821</td>
-<td>0.374115</td>
-<td>0.681685</td>
+<td>20.173736</td>
+<td>0.992887</td>
+<td>0.376615</td>
+<td>0.393387</td>
+<td>0.384818</td>
+<td>0.694842</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005715</td>
+<td>0.005755</td>
 <td>262042</td>
-<td>0.005774</td>
+<td>0.005656</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>INNE</td>
-<td>25.323826</td>
-<td>0.992921</td>
-<td>0.375727</td>
-<td>0.341705</td>
-<td>0.357909</td>
-<td>0.669204</td>
+<td>21.359880</td>
+<td>0.989490</td>
+<td>0.053371</td>
+<td>0.051282</td>
+<td>0.052306</td>
+<td>0.523054</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005715</td>
+<td>0.005755</td>
 <td>262042</td>
-<td>0.005774</td>
+<td>0.005656</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
 <td>KNN</td>
-<td>1.392572</td>
-<td>0.992047</td>
-<td>0.299085</td>
-<td>0.280899</td>
-<td>0.289707</td>
-<td>0.638538</td>
+<td>1.404509</td>
+<td>0.992116</td>
+<td>0.303235</td>
+<td>0.303644</td>
+<td>0.303439</td>
+<td>0.649838</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005715</td>
+<td>0.005755</td>
 <td>262042</td>
-<td>0.005774</td>
+<td>0.005656</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
 <td>LODA</td>
-<td>2.211522</td>
-<td>0.993978</td>
+<td>1.521674</td>
+<td>0.993982</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.499875</td>
+<td>0.499818</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005715</td>
+<td>0.005755</td>
 <td>262042</td>
-<td>0.005774</td>
+<td>0.005656</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
 <td>LOF</td>
-<td>2.140320</td>
-<td>0.988784</td>
-<td>0.000700</td>
-<td>0.000661</td>
-<td>0.000680</td>
-<td>0.497592</td>
+<td>2.060348</td>
+<td>0.988952</td>
+<td>0.001411</td>
+<td>0.001350</td>
+<td>0.001380</td>
+<td>0.497959</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005715</td>
+<td>0.005755</td>
 <td>262042</td>
-<td>0.005774</td>
+<td>0.005656</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
 <td>MCD</td>
-<td>0.158081</td>
-<td>0.992898</td>
-<td>0.382114</td>
-<td>0.372769</td>
-<td>0.377384</td>
-<td>0.684634</td>
+<td>0.135239</td>
+<td>0.992887</td>
+<td>0.376615</td>
+<td>0.393387</td>
+<td>0.384818</td>
+<td>0.694842</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005715</td>
+<td>0.005755</td>
 <td>262042</td>
-<td>0.005774</td>
+<td>0.005656</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
 <td>PCA</td>
-<td>0.048425</td>
-<td>0.992898</td>
-<td>0.382114</td>
-<td>0.372769</td>
-<td>0.377384</td>
-<td>0.684634</td>
+<td>0.047284</td>
+<td>0.992887</td>
+<td>0.376615</td>
+<td>0.393387</td>
+<td>0.384818</td>
+<td>0.694842</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005715</td>
+<td>0.005755</td>
 <td>262042</td>
-<td>0.005774</td>
+<td>0.005656</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
 <td>ROD</td>
-<td>15.528072</td>
-<td>0.989330</td>
+<td>11.951331</td>
+<td>0.990101</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.497538</td>
+<td>0.497866</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.00573</td>
 <td>786126</td>
 <td>[amt]</td>
-<td>0.005715</td>
+<td>0.005755</td>
 <td>262042</td>
-<td>0.005774</td>
+<td>0.005656</td>
 <td>None</td>
 </tr>
 </tbody>
@@ -1355,22 +1194,9 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 </div>
 </div>
 </div>
-<div id="0bfc7fb8-18d3-419b-9491-42d247012f5b" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.006</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7fb797b45430&gt;
-Traceback (most recent call last):
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
-    self._make_module_from_path(filepath)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
-    module = module_class(filepath, prefix, user_api, internal_api)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
-    self.version = self.get_version()
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
-    config = get_config().split()
-AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div id="0bfc7fb8-18d3-419b-9491-42d247012f5b" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.006</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
 <div>
 
 
@@ -1400,210 +1226,210 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>ECOD</td>
-<td>0.162771</td>
-<td>0.989463</td>
-<td>0.124495</td>
-<td>0.121631</td>
-<td>0.123046</td>
-<td>0.558200</td>
+<td>0.145698</td>
+<td>0.989686</td>
+<td>0.122661</td>
+<td>0.118633</td>
+<td>0.120613</td>
+<td>0.556772</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.006</td>
 <td>750750</td>
 <td>[amt]</td>
-<td>0.005974</td>
+<td>0.006013</td>
 <td>250250</td>
-<td>0.006078</td>
+<td>0.005962</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>GMM</td>
-<td>0.169849</td>
-<td>0.992663</td>
-<td>0.397926</td>
-<td>0.403682</td>
-<td>0.400783</td>
-<td>0.699973</td>
+<td>0.135238</td>
+<td>0.992619</td>
+<td>0.374912</td>
+<td>0.356568</td>
+<td>0.365510</td>
+<td>0.676501</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.006</td>
 <td>750750</td>
 <td>[amt]</td>
-<td>0.005974</td>
+<td>0.006013</td>
 <td>250250</td>
-<td>0.006078</td>
+<td>0.005962</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>HBOS</td>
-<td>0.021995</td>
-<td>0.993634</td>
+<td>0.024256</td>
+<td>0.993758</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.499855</td>
+<td>0.499859</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.006</td>
 <td>750750</td>
 <td>[amt]</td>
-<td>0.005974</td>
+<td>0.006013</td>
 <td>250250</td>
-<td>0.006078</td>
+<td>0.005962</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>IForest</td>
-<td>17.540598</td>
-<td>0.992675</td>
-<td>0.396962</td>
-<td>0.395135</td>
-<td>0.396046</td>
-<td>0.695732</td>
+<td>16.434630</td>
+<td>0.992599</td>
+<td>0.371977</td>
+<td>0.350536</td>
+<td>0.360939</td>
+<td>0.673493</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.006</td>
 <td>750750</td>
 <td>[amt]</td>
-<td>0.005974</td>
+<td>0.006013</td>
 <td>250250</td>
-<td>0.006078</td>
+<td>0.005962</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>INNE</td>
-<td>26.054414</td>
-<td>0.989822</td>
-<td>0.168605</td>
-<td>0.171598</td>
-<td>0.170088</td>
-<td>0.583212</td>
+<td>19.408525</td>
+<td>0.992715</td>
+<td>0.372985</td>
+<td>0.325737</td>
+<td>0.347764</td>
+<td>0.661226</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.006</td>
 <td>750750</td>
 <td>[amt]</td>
-<td>0.005974</td>
+<td>0.006013</td>
 <td>250250</td>
-<td>0.006078</td>
+<td>0.005962</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
 <td>KNN</td>
-<td>1.361148</td>
-<td>0.991524</td>
-<td>0.304688</td>
-<td>0.307692</td>
-<td>0.306183</td>
-<td>0.651699</td>
+<td>1.251204</td>
+<td>0.991708</td>
+<td>0.300752</td>
+<td>0.294906</td>
+<td>0.297800</td>
+<td>0.645397</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.006</td>
 <td>750750</td>
 <td>[amt]</td>
-<td>0.005974</td>
+<td>0.006013</td>
 <td>250250</td>
-<td>0.006078</td>
+<td>0.005962</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
 <td>LODA</td>
-<td>2.033969</td>
-<td>0.993634</td>
+<td>1.181331</td>
+<td>0.993758</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.499855</td>
+<td>0.499859</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.006</td>
 <td>750750</td>
 <td>[amt]</td>
-<td>0.005974</td>
+<td>0.006013</td>
 <td>250250</td>
-<td>0.006078</td>
+<td>0.005962</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
 <td>LOF</td>
-<td>2.033125</td>
-<td>0.987644</td>
-<td>0.001902</td>
-<td>0.001972</td>
-<td>0.001937</td>
-<td>0.497822</td>
+<td>1.943183</td>
+<td>0.988024</td>
+<td>0.001325</td>
+<td>0.001340</td>
+<td>0.001333</td>
+<td>0.497641</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.006</td>
 <td>750750</td>
 <td>[amt]</td>
-<td>0.005974</td>
+<td>0.006013</td>
 <td>250250</td>
-<td>0.006078</td>
+<td>0.005962</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
 <td>MCD</td>
-<td>0.153317</td>
-<td>0.992663</td>
-<td>0.397926</td>
-<td>0.403682</td>
-<td>0.400783</td>
-<td>0.699973</td>
+<td>0.132324</td>
+<td>0.992619</td>
+<td>0.374912</td>
+<td>0.356568</td>
+<td>0.365510</td>
+<td>0.676501</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.006</td>
 <td>750750</td>
 <td>[amt]</td>
-<td>0.005974</td>
+<td>0.006013</td>
 <td>250250</td>
-<td>0.006078</td>
+<td>0.005962</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
 <td>PCA</td>
-<td>0.044844</td>
-<td>0.992663</td>
-<td>0.397926</td>
-<td>0.403682</td>
-<td>0.400783</td>
-<td>0.699973</td>
+<td>0.042269</td>
+<td>0.992619</td>
+<td>0.374912</td>
+<td>0.356568</td>
+<td>0.365510</td>
+<td>0.676501</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.006</td>
 <td>750750</td>
 <td>[amt]</td>
-<td>0.005974</td>
+<td>0.006013</td>
 <td>250250</td>
-<td>0.006078</td>
+<td>0.005962</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
 <td>ROD</td>
-<td>14.036913</td>
-<td>0.984663</td>
+<td>13.854177</td>
+<td>0.993958</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.495342</td>
+<td>0.499960</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.006</td>
 <td>750750</td>
 <td>[amt]</td>
-<td>0.005974</td>
+<td>0.006013</td>
 <td>250250</td>
-<td>0.006078</td>
+<td>0.005962</td>
 <td>None</td>
 </tr>
 </tbody>
@@ -1612,22 +1438,9 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 </div>
 </div>
 </div>
-<div id="006c8b9a-3a9c-4923-8175-2646646a8b08" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.007</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7fb7833da940&gt;
-Traceback (most recent call last):
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
-    self._make_module_from_path(filepath)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
-    module = module_class(filepath, prefix, user_api, internal_api)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
-    self.version = self.get_version()
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
-    config = get_config().split()
-AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div id="006c8b9a-3a9c-4923-8175-2646646a8b08" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.007</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
 <div>
 
 
@@ -1657,210 +1470,210 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>ECOD</td>
-<td>0.137144</td>
-<td>0.988294</td>
-<td>0.157548</td>
-<td>0.162364</td>
-<td>0.159920</td>
-<td>0.578182</td>
+<td>0.127007</td>
+<td>0.988061</td>
+<td>0.159015</td>
+<td>0.155599</td>
+<td>0.157289</td>
+<td>0.574832</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.007</td>
 <td>643500</td>
 <td>[amt]</td>
-<td>0.007046</td>
+<td>0.006946</td>
 <td>214500</td>
-<td>0.006862</td>
+<td>0.007161</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>GMM</td>
-<td>0.156920</td>
-<td>0.991977</td>
-<td>0.417055</td>
-<td>0.425272</td>
-<td>0.421123</td>
-<td>0.710582</td>
+<td>0.118660</td>
+<td>0.991855</td>
+<td>0.428475</td>
+<td>0.411458</td>
+<td>0.419794</td>
+<td>0.703750</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.007</td>
 <td>643500</td>
 <td>[amt]</td>
-<td>0.007046</td>
+<td>0.006946</td>
 <td>214500</td>
-<td>0.006862</td>
+<td>0.007161</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>HBOS</td>
-<td>0.019263</td>
-<td>0.992429</td>
+<td>0.021492</td>
+<td>0.992499</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.499643</td>
+<td>0.499829</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.007</td>
 <td>643500</td>
 <td>[amt]</td>
-<td>0.007046</td>
+<td>0.006946</td>
 <td>214500</td>
-<td>0.006862</td>
+<td>0.007161</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>IForest</td>
-<td>15.022478</td>
-<td>0.992005</td>
-<td>0.418071</td>
-<td>0.421196</td>
-<td>0.419628</td>
-<td>0.708572</td>
+<td>13.654450</td>
+<td>0.991828</td>
+<td>0.425736</td>
+<td>0.404948</td>
+<td>0.415082</td>
+<td>0.700504</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.007</td>
 <td>643500</td>
 <td>[amt]</td>
-<td>0.007046</td>
+<td>0.006946</td>
 <td>214500</td>
-<td>0.006862</td>
+<td>0.007161</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>INNE</td>
-<td>22.330099</td>
-<td>0.992051</td>
-<td>0.416368</td>
-<td>0.394022</td>
-<td>0.404887</td>
-<td>0.695103</td>
+<td>16.246222</td>
+<td>0.991930</td>
+<td>0.428044</td>
+<td>0.377604</td>
+<td>0.401245</td>
+<td>0.686983</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.007</td>
 <td>643500</td>
 <td>[amt]</td>
-<td>0.007046</td>
+<td>0.006946</td>
 <td>214500</td>
-<td>0.006862</td>
+<td>0.007161</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
 <td>KNN</td>
-<td>1.042205</td>
-<td>0.990620</td>
-<td>0.318059</td>
-<td>0.320652</td>
-<td>0.319350</td>
-<td>0.657951</td>
+<td>1.089241</td>
+<td>0.990247</td>
+<td>0.311141</td>
+<td>0.298177</td>
+<td>0.304521</td>
+<td>0.646708</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.007</td>
 <td>643500</td>
 <td>[amt]</td>
-<td>0.007046</td>
+<td>0.006946</td>
 <td>214500</td>
-<td>0.006862</td>
+<td>0.007161</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
 <td>LODA</td>
-<td>1.774493</td>
-<td>0.992429</td>
+<td>1.013922</td>
+<td>0.992499</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.499643</td>
+<td>0.499829</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.007</td>
 <td>643500</td>
 <td>[amt]</td>
-<td>0.007046</td>
+<td>0.006946</td>
 <td>214500</td>
-<td>0.006862</td>
+<td>0.007161</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
 <td>LOF</td>
-<td>1.573942</td>
-<td>0.986527</td>
-<td>0.002107</td>
-<td>0.002038</td>
-<td>0.002072</td>
-<td>0.497684</td>
+<td>1.578532</td>
+<td>0.987096</td>
+<td>0.001618</td>
+<td>0.001302</td>
+<td>0.001443</td>
+<td>0.497754</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.007</td>
 <td>643500</td>
 <td>[amt]</td>
-<td>0.007046</td>
+<td>0.006946</td>
 <td>214500</td>
-<td>0.006862</td>
+<td>0.007161</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
 <td>MCD</td>
-<td>0.127130</td>
-<td>0.991977</td>
-<td>0.417055</td>
-<td>0.425272</td>
-<td>0.421123</td>
-<td>0.710582</td>
+<td>0.110214</td>
+<td>0.991855</td>
+<td>0.428475</td>
+<td>0.411458</td>
+<td>0.419794</td>
+<td>0.703750</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.007</td>
 <td>643500</td>
 <td>[amt]</td>
-<td>0.007046</td>
+<td>0.006946</td>
 <td>214500</td>
-<td>0.006862</td>
+<td>0.007161</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
 <td>PCA</td>
-<td>0.037109</td>
-<td>0.991977</td>
-<td>0.417055</td>
-<td>0.425272</td>
-<td>0.421123</td>
-<td>0.710582</td>
+<td>0.036325</td>
+<td>0.991855</td>
+<td>0.428475</td>
+<td>0.411458</td>
+<td>0.419794</td>
+<td>0.703750</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.007</td>
 <td>643500</td>
 <td>[amt]</td>
-<td>0.007046</td>
+<td>0.006946</td>
 <td>214500</td>
-<td>0.006862</td>
+<td>0.007161</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
 <td>ROD</td>
-<td>15.755857</td>
-<td>0.982065</td>
+<td>12.376851</td>
+<td>0.988573</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.494426</td>
+<td>0.497852</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.007</td>
 <td>643500</td>
 <td>[amt]</td>
-<td>0.007046</td>
+<td>0.006946</td>
 <td>214500</td>
-<td>0.006862</td>
+<td>0.007161</td>
 <td>None</td>
 </tr>
 </tbody>
@@ -1869,22 +1682,9 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 </div>
 </div>
 </div>
-<div id="99b91209-745f-4400-b8ae-98b1018b46ba" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.008</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7fb797b45430&gt;
-Traceback (most recent call last):
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
-    self._make_module_from_path(filepath)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
-    module = module_class(filepath, prefix, user_api, internal_api)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
-    self.version = self.get_version()
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
-    config = get_config().split()
-AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div id="99b91209-745f-4400-b8ae-98b1018b46ba" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.008</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
 <div>
 
 
@@ -1914,210 +1714,210 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>ECOD</td>
-<td>0.119038</td>
-<td>0.987053</td>
-<td>0.194964</td>
-<td>0.203367</td>
-<td>0.199077</td>
-<td>0.598335</td>
+<td>0.107724</td>
+<td>0.987197</td>
+<td>0.197100</td>
+<td>0.201482</td>
+<td>0.199267</td>
+<td>0.597471</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.008</td>
 <td>563062</td>
 <td>[amt]</td>
-<td>0.008029</td>
+<td>0.008031</td>
 <td>187688</td>
-<td>0.007912</td>
+<td>0.007907</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>GMM</td>
-<td>0.144922</td>
-<td>0.991166</td>
-<td>0.442448</td>
-<td>0.447811</td>
-<td>0.445114</td>
-<td>0.721655</td>
+<td>0.101690</td>
+<td>0.991156</td>
+<td>0.442857</td>
+<td>0.459569</td>
+<td>0.451058</td>
+<td>0.727480</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.008</td>
 <td>563062</td>
 <td>[amt]</td>
-<td>0.008029</td>
+<td>0.008031</td>
 <td>187688</td>
-<td>0.007912</td>
+<td>0.007907</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>HBOS</td>
-<td>0.016834</td>
-<td>0.991758</td>
+<td>0.016904</td>
+<td>0.991710</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.499834</td>
+<td>0.499807</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.008</td>
 <td>563062</td>
 <td>[amt]</td>
-<td>0.008029</td>
+<td>0.008031</td>
 <td>187688</td>
-<td>0.007912</td>
+<td>0.007907</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>IForest</td>
-<td>13.051786</td>
+<td>14.253869</td>
 <td>0.991182</td>
-<td>0.443106</td>
-<td>0.445791</td>
-<td>0.444444</td>
-<td>0.720662</td>
+<td>0.443861</td>
+<td>0.455526</td>
+<td>0.449618</td>
+<td>0.725488</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.008</td>
 <td>563062</td>
 <td>[amt]</td>
-<td>0.008029</td>
+<td>0.008031</td>
 <td>187688</td>
-<td>0.007912</td>
+<td>0.007907</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>INNE</td>
-<td>19.702755</td>
-<td>0.991315</td>
-<td>0.449265</td>
-<td>0.432323</td>
-<td>0.440631</td>
-<td>0.714048</td>
+<td>15.132947</td>
+<td>0.991193</td>
+<td>0.444298</td>
+<td>0.454178</td>
+<td>0.449184</td>
+<td>0.724825</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.008</td>
 <td>563062</td>
 <td>[amt]</td>
-<td>0.008029</td>
+<td>0.008031</td>
 <td>187688</td>
-<td>0.007912</td>
+<td>0.007907</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
 <td>KNN</td>
-<td>0.860021</td>
-<td>0.989717</td>
-<td>0.352747</td>
-<td>0.358923</td>
-<td>0.355808</td>
-<td>0.676835</td>
+<td>0.851337</td>
+<td>0.989728</td>
+<td>0.357875</td>
+<td>0.376685</td>
+<td>0.367039</td>
+<td>0.685649</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.008</td>
 <td>563062</td>
 <td>[amt]</td>
-<td>0.008029</td>
+<td>0.008031</td>
 <td>187688</td>
-<td>0.007912</td>
+<td>0.007907</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
 <td>LODA</td>
-<td>1.489719</td>
-<td>0.991758</td>
+<td>0.876604</td>
+<td>0.991710</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.499834</td>
+<td>0.499807</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.008</td>
 <td>563062</td>
 <td>[amt]</td>
-<td>0.008029</td>
+<td>0.008031</td>
 <td>187688</td>
-<td>0.007912</td>
+<td>0.007907</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
 <td>LOF</td>
-<td>1.370956</td>
-<td>0.984426</td>
-<td>0.000694</td>
-<td>0.000673</td>
-<td>0.000684</td>
-<td>0.496473</td>
+<td>1.358122</td>
+<td>0.984964</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.496407</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.008</td>
 <td>563062</td>
 <td>[amt]</td>
-<td>0.008029</td>
+<td>0.008031</td>
 <td>187688</td>
-<td>0.007912</td>
+<td>0.007907</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
 <td>MCD</td>
-<td>0.113501</td>
-<td>0.991166</td>
-<td>0.442448</td>
-<td>0.447811</td>
-<td>0.445114</td>
-<td>0.721655</td>
+<td>0.095074</td>
+<td>0.991156</td>
+<td>0.442857</td>
+<td>0.459569</td>
+<td>0.451058</td>
+<td>0.727480</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.008</td>
 <td>563062</td>
 <td>[amt]</td>
-<td>0.008029</td>
+<td>0.008031</td>
 <td>187688</td>
-<td>0.007912</td>
+<td>0.007907</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
 <td>PCA</td>
-<td>0.032855</td>
-<td>0.991166</td>
-<td>0.442448</td>
-<td>0.447811</td>
-<td>0.445114</td>
-<td>0.721655</td>
+<td>0.033198</td>
+<td>0.991156</td>
+<td>0.442857</td>
+<td>0.459569</td>
+<td>0.451058</td>
+<td>0.727480</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.008</td>
 <td>563062</td>
 <td>[amt]</td>
-<td>0.008029</td>
+<td>0.008031</td>
 <td>187688</td>
-<td>0.007912</td>
+<td>0.007907</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
 <td>ROD</td>
-<td>14.830936</td>
-<td>0.981533</td>
-<td>0.000504</td>
-<td>0.000673</td>
-<td>0.000577</td>
-<td>0.495015</td>
+<td>11.736433</td>
+<td>0.987858</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.497865</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.008</td>
 <td>563062</td>
 <td>[amt]</td>
-<td>0.008029</td>
+<td>0.008031</td>
 <td>187688</td>
-<td>0.007912</td>
+<td>0.007907</td>
 <td>None</td>
 </tr>
 </tbody>
@@ -2126,22 +1926,9 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 </div>
 </div>
 </div>
-<div id="59db7c25-a26a-40cc-9c5c-7b513b165298" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.009</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7fb7833daee0&gt;
-Traceback (most recent call last):
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
-    self._make_module_from_path(filepath)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
-    module = module_class(filepath, prefix, user_api, internal_api)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
-    self.version = self.get_version()
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
-    config = get_config().split()
-AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div id="59db7c25-a26a-40cc-9c5c-7b513b165298" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.009</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
 <div>
 
 
@@ -2171,210 +1958,210 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>ECOD</td>
-<td>0.102734</td>
-<td>0.985980</td>
-<td>0.213324</td>
-<td>0.213181</td>
-<td>0.213253</td>
-<td>0.603055</td>
+<td>0.099683</td>
+<td>0.985872</td>
+<td>0.220540</td>
+<td>0.222149</td>
+<td>0.221341</td>
+<td>0.607493</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.009</td>
 <td>500499</td>
 <td>[amt]</td>
-<td>0.009029</td>
+<td>0.008987</td>
 <td>166834</td>
-<td>0.008913</td>
+<td>0.009039</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>GMM</td>
-<td>0.139226</td>
-<td>0.990787</td>
-<td>0.482782</td>
-<td>0.471419</td>
-<td>0.477033</td>
-<td>0.733439</td>
+<td>0.093896</td>
+<td>0.990164</td>
+<td>0.456106</td>
+<td>0.458223</td>
+<td>0.457162</td>
+<td>0.726619</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.009</td>
 <td>500499</td>
 <td>[amt]</td>
-<td>0.009029</td>
+<td>0.008987</td>
 <td>166834</td>
-<td>0.008913</td>
+<td>0.009039</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>HBOS</td>
-<td>0.014991</td>
-<td>0.990775</td>
+<td>0.018281</td>
+<td>0.990583</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.499843</td>
+<td>0.499809</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.009</td>
 <td>500499</td>
 <td>[amt]</td>
-<td>0.009029</td>
+<td>0.008987</td>
 <td>166834</td>
-<td>0.008913</td>
+<td>0.009039</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>IForest</td>
-<td>11.497505</td>
-<td>0.990757</td>
-<td>0.480916</td>
-<td>0.466039</td>
-<td>0.473361</td>
-<td>0.730758</td>
+<td>11.115221</td>
+<td>0.990350</td>
+<td>0.465306</td>
+<td>0.453581</td>
+<td>0.459369</td>
+<td>0.724413</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.009</td>
 <td>500499</td>
 <td>[amt]</td>
-<td>0.009029</td>
+<td>0.008987</td>
 <td>166834</td>
-<td>0.008913</td>
+<td>0.009039</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>INNE</td>
-<td>16.159571</td>
-<td>0.989606</td>
-<td>0.413937</td>
-<td>0.399462</td>
-<td>0.406571</td>
-<td>0.697188</td>
+<td>12.340797</td>
+<td>0.990134</td>
+<td>0.454605</td>
+<td>0.458223</td>
+<td>0.456407</td>
+<td>0.726604</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.009</td>
 <td>500499</td>
 <td>[amt]</td>
-<td>0.009029</td>
+<td>0.008987</td>
 <td>166834</td>
-<td>0.008913</td>
+<td>0.009039</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
 <td>KNN</td>
-<td>0.733732</td>
-<td>0.989187</td>
-<td>0.392250</td>
-<td>0.388030</td>
-<td>0.390128</td>
-<td>0.691311</td>
+<td>0.748844</td>
+<td>0.988797</td>
+<td>0.379426</td>
+<td>0.376658</td>
+<td>0.378037</td>
+<td>0.685519</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.009</td>
 <td>500499</td>
 <td>[amt]</td>
-<td>0.009029</td>
+<td>0.008987</td>
 <td>166834</td>
-<td>0.008913</td>
+<td>0.009039</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
 <td>LODA</td>
-<td>1.380267</td>
-<td>0.990775</td>
+<td>1.080885</td>
+<td>0.990583</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
-<td>0.499843</td>
+<td>0.499809</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.009</td>
 <td>500499</td>
 <td>[amt]</td>
-<td>0.009029</td>
+<td>0.008987</td>
 <td>166834</td>
-<td>0.008913</td>
+<td>0.009039</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
 <td>LOF</td>
-<td>1.171791</td>
-<td>0.982414</td>
-<td>0.001378</td>
-<td>0.001345</td>
-<td>0.001361</td>
-<td>0.496291</td>
+<td>1.217433</td>
+<td>0.982210</td>
+<td>0.002046</td>
+<td>0.001989</td>
+<td>0.002017</td>
+<td>0.496570</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.009</td>
 <td>500499</td>
 <td>[amt]</td>
-<td>0.009029</td>
+<td>0.008987</td>
 <td>166834</td>
-<td>0.008913</td>
+<td>0.009039</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
 <td>MCD</td>
-<td>0.101797</td>
-<td>0.990787</td>
-<td>0.482782</td>
-<td>0.471419</td>
-<td>0.477033</td>
-<td>0.733439</td>
+<td>0.093267</td>
+<td>0.990164</td>
+<td>0.456106</td>
+<td>0.458223</td>
+<td>0.457162</td>
+<td>0.726619</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.009</td>
 <td>500499</td>
 <td>[amt]</td>
-<td>0.009029</td>
+<td>0.008987</td>
 <td>166834</td>
-<td>0.008913</td>
+<td>0.009039</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
 <td>PCA</td>
-<td>0.029553</td>
-<td>0.990787</td>
-<td>0.482782</td>
-<td>0.471419</td>
-<td>0.477033</td>
-<td>0.733439</td>
+<td>0.037229</td>
+<td>0.990164</td>
+<td>0.456106</td>
+<td>0.458223</td>
+<td>0.457162</td>
+<td>0.726619</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.009</td>
 <td>500499</td>
 <td>[amt]</td>
-<td>0.009029</td>
+<td>0.008987</td>
 <td>166834</td>
-<td>0.008913</td>
+<td>0.009039</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
 <td>ROD</td>
-<td>15.238129</td>
-<td>0.978524</td>
-<td>0.000477</td>
-<td>0.000672</td>
-<td>0.000558</td>
-<td>0.493995</td>
+<td>12.339864</td>
+<td>0.977996</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.493458</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.009</td>
 <td>500499</td>
 <td>[amt]</td>
-<td>0.009029</td>
+<td>0.008987</td>
 <td>166834</td>
-<td>0.008913</td>
+<td>0.009039</td>
 <td>None</td>
 </tr>
 </tbody>

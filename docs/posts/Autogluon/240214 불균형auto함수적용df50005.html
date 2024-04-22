@@ -188,9 +188,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<ol type="1">
+<li><p>2/14</p></li>
+<li><p>4/9</p></li>
+</ol>
 <section id="imports" class="level1">
 <h1>imports</h1>
-<div id="4eb91738-6398-4ffc-bbec-fc48fcc8f249" class="cell" data-execution_count="4">
+<div id="4eb91738-6398-4ffc-bbec-fc48fcc8f249" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn</span>
@@ -200,16 +204,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b62fd4fe-e850-4d9a-9708-55fb40e73485" class="cell" data-execution_count="5">
+<div id="b62fd4fe-e850-4d9a-9708-55fb40e73485" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>run ..<span class="op">/</span>functions<span class="op">-</span>auto.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="9f8b4812-1b25-44e2-bc14-438f74d7e911" class="cell" data-execution_count="6">
+<div id="9f8b4812-1b25-44e2-bc14-438f74d7e911" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b862979e-7581-4645-80cd-fd67df2128ac" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb2(fraudTrain,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="8d324a9f-6f0d-4cd5-8343-1a6bc8663cdd" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb3(fraudTrain,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
 <div>
 
 
@@ -240,567 +244,266 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">0</td>
 <td>KNeighborsUnif</td>
 <td>None</td>
-<td>0.879535</td>
-<td>0.047633</td>
-<td>0.892045</td>
-<td>0.090438</td>
-<td>0.958061</td>
+<td>0.875755</td>
+<td>0.007702</td>
+<td>0.78125</td>
+<td>0.015253</td>
+<td>0.884682</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.132978</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
-<td>0.500389</td>
-<td>26215</td>
-<td>0.006714</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>KNeighborsDist</td>
 <td>None</td>
-<td>0.874805</td>
-<td>0.045641</td>
-<td>0.886364</td>
-<td>0.086811</td>
-<td>0.935009</td>
+<td>0.867634</td>
+<td>0.007517</td>
+<td>0.81250</td>
+<td>0.014895</td>
+<td>0.880694</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.132978</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
-<td>0.500389</td>
-<td>26215</td>
-<td>0.006714</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>LightGBMXT</td>
 <td>None</td>
-<td>0.886477</td>
-<td>0.050706</td>
-<td>0.897727</td>
-<td>0.095990</td>
-<td>0.968582</td>
+<td>0.883877</td>
+<td>0.008237</td>
+<td>0.78125</td>
+<td>0.016303</td>
+<td>0.923171</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.132978</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
-<td>0.500389</td>
-<td>26215</td>
-<td>0.006714</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>LightGBM</td>
 <td>None</td>
-<td>0.911120</td>
-<td>0.064320</td>
-<td>0.903409</td>
-<td>0.120091</td>
-<td>0.969107</td>
+<td>0.896732</td>
+<td>0.009256</td>
+<td>0.78125</td>
+<td>0.018295</td>
+<td>0.939773</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.132978</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
-<td>0.500389</td>
-<td>26215</td>
-<td>0.006714</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>RandomForestGini</td>
 <td>None</td>
-<td>0.856189</td>
-<td>0.041113</td>
-<td>0.914773</td>
-<td>0.078690</td>
-<td>0.959388</td>
+<td>0.849698</td>
+<td>0.006875</td>
+<td>0.84375</td>
+<td>0.013640</td>
+<td>0.909261</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.132978</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
-<td>0.500389</td>
-<td>26215</td>
-<td>0.006714</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
 <td>RandomForestEntr</td>
 <td>None</td>
-<td>0.856189</td>
-<td>0.041113</td>
-<td>0.914773</td>
-<td>0.078690</td>
-<td>0.959388</td>
+<td>0.849698</td>
+<td>0.006875</td>
+<td>0.84375</td>
+<td>0.013640</td>
+<td>0.909261</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.132978</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
-<td>0.500389</td>
-<td>26215</td>
-<td>0.006714</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
 <td>CatBoost</td>
 <td>None</td>
-<td>0.902575</td>
-<td>0.059303</td>
-<td>0.909091</td>
-<td>0.111343</td>
-<td>0.968886</td>
+<td>0.890651</td>
+<td>0.008744</td>
+<td>0.78125</td>
+<td>0.017295</td>
+<td>0.930557</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.132978</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
-<td>0.500389</td>
-<td>26215</td>
-<td>0.006714</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
 <td>ExtraTreesGini</td>
 <td>None</td>
-<td>0.863246</td>
-<td>0.042662</td>
-<td>0.903409</td>
-<td>0.081476</td>
-<td>0.962752</td>
+<td>0.857896</td>
+<td>0.007004</td>
+<td>0.81250</td>
+<td>0.013889</td>
+<td>0.918836</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.132978</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
-<td>0.500389</td>
-<td>26215</td>
-<td>0.006714</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
 <td>ExtraTreesEntr</td>
 <td>None</td>
-<td>0.866336</td>
-<td>0.043609</td>
-<td>0.903409</td>
-<td>0.083203</td>
-<td>0.963072</td>
+<td>0.855818</td>
+<td>0.007166</td>
+<td>0.84375</td>
+<td>0.014211</td>
+<td>0.909375</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.132978</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
-<td>0.500389</td>
-<td>26215</td>
-<td>0.006714</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
 <td>NeuralNetFastAI</td>
 <td>None</td>
-<td>0.967080</td>
-<td>0.137276</td>
-<td>0.738636</td>
-<td>0.231523</td>
-<td>0.835557</td>
+<td>0.965706</td>
+<td>0.025414</td>
+<td>0.71875</td>
+<td>0.049093</td>
+<td>0.823335</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.132978</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
-<td>0.500389</td>
-<td>26215</td>
-<td>0.006714</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
 <td>XGBoost</td>
 <td>None</td>
-<td>0.909517</td>
-<td>0.063246</td>
-<td>0.903409</td>
-<td>0.118216</td>
-<td>0.968872</td>
+<td>0.895616</td>
+<td>0.009158</td>
+<td>0.78125</td>
+<td>0.018103</td>
+<td>0.940320</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.132978</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
-<td>0.500389</td>
-<td>26215</td>
-<td>0.006714</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">11</td>
 <td>NeuralNetTorch</td>
 <td>None</td>
-<td>0.883082</td>
-<td>0.050140</td>
-<td>0.914773</td>
-<td>0.095069</td>
-<td>0.967770</td>
+<td>0.883030</td>
+<td>0.007856</td>
+<td>0.75000</td>
+<td>0.015549</td>
+<td>0.921634</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.132978</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
-<td>0.500389</td>
-<td>26215</td>
-<td>0.006714</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">12</td>
 <td>LightGBMLarge</td>
 <td>None</td>
-<td>0.886821</td>
-<td>0.052294</td>
-<td>0.926136</td>
-<td>0.098998</td>
-<td>0.968253</td>
+<td>0.852200</td>
+<td>0.006736</td>
+<td>0.81250</td>
+<td>0.013361</td>
+<td>0.939314</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.132978</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
-<td>0.500389</td>
-<td>26215</td>
-<td>0.006714</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">13</td>
 <td>WeightedEnsemble_L2</td>
 <td>None</td>
-<td>0.904864</td>
-<td>0.060652</td>
-<td>0.909091</td>
-<td>0.113717</td>
-<td>0.970497</td>
+<td>0.883877</td>
+<td>0.008237</td>
+<td>0.78125</td>
+<td>0.016303</td>
+<td>0.923171</td>
 <td>False</td>
 <td>Auto_not_best</td>
-<td>0.132978</td>
+<td>0.130637</td>
 <td>9009</td>
 <td>[amt]</td>
-<td>0.500389</td>
-<td>26215</td>
-<td>0.006714</td>
-<td>None</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div id="8d324a9f-6f0d-4cd5-8343-1a6bc8663cdd" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>auto_amt_nb3(fraudTrain,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">model</th>
-<th data-quarto-table-cell-role="th">time</th>
-<th data-quarto-table-cell-role="th">acc</th>
-<th data-quarto-table-cell-role="th">pre</th>
-<th data-quarto-table-cell-role="th">rec</th>
-<th data-quarto-table-cell-role="th">f1</th>
-<th data-quarto-table-cell-role="th">auc</th>
-<th data-quarto-table-cell-role="th">graph_based</th>
-<th data-quarto-table-cell-role="th">method</th>
-<th data-quarto-table-cell-role="th">throw_rate</th>
-<th data-quarto-table-cell-role="th">train_size</th>
-<th data-quarto-table-cell-role="th">train_cols</th>
-<th data-quarto-table-cell-role="th">train_frate</th>
-<th data-quarto-table-cell-role="th">test_size</th>
-<th data-quarto-table-cell-role="th">test_frate</th>
-<th data-quarto-table-cell-role="th">hyper_params</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>KNeighborsUnif</td>
-<td>None</td>
-<td>0.874100</td>
-<td>0.009706</td>
-<td>0.864865</td>
-<td>0.019196</td>
-<td>0.931184</td>
-<td>False</td>
-<td>Auto_not_best</td>
-<td>0.12961</td>
-<td>9009</td>
-<td>[amt]</td>
-<td>0.499167</td>
-<td>25973</td>
-<td>0.001425</td>
-<td>None</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>KNeighborsDist</td>
-<td>None</td>
-<td>0.871251</td>
-<td>0.008910</td>
-<td>0.810811</td>
-<td>0.017626</td>
-<td>0.924838</td>
-<td>False</td>
-<td>Auto_not_best</td>
-<td>0.12961</td>
-<td>9009</td>
-<td>[amt]</td>
-<td>0.499167</td>
-<td>25973</td>
-<td>0.001425</td>
-<td>None</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>LightGBMXT</td>
-<td>None</td>
-<td>0.942902</td>
-<td>0.017356</td>
-<td>0.702703</td>
-<td>0.033876</td>
-<td>0.942350</td>
-<td>False</td>
-<td>Auto_not_best</td>
-<td>0.12961</td>
-<td>9009</td>
-<td>[amt]</td>
-<td>0.499167</td>
-<td>25973</td>
-<td>0.001425</td>
-<td>None</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>LightGBM</td>
-<td>None</td>
-<td>0.918146</td>
-<td>0.013960</td>
-<td>0.810811</td>
-<td>0.027447</td>
-<td>0.954469</td>
-<td>False</td>
-<td>Auto_not_best</td>
-<td>0.12961</td>
-<td>9009</td>
-<td>[amt]</td>
-<td>0.499167</td>
-<td>25973</td>
-<td>0.001425</td>
-<td>None</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>RandomForestGini</td>
-<td>None</td>
-<td>0.853964</td>
-<td>0.007862</td>
-<td>0.810811</td>
-<td>0.015572</td>
-<td>0.942904</td>
-<td>False</td>
-<td>Auto_not_best</td>
-<td>0.12961</td>
-<td>9009</td>
-<td>[amt]</td>
-<td>0.499167</td>
-<td>25973</td>
-<td>0.001425</td>
-<td>None</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
-<td>RandomForestEntr</td>
-<td>None</td>
-<td>0.853964</td>
-<td>0.007862</td>
-<td>0.810811</td>
-<td>0.015572</td>
-<td>0.942904</td>
-<td>False</td>
-<td>Auto_not_best</td>
-<td>0.12961</td>
-<td>9009</td>
-<td>[amt]</td>
-<td>0.499167</td>
-<td>25973</td>
-<td>0.001425</td>
-<td>None</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
-<td>CatBoost</td>
-<td>None</td>
-<td>0.915682</td>
-<td>0.013556</td>
-<td>0.810811</td>
-<td>0.026667</td>
-<td>0.957646</td>
-<td>False</td>
-<td>Auto_not_best</td>
-<td>0.12961</td>
-<td>9009</td>
-<td>[amt]</td>
-<td>0.499167</td>
-<td>25973</td>
-<td>0.001425</td>
-<td>None</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
-<td>ExtraTreesGini</td>
-<td>None</td>
-<td>0.861125</td>
-<td>0.008264</td>
-<td>0.810811</td>
-<td>0.016362</td>
-<td>0.949444</td>
-<td>False</td>
-<td>Auto_not_best</td>
-<td>0.12961</td>
-<td>9009</td>
-<td>[amt]</td>
-<td>0.499167</td>
-<td>25973</td>
-<td>0.001425</td>
-<td>None</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
-<td>ExtraTreesEntr</td>
-<td>None</td>
-<td>0.860355</td>
-<td>0.008488</td>
-<td>0.837838</td>
-<td>0.016807</td>
-<td>0.949917</td>
-<td>False</td>
-<td>Auto_not_best</td>
-<td>0.12961</td>
-<td>9009</td>
-<td>[amt]</td>
-<td>0.499167</td>
-<td>25973</td>
-<td>0.001425</td>
-<td>None</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
-<td>NeuralNetFastAI</td>
-<td>None</td>
-<td>0.973395</td>
-<td>0.035511</td>
-<td>0.675676</td>
-<td>0.067476</td>
-<td>0.873008</td>
-<td>False</td>
-<td>Auto_not_best</td>
-<td>0.12961</td>
-<td>9009</td>
-<td>[amt]</td>
-<td>0.499167</td>
-<td>25973</td>
-<td>0.001425</td>
-<td>None</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">10</td>
-<td>XGBoost</td>
-<td>None</td>
-<td>0.911138</td>
-<td>0.012870</td>
-<td>0.810811</td>
-<td>0.025338</td>
-<td>0.959655</td>
-<td>False</td>
-<td>Auto_not_best</td>
-<td>0.12961</td>
-<td>9009</td>
-<td>[amt]</td>
-<td>0.499167</td>
-<td>25973</td>
-<td>0.001425</td>
-<td>None</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11</td>
-<td>NeuralNetTorch</td>
-<td>None</td>
-<td>0.943749</td>
-<td>0.018268</td>
-<td>0.729730</td>
-<td>0.035644</td>
-<td>0.934012</td>
-<td>False</td>
-<td>Auto_not_best</td>
-<td>0.12961</td>
-<td>9009</td>
-<td>[amt]</td>
-<td>0.499167</td>
-<td>25973</td>
-<td>0.001425</td>
-<td>None</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">12</td>
-<td>LightGBMLarge</td>
-<td>None</td>
-<td>0.912525</td>
-<td>0.013072</td>
-<td>0.810811</td>
-<td>0.025729</td>
-<td>0.952842</td>
-<td>False</td>
-<td>Auto_not_best</td>
-<td>0.12961</td>
-<td>9009</td>
-<td>[amt]</td>
-<td>0.499167</td>
-<td>25973</td>
-<td>0.001425</td>
-<td>None</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">13</td>
-<td>WeightedEnsemble_L2</td>
-<td>None</td>
-<td>0.903746</td>
-<td>0.011891</td>
-<td>0.810811</td>
-<td>0.023438</td>
-<td>0.954590</td>
-<td>False</td>
-<td>Auto_not_best</td>
-<td>0.12961</td>
-<td>9009</td>
-<td>[amt]</td>
-<td>0.499167</td>
-<td>25973</td>
-<td>0.001425</td>
+<td>0.50383</td>
+<td>25981</td>
+<td>0.001232</td>
 <td>None</td>
 </tr>
 </tbody>

@@ -188,10 +188,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<ol type="1">
+<li><p>2/20</p></li>
+<li><p>4/5</p></li>
+<li><p>4/8</p></li>
+</ol>
 <p>ref: <a href="https://pyod.readthedocs.io/en/latest/pyod.models.html#all-models" class="uri">https://pyod.readthedocs.io/en/latest/pyod.models.html#all-models</a></p>
 <section id="imports" class="level1">
 <h1>1. Imports</h1>
-<div id="f4162b18-f612-4403-bf6b-823b6b662ea4" class="cell" data-tags="[]" data-execution_count="1">
+<div id="f4162b18-f612-4403-bf6b-823b6b662ea4" class="cell" data-tags="[]" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn</span>
@@ -199,36 +204,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time </span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e59bf270-951d-4da7-b7bb-09d4227238bd" class="cell" data-tags="[]" data-execution_count="2">
+<div id="e59bf270-951d-4da7-b7bb-09d4227238bd" class="cell" data-tags="[]" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e42d11c8-75b7-4337-b0ac-c715d41b1011" class="cell" data-execution_count="3">
+<div id="e42d11c8-75b7-4337-b0ac-c715d41b1011" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>run ..<span class="op">/</span>functions_pyod2.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="81833a59-fff8-46f3-bd2d-f77279fb7aa9" class="cell" data-execution_count="4">
+<div id="81833a59-fff8-46f3-bd2d-f77279fb7aa9" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="section" class="level1">
 <h1>2.</h1>
-<div id="9330d2a1-940f-4687-869e-fb10f589aa4f" class="cell" data-execution_count="5">
+<div id="9330d2a1-940f-4687-869e-fb10f589aa4f" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess4(fraudTrain, <span class="fl">0.04</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Exception ignored on calling ctypes callback function: &lt;function _ThreadpoolInfo._find_modules_with_dl_iterate_phdr.&lt;locals&gt;.match_module_callback at 0x7fca59d80d30&gt;
-Traceback (most recent call last):
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 400, in match_module_callback
-    self._make_module_from_path(filepath)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 515, in _make_module_from_path
-    module = module_class(filepath, prefix, user_api, internal_api)
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 606, in __init__
-    self.version = self.get_version()
-  File "/home/coco/anaconda3/envs/py38/lib/python3.8/site-packages/threadpoolctl.py", line 646, in get_version
-    config = get_config().split()
-AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
 
@@ -258,248 +250,210 @@ AttributeError: 'NoneType' object has no attribute 'split'</code></pre>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>ECOD</td>
-<td>0.206807</td>
-<td>0.952208</td>
-<td>0.413505</td>
-<td>0.421639</td>
-<td>0.417532</td>
-<td>0.698158</td>
+<td>0.023506</td>
+<td>0.951995</td>
+<td>0.407220</td>
+<td>0.426110</td>
+<td>0.416451</td>
+<td>0.700065</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.04</td>
 <td>112612</td>
 <td>[amt]</td>
-<td>0.039791</td>
+<td>0.039934</td>
 <td>37538</td>
-<td>0.040625</td>
+<td>0.040199</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>GMM</td>
-<td>0.127103</td>
-<td>0.966620</td>
-<td>0.586845</td>
-<td>0.602623</td>
-<td>0.594630</td>
-<td>0.792329</td>
+<td>0.035906</td>
+<td>0.967260</td>
+<td>0.589629</td>
+<td>0.610338</td>
+<td>0.599805</td>
+<td>0.796273</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.04</td>
 <td>112612</td>
 <td>[amt]</td>
-<td>0.039791</td>
+<td>0.039934</td>
 <td>37538</td>
-<td>0.040625</td>
+<td>0.040199</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>HBOS</td>
-<td>0.913406</td>
-<td>0.958256</td>
-<td>0.223684</td>
-<td>0.011148</td>
-<td>0.021237</td>
-<td>0.504755</td>
+<td>0.006652</td>
+<td>0.959401</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499792</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.04</td>
 <td>112612</td>
 <td>[amt]</td>
-<td>0.039791</td>
+<td>0.039934</td>
 <td>37538</td>
-<td>0.040625</td>
+<td>0.040199</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>IForest</td>
-<td>2.626169</td>
-<td>0.966620</td>
-<td>0.586845</td>
-<td>0.602623</td>
-<td>0.594630</td>
-<td>0.792329</td>
+<td>2.369873</td>
+<td>0.967100</td>
+<td>0.588387</td>
+<td>0.604374</td>
+<td>0.596273</td>
+<td>0.793333</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.04</td>
 <td>112612</td>
 <td>[amt]</td>
-<td>0.039791</td>
+<td>0.039934</td>
 <td>37538</td>
-<td>0.040625</td>
+<td>0.040199</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>INNE</td>
-<td>3.188388</td>
-<td>0.966620</td>
-<td>0.586845</td>
-<td>0.602623</td>
-<td>0.594630</td>
-<td>0.792329</td>
+<td>2.631451</td>
+<td>0.964729</td>
+<td>0.560261</td>
+<td>0.569914</td>
+<td>0.565046</td>
+<td>0.775589</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.04</td>
 <td>112612</td>
 <td>[amt]</td>
-<td>0.039791</td>
+<td>0.039934</td>
 <td>37538</td>
-<td>0.040625</td>
+<td>0.040199</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
-<td>KDE</td>
-<td>368.169651</td>
-<td>0.965022</td>
-<td>0.566835</td>
-<td>0.589508</td>
-<td>0.577949</td>
-<td>0.785216</td>
+<td>KNN</td>
+<td>0.148018</td>
+<td>0.965049</td>
+<td>0.563263</td>
+<td>0.581180</td>
+<td>0.572081</td>
+<td>0.781153</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.04</td>
 <td>112612</td>
 <td>[amt]</td>
-<td>0.039791</td>
+<td>0.039934</td>
 <td>37538</td>
-<td>0.040625</td>
+<td>0.040199</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
-<td>KNN</td>
-<td>0.141543</td>
-<td>0.964596</td>
-<td>0.563802</td>
-<td>0.567869</td>
-<td>0.565828</td>
-<td>0.774632</td>
+<td>LODA</td>
+<td>0.182127</td>
+<td>0.959401</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499792</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.04</td>
 <td>112612</td>
 <td>[amt]</td>
-<td>0.039791</td>
+<td>0.039934</td>
 <td>37538</td>
-<td>0.040625</td>
+<td>0.040199</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
-<td>LODA</td>
-<td>0.613106</td>
-<td>0.958256</td>
-<td>0.223684</td>
-<td>0.011148</td>
-<td>0.021237</td>
-<td>0.504755</td>
+<td>LOF</td>
+<td>0.265123</td>
+<td>0.914114</td>
+<td>0.025457</td>
+<td>0.030484</td>
+<td>0.027744</td>
+<td>0.490803</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.04</td>
 <td>112612</td>
 <td>[amt]</td>
-<td>0.039791</td>
+<td>0.039934</td>
 <td>37538</td>
-<td>0.040625</td>
+<td>0.040199</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
-<td>LOF</td>
-<td>0.254347</td>
-<td>0.914407</td>
-<td>0.017162</td>
-<td>0.019672</td>
-<td>0.018332</td>
-<td>0.485984</td>
+<td>MCD</td>
+<td>0.033004</td>
+<td>0.967260</td>
+<td>0.589629</td>
+<td>0.610338</td>
+<td>0.599805</td>
+<td>0.796273</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.04</td>
 <td>112612</td>
 <td>[amt]</td>
-<td>0.039791</td>
+<td>0.039934</td>
 <td>37538</td>
-<td>0.040625</td>
+<td>0.040199</td>
 <td>None</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
-<td>MCD</td>
-<td>0.035822</td>
-<td>0.966620</td>
-<td>0.586845</td>
-<td>0.602623</td>
-<td>0.594630</td>
-<td>0.792329</td>
+<td>PCA</td>
+<td>0.010788</td>
+<td>0.956551</td>
+<td>0.462346</td>
+<td>0.496355</td>
+<td>0.478747</td>
+<td>0.736090</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.04</td>
 <td>112612</td>
 <td>[amt]</td>
-<td>0.039791</td>
+<td>0.039934</td>
 <td>37538</td>
-<td>0.040625</td>
+<td>0.040199</td>
 <td>None</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
-<td>OCSVM</td>
-<td>723.667892</td>
-<td>0.965022</td>
-<td>0.566499</td>
-<td>0.592131</td>
-<td>0.579032</td>
-<td>0.786472</td>
-<td>False</td>
-<td>pyod</td>
-<td>0.04</td>
-<td>112612</td>
-<td>[amt]</td>
-<td>0.039791</td>
-<td>37538</td>
-<td>0.040625</td>
-<td>None</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11</td>
-<td>PCA</td>
-<td>0.017816</td>
-<td>0.958922</td>
-<td>0.494419</td>
-<td>0.493770</td>
-<td>0.494094</td>
-<td>0.736195</td>
-<td>False</td>
-<td>pyod</td>
-<td>0.04</td>
-<td>112612</td>
-<td>[amt]</td>
-<td>0.039791</td>
-<td>37538</td>
-<td>0.040625</td>
-<td>None</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">12</td>
 <td>ROD</td>
-<td>8.310001</td>
-<td>0.918269</td>
-<td>0.000647</td>
-<td>0.000656</td>
-<td>0.000651</td>
-<td>0.478891</td>
+<td>7.429507</td>
+<td>0.918030</td>
+<td>0.000637</td>
+<td>0.000663</td>
+<td>0.000650</td>
+<td>0.478557</td>
 <td>False</td>
 <td>pyod</td>
 <td>0.04</td>
 <td>112612</td>
 <td>[amt]</td>
-<td>0.039791</td>
+<td>0.039934</td>
 <td>37538</td>
-<td>0.040625</td>
+<td>0.040199</td>
 <td>None</td>
 </tr>
 </tbody>
