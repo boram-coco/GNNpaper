@@ -4071,17 +4071,1285 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="73db14d5-f5c3-47cb-99f7-8acff96acb32" class="cell">
+<div id="73db14d5-f5c3-47cb-99f7-8acff96acb32" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess7(fraudTrain, <span class="fl">0.5</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ABOD</td>
+<td>0.703161</td>
+<td>0.998537</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.500000</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.128569</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.49506</td>
+<td>25976</td>
+<td>0.001463</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>COPOD</td>
+<td>0.003858</td>
+<td>0.960887</td>
+<td>0.027079</td>
+<td>0.736842</td>
+<td>0.052239</td>
+<td>0.849029</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.128569</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.49506</td>
+<td>25976</td>
+<td>0.001463</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>ECOD</td>
+<td>0.003752</td>
+<td>0.920658</td>
+<td>0.006826</td>
+<td>0.368421</td>
+<td>0.013404</td>
+<td>0.644944</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.128569</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.49506</td>
+<td>25976</td>
+<td>0.001463</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>GMM</td>
+<td>0.039163</td>
+<td>0.996227</td>
+<td>0.115385</td>
+<td>0.236842</td>
+<td>0.155172</td>
+<td>0.617091</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.128569</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.49506</td>
+<td>25976</td>
+<td>0.001463</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>HBOS</td>
+<td>0.002577</td>
+<td>0.998383</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499923</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.128569</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.49506</td>
+<td>25976</td>
+<td>0.001463</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>IForest</td>
+<td>0.439774</td>
+<td>0.948991</td>
+<td>0.005380</td>
+<td>0.184211</td>
+<td>0.010456</td>
+<td>0.567161</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.128569</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.49506</td>
+<td>25976</td>
+<td>0.001463</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>INNE</td>
+<td>0.332006</td>
+<td>0.881775</td>
+<td>0.001315</td>
+<td>0.105263</td>
+<td>0.002598</td>
+<td>0.494088</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.128569</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.49506</td>
+<td>25976</td>
+<td>0.001463</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>KDE</td>
+<td>2.300047</td>
+<td>0.941446</td>
+<td>0.005337</td>
+<td>0.210526</td>
+<td>0.010410</td>
+<td>0.576522</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.128569</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.49506</td>
+<td>25976</td>
+<td>0.001463</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>KNN</td>
+<td>0.013132</td>
+<td>0.953342</td>
+<td>0.005059</td>
+<td>0.157895</td>
+<td>0.009804</td>
+<td>0.556201</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.128569</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.49506</td>
+<td>25976</td>
+<td>0.001463</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>LODA</td>
+<td>0.033323</td>
+<td>0.998383</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499923</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.128569</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.49506</td>
+<td>25976</td>
+<td>0.001463</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>LOF</td>
+<td>0.024341</td>
+<td>0.849091</td>
+<td>0.001541</td>
+<td>0.157895</td>
+<td>0.003052</td>
+<td>0.503999</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.128569</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.49506</td>
+<td>25976</td>
+<td>0.001463</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>MCD</td>
+<td>0.008350</td>
+<td>0.996227</td>
+<td>0.115385</td>
+<td>0.236842</td>
+<td>0.155172</td>
+<td>0.617091</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.128569</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.49506</td>
+<td>25976</td>
+<td>0.001463</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>OCSVM</td>
+<td>4.438412</td>
+<td>0.940753</td>
+<td>0.005274</td>
+<td>0.210526</td>
+<td>0.010289</td>
+<td>0.576175</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.128569</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.49506</td>
+<td>25976</td>
+<td>0.001463</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>PCA</td>
+<td>0.009766</td>
+<td>0.781337</td>
+<td>0.000177</td>
+<td>0.026316</td>
+<td>0.000352</td>
+<td>0.404379</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.128569</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.49506</td>
+<td>25976</td>
+<td>0.001463</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>ROD</td>
+<td>2.003416</td>
+<td>0.998537</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.500000</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.128569</td>
+<td>9009</td>
+<td>[amt]</td>
+<td>0.49506</td>
+<td>25976</td>
+<td>0.001463</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div id="a192e16c-20c3-4d21-ae01-966aee1e1290" class="cell">
+</div>
+</div>
+<div id="a192e16c-20c3-4d21-ae01-966aee1e1290" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess7(fraudTrain, <span class="fl">0.09</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ABOD</td>
+<td>3.230120</td>
+<td>0.998237</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.500000</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.060459</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.089732</td>
+<td>24960</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>COPOD</td>
+<td>0.011822</td>
+<td>0.977284</td>
+<td>0.052991</td>
+<td>0.704545</td>
+<td>0.098569</td>
+<td>0.841155</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.060459</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.089732</td>
+<td>24960</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>ECOD</td>
+<td>0.011770</td>
+<td>0.964223</td>
+<td>0.022497</td>
+<td>0.454545</td>
+<td>0.042872</td>
+<td>0.709834</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.060459</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.089732</td>
+<td>24960</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>GMM</td>
+<td>0.055667</td>
+<td>0.983253</td>
+<td>0.063084</td>
+<td>0.613636</td>
+<td>0.114407</td>
+<td>0.798771</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.060459</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.089732</td>
+<td>24960</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>HBOS</td>
+<td>0.004632</td>
+<td>0.997837</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499799</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.060459</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.089732</td>
+<td>24960</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>IForest</td>
+<td>1.450632</td>
+<td>0.982973</td>
+<td>0.060046</td>
+<td>0.590909</td>
+<td>0.109015</td>
+<td>0.787287</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.060459</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.089732</td>
+<td>24960</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>INNE</td>
+<td>1.661278</td>
+<td>0.977644</td>
+<td>0.037770</td>
+<td>0.477273</td>
+<td>0.070000</td>
+<td>0.727900</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.060459</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.089732</td>
+<td>24960</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>KDE</td>
+<td>71.262674</td>
+<td>0.982412</td>
+<td>0.060134</td>
+<td>0.613636</td>
+<td>0.109533</td>
+<td>0.798350</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.060459</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.089732</td>
+<td>24960</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>KNN</td>
+<td>0.061291</td>
+<td>0.980569</td>
+<td>0.049080</td>
+<td>0.545455</td>
+<td>0.090056</td>
+<td>0.763396</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.060459</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.089732</td>
+<td>24960</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>LODA</td>
+<td>0.131766</td>
+<td>0.997837</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499799</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.060459</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.089732</td>
+<td>24960</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>LOF</td>
+<td>0.134313</td>
+<td>0.924880</td>
+<td>0.002175</td>
+<td>0.090909</td>
+<td>0.004249</td>
+<td>0.508631</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.060459</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.089732</td>
+<td>24960</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>MCD</td>
+<td>0.012015</td>
+<td>0.983253</td>
+<td>0.063084</td>
+<td>0.613636</td>
+<td>0.114407</td>
+<td>0.798771</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.060459</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.089732</td>
+<td>24960</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>OCSVM</td>
+<td>187.261724</td>
+<td>0.981611</td>
+<td>0.055675</td>
+<td>0.590909</td>
+<td>0.101761</td>
+<td>0.786605</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.060459</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.089732</td>
+<td>24960</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>PCA</td>
+<td>0.014000</td>
+<td>0.978446</td>
+<td>0.037453</td>
+<td>0.454545</td>
+<td>0.069204</td>
+<td>0.716958</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.060459</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.089732</td>
+<td>24960</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>ROD</td>
+<td>7.488965</td>
+<td>0.938101</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.469879</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.060459</td>
+<td>50049</td>
+<td>[amt]</td>
+<td>0.089732</td>
+<td>24960</td>
+<td>0.001763</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div id="b6e5d539-b895-44b0-bccd-ef02d816591c" class="cell">
+</div>
+</div>
+<div id="b6e5d539-b895-44b0-bccd-ef02d816591c" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess7(fraudTrain, <span class="fl">0.08</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ABOD</td>
+<td>4.189796</td>
+<td>0.998226</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.500000</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.05627</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.080276</td>
+<td>24803</td>
+<td>0.001774</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>COPOD</td>
+<td>0.014530</td>
+<td>0.976777</td>
+<td>0.041379</td>
+<td>0.545455</td>
+<td>0.076923</td>
+<td>0.761499</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.05627</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.080276</td>
+<td>24803</td>
+<td>0.001774</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>ECOD</td>
+<td>0.014443</td>
+<td>0.965811</td>
+<td>0.019139</td>
+<td>0.363636</td>
+<td>0.036364</td>
+<td>0.665259</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.05627</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.080276</td>
+<td>24803</td>
+<td>0.001774</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>GMM</td>
+<td>0.038358</td>
+<td>0.983067</td>
+<td>0.048077</td>
+<td>0.454545</td>
+<td>0.086957</td>
+<td>0.719276</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.05627</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.080276</td>
+<td>24803</td>
+<td>0.001774</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>HBOS</td>
+<td>0.004105</td>
+<td>0.997944</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499859</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.05627</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.080276</td>
+<td>24803</td>
+<td>0.001774</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>IForest</td>
+<td>1.553486</td>
+<td>0.983389</td>
+<td>0.049020</td>
+<td>0.454545</td>
+<td>0.088496</td>
+<td>0.719437</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.05627</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.080276</td>
+<td>24803</td>
+<td>0.001774</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>INNE</td>
+<td>1.848711</td>
+<td>0.982502</td>
+<td>0.048611</td>
+<td>0.477273</td>
+<td>0.088235</td>
+<td>0.730336</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.05627</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.080276</td>
+<td>24803</td>
+<td>0.001774</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>KDE</td>
+<td>88.011782</td>
+<td>0.982220</td>
+<td>0.045767</td>
+<td>0.454545</td>
+<td>0.083160</td>
+<td>0.718852</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.05627</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.080276</td>
+<td>24803</td>
+<td>0.001774</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>KNN</td>
+<td>0.071372</td>
+<td>0.980809</td>
+<td>0.036481</td>
+<td>0.386364</td>
+<td>0.066667</td>
+<td>0.684114</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.05627</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.080276</td>
+<td>24803</td>
+<td>0.001774</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>LODA</td>
+<td>0.137621</td>
+<td>0.997944</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499859</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.05627</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.080276</td>
+<td>24803</td>
+<td>0.001774</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>LOF</td>
+<td>0.159186</td>
+<td>0.930371</td>
+<td>0.001776</td>
+<td>0.068182</td>
+<td>0.003462</td>
+<td>0.500043</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.05627</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.080276</td>
+<td>24803</td>
+<td>0.001774</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>MCD</td>
+<td>0.013139</td>
+<td>0.983067</td>
+<td>0.048077</td>
+<td>0.454545</td>
+<td>0.086957</td>
+<td>0.719276</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.05627</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.080276</td>
+<td>24803</td>
+<td>0.001774</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>OCSVM</td>
+<td>260.031710</td>
+<td>0.981131</td>
+<td>0.043103</td>
+<td>0.454545</td>
+<td>0.078740</td>
+<td>0.718306</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.05627</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.080276</td>
+<td>24803</td>
+<td>0.001774</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>PCA</td>
+<td>0.005343</td>
+<td>0.977140</td>
+<td>0.028829</td>
+<td>0.363636</td>
+<td>0.053422</td>
+<td>0.670933</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.05627</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.080276</td>
+<td>24803</td>
+<td>0.001774</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>ROD</td>
+<td>6.357995</td>
+<td>0.939322</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.470496</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.05627</td>
+<td>56306</td>
+<td>[amt]</td>
+<td>0.080276</td>
+<td>24803</td>
+<td>0.001774</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div id="150bfe41-01d9-4d77-8d21-400b0acbacde" class="cell">
+</div>
+</div>
+<div id="150bfe41-01d9-4d77-8d21-400b0acbacde" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess7(fraudTrain, <span class="fl">0.07</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ABOD</td>
+<td>2.958657</td>
+<td>0.998740</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.500000</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.050606</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.069479</td>
+<td>24611</td>
+<td>0.00126</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>COPOD</td>
+<td>0.014501</td>
+<td>0.978627</td>
+<td>0.039106</td>
+<td>0.677419</td>
+<td>0.073944</td>
+<td>0.828213</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.050606</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.069479</td>
+<td>24611</td>
+<td>0.00126</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>ECOD</td>
+<td>0.014122</td>
+<td>0.969241</td>
+<td>0.019841</td>
+<td>0.483871</td>
+<td>0.038119</td>
+<td>0.726862</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.050606</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.069479</td>
+<td>24611</td>
+<td>0.00126</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>GMM</td>
+<td>0.048176</td>
+<td>0.983422</td>
+<td>0.045783</td>
+<td>0.612903</td>
+<td>0.085202</td>
+<td>0.798396</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.050606</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.069479</td>
+<td>24611</td>
+<td>0.00126</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>HBOS</td>
+<td>0.004385</td>
+<td>0.998497</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499878</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.050606</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.069479</td>
+<td>24611</td>
+<td>0.00126</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>IForest</td>
+<td>1.564718</td>
+<td>0.983422</td>
+<td>0.045783</td>
+<td>0.612903</td>
+<td>0.085202</td>
+<td>0.798396</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.050606</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.069479</td>
+<td>24611</td>
+<td>0.00126</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>INNE</td>
+<td>1.577002</td>
+<td>0.983463</td>
+<td>0.041463</td>
+<td>0.548387</td>
+<td>0.077098</td>
+<td>0.766199</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.050606</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.069479</td>
+<td>24611</td>
+<td>0.00126</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>KDE</td>
+<td>123.222591</td>
+<td>0.983056</td>
+<td>0.044811</td>
+<td>0.612903</td>
+<td>0.083516</td>
+<td>0.798213</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.050606</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.069479</td>
+<td>24611</td>
+<td>0.00126</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>KNN</td>
+<td>0.075100</td>
+<td>0.980700</td>
+<td>0.031646</td>
+<td>0.483871</td>
+<td>0.059406</td>
+<td>0.732599</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.050606</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.069479</td>
+<td>24611</td>
+<td>0.00126</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>LODA</td>
+<td>0.157073</td>
+<td>0.998497</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.499878</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.050606</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.069479</td>
+<td>24611</td>
+<td>0.00126</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>LOF</td>
+<td>0.204140</td>
+<td>0.946528</td>
+<td>0.000777</td>
+<td>0.032258</td>
+<td>0.001517</td>
+<td>0.489970</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.050606</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.069479</td>
+<td>24611</td>
+<td>0.00126</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>MCD</td>
+<td>0.015097</td>
+<td>0.983422</td>
+<td>0.045783</td>
+<td>0.612903</td>
+<td>0.085202</td>
+<td>0.798396</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.050606</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.069479</td>
+<td>24611</td>
+<td>0.00126</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>OCSVM</td>
+<td>256.638857</td>
+<td>0.982488</td>
+<td>0.043379</td>
+<td>0.612903</td>
+<td>0.081023</td>
+<td>0.797928</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.050606</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.069479</td>
+<td>24611</td>
+<td>0.00126</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>PCA</td>
+<td>0.005676</td>
+<td>0.978668</td>
+<td>0.028626</td>
+<td>0.483871</td>
+<td>0.054054</td>
+<td>0.731582</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.050606</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.069479</td>
+<td>24611</td>
+<td>0.00126</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>ROD</td>
+<td>6.052641</td>
+<td>0.946325</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.473759</td>
+<td>False</td>
+<td>pyod</td>
+<td>0.050606</td>
+<td>64350</td>
+<td>[amt]</td>
+<td>0.069479</td>
+<td>24611</td>
+<td>0.00126</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
 </div>
 <div id="ca861b21-1478-4cda-9a22-98d9f49def06" class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pyod(<span class="op">*</span>pyod_preprocess7(fraudTrain, <span class="fl">0.06</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
