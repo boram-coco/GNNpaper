@@ -578,10 +578,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="데이터정리" class="level2">
 <h2 class="anchored" data-anchor-id="데이터정리">데이터정리</h2>
-<div id="dd7e2cc5-dd94-4462-a43b-3e2c19f65fd5" class="cell" data-execution_count="81">
+<div id="dd7e2cc5-dd94-4462-a43b-3e2c19f65fd5" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df50 <span class="op">=</span> throw(fraudTrain, <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="0e987e34-1467-4608-918b-a4988910abe9" class="cell" data-execution_count="82">
+<div id="0e987e34-1467-4608-918b-a4988910abe9" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>train_mask, test_mask <span class="op">=</span> mask(df50)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -589,7 +589,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="책신용카드-거래에-대한-그래프-분석" class="level1">
 <h1>책(신용카드 거래에 대한 그래프 분석)</h1>
 <p><code>-</code> 이분그래프</p>
-<div id="44f78797-91db-4943-880f-625f41ff87ff" class="cell" data-execution_count="83">
+<div id="44f78797-91db-4943-880f-625f41ff87ff" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_graph_bipartite(df_input, graph_type<span class="op">=</span>nx.Graph()):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    df<span class="op">=</span>df_input.copy()</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    mapping<span class="op">=</span>{x:node_id <span class="cf">for</span> node_id, x <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">set</span>(df[<span class="st">"cc_num"</span>].values.tolist()<span class="op">+\</span></span>
@@ -609,11 +609,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="5d7d24d3-ddc9-4573-b411-b787f47239af" class="cell" data-execution_count="85">
+<div id="5d7d24d3-ddc9-4573-b411-b787f47239af" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>G_bu <span class="op">=</span> build_graph_bipartite(df50, nx.Graph(name<span class="op">=</span><span class="st">"Bipartite Undirect"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>-</code> 삼분그래프</p>
-<div id="de4f50b6-213c-4b04-b3bd-4ff0a8221ff5" class="cell" data-execution_count="17">
+<div id="de4f50b6-213c-4b04-b3bd-4ff0a8221ff5" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_graph_tripartite(df_input, graph_type<span class="op">=</span>nx.Graph()):</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    df<span class="op">=</span>df_input.copy()</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    mapping<span class="op">=</span>{x:node_id <span class="cf">for</span> node_id, x <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">set</span>(df.index.values.tolist() <span class="op">+</span> </span>
@@ -641,7 +641,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>판매자, 고객, 거래에 노드 할당</li>
 </ul>
-<div id="2be1fed8-bc99-46cd-8946-78e5edffb031" class="cell" data-execution_count="18">
+<div id="2be1fed8-bc99-46cd-8946-78e5edffb031" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>G_tu <span class="op">=</span> build_graph_tripartite(df50, nx.Graph())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="사기-탐지를-위한-지도-및-비지도-임베딩" class="level2">
@@ -778,7 +778,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>0.0</code></pre>
 </div>
 </div>
-<div id="2a9cd27b-c225-4009-bb8e-bfe4162d02e6" class="cell" data-execution_count="49">
+<div id="2a9cd27b-c225-4009-bb8e-bfe4162d02e6" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> try_book(fraudTrain, fraudrate, n, prev_results<span class="op">=</span><span class="va">None</span>):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> prev_results <span class="kw">is</span> <span class="va">None</span>:</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>        df_results <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[</span>
@@ -858,277 +858,405 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb24-77"><a href="#cb24-77" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb24-78"><a href="#cb24-78" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-79"><a href="#cb24-79" aria-hidden="true" tabindex="-1"></a>    ymdhms <span class="op">=</span> datetime.datetime.fromtimestamp(time.time()).strftime(<span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">-%H%M%S'</span>) </span>
-<span id="cb24-80"><a href="#cb24-80" aria-hidden="true" tabindex="-1"></a>    df_results.to_csv(<span class="ss">f'./results/</span><span class="sc">{</span>ymdhms<span class="sc">}</span><span class="ss">-pyod.csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb24-80"><a href="#cb24-80" aria-hidden="true" tabindex="-1"></a>    df_results.to_csv(<span class="ss">f'../results/</span><span class="sc">{</span>ymdhms<span class="sc">}</span><span class="ss">-pyod.csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb24-81"><a href="#cb24-81" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="5eb44df5-b9bd-409d-b0da-07bec644c2ab" class="cell" data-execution_count="50">
+<div id="5eb44df5-b9bd-409d-b0da-07bec644c2ab" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>try_book(fraudTrain, <span class="fl">0.5</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"18fbdc39e5d540d3885349c470ec2e7c","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+{"model_id":"187d58e3f27b4046840c9e37b0bd32ba","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Generating walks (CPU: 1): 100%|██████████| 10/10 [01:37&lt;00:00,  9.72s/it]</code></pre>
+<pre><code>Generating walks (CPU: 1): 100%|██████████| 10/10 [01:29&lt;00:00,  8.93s/it]</code></pre>
 </div>
-<div class="cell-output cell-output-error">
-<pre><code>OSError: Cannot save file into a non-existent directory: 'results'</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
 </div>
+</div>
+</div>
+<div id="e71a8cc0-6a8d-413f-bc5b-0be9d0ddaa42" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dfrate <span class="op">=</span> throw(fraudTrain, <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="1122b17f-36c8-42b4-bc79-23c294411f52" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_tr, df_tst <span class="op">=</span> sklearn.model_selection.train_test_split(dfrate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="0a4069b1-7d6a-4da9-9271-35ec70137669" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dfn <span class="op">=</span> fraudTrain[::<span class="dv">10</span>]</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>dfnn <span class="op">=</span> dfn[<span class="op">~</span>dfn.index.isin(df_tr.index)]</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>dfnn <span class="op">=</span> dfnn.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>df_trn, df_tstn <span class="op">=</span> sklearn.model_selection.train_test_split(dfnn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b5948ac7-91d5-4d26-9e6c-87b280a0a166" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>    df2, mask <span class="op">=</span> concat(df_tr, df_tstn)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    df2[<span class="st">'index'</span>] <span class="op">=</span> df2.index</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df2.reset_index()</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    G_df <span class="op">=</span> build_graph_tripartite(df, nx.Graph())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="24aedf80-8e6b-40a0-86d3-7ad3bd844391" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a> train_edges, test_edges, train_labels, y <span class="op">=</span> train_test_split(<span class="bu">list</span>(<span class="bu">range</span>(<span class="bu">len</span>(G_df.edges))), </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                                                                 <span class="bu">list</span>(nx.get_edge_attributes(G_df, <span class="st">"label"</span>).values()), </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                                                                 test_size<span class="op">=</span><span class="fl">0.20</span>, </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                                                                 random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="e1b0a89d-90a3-463c-ae9d-5fb0525271cd" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>edgs <span class="op">=</span> <span class="bu">list</span>(G_df.edges)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>train_graph <span class="op">=</span> G_df.edge_subgraph([edgs[x] <span class="cf">for</span> x <span class="kw">in</span> train_edges]).copy()</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>train_graph.add_nodes_from(<span class="bu">list</span>(<span class="bu">set</span>(G_df.nodes) <span class="op">-</span> <span class="bu">set</span>(train_graph.nodes)))</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>node2vec_train <span class="op">=</span> Node2Vec(train_graph, weight_key<span class="op">=</span><span class="st">'weight'</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>model_train <span class="op">=</span> node2vec_train.fit(window<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"4090d5511b7d48a8a57a4cc1b5e57e76","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Generating walks (CPU: 1): 100%|██████████| 10/10 [01:30&lt;00:00,  9.05s/it]</code></pre>
+</div>
+</div>
+<div id="5fd9318d-9a2b-472c-aa08-3dab9e72fba3" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a> embeddings_train <span class="op">=</span> HadamardEmbedder(keyed_vectors<span class="op">=</span>model_train.wv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="a4fd2583-e422-4779-b3dc-07d0212b74a5" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>train_embeddings <span class="op">=</span> [embeddings_train[<span class="bu">str</span>(edgs[x][<span class="dv">0</span>]), <span class="bu">str</span>(edgs[x][<span class="dv">1</span>])] <span class="cf">for</span> x <span class="kw">in</span> train_edges]</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>test_embeddings <span class="op">=</span> [embeddings_train[<span class="bu">str</span>(edgs[x][<span class="dv">0</span>]), <span class="bu">str</span>(edgs[x][<span class="dv">1</span>])] <span class="cf">for</span> x <span class="kw">in</span> test_edges]</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">1000</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>rf.fit(train_embeddings, train_labels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestClassifier(n_estimators=1000, random_state=42)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">RandomForestClassifier</label><div class="sk-toggleable__content"><pre>RandomForestClassifier(n_estimators=1000, random_state=42)</pre></div></div></div></div></div>
+</div>
+</div>
+<div id="bc12a64c-326a-4708-9f24-5340e0370c82" class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fl">.0</span> h</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="75ed5146-b20f-48b2-bfc6-95f4dbbf8c20" class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a> result <span class="op">=</span> {</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">'model'</span>: <span class="st">'bipartite'</span>,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">'time'</span>: <span class="va">None</span>,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'acc'</span>: acc,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'pre'</span>: pre,</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">'rec'</span>: rec,</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'f1'</span>: f1,</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">'auc'</span>: auc,</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">'graph_based'</span>: <span class="va">True</span>,</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">'method'</span>: <span class="st">"Hadaembedder"</span>,</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'throw_rate'</span>: df.is_fraud.mean(),</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_size'</span>: <span class="bu">len</span>(train_labels),</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_cols'</span>: <span class="st">'amt'</span>,</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_frate'</span>: np.array(train_labels).mean(),</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test_size'</span>: <span class="bu">len</span>(y),</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test_frate'</span>: np.array(y).mean(),</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">'hyper_params'</span>: <span class="va">None</span>,</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'theta'</span>: <span class="va">None</span>,</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'gamma'</span>: <span class="va">None</span></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="bdbd7401-bb5d-472e-82db-2eb392a2b29b" class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#classes = [HadamardEmbedder]#, AverageEmbedder, WeightedL1Embedder, WeightedL2Embedder]</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">#evaluation_results = {}</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="bb66951d-125e-485c-bbde-bb0d3dbe3b25" class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>try_book(fraudTrain, <span class="fl">0.7</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>try_book(fraudTrain, <span class="fl">0.7</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="9b14cd5c-bd74-48d6-b255-a217df8f680f" class="cell" data-execution_count="45">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> try_book_A(fraudTrain, fraudrate, n, prev_results<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> prev_results <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>        df_results <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">'model'</span>, <span class="st">'time'</span>, <span class="st">'acc'</span>, <span class="st">'pre'</span>, <span class="st">'rec'</span>, <span class="st">'f1'</span>, <span class="st">'auc'</span>, <span class="st">'graph_based'</span>, </span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">'method'</span>, <span class="st">'throw_rate'</span>, <span class="st">'train_size'</span>, <span class="st">'train_cols'</span>, <span class="st">'train_frate'</span>, </span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">'test_size'</span>, <span class="st">'test_frate'</span>, <span class="st">'hyper_params'</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>        ])</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>        df_results <span class="op">=</span> prev_results</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    dfrate <span class="op">=</span> throw(fraudTrain, fraudrate)</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    df_tr, df_tst <span class="op">=</span> sklearn.model_selection.train_test_split(dfrate)</span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    dfn <span class="op">=</span> fraudTrain[::n]</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    dfnn <span class="op">=</span> dfn[<span class="op">~</span>dfn.index.isin(df_tr.index)]</span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>    dfnn <span class="op">=</span> dfnn.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>    df_trn, df_tstn <span class="op">=</span> sklearn.model_selection.train_test_split(dfnn)</span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>    df2, mask <span class="op">=</span> concat(df_tr, df_tstn)</span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>    df2[<span class="st">'index'</span>] <span class="op">=</span> df2.index</span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df2.reset_index()</span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    G_df <span class="op">=</span> build_graph_tripartite(df, nx.Graph())</span>
-<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>    train_edges, test_edges, train_labels, y <span class="op">=</span> train_test_split(<span class="bu">list</span>(<span class="bu">range</span>(<span class="bu">len</span>(G_df.edges))), </span>
-<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>                                                                 <span class="bu">list</span>(nx.get_edge_attributes(G_df, <span class="st">"label"</span>).values()), </span>
-<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>                                                                 test_size<span class="op">=</span><span class="fl">0.20</span>, </span>
-<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>                                                                 random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>    edgs <span class="op">=</span> <span class="bu">list</span>(G_df.edges)</span>
-<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>    train_graph <span class="op">=</span> G_df.edge_subgraph([edgs[x] <span class="cf">for</span> x <span class="kw">in</span> train_edges]).copy()</span>
-<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>    train_graph.add_nodes_from(<span class="bu">list</span>(<span class="bu">set</span>(G_df.nodes) <span class="op">-</span> <span class="bu">set</span>(train_graph.nodes)))</span>
-<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>    node2vec_train <span class="op">=</span> Node2Vec(train_graph, weight_key<span class="op">=</span><span class="st">'weight'</span>)</span>
-<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>    model_train <span class="op">=</span> node2vec_train.fit(window<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">#classes = [HadamardEmbedder]#, AverageEmbedder, WeightedL1Embedder, WeightedL2Embedder]</span></span>
-<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">#evaluation_results = {}</span></span>
-<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a>    embeddings_train <span class="op">=</span> AverageEmbedder(keyed_vectors<span class="op">=</span>model_train.wv)</span>
-<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>    train_embeddings <span class="op">=</span> [embeddings_train[<span class="bu">str</span>(edgs[x][<span class="dv">0</span>]), <span class="bu">str</span>(edgs[x][<span class="dv">1</span>])] <span class="cf">for</span> x <span class="kw">in</span> train_edges]</span>
-<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>    test_embeddings <span class="op">=</span> [embeddings_train[<span class="bu">str</span>(edgs[x][<span class="dv">0</span>]), <span class="bu">str</span>(edgs[x][<span class="dv">1</span>])] <span class="cf">for</span> x <span class="kw">in</span> test_edges]</span>
-<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a>    rf <span class="op">=</span> RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">1000</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a>    rf.fit(train_embeddings, train_labels)</span>
-<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a>    yhat <span class="op">=</span> rf.predict(test_embeddings)</span>
-<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> metrics.accuracy_score(y, yhat)</span>
-<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a>    pre <span class="op">=</span> metrics.precision_score(y, yhat)</span>
-<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a>    rec <span class="op">=</span> metrics.recall_score(y, yhat)</span>
-<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a>    f1 <span class="op">=</span> metrics.f1_score(y, yhat)</span>
-<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a>    auc <span class="op">=</span> metrics.roc_auc_score(y, yhat)</span>
-<span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb29-58"><a href="#cb29-58" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> {</span>
-<span id="cb29-59"><a href="#cb29-59" aria-hidden="true" tabindex="-1"></a>        <span class="st">'model'</span>: <span class="st">'bipartite'</span>,</span>
-<span id="cb29-60"><a href="#cb29-60" aria-hidden="true" tabindex="-1"></a>        <span class="st">'time'</span>: <span class="va">None</span>,</span>
-<span id="cb29-61"><a href="#cb29-61" aria-hidden="true" tabindex="-1"></a>        <span class="st">'acc'</span>: acc,</span>
-<span id="cb29-62"><a href="#cb29-62" aria-hidden="true" tabindex="-1"></a>        <span class="st">'pre'</span>: pre,</span>
-<span id="cb29-63"><a href="#cb29-63" aria-hidden="true" tabindex="-1"></a>        <span class="st">'rec'</span>: rec,</span>
-<span id="cb29-64"><a href="#cb29-64" aria-hidden="true" tabindex="-1"></a>        <span class="st">'f1'</span>: f1,</span>
-<span id="cb29-65"><a href="#cb29-65" aria-hidden="true" tabindex="-1"></a>        <span class="st">'auc'</span>: auc,</span>
-<span id="cb29-66"><a href="#cb29-66" aria-hidden="true" tabindex="-1"></a>        <span class="st">'graph_based'</span>: <span class="va">True</span>,</span>
-<span id="cb29-67"><a href="#cb29-67" aria-hidden="true" tabindex="-1"></a>        <span class="st">'method'</span>: <span class="st">'AverageEmbedder'</span>,</span>
-<span id="cb29-68"><a href="#cb29-68" aria-hidden="true" tabindex="-1"></a>        <span class="st">'throw_rate'</span>: df.is_fraud.mean(),</span>
-<span id="cb29-69"><a href="#cb29-69" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_size'</span>: <span class="bu">len</span>(train_labels),</span>
-<span id="cb29-70"><a href="#cb29-70" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_cols'</span>: <span class="st">'amt'</span>,</span>
-<span id="cb29-71"><a href="#cb29-71" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_frate'</span>: np.array(train_labels).mean(),</span>
-<span id="cb29-72"><a href="#cb29-72" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test_size'</span>: <span class="bu">len</span>(y),</span>
-<span id="cb29-73"><a href="#cb29-73" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test_frate'</span>: np.array(y).mean(),</span>
-<span id="cb29-74"><a href="#cb29-74" aria-hidden="true" tabindex="-1"></a>        <span class="st">'hyper_params'</span>: <span class="va">None</span>,</span>
-<span id="cb29-75"><a href="#cb29-75" aria-hidden="true" tabindex="-1"></a>        <span class="st">'theta'</span>: <span class="va">None</span>,</span>
-<span id="cb29-76"><a href="#cb29-76" aria-hidden="true" tabindex="-1"></a>        <span class="st">'gamma'</span>: <span class="va">None</span></span>
-<span id="cb29-77"><a href="#cb29-77" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb29-78"><a href="#cb29-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-79"><a href="#cb29-79" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb29-80"><a href="#cb29-80" aria-hidden="true" tabindex="-1"></a>    df_results <span class="op">=</span> df_results.append(evaluation_results, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb29-81"><a href="#cb29-81" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb29-82"><a href="#cb29-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> try_book_A(fraudTrain, fraudrate, n, prev_results<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> prev_results <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>        df_results <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">'model'</span>, <span class="st">'time'</span>, <span class="st">'acc'</span>, <span class="st">'pre'</span>, <span class="st">'rec'</span>, <span class="st">'f1'</span>, <span class="st">'auc'</span>, <span class="st">'graph_based'</span>, </span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">'method'</span>, <span class="st">'throw_rate'</span>, <span class="st">'train_size'</span>, <span class="st">'train_cols'</span>, <span class="st">'train_frate'</span>, </span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">'test_size'</span>, <span class="st">'test_frate'</span>, <span class="st">'hyper_params'</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>        df_results <span class="op">=</span> prev_results</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>    dfrate <span class="op">=</span> throw(fraudTrain, fraudrate)</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    df_tr, df_tst <span class="op">=</span> sklearn.model_selection.train_test_split(dfrate)</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>    dfn <span class="op">=</span> fraudTrain[::n]</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>    dfnn <span class="op">=</span> dfn[<span class="op">~</span>dfn.index.isin(df_tr.index)]</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>    dfnn <span class="op">=</span> dfnn.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>    df_trn, df_tstn <span class="op">=</span> sklearn.model_selection.train_test_split(dfnn)</span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>    df2, mask <span class="op">=</span> concat(df_tr, df_tstn)</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>    df2[<span class="st">'index'</span>] <span class="op">=</span> df2.index</span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df2.reset_index()</span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>    G_df <span class="op">=</span> build_graph_tripartite(df, nx.Graph())</span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>    train_edges, test_edges, train_labels, y <span class="op">=</span> train_test_split(<span class="bu">list</span>(<span class="bu">range</span>(<span class="bu">len</span>(G_df.edges))), </span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>                                                                 <span class="bu">list</span>(nx.get_edge_attributes(G_df, <span class="st">"label"</span>).values()), </span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>                                                                 test_size<span class="op">=</span><span class="fl">0.20</span>, </span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>                                                                 random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a>    edgs <span class="op">=</span> <span class="bu">list</span>(G_df.edges)</span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a>    train_graph <span class="op">=</span> G_df.edge_subgraph([edgs[x] <span class="cf">for</span> x <span class="kw">in</span> train_edges]).copy()</span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a>    train_graph.add_nodes_from(<span class="bu">list</span>(<span class="bu">set</span>(G_df.nodes) <span class="op">-</span> <span class="bu">set</span>(train_graph.nodes)))</span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a>    node2vec_train <span class="op">=</span> Node2Vec(train_graph, weight_key<span class="op">=</span><span class="st">'weight'</span>)</span>
+<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a>    model_train <span class="op">=</span> node2vec_train.fit(window<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb40-36"><a href="#cb40-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">#classes = [HadamardEmbedder]#, AverageEmbedder, WeightedL1Embedder, WeightedL2Embedder]</span></span>
+<span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">#evaluation_results = {}</span></span>
+<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-41"><a href="#cb40-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-42"><a href="#cb40-42" aria-hidden="true" tabindex="-1"></a>    embeddings_train <span class="op">=</span> AverageEmbedder(keyed_vectors<span class="op">=</span>model_train.wv)</span>
+<span id="cb40-43"><a href="#cb40-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-44"><a href="#cb40-44" aria-hidden="true" tabindex="-1"></a>    train_embeddings <span class="op">=</span> [embeddings_train[<span class="bu">str</span>(edgs[x][<span class="dv">0</span>]), <span class="bu">str</span>(edgs[x][<span class="dv">1</span>])] <span class="cf">for</span> x <span class="kw">in</span> train_edges]</span>
+<span id="cb40-45"><a href="#cb40-45" aria-hidden="true" tabindex="-1"></a>    test_embeddings <span class="op">=</span> [embeddings_train[<span class="bu">str</span>(edgs[x][<span class="dv">0</span>]), <span class="bu">str</span>(edgs[x][<span class="dv">1</span>])] <span class="cf">for</span> x <span class="kw">in</span> test_edges]</span>
+<span id="cb40-46"><a href="#cb40-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-47"><a href="#cb40-47" aria-hidden="true" tabindex="-1"></a>    rf <span class="op">=</span> RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">1000</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb40-48"><a href="#cb40-48" aria-hidden="true" tabindex="-1"></a>    rf.fit(train_embeddings, train_labels)</span>
+<span id="cb40-49"><a href="#cb40-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-50"><a href="#cb40-50" aria-hidden="true" tabindex="-1"></a>    yhat <span class="op">=</span> rf.predict(test_embeddings)</span>
+<span id="cb40-51"><a href="#cb40-51" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> metrics.accuracy_score(y, yhat)</span>
+<span id="cb40-52"><a href="#cb40-52" aria-hidden="true" tabindex="-1"></a>    pre <span class="op">=</span> metrics.precision_score(y, yhat)</span>
+<span id="cb40-53"><a href="#cb40-53" aria-hidden="true" tabindex="-1"></a>    rec <span class="op">=</span> metrics.recall_score(y, yhat)</span>
+<span id="cb40-54"><a href="#cb40-54" aria-hidden="true" tabindex="-1"></a>    f1 <span class="op">=</span> metrics.f1_score(y, yhat)</span>
+<span id="cb40-55"><a href="#cb40-55" aria-hidden="true" tabindex="-1"></a>    auc <span class="op">=</span> metrics.roc_auc_score(y, yhat)</span>
+<span id="cb40-56"><a href="#cb40-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-57"><a href="#cb40-57" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-58"><a href="#cb40-58" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> {</span>
+<span id="cb40-59"><a href="#cb40-59" aria-hidden="true" tabindex="-1"></a>        <span class="st">'model'</span>: <span class="st">'bipartite'</span>,</span>
+<span id="cb40-60"><a href="#cb40-60" aria-hidden="true" tabindex="-1"></a>        <span class="st">'time'</span>: <span class="va">None</span>,</span>
+<span id="cb40-61"><a href="#cb40-61" aria-hidden="true" tabindex="-1"></a>        <span class="st">'acc'</span>: acc,</span>
+<span id="cb40-62"><a href="#cb40-62" aria-hidden="true" tabindex="-1"></a>        <span class="st">'pre'</span>: pre,</span>
+<span id="cb40-63"><a href="#cb40-63" aria-hidden="true" tabindex="-1"></a>        <span class="st">'rec'</span>: rec,</span>
+<span id="cb40-64"><a href="#cb40-64" aria-hidden="true" tabindex="-1"></a>        <span class="st">'f1'</span>: f1,</span>
+<span id="cb40-65"><a href="#cb40-65" aria-hidden="true" tabindex="-1"></a>        <span class="st">'auc'</span>: auc,</span>
+<span id="cb40-66"><a href="#cb40-66" aria-hidden="true" tabindex="-1"></a>        <span class="st">'graph_based'</span>: <span class="va">True</span>,</span>
+<span id="cb40-67"><a href="#cb40-67" aria-hidden="true" tabindex="-1"></a>        <span class="st">'method'</span>: <span class="st">'AverageEmbedder'</span>,</span>
+<span id="cb40-68"><a href="#cb40-68" aria-hidden="true" tabindex="-1"></a>        <span class="st">'throw_rate'</span>: df.is_fraud.mean(),</span>
+<span id="cb40-69"><a href="#cb40-69" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_size'</span>: <span class="bu">len</span>(train_labels),</span>
+<span id="cb40-70"><a href="#cb40-70" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_cols'</span>: <span class="st">'amt'</span>,</span>
+<span id="cb40-71"><a href="#cb40-71" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_frate'</span>: np.array(train_labels).mean(),</span>
+<span id="cb40-72"><a href="#cb40-72" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test_size'</span>: <span class="bu">len</span>(y),</span>
+<span id="cb40-73"><a href="#cb40-73" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test_frate'</span>: np.array(y).mean(),</span>
+<span id="cb40-74"><a href="#cb40-74" aria-hidden="true" tabindex="-1"></a>        <span class="st">'hyper_params'</span>: <span class="va">None</span>,</span>
+<span id="cb40-75"><a href="#cb40-75" aria-hidden="true" tabindex="-1"></a>        <span class="st">'theta'</span>: <span class="va">None</span>,</span>
+<span id="cb40-76"><a href="#cb40-76" aria-hidden="true" tabindex="-1"></a>        <span class="st">'gamma'</span>: <span class="va">None</span></span>
+<span id="cb40-77"><a href="#cb40-77" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb40-78"><a href="#cb40-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-79"><a href="#cb40-79" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-80"><a href="#cb40-80" aria-hidden="true" tabindex="-1"></a>    df_results <span class="op">=</span> df_results.append(evaluation_results, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb40-81"><a href="#cb40-81" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-82"><a href="#cb40-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="0589a004-6045-471e-9576-38a30b6aec4c" class="cell" data-execution_count="46">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> try_book_W1(fraudTrain, fraudrate, n, prev_results<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> prev_results <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>        df_results <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">'model'</span>, <span class="st">'time'</span>, <span class="st">'acc'</span>, <span class="st">'pre'</span>, <span class="st">'rec'</span>, <span class="st">'f1'</span>, <span class="st">'auc'</span>, <span class="st">'graph_based'</span>, </span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">'method'</span>, <span class="st">'throw_rate'</span>, <span class="st">'train_size'</span>, <span class="st">'train_cols'</span>, <span class="st">'train_frate'</span>, </span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">'test_size'</span>, <span class="st">'test_frate'</span>, <span class="st">'hyper_params'</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>        ])</span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>        df_results <span class="op">=</span> prev_results</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    dfrate <span class="op">=</span> throw(fraudTrain, fraudrate)</span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    df_tr, df_tst <span class="op">=</span> sklearn.model_selection.train_test_split(dfrate)</span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>    dfn <span class="op">=</span> fraudTrain[::n]</span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>    dfnn <span class="op">=</span> dfn[<span class="op">~</span>dfn.index.isin(df_tr.index)]</span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>    dfnn <span class="op">=</span> dfnn.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    df_trn, df_tstn <span class="op">=</span> sklearn.model_selection.train_test_split(dfnn)</span>
-<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>    df2, mask <span class="op">=</span> concat(df_tr, df_tstn)</span>
-<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>    df2[<span class="st">'index'</span>] <span class="op">=</span> df2.index</span>
-<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df2.reset_index()</span>
-<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>    G_df <span class="op">=</span> build_graph_tripartite(df, nx.Graph())</span>
-<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>    train_edges, test_edges, train_labels, y <span class="op">=</span> train_test_split(<span class="bu">list</span>(<span class="bu">range</span>(<span class="bu">len</span>(G_df.edges))), </span>
-<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>                                                                 <span class="bu">list</span>(nx.get_edge_attributes(G_df, <span class="st">"label"</span>).values()), </span>
-<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>                                                                 test_size<span class="op">=</span><span class="fl">0.20</span>, </span>
-<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>                                                                 random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>    edgs <span class="op">=</span> <span class="bu">list</span>(G_df.edges)</span>
-<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>    train_graph <span class="op">=</span> G_df.edge_subgraph([edgs[x] <span class="cf">for</span> x <span class="kw">in</span> train_edges]).copy()</span>
-<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>    train_graph.add_nodes_from(<span class="bu">list</span>(<span class="bu">set</span>(G_df.nodes) <span class="op">-</span> <span class="bu">set</span>(train_graph.nodes)))</span>
-<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>    node2vec_train <span class="op">=</span> Node2Vec(train_graph, weight_key<span class="op">=</span><span class="st">'weight'</span>)</span>
-<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a>    model_train <span class="op">=</span> node2vec_train.fit(window<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">#classes = [HadamardEmbedder]#, AverageEmbedder, WeightedL1Embedder, WeightedL2Embedder]</span></span>
-<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">#evaluation_results = {}</span></span>
-<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a>    embeddings_train <span class="op">=</span> WeightedL1Embedder(keyed_vectors<span class="op">=</span>model_train.wv)</span>
-<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a>    train_embeddings <span class="op">=</span> [embeddings_train[<span class="bu">str</span>(edgs[x][<span class="dv">0</span>]), <span class="bu">str</span>(edgs[x][<span class="dv">1</span>])] <span class="cf">for</span> x <span class="kw">in</span> train_edges]</span>
-<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a>    test_embeddings <span class="op">=</span> [embeddings_train[<span class="bu">str</span>(edgs[x][<span class="dv">0</span>]), <span class="bu">str</span>(edgs[x][<span class="dv">1</span>])] <span class="cf">for</span> x <span class="kw">in</span> test_edges]</span>
-<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a>    rf <span class="op">=</span> RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">1000</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb30-48"><a href="#cb30-48" aria-hidden="true" tabindex="-1"></a>    rf.fit(train_embeddings, train_labels)</span>
-<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-50"><a href="#cb30-50" aria-hidden="true" tabindex="-1"></a>    yhat <span class="op">=</span> rf.predict(test_embeddings)</span>
-<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> metrics.accuracy_score(y, yhat)</span>
-<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a>    pre <span class="op">=</span> metrics.precision_score(y, yhat)</span>
-<span id="cb30-53"><a href="#cb30-53" aria-hidden="true" tabindex="-1"></a>    rec <span class="op">=</span> metrics.recall_score(y, yhat)</span>
-<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a>    f1 <span class="op">=</span> metrics.f1_score(y, yhat)</span>
-<span id="cb30-55"><a href="#cb30-55" aria-hidden="true" tabindex="-1"></a>    auc <span class="op">=</span> metrics.roc_auc_score(y, yhat)</span>
-<span id="cb30-56"><a href="#cb30-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-57"><a href="#cb30-57" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb30-58"><a href="#cb30-58" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> {</span>
-<span id="cb30-59"><a href="#cb30-59" aria-hidden="true" tabindex="-1"></a>        <span class="st">'model'</span>: <span class="st">'bipartite'</span>,</span>
-<span id="cb30-60"><a href="#cb30-60" aria-hidden="true" tabindex="-1"></a>        <span class="st">'time'</span>: <span class="va">None</span>,</span>
-<span id="cb30-61"><a href="#cb30-61" aria-hidden="true" tabindex="-1"></a>        <span class="st">'acc'</span>: acc,</span>
-<span id="cb30-62"><a href="#cb30-62" aria-hidden="true" tabindex="-1"></a>        <span class="st">'pre'</span>: pre,</span>
-<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a>        <span class="st">'rec'</span>: rec,</span>
-<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a>        <span class="st">'f1'</span>: f1,</span>
-<span id="cb30-65"><a href="#cb30-65" aria-hidden="true" tabindex="-1"></a>        <span class="st">'auc'</span>: auc,</span>
-<span id="cb30-66"><a href="#cb30-66" aria-hidden="true" tabindex="-1"></a>        <span class="st">'graph_based'</span>: <span class="va">True</span>,</span>
-<span id="cb30-67"><a href="#cb30-67" aria-hidden="true" tabindex="-1"></a>        <span class="st">'method'</span>: <span class="st">'WeightedL1Embedder'</span>,</span>
-<span id="cb30-68"><a href="#cb30-68" aria-hidden="true" tabindex="-1"></a>        <span class="st">'throw_rate'</span>: df.is_fraud.mean(),</span>
-<span id="cb30-69"><a href="#cb30-69" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_size'</span>: <span class="bu">len</span>(train_labels),</span>
-<span id="cb30-70"><a href="#cb30-70" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_cols'</span>: <span class="st">'amt'</span>,</span>
-<span id="cb30-71"><a href="#cb30-71" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_frate'</span>: np.array(train_labels).mean(),</span>
-<span id="cb30-72"><a href="#cb30-72" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test_size'</span>: <span class="bu">len</span>(y),</span>
-<span id="cb30-73"><a href="#cb30-73" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test_frate'</span>: np.array(y).mean(),</span>
-<span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a>        <span class="st">'hyper_params'</span>: <span class="va">None</span>,</span>
-<span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a>        <span class="st">'theta'</span>: <span class="va">None</span>,</span>
-<span id="cb30-76"><a href="#cb30-76" aria-hidden="true" tabindex="-1"></a>        <span class="st">'gamma'</span>: <span class="va">None</span></span>
-<span id="cb30-77"><a href="#cb30-77" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb30-78"><a href="#cb30-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-79"><a href="#cb30-79" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb30-80"><a href="#cb30-80" aria-hidden="true" tabindex="-1"></a>    df_results <span class="op">=</span> df_results.append(evaluation_results, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb30-81"><a href="#cb30-81" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb30-82"><a href="#cb30-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> try_book_W1(fraudTrain, fraudrate, n, prev_results<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> prev_results <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>        df_results <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">'model'</span>, <span class="st">'time'</span>, <span class="st">'acc'</span>, <span class="st">'pre'</span>, <span class="st">'rec'</span>, <span class="st">'f1'</span>, <span class="st">'auc'</span>, <span class="st">'graph_based'</span>, </span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">'method'</span>, <span class="st">'throw_rate'</span>, <span class="st">'train_size'</span>, <span class="st">'train_cols'</span>, <span class="st">'train_frate'</span>, </span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">'test_size'</span>, <span class="st">'test_frate'</span>, <span class="st">'hyper_params'</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>        df_results <span class="op">=</span> prev_results</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    dfrate <span class="op">=</span> throw(fraudTrain, fraudrate)</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>    df_tr, df_tst <span class="op">=</span> sklearn.model_selection.train_test_split(dfrate)</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>    dfn <span class="op">=</span> fraudTrain[::n]</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>    dfnn <span class="op">=</span> dfn[<span class="op">~</span>dfn.index.isin(df_tr.index)]</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>    dfnn <span class="op">=</span> dfnn.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>    df_trn, df_tstn <span class="op">=</span> sklearn.model_selection.train_test_split(dfnn)</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>    df2, mask <span class="op">=</span> concat(df_tr, df_tstn)</span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>    df2[<span class="st">'index'</span>] <span class="op">=</span> df2.index</span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df2.reset_index()</span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>    G_df <span class="op">=</span> build_graph_tripartite(df, nx.Graph())</span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>    train_edges, test_edges, train_labels, y <span class="op">=</span> train_test_split(<span class="bu">list</span>(<span class="bu">range</span>(<span class="bu">len</span>(G_df.edges))), </span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a>                                                                 <span class="bu">list</span>(nx.get_edge_attributes(G_df, <span class="st">"label"</span>).values()), </span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a>                                                                 test_size<span class="op">=</span><span class="fl">0.20</span>, </span>
+<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a>                                                                 random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a>    edgs <span class="op">=</span> <span class="bu">list</span>(G_df.edges)</span>
+<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a>    train_graph <span class="op">=</span> G_df.edge_subgraph([edgs[x] <span class="cf">for</span> x <span class="kw">in</span> train_edges]).copy()</span>
+<span id="cb41-32"><a href="#cb41-32" aria-hidden="true" tabindex="-1"></a>    train_graph.add_nodes_from(<span class="bu">list</span>(<span class="bu">set</span>(G_df.nodes) <span class="op">-</span> <span class="bu">set</span>(train_graph.nodes)))</span>
+<span id="cb41-33"><a href="#cb41-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-34"><a href="#cb41-34" aria-hidden="true" tabindex="-1"></a>    node2vec_train <span class="op">=</span> Node2Vec(train_graph, weight_key<span class="op">=</span><span class="st">'weight'</span>)</span>
+<span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a>    model_train <span class="op">=</span> node2vec_train.fit(window<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">#classes = [HadamardEmbedder]#, AverageEmbedder, WeightedL1Embedder, WeightedL2Embedder]</span></span>
+<span id="cb41-39"><a href="#cb41-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">#evaluation_results = {}</span></span>
+<span id="cb41-40"><a href="#cb41-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-41"><a href="#cb41-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-42"><a href="#cb41-42" aria-hidden="true" tabindex="-1"></a>    embeddings_train <span class="op">=</span> WeightedL1Embedder(keyed_vectors<span class="op">=</span>model_train.wv)</span>
+<span id="cb41-43"><a href="#cb41-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-44"><a href="#cb41-44" aria-hidden="true" tabindex="-1"></a>    train_embeddings <span class="op">=</span> [embeddings_train[<span class="bu">str</span>(edgs[x][<span class="dv">0</span>]), <span class="bu">str</span>(edgs[x][<span class="dv">1</span>])] <span class="cf">for</span> x <span class="kw">in</span> train_edges]</span>
+<span id="cb41-45"><a href="#cb41-45" aria-hidden="true" tabindex="-1"></a>    test_embeddings <span class="op">=</span> [embeddings_train[<span class="bu">str</span>(edgs[x][<span class="dv">0</span>]), <span class="bu">str</span>(edgs[x][<span class="dv">1</span>])] <span class="cf">for</span> x <span class="kw">in</span> test_edges]</span>
+<span id="cb41-46"><a href="#cb41-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-47"><a href="#cb41-47" aria-hidden="true" tabindex="-1"></a>    rf <span class="op">=</span> RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">1000</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb41-48"><a href="#cb41-48" aria-hidden="true" tabindex="-1"></a>    rf.fit(train_embeddings, train_labels)</span>
+<span id="cb41-49"><a href="#cb41-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-50"><a href="#cb41-50" aria-hidden="true" tabindex="-1"></a>    yhat <span class="op">=</span> rf.predict(test_embeddings)</span>
+<span id="cb41-51"><a href="#cb41-51" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> metrics.accuracy_score(y, yhat)</span>
+<span id="cb41-52"><a href="#cb41-52" aria-hidden="true" tabindex="-1"></a>    pre <span class="op">=</span> metrics.precision_score(y, yhat)</span>
+<span id="cb41-53"><a href="#cb41-53" aria-hidden="true" tabindex="-1"></a>    rec <span class="op">=</span> metrics.recall_score(y, yhat)</span>
+<span id="cb41-54"><a href="#cb41-54" aria-hidden="true" tabindex="-1"></a>    f1 <span class="op">=</span> metrics.f1_score(y, yhat)</span>
+<span id="cb41-55"><a href="#cb41-55" aria-hidden="true" tabindex="-1"></a>    auc <span class="op">=</span> metrics.roc_auc_score(y, yhat)</span>
+<span id="cb41-56"><a href="#cb41-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-57"><a href="#cb41-57" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-58"><a href="#cb41-58" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> {</span>
+<span id="cb41-59"><a href="#cb41-59" aria-hidden="true" tabindex="-1"></a>        <span class="st">'model'</span>: <span class="st">'bipartite'</span>,</span>
+<span id="cb41-60"><a href="#cb41-60" aria-hidden="true" tabindex="-1"></a>        <span class="st">'time'</span>: <span class="va">None</span>,</span>
+<span id="cb41-61"><a href="#cb41-61" aria-hidden="true" tabindex="-1"></a>        <span class="st">'acc'</span>: acc,</span>
+<span id="cb41-62"><a href="#cb41-62" aria-hidden="true" tabindex="-1"></a>        <span class="st">'pre'</span>: pre,</span>
+<span id="cb41-63"><a href="#cb41-63" aria-hidden="true" tabindex="-1"></a>        <span class="st">'rec'</span>: rec,</span>
+<span id="cb41-64"><a href="#cb41-64" aria-hidden="true" tabindex="-1"></a>        <span class="st">'f1'</span>: f1,</span>
+<span id="cb41-65"><a href="#cb41-65" aria-hidden="true" tabindex="-1"></a>        <span class="st">'auc'</span>: auc,</span>
+<span id="cb41-66"><a href="#cb41-66" aria-hidden="true" tabindex="-1"></a>        <span class="st">'graph_based'</span>: <span class="va">True</span>,</span>
+<span id="cb41-67"><a href="#cb41-67" aria-hidden="true" tabindex="-1"></a>        <span class="st">'method'</span>: <span class="st">'WeightedL1Embedder'</span>,</span>
+<span id="cb41-68"><a href="#cb41-68" aria-hidden="true" tabindex="-1"></a>        <span class="st">'throw_rate'</span>: df.is_fraud.mean(),</span>
+<span id="cb41-69"><a href="#cb41-69" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_size'</span>: <span class="bu">len</span>(train_labels),</span>
+<span id="cb41-70"><a href="#cb41-70" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_cols'</span>: <span class="st">'amt'</span>,</span>
+<span id="cb41-71"><a href="#cb41-71" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_frate'</span>: np.array(train_labels).mean(),</span>
+<span id="cb41-72"><a href="#cb41-72" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test_size'</span>: <span class="bu">len</span>(y),</span>
+<span id="cb41-73"><a href="#cb41-73" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test_frate'</span>: np.array(y).mean(),</span>
+<span id="cb41-74"><a href="#cb41-74" aria-hidden="true" tabindex="-1"></a>        <span class="st">'hyper_params'</span>: <span class="va">None</span>,</span>
+<span id="cb41-75"><a href="#cb41-75" aria-hidden="true" tabindex="-1"></a>        <span class="st">'theta'</span>: <span class="va">None</span>,</span>
+<span id="cb41-76"><a href="#cb41-76" aria-hidden="true" tabindex="-1"></a>        <span class="st">'gamma'</span>: <span class="va">None</span></span>
+<span id="cb41-77"><a href="#cb41-77" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb41-78"><a href="#cb41-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-79"><a href="#cb41-79" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-80"><a href="#cb41-80" aria-hidden="true" tabindex="-1"></a>    df_results <span class="op">=</span> df_results.append(evaluation_results, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb41-81"><a href="#cb41-81" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-82"><a href="#cb41-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="27dc4420-2aa5-49bb-9fa8-f8b70508702c" class="cell" data-execution_count="47">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> try_book_W2(fraudTrain, fraudrate, n, prev_results<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> prev_results <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>        df_results <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">'model'</span>, <span class="st">'time'</span>, <span class="st">'acc'</span>, <span class="st">'pre'</span>, <span class="st">'rec'</span>, <span class="st">'f1'</span>, <span class="st">'auc'</span>, <span class="st">'graph_based'</span>, </span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">'method'</span>, <span class="st">'throw_rate'</span>, <span class="st">'train_size'</span>, <span class="st">'train_cols'</span>, <span class="st">'train_frate'</span>, </span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">'test_size'</span>, <span class="st">'test_frate'</span>, <span class="st">'hyper_params'</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>        ])</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>        df_results <span class="op">=</span> prev_results</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    dfrate <span class="op">=</span> throw(fraudTrain, fraudrate)</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    df_tr, df_tst <span class="op">=</span> sklearn.model_selection.train_test_split(dfrate)</span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    dfn <span class="op">=</span> fraudTrain[::n]</span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>    dfnn <span class="op">=</span> dfn[<span class="op">~</span>dfn.index.isin(df_tr.index)]</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    dfnn <span class="op">=</span> dfnn.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    df_trn, df_tstn <span class="op">=</span> sklearn.model_selection.train_test_split(dfnn)</span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    df2, mask <span class="op">=</span> concat(df_tr, df_tstn)</span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>    df2[<span class="st">'index'</span>] <span class="op">=</span> df2.index</span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df2.reset_index()</span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>    G_df <span class="op">=</span> build_graph_tripartite(df, nx.Graph())</span>
-<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>    train_edges, test_edges, train_labels, y <span class="op">=</span> train_test_split(<span class="bu">list</span>(<span class="bu">range</span>(<span class="bu">len</span>(G_df.edges))), </span>
-<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>                                                                 <span class="bu">list</span>(nx.get_edge_attributes(G_df, <span class="st">"label"</span>).values()), </span>
-<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>                                                                 test_size<span class="op">=</span><span class="fl">0.20</span>, </span>
-<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>                                                                 random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>    edgs <span class="op">=</span> <span class="bu">list</span>(G_df.edges)</span>
-<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>    train_graph <span class="op">=</span> G_df.edge_subgraph([edgs[x] <span class="cf">for</span> x <span class="kw">in</span> train_edges]).copy()</span>
-<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>    train_graph.add_nodes_from(<span class="bu">list</span>(<span class="bu">set</span>(G_df.nodes) <span class="op">-</span> <span class="bu">set</span>(train_graph.nodes)))</span>
-<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>    node2vec_train <span class="op">=</span> Node2Vec(train_graph, weight_key<span class="op">=</span><span class="st">'weight'</span>)</span>
-<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>    model_train <span class="op">=</span> node2vec_train.fit(window<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">#classes = [HadamardEmbedder]#, AverageEmbedder, WeightedL1Embedder, WeightedL2Embedder]</span></span>
-<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">#evaluation_results = {}</span></span>
-<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>    embeddings_train <span class="op">=</span> WeightedL2Embedder(keyed_vectors<span class="op">=</span>model_train.wv)</span>
-<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>    train_embeddings <span class="op">=</span> [embeddings_train[<span class="bu">str</span>(edgs[x][<span class="dv">0</span>]), <span class="bu">str</span>(edgs[x][<span class="dv">1</span>])] <span class="cf">for</span> x <span class="kw">in</span> train_edges]</span>
-<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a>    test_embeddings <span class="op">=</span> [embeddings_train[<span class="bu">str</span>(edgs[x][<span class="dv">0</span>]), <span class="bu">str</span>(edgs[x][<span class="dv">1</span>])] <span class="cf">for</span> x <span class="kw">in</span> test_edges]</span>
-<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a>    rf <span class="op">=</span> RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">1000</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a>    rf.fit(train_embeddings, train_labels)</span>
-<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-50"><a href="#cb31-50" aria-hidden="true" tabindex="-1"></a>    yhat <span class="op">=</span> rf.predict(test_embeddings)</span>
-<span id="cb31-51"><a href="#cb31-51" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> metrics.accuracy_score(y, yhat)</span>
-<span id="cb31-52"><a href="#cb31-52" aria-hidden="true" tabindex="-1"></a>    pre <span class="op">=</span> metrics.precision_score(y, yhat)</span>
-<span id="cb31-53"><a href="#cb31-53" aria-hidden="true" tabindex="-1"></a>    rec <span class="op">=</span> metrics.recall_score(y, yhat)</span>
-<span id="cb31-54"><a href="#cb31-54" aria-hidden="true" tabindex="-1"></a>    f1 <span class="op">=</span> metrics.f1_score(y, yhat)</span>
-<span id="cb31-55"><a href="#cb31-55" aria-hidden="true" tabindex="-1"></a>    auc <span class="op">=</span> metrics.roc_auc_score(y, yhat)</span>
-<span id="cb31-56"><a href="#cb31-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-57"><a href="#cb31-57" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-58"><a href="#cb31-58" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> {</span>
-<span id="cb31-59"><a href="#cb31-59" aria-hidden="true" tabindex="-1"></a>        <span class="st">'model'</span>: <span class="st">'bipartite'</span>,</span>
-<span id="cb31-60"><a href="#cb31-60" aria-hidden="true" tabindex="-1"></a>        <span class="st">'time'</span>: <span class="va">None</span>,</span>
-<span id="cb31-61"><a href="#cb31-61" aria-hidden="true" tabindex="-1"></a>        <span class="st">'acc'</span>: acc,</span>
-<span id="cb31-62"><a href="#cb31-62" aria-hidden="true" tabindex="-1"></a>        <span class="st">'pre'</span>: pre,</span>
-<span id="cb31-63"><a href="#cb31-63" aria-hidden="true" tabindex="-1"></a>        <span class="st">'rec'</span>: rec,</span>
-<span id="cb31-64"><a href="#cb31-64" aria-hidden="true" tabindex="-1"></a>        <span class="st">'f1'</span>: f1,</span>
-<span id="cb31-65"><a href="#cb31-65" aria-hidden="true" tabindex="-1"></a>        <span class="st">'auc'</span>: auc,</span>
-<span id="cb31-66"><a href="#cb31-66" aria-hidden="true" tabindex="-1"></a>        <span class="st">'graph_based'</span>: <span class="va">True</span>,</span>
-<span id="cb31-67"><a href="#cb31-67" aria-hidden="true" tabindex="-1"></a>        <span class="st">'method'</span>: <span class="st">'WeightedL2Embedder'</span>,</span>
-<span id="cb31-68"><a href="#cb31-68" aria-hidden="true" tabindex="-1"></a>        <span class="st">'throw_rate'</span>: df.is_fraud.mean(),</span>
-<span id="cb31-69"><a href="#cb31-69" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_size'</span>: <span class="bu">len</span>(train_labels),</span>
-<span id="cb31-70"><a href="#cb31-70" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_cols'</span>: <span class="st">'amt'</span>,</span>
-<span id="cb31-71"><a href="#cb31-71" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_frate'</span>: np.array(train_labels).mean(),</span>
-<span id="cb31-72"><a href="#cb31-72" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test_size'</span>: <span class="bu">len</span>(y),</span>
-<span id="cb31-73"><a href="#cb31-73" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test_frate'</span>: np.array(y).mean(),</span>
-<span id="cb31-74"><a href="#cb31-74" aria-hidden="true" tabindex="-1"></a>        <span class="st">'hyper_params'</span>: <span class="va">None</span>,</span>
-<span id="cb31-75"><a href="#cb31-75" aria-hidden="true" tabindex="-1"></a>        <span class="st">'theta'</span>: <span class="va">None</span>,</span>
-<span id="cb31-76"><a href="#cb31-76" aria-hidden="true" tabindex="-1"></a>        <span class="st">'gamma'</span>: <span class="va">None</span></span>
-<span id="cb31-77"><a href="#cb31-77" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb31-78"><a href="#cb31-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-79"><a href="#cb31-79" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-80"><a href="#cb31-80" aria-hidden="true" tabindex="-1"></a>    df_results <span class="op">=</span> df_results.append(evaluation_results, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb31-81"><a href="#cb31-81" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-82"><a href="#cb31-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> try_book_W2(fraudTrain, fraudrate, n, prev_results<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> prev_results <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>        df_results <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">'model'</span>, <span class="st">'time'</span>, <span class="st">'acc'</span>, <span class="st">'pre'</span>, <span class="st">'rec'</span>, <span class="st">'f1'</span>, <span class="st">'auc'</span>, <span class="st">'graph_based'</span>, </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">'method'</span>, <span class="st">'throw_rate'</span>, <span class="st">'train_size'</span>, <span class="st">'train_cols'</span>, <span class="st">'train_frate'</span>, </span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">'test_size'</span>, <span class="st">'test_frate'</span>, <span class="st">'hyper_params'</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>        df_results <span class="op">=</span> prev_results</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>    dfrate <span class="op">=</span> throw(fraudTrain, fraudrate)</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>    df_tr, df_tst <span class="op">=</span> sklearn.model_selection.train_test_split(dfrate)</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>    dfn <span class="op">=</span> fraudTrain[::n]</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>    dfnn <span class="op">=</span> dfn[<span class="op">~</span>dfn.index.isin(df_tr.index)]</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>    dfnn <span class="op">=</span> dfnn.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>    df_trn, df_tstn <span class="op">=</span> sklearn.model_selection.train_test_split(dfnn)</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>    df2, mask <span class="op">=</span> concat(df_tr, df_tstn)</span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>    df2[<span class="st">'index'</span>] <span class="op">=</span> df2.index</span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df2.reset_index()</span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a>    G_df <span class="op">=</span> build_graph_tripartite(df, nx.Graph())</span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a>    train_edges, test_edges, train_labels, y <span class="op">=</span> train_test_split(<span class="bu">list</span>(<span class="bu">range</span>(<span class="bu">len</span>(G_df.edges))), </span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a>                                                                 <span class="bu">list</span>(nx.get_edge_attributes(G_df, <span class="st">"label"</span>).values()), </span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a>                                                                 test_size<span class="op">=</span><span class="fl">0.20</span>, </span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a>                                                                 random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a>    edgs <span class="op">=</span> <span class="bu">list</span>(G_df.edges)</span>
+<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a>    train_graph <span class="op">=</span> G_df.edge_subgraph([edgs[x] <span class="cf">for</span> x <span class="kw">in</span> train_edges]).copy()</span>
+<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a>    train_graph.add_nodes_from(<span class="bu">list</span>(<span class="bu">set</span>(G_df.nodes) <span class="op">-</span> <span class="bu">set</span>(train_graph.nodes)))</span>
+<span id="cb42-33"><a href="#cb42-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a>    node2vec_train <span class="op">=</span> Node2Vec(train_graph, weight_key<span class="op">=</span><span class="st">'weight'</span>)</span>
+<span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a>    model_train <span class="op">=</span> node2vec_train.fit(window<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-37"><a href="#cb42-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb42-38"><a href="#cb42-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">#classes = [HadamardEmbedder]#, AverageEmbedder, WeightedL1Embedder, WeightedL2Embedder]</span></span>
+<span id="cb42-39"><a href="#cb42-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">#evaluation_results = {}</span></span>
+<span id="cb42-40"><a href="#cb42-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb42-41"><a href="#cb42-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb42-42"><a href="#cb42-42" aria-hidden="true" tabindex="-1"></a>    embeddings_train <span class="op">=</span> WeightedL2Embedder(keyed_vectors<span class="op">=</span>model_train.wv)</span>
+<span id="cb42-43"><a href="#cb42-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-44"><a href="#cb42-44" aria-hidden="true" tabindex="-1"></a>    train_embeddings <span class="op">=</span> [embeddings_train[<span class="bu">str</span>(edgs[x][<span class="dv">0</span>]), <span class="bu">str</span>(edgs[x][<span class="dv">1</span>])] <span class="cf">for</span> x <span class="kw">in</span> train_edges]</span>
+<span id="cb42-45"><a href="#cb42-45" aria-hidden="true" tabindex="-1"></a>    test_embeddings <span class="op">=</span> [embeddings_train[<span class="bu">str</span>(edgs[x][<span class="dv">0</span>]), <span class="bu">str</span>(edgs[x][<span class="dv">1</span>])] <span class="cf">for</span> x <span class="kw">in</span> test_edges]</span>
+<span id="cb42-46"><a href="#cb42-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-47"><a href="#cb42-47" aria-hidden="true" tabindex="-1"></a>    rf <span class="op">=</span> RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">1000</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb42-48"><a href="#cb42-48" aria-hidden="true" tabindex="-1"></a>    rf.fit(train_embeddings, train_labels)</span>
+<span id="cb42-49"><a href="#cb42-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-50"><a href="#cb42-50" aria-hidden="true" tabindex="-1"></a>    yhat <span class="op">=</span> rf.predict(test_embeddings)</span>
+<span id="cb42-51"><a href="#cb42-51" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> metrics.accuracy_score(y, yhat)</span>
+<span id="cb42-52"><a href="#cb42-52" aria-hidden="true" tabindex="-1"></a>    pre <span class="op">=</span> metrics.precision_score(y, yhat)</span>
+<span id="cb42-53"><a href="#cb42-53" aria-hidden="true" tabindex="-1"></a>    rec <span class="op">=</span> metrics.recall_score(y, yhat)</span>
+<span id="cb42-54"><a href="#cb42-54" aria-hidden="true" tabindex="-1"></a>    f1 <span class="op">=</span> metrics.f1_score(y, yhat)</span>
+<span id="cb42-55"><a href="#cb42-55" aria-hidden="true" tabindex="-1"></a>    auc <span class="op">=</span> metrics.roc_auc_score(y, yhat)</span>
+<span id="cb42-56"><a href="#cb42-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-57"><a href="#cb42-57" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb42-58"><a href="#cb42-58" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> {</span>
+<span id="cb42-59"><a href="#cb42-59" aria-hidden="true" tabindex="-1"></a>        <span class="st">'model'</span>: <span class="st">'bipartite'</span>,</span>
+<span id="cb42-60"><a href="#cb42-60" aria-hidden="true" tabindex="-1"></a>        <span class="st">'time'</span>: <span class="va">None</span>,</span>
+<span id="cb42-61"><a href="#cb42-61" aria-hidden="true" tabindex="-1"></a>        <span class="st">'acc'</span>: acc,</span>
+<span id="cb42-62"><a href="#cb42-62" aria-hidden="true" tabindex="-1"></a>        <span class="st">'pre'</span>: pre,</span>
+<span id="cb42-63"><a href="#cb42-63" aria-hidden="true" tabindex="-1"></a>        <span class="st">'rec'</span>: rec,</span>
+<span id="cb42-64"><a href="#cb42-64" aria-hidden="true" tabindex="-1"></a>        <span class="st">'f1'</span>: f1,</span>
+<span id="cb42-65"><a href="#cb42-65" aria-hidden="true" tabindex="-1"></a>        <span class="st">'auc'</span>: auc,</span>
+<span id="cb42-66"><a href="#cb42-66" aria-hidden="true" tabindex="-1"></a>        <span class="st">'graph_based'</span>: <span class="va">True</span>,</span>
+<span id="cb42-67"><a href="#cb42-67" aria-hidden="true" tabindex="-1"></a>        <span class="st">'method'</span>: <span class="st">'WeightedL2Embedder'</span>,</span>
+<span id="cb42-68"><a href="#cb42-68" aria-hidden="true" tabindex="-1"></a>        <span class="st">'throw_rate'</span>: df.is_fraud.mean(),</span>
+<span id="cb42-69"><a href="#cb42-69" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_size'</span>: <span class="bu">len</span>(train_labels),</span>
+<span id="cb42-70"><a href="#cb42-70" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_cols'</span>: <span class="st">'amt'</span>,</span>
+<span id="cb42-71"><a href="#cb42-71" aria-hidden="true" tabindex="-1"></a>        <span class="st">'train_frate'</span>: np.array(train_labels).mean(),</span>
+<span id="cb42-72"><a href="#cb42-72" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test_size'</span>: <span class="bu">len</span>(y),</span>
+<span id="cb42-73"><a href="#cb42-73" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test_frate'</span>: np.array(y).mean(),</span>
+<span id="cb42-74"><a href="#cb42-74" aria-hidden="true" tabindex="-1"></a>        <span class="st">'hyper_params'</span>: <span class="va">None</span>,</span>
+<span id="cb42-75"><a href="#cb42-75" aria-hidden="true" tabindex="-1"></a>        <span class="st">'theta'</span>: <span class="va">None</span>,</span>
+<span id="cb42-76"><a href="#cb42-76" aria-hidden="true" tabindex="-1"></a>        <span class="st">'gamma'</span>: <span class="va">None</span></span>
+<span id="cb42-77"><a href="#cb42-77" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb42-78"><a href="#cb42-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-79"><a href="#cb42-79" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb42-80"><a href="#cb42-80" aria-hidden="true" tabindex="-1"></a>    df_results <span class="op">=</span> df_results.append(evaluation_results, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb42-81"><a href="#cb42-81" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb42-82"><a href="#cb42-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

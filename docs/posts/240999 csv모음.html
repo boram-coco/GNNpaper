@@ -188,19 +188,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="b64a49f0-275c-49c1-97ce-1012930e4bd2" class="cell" data-execution_count="1">
+<div id="b64a49f0-275c-49c1-97ce-1012930e4bd2" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="section" class="level2">
 <h2 class="anchored" data-anchor-id="section">240220</h2>
-<div id="de6a4446-4d95-4779-afbc-aa0149089d20" class="cell" data-execution_count="5">
+<div id="de6a4446-4d95-4779-afbc-aa0149089d20" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>folder_path <span class="op">=</span> <span class="st">'./results'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="62cf100f-5cbe-4fe3-aa3f-78ca16b4c5da" class="cell" data-execution_count="6">
+<div id="62cf100f-5cbe-4fe3-aa3f-78ca16b4c5da" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="op">=</span> []</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="91404788-a555-4f3a-b1c9-d88d5090e0cf" class="cell" data-execution_count="7">
+<div id="91404788-a555-4f3a-b1c9-d88d5090e0cf" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file_name <span class="kw">in</span> os.listdir(folder_path):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> file_name.endswith(<span class="st">'.csv'</span>):</span>
@@ -3356,6 +3356,302 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="25624416-cf59-451a-8743-516dd92ec92a" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>merged_df.to_csv(<span class="st">'./results/240423_meged.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-8" class="level2">
+<h2 class="anchored" data-anchor-id="section-8">240430</h2>
+<div id="d60f433b-4614-46e5-afb5-178d8060183e" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>folder_path <span class="op">=</span> <span class="st">'./results'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="3d96d5c6-8357-475b-b7df-09d2baed9f16" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="op">=</span> []</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="2e6e3f73-48e6-4d74-85f4-9b2e84f0219d" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file_name <span class="kw">in</span> os.listdir(folder_path):</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> file_name.endswith(<span class="st">'.csv'</span>):</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> pd.read_csv(os.path.join(folder_path, file_name))</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>        all_data.append(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="e2b565f4-fd28-47e6-a0a0-7f8151dbfa17" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> pd.concat(all_data, ignore_index<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="535b7d50-9af6-42f3-9007-db20eed73195" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>merged_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+<th data-quarto-table-cell-role="th">theta</th>
+<th data-quarto-table-cell-role="th">gamma</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>NaN</td>
+<td>0.943679</td>
+<td>0.961741</td>
+<td>0.975904</td>
+<td>0.968771</td>
+<td>0.897824</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>['amt']</td>
+<td>0.901679</td>
+<td>1669</td>
+<td>0.895147</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>NaN</td>
+<td>0.927501</td>
+<td>0.959197</td>
+<td>0.959839</td>
+<td>0.959518</td>
+<td>0.870203</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>['amt']</td>
+<td>0.901679</td>
+<td>1669</td>
+<td>0.895147</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>NaN</td>
+<td>0.929299</td>
+<td>0.952632</td>
+<td>0.969210</td>
+<td>0.960849</td>
+<td>0.945900</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>['amt']</td>
+<td>0.901679</td>
+<td>1669</td>
+<td>0.895147</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>NaN</td>
+<td>0.946675</td>
+<td>0.958252</td>
+<td>0.983266</td>
+<td>0.970598</td>
+<td>0.954381</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>['amt']</td>
+<td>0.901679</td>
+<td>1669</td>
+<td>0.895147</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>NaN</td>
+<td>0.927501</td>
+<td>0.957972</td>
+<td>0.961178</td>
+<td>0.959572</td>
+<td>0.903513</td>
+<td>False</td>
+<td>Auto_not_best</td>
+<td>0.900045</td>
+<td>5004</td>
+<td>['amt']</td>
+<td>0.901679</td>
+<td>1669</td>
+<td>0.895147</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">51405</td>
+<td>NeuralNetFastAI</td>
+<td>NaN</td>
+<td>0.997890</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.917705</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.008901</td>
+<td>500499</td>
+<td>['amt']</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.002110</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">51406</td>
+<td>XGBoost</td>
+<td>NaN</td>
+<td>0.996580</td>
+<td>0.178571</td>
+<td>0.172414</td>
+<td>0.175439</td>
+<td>0.939455</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.008901</td>
+<td>500499</td>
+<td>['amt']</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.002110</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">51407</td>
+<td>NeuralNetTorch</td>
+<td>NaN</td>
+<td>0.997162</td>
+<td>0.187500</td>
+<td>0.103448</td>
+<td>0.133333</td>
+<td>0.941711</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.008901</td>
+<td>500499</td>
+<td>['amt']</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.002110</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">51408</td>
+<td>LightGBMLarge</td>
+<td>NaN</td>
+<td>0.997890</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.944964</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.008901</td>
+<td>500499</td>
+<td>['amt']</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.002110</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">51409</td>
+<td>WeightedEnsemble_L2</td>
+<td>NaN</td>
+<td>0.997162</td>
+<td>0.187500</td>
+<td>0.103448</td>
+<td>0.133333</td>
+<td>0.941711</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.008901</td>
+<td>500499</td>
+<td>['amt']</td>
+<td>0.009087</td>
+<td>13741</td>
+<td>0.002110</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>51410 rows × 18 columns</p>
+</div>
+</div>
+</div>
+<div id="7a39801e-445e-4500-9663-ef8c2a0f4954" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>merged_df.loc[merged_df[<span class="st">'method'</span>] <span class="op">==</span> <span class="st">'Auto_not_best'</span>, <span class="st">'method'</span>] <span class="op">=</span> <span class="st">'Autogluon'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="6de7b34f-0d1d-457b-a7ee-98ab54e93e01" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>merged_df.to_csv(<span class="st">'./results/240430_meged.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
