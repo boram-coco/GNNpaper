@@ -188,144 +188,237 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>ref: <a href="https://pyod.readthedocs.io/en/latest/pyod.models.html#all-models" class="uri">https://pyod.readthedocs.io/en/latest/pyod.models.html#all-models</a></p>
 <section id="imports" class="level1">
 <h1>1. Imports</h1>
-<div id="f4162b18-f612-4403-bf6b-823b6b662ea4" class="cell" data-tags="[]" data-execution_count="1">
+<div id="f4162b18-f612-4403-bf6b-823b6b662ea4" class="cell" data-tags="[]" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle </span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time </span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_1127709/761229760.py:1: DeprecationWarning: 
-Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
-(to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
-but was not found to be installed on your system.
-If this would cause problems for you,
-please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
-        
-  import pandas as pd</code></pre>
+</div>
+<div id="e59bf270-951d-4da7-b7bb-09d4227238bd" class="cell" data-tags="[]" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="e42d11c8-75b7-4337-b0ac-c715d41b1011" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>run ..<span class="op">/</span>functions_pyod2.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="81833a59-fff8-46f3-bd2d-f77279fb7aa9" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="105ef730-80f4-4529-a7f9-6a39a493b70a" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_train1 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train1.csv'</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_train2 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train2.csv'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df_train3 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train3.csv'</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df_train4 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train4.csv'</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df_train5 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train5.csv'</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>df_train6 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train6.csv'</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>df_train7 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train7.csv'</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>df_train8 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train8.csv'</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="619c7210-cfa5-43e0-a19d-7072c3283933" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>_df1 <span class="op">=</span> pd.concat([df_train1, df_test])</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>_df2 <span class="op">=</span> pd.concat([df_train2, df_test])</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>_df3 <span class="op">=</span> pd.concat([df_train3, df_test])</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>_df4 <span class="op">=</span> pd.concat([df_train4, df_test])</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>_df5 <span class="op">=</span> pd.concat([df_train5, df_test])</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>_df6 <span class="op">=</span> pd.concat([df_train6, df_test])</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>_df7 <span class="op">=</span> pd.concat([df_train7, df_test])</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>_df8 <span class="op">=</span> pd.concat([df_train8, df_test])</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>_df1_mean <span class="op">=</span> _df1.is_fraud.mean()</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>_df2_mean <span class="op">=</span> _df2.is_fraud.mean()</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>_df3_mean <span class="op">=</span> _df3.is_fraud.mean()</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>_df4_mean <span class="op">=</span> _df4.is_fraud.mean()</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>_df5_mean <span class="op">=</span> _df5.is_fraud.mean()</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>_df6_mean <span class="op">=</span> _df6.is_fraud.mean()</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>_df7_mean <span class="op">=</span> _df7.is_fraud.mean()</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>_df8_mean <span class="op">=</span> _df8.is_fraud.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="544ede2e-a4ac-44b3-abb6-be6eb3ef093e" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_train1.shape, df_train2.shape, df_train3.shape, df_train4.shape,df_train5.shape,df_train6.shape,df_train7.shape,df_train8.shape,df_test.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<pre><code>((734003, 22),
+ (420500, 22),
+ (84100, 22),
+ (42050, 22),
+ (21025, 22),
+ (14017, 22),
+ (10512, 22),
+ (8410, 22),
+ (314572, 22))</code></pre>
 </div>
 </div>
-<div id="e59bf270-951d-4da7-b7bb-09d4227238bd" class="cell" data-tags="[]" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="6d2481bb-a207-4149-a191-3bd6327157c2" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_train1.is_fraud.mean(),df_train2.is_fraud.mean(),df_train3.is_fraud.mean(),df_train4.is_fraud.mean(),df_train5.is_fraud.mean(),df_train6.is_fraud.mean(),df_train7.is_fraud.mean(),df_train8.is_fraud.mean(),df_test.is_fraud.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>(0.005728859418830713,
+ 0.01,
+ 0.05,
+ 0.1,
+ 0.2,
+ 0.29999286580580725,
+ 0.4000190258751903,
+ 0.5,
+ 0.005725239372862174)</code></pre>
 </div>
-<div id="e42d11c8-75b7-4337-b0ac-c715d41b1011" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>run ..<span class="op">/</span>functions_pyod2.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="81833a59-fff8-46f3-bd2d-f77279fb7aa9" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../fraudTrain.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    fraudTrain <span class="op">=</span> pickle.load(<span class="bu">file</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3ea6df85-c4b5-444e-9393-c5044bd9c3f5" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>_df1_mean, _df2_mean,_df3_mean,_df4_mean,_df5_mean,_df6_mean,_df7_mean,_df8_mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<pre><code>(0.005727773406766326,
+ 0.00817062818336163,
+ 0.015065015852630734,
+ 0.01684136144152632,
+ 0.017896465105468762,
+ 0.018278152950950883,
+ 0.01847522486495798,
+ 0.018595463524283085)</code></pre>
 </div>
-<div id="105ef730-80f4-4529-a7f9-6a39a493b70a" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_train1 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train1.csv'</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_train2 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train2.csv'</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df_train3 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train3.csv'</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df_train4 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train4.csv'</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>df_train5 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train5.csv'</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>df_train6 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train6.csv'</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>df_train7 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train7.csv'</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>df_train8 <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_train8.csv'</span>)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> pd.read_csv(<span class="st">'~/Dropbox/Data/df_test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="619c7210-cfa5-43e0-a19d-7072c3283933" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>_df1 <span class="op">=</span> pd.concat([df_train1, df_test])</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>_df2 <span class="op">=</span> pd.concat([df_train2, df_test])</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>_df3 <span class="op">=</span> pd.concat([df_train3, df_test])</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>_df4 <span class="op">=</span> pd.concat([df_train4, df_test])</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>_df5 <span class="op">=</span> pd.concat([df_train5, df_test])</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>_df6 <span class="op">=</span> pd.concat([df_train6, df_test])</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>_df7 <span class="op">=</span> pd.concat([df_train7, df_test])</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>_df8 <span class="op">=</span> pd.concat([df_train8, df_test])</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>_df1_mean <span class="op">=</span> _df1.is_fraud.mean()</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>_df2_mean <span class="op">=</span> _df2.is_fraud.mean()</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>_df3_mean <span class="op">=</span> _df3.is_fraud.mean()</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>_df4_mean <span class="op">=</span> _df4.is_fraud.mean()</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>_df5_mean <span class="op">=</span> _df5.is_fraud.mean()</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>_df6_mean <span class="op">=</span> _df6.is_fraud.mean()</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>_df7_mean <span class="op">=</span> _df7.is_fraud.mean()</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>_df8_mean <span class="op">=</span> _df8.is_fraud.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="pyod_0503-기존거에서-그냥-result2로-저장위치만-변경" class="level2">
 <h2 class="anchored" data-anchor-id="pyod_0503-기존거에서-그냥-result2로-저장위치만-변경">pyod_0503: 기존거에서 그냥 result2로 저장위치만 변경</h2>
-<div id="5f24a355-f133-4983-8bd4-1a49001bd08e" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pyod_preprocess_0503(df_tr, df_tstn, _df_mean):</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> pd.DataFrame(df_tr[<span class="st">'amt'</span>])</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> pd.DataFrame(df_tr[<span class="st">'is_fraud'</span>])</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    XX <span class="op">=</span> pd.DataFrame(df_tstn[<span class="st">'amt'</span>])</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    yy <span class="op">=</span> pd.DataFrame(df_tstn[<span class="st">'is_fraud'</span>])</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    throw_rate <span class="op">=</span> _df_mean</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    fraud_ratio <span class="op">=</span> df_tr.is_fraud.mean()</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    predictors <span class="op">=</span> {</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">'ABOD'</span>: ABOD(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#    'ALAD': ALAD(contamination=fraud_ratio),</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#    'AnoGAN': AnoGAN(contamination=fraud_ratio),</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#    'AutoEncoder':AutoEncoder(contamination=fraud_ratio),</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">##    'CBLOF': CBLOF(contamination=fraud_ratio,n_clusters=2),</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">##    'COF': COF(contamination=fraud_ratio),</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">##    'CD': CD(contamination=fraud_ratio),</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'COPOD'</span>: COPOD(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#    'DeepSVDD': DeepSVDD(contamination=fraud_ratio),</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#    'DIF': DIF(contamination=fraud_ratio),    </span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ECOD'</span>: ECOD(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">#    'FeatureBagging': FeatureBagging(contamination=fraud_ratio),</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GMM'</span>: GMM(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">'HBOS'</span>: HBOS(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">'IForest'</span>: IForest(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">'INNE'</span>: INNE(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">'KDE'</span>: KDE(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">'KNN'</span>: KNN(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co">####    'KPCA': KPCA(contamination=fraud_ratio),</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co">#    'PyODKernelPCA': PyODKernelPCA(contamination=fraud_ratio),</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="co">##    'LMDD': LMDD(contamination=fraud_ratio),</span></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">'LODA'</span>: LODA(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">'LOF'</span>: LOF(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co">####    'LOCI': LOCI(contamination=fraud_ratio),</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co">#    'LUNAR': LUNAR(contamination=fraud_ratio),</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">'LODA'</span>: LODA(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co">#    'LSCP': LSCP(contamination=fraud_ratio),</span></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MAD'</span>: MAD(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MCD'</span>: MCD(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="co">#    'MO_GAAL': MO_GAAL(contamination=fraud_ratio),</span></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">'OCSVM'</span>: OCSVM(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">'PCA'</span>: PCA(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="co">###    'QMCD': QMCD(contamination=fraud_ratio),</span></span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="co">####    'RGraph': RGraph(contamination=fraud_ratio),</span></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ROD'</span>: ROD(contamination<span class="op">=</span>fraud_ratio),</span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="co">##    'Sampling': Sampling(contamination=fraud_ratio),</span></span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="co">##   'SOD': SOD(contamination=fraud_ratio),</span></span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="co">#    'SO_GAAL': SO_GAAL(contamination=fraud_ratio),</span></span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="co">####    'SOS': SOS(contamination=fraud_ratio),</span></span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="co">#    'SUOD': SUOD(contamination=fraud_ratio),</span></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="co">#    'VAE': VAE(contamination=fraud_ratio),</span></span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="co">#    'XGBOD': XGBOD(contamination=fraud_ratio),  </span></span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X, XX, y, yy, predictors, throw_rate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="ba77e70e-7384-4a34-9254-e7b75498fc7f" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pyod_0503(X,XX,y,yy,predictors,throw_rate):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> []</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    time_diff <span class="op">=</span> []</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> []</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    pre <span class="op">=</span> []</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    rec <span class="op">=</span> []</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    f1 <span class="op">=</span> [] </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    auc <span class="op">=</span> [] </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    graph_based <span class="op">=</span> []</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    method <span class="op">=</span> [] </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    train_size <span class="op">=</span> []</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    train_cols <span class="op">=</span> []</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    train_frate <span class="op">=</span> []</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    test_size <span class="op">=</span> []</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    test_frate <span class="op">=</span> []</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    hyper_params <span class="op">=</span> [] </span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name, predictor <span class="kw">in</span> predictors.items():</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        t1 <span class="op">=</span> time.time()</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        predictor.fit(X,y)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        t2 <span class="op">=</span> time.time()</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        yyhat <span class="op">=</span> predictor.predict(XX)</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        scores <span class="op">=</span> evaluate(yy,yyhat)</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        model.append(name)</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>        time_diff.append(t2<span class="op">-</span>t1)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>        acc.append(scores[<span class="st">'acc'</span>])</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>        pre.append(scores[<span class="st">'pre'</span>])</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>        rec.append(scores[<span class="st">'rec'</span>])</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>        f1.append(scores[<span class="st">'f1'</span>])</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        auc.append(scores[<span class="st">'auc'</span>])</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>        graph_based.append(<span class="va">False</span>)</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>        method.append(<span class="st">'pyod'</span>)</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>        train_size.append(<span class="bu">len</span>(y)),</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>        train_cols.append(<span class="bu">list</span>(X.columns)),</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>        train_frate.append(np.array(y).reshape(<span class="op">-</span><span class="dv">1</span>).mean()),</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>        test_size.append(<span class="bu">len</span>(yy)),</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>        test_frate.append(np.array(yy).reshape(<span class="op">-</span><span class="dv">1</span>).mean())</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>        hyper_params.append(<span class="va">None</span>)</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    df_results <span class="op">=</span> pd.DataFrame(<span class="bu">dict</span>(</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>        model <span class="op">=</span> model,</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>        time<span class="op">=</span>time_diff,</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>        acc<span class="op">=</span>acc,</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>        pre<span class="op">=</span>pre,</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>        rec<span class="op">=</span>rec,</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>        f1<span class="op">=</span>f1,</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>        auc<span class="op">=</span>auc,</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>        graph_based <span class="op">=</span> graph_based,</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>        method <span class="op">=</span> method,</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>        throw_rate <span class="op">=</span> throw_rate,</span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>        train_size <span class="op">=</span> train_size,</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>        train_cols <span class="op">=</span> train_cols,</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>        train_frate <span class="op">=</span> np.array(y).mean(),</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>        test_size <span class="op">=</span> test_size,</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>        test_frate <span class="op">=</span> np.array(yy).mean(),</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>        hyper_params <span class="op">=</span> hyper_params</span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>    ymdhms <span class="op">=</span> datetime.datetime.fromtimestamp(time.time()).strftime(<span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">-%H%M%S'</span>) </span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>    df_results.to_csv(<span class="ss">f'../results2/</span><span class="sc">{</span>ymdhms<span class="sc">}</span><span class="ss">-pyod.csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="957087d4-9801-404c-aa5f-22f698ed3a60" class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train1, df_test, _df1_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5f24a355-f133-4983-8bd4-1a49001bd08e" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pyod_preprocess_0503(df_tr, df_tstn, _df_mean):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> pd.DataFrame(df_tr[<span class="st">'amt'</span>])</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> pd.DataFrame(df_tr[<span class="st">'is_fraud'</span>])</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    XX <span class="op">=</span> pd.DataFrame(df_tstn[<span class="st">'amt'</span>])</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    yy <span class="op">=</span> pd.DataFrame(df_tstn[<span class="st">'is_fraud'</span>])</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    throw_rate <span class="op">=</span> _df_mean</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    fraud_ratio <span class="op">=</span> df_tr.is_fraud.mean()</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    predictors <span class="op">=</span> {</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">'ABOD'</span>: ABOD(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#    'ALAD': ALAD(contamination=fraud_ratio),</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#    'AnoGAN': AnoGAN(contamination=fraud_ratio),</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#    'AutoEncoder':AutoEncoder(contamination=fraud_ratio),</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">##    'CBLOF': CBLOF(contamination=fraud_ratio,n_clusters=2),</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">##    'COF': COF(contamination=fraud_ratio),</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">##    'CD': CD(contamination=fraud_ratio),</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'COPOD'</span>: COPOD(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co">#    'DeepSVDD': DeepSVDD(contamination=fraud_ratio),</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">#    'DIF': DIF(contamination=fraud_ratio),    </span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ECOD'</span>: ECOD(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">#    'FeatureBagging': FeatureBagging(contamination=fraud_ratio),</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GMM'</span>: GMM(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">'HBOS'</span>: HBOS(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">'IForest'</span>: IForest(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">'INNE'</span>: INNE(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">'KDE'</span>: KDE(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">'KNN'</span>: KNN(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co">####    'KPCA': KPCA(contamination=fraud_ratio),</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="co">#    'PyODKernelPCA': PyODKernelPCA(contamination=fraud_ratio),</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="co">##    'LMDD': LMDD(contamination=fraud_ratio),</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">'LODA'</span>: LODA(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">'LOF'</span>: LOF(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="co">####    'LOCI': LOCI(contamination=fraud_ratio),</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="co">#    'LUNAR': LUNAR(contamination=fraud_ratio),</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">'LODA'</span>: LODA(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="co">#    'LSCP': LSCP(contamination=fraud_ratio),</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MAD'</span>: MAD(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MCD'</span>: MCD(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="co">#    'MO_GAAL': MO_GAAL(contamination=fraud_ratio),</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">'OCSVM'</span>: OCSVM(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">'PCA'</span>: PCA(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="co">###    'QMCD': QMCD(contamination=fraud_ratio),</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a><span class="co">####    'RGraph': RGraph(contamination=fraud_ratio),</span></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ROD'</span>: ROD(contamination<span class="op">=</span>fraud_ratio),</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="co">##    'Sampling': Sampling(contamination=fraud_ratio),</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="co">##   'SOD': SOD(contamination=fraud_ratio),</span></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a><span class="co">#    'SO_GAAL': SO_GAAL(contamination=fraud_ratio),</span></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a><span class="co">####    'SOS': SOS(contamination=fraud_ratio),</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a><span class="co">#    'SUOD': SUOD(contamination=fraud_ratio),</span></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a><span class="co">#    'VAE': VAE(contamination=fraud_ratio),</span></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a><span class="co">#    'XGBOD': XGBOD(contamination=fraud_ratio),  </span></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X, XX, y, yy, predictors, throw_rate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div id="501caac7-7123-48cc-8e26-7bd7d442e873" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train1, df_test, _df1_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>–&gt; 9시간 이상</p>
 <div id="7cbeb45f-0850-42fc-853f-4c9785063860" class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train2, df_test, _df2_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train2, df_test, _df2_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>—&gt; 4시간 이상</p>
 <div id="d980ba12-3f83-458b-bbd5-7349a59229db" class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train3, df_test, _df3_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train3, df_test, _df3_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="a3dd54eb-d0ce-484b-930d-dbb45085d9a3" class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train4, df_test, _df4_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train4, df_test, _df4_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="e9fd54ed-fcf0-4cd9-a50a-ca25622cd6d7" class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train5, df_test, _df5_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train5, df_test, _df5_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="a6d86f63-15dc-457a-9d16-1fa81372e0f8" class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train6, df_test, _df6_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train6, df_test, _df6_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="322176f2-51fc-424b-b0c0-6130188168a0" class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train7, df_test, _df7_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train7, df_test, _df7_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="2b9697da-0dc8-4aa7-9fd3-d10fe7c2acd3" class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train8, df_test, _df8_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pyod_0503(<span class="op">*</span>pyod_preprocess_0503(df_train8, df_test, _df8_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

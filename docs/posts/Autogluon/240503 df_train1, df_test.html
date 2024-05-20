@@ -245,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    df_tst <span class="op">=</span> df_tst[[<span class="st">"amt"</span>,<span class="st">"is_fraud"</span>]]     </span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    tr <span class="op">=</span> TabularDataset(df_tr)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    tst <span class="op">=</span> TabularDataset(df_tst)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    predictr <span class="op">=</span> TabularPredictor(label<span class="op">=</span><span class="st">"is_fraud"</span>, verbosity<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    predictr <span class="op">=</span> TabularPredictor(label<span class="op">=</span><span class="st">"is_fraud"</span>, verbosity<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    t1 <span class="op">=</span> time.time()</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    predictr.fit(tr)</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    t2 <span class="op">=</span> time.time()</span>
@@ -324,6 +324,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cc70728d-bff3-48cb-b45d-4de4c1de87ba" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train1, df_test, _df1_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_052634/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
@@ -624,7 +629,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="4d86bc1d-f16b-49a1-8bcd-e5680ad9fc6c" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train2, df_test, _df2_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train2, df_test, _df2_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_053531/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
@@ -925,7 +935,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="c9269765-b422-46d9-a164-ca75fe9cf532" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train3, df_test, _df3_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train3, df_test, _df3_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_053949/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
@@ -1226,7 +1241,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="53866acc-a71e-453c-ba49-d905366d1b37" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train4, df_test, _df4_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train4, df_test, _df4_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_054133/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
@@ -1527,7 +1547,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="66f11edf-6222-4b71-901b-0c80c22e2e0d" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train5, df_test, _df5_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train5, df_test, _df5_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_054246/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <div>
 
@@ -1828,7 +1853,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="514228c1-4912-4a43-b3cd-20c37943de77" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train6, df_test, _df6_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train6, df_test, _df6_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_054324/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <div>
 
@@ -2129,7 +2159,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="0503957d-856f-43ef-a2dd-7f17640b8e6b" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train7, df_test, _df7_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train7, df_test, _df7_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_054355/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 
@@ -2430,7 +2465,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="007bd441-79b9-4233-9a9d-508997e1737d" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train8, df_test, _df8_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train8, df_test, _df8_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_054431/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <div>
 
@@ -2728,6 +2768,2745 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 
 </div>
+</div>
+</div>
+<hr>
+</section>
+<section id="amt-80-미만-잘-잡는지-확인용.." class="level1">
+<h1>amt 80 미만 잘 잡는지 확인용..</h1>
+<div id="05c7773c-29e8-46e0-a27a-9188853af110" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_80 <span class="op">=</span> df_test[df_test[<span class="st">'amt'</span>] <span class="op">&lt;=</span> <span class="dv">80</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="c4ea0589-d894-46e6-a8cb-cfcdc398a816" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df_80.shape, df_80.is_fraud.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>((231011, 22), 0.0016665873053664112)</code></pre>
+</div>
+</div>
+<div id="eccd12d1-28ad-47a0-a473-428d3cfd5473" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>_df1_ <span class="op">=</span> pd.concat([df_train1, df_80])</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>_df2_ <span class="op">=</span> pd.concat([df_train2, df_80])</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>_df3_ <span class="op">=</span> pd.concat([df_train3, df_80])</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>_df4_ <span class="op">=</span> pd.concat([df_train4, df_80])</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>_df5_ <span class="op">=</span> pd.concat([df_train5, df_80])</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>_df6_ <span class="op">=</span> pd.concat([df_train6, df_80])</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>_df7_ <span class="op">=</span> pd.concat([df_train7, df_80])</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>_df8_ <span class="op">=</span> pd.concat([df_train8, df_80])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="0bfc510a-0a67-47ef-972f-2b9e3d1acb6c" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>_df1_mean_ <span class="op">=</span> _df1_.is_fraud.mean()</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>_df2_mean_ <span class="op">=</span> _df2_.is_fraud.mean()</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>_df3_mean_ <span class="op">=</span> _df3_.is_fraud.mean()</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>_df4_mean_ <span class="op">=</span> _df4_.is_fraud.mean()</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>_df5_mean_ <span class="op">=</span> _df5_.is_fraud.mean()</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>_df6_mean_ <span class="op">=</span> _df6_.is_fraud.mean()</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>_df7_mean_ <span class="op">=</span> _df7_.is_fraud.mean()</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>_df8_mean_ <span class="op">=</span> _df8_.is_fraud.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="56d13063-805c-4e46-9838-b315280a269d" class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train1, df_80, _df1_mean_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_094408/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
+</div>
+<div id="aa2d6546-c8f7-4640-a18d-ba302cf04ea2" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train2, df_80, _df2_mean_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_064424/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.537194</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007045</td>
+<td>420500</td>
+<td>[amt]</td>
+<td>0.01</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.537194</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007045</td>
+<td>420500</td>
+<td>[amt]</td>
+<td>0.01</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.619651</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007045</td>
+<td>420500</td>
+<td>[amt]</td>
+<td>0.01</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.885680</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007045</td>
+<td>420500</td>
+<td>[amt]</td>
+<td>0.01</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.631076</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007045</td>
+<td>420500</td>
+<td>[amt]</td>
+<td>0.01</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.631076</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007045</td>
+<td>420500</td>
+<td>[amt]</td>
+<td>0.01</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.854812</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007045</td>
+<td>420500</td>
+<td>[amt]</td>
+<td>0.01</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.631076</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007045</td>
+<td>420500</td>
+<td>[amt]</td>
+<td>0.01</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.631076</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007045</td>
+<td>420500</td>
+<td>[amt]</td>
+<td>0.01</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.746475</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007045</td>
+<td>420500</td>
+<td>[amt]</td>
+<td>0.01</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.826658</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007045</td>
+<td>420500</td>
+<td>[amt]</td>
+<td>0.01</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.858653</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007045</td>
+<td>420500</td>
+<td>[amt]</td>
+<td>0.01</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.885310</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007045</td>
+<td>420500</td>
+<td>[amt]</td>
+<td>0.01</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.858653</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.007045</td>
+<td>420500</td>
+<td>[amt]</td>
+<td>0.01</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="4b0b958e-7d0e-4b09-821d-ab9d5f4eaf07" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train3, df_80, _df3_mean_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_064813/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.997074</td>
+<td>0.010101</td>
+<td>0.007792</td>
+<td>0.008798</td>
+<td>0.610442</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.014566</td>
+<td>84100</td>
+<td>[amt]</td>
+<td>0.05</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.996883</td>
+<td>0.011662</td>
+<td>0.010390</td>
+<td>0.010989</td>
+<td>0.592382</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.014566</td>
+<td>84100</td>
+<td>[amt]</td>
+<td>0.05</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.667233</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.014566</td>
+<td>84100</td>
+<td>[amt]</td>
+<td>0.05</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.890164</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.014566</td>
+<td>84100</td>
+<td>[amt]</td>
+<td>0.05</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.996953</td>
+<td>0.009231</td>
+<td>0.007792</td>
+<td>0.008451</td>
+<td>0.665573</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.014566</td>
+<td>84100</td>
+<td>[amt]</td>
+<td>0.05</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.996953</td>
+<td>0.009231</td>
+<td>0.007792</td>
+<td>0.008451</td>
+<td>0.665573</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.014566</td>
+<td>84100</td>
+<td>[amt]</td>
+<td>0.05</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.849362</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.014566</td>
+<td>84100</td>
+<td>[amt]</td>
+<td>0.05</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.997186</td>
+<td>0.011070</td>
+<td>0.007792</td>
+<td>0.009146</td>
+<td>0.679732</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.014566</td>
+<td>84100</td>
+<td>[amt]</td>
+<td>0.05</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.997186</td>
+<td>0.011070</td>
+<td>0.007792</td>
+<td>0.009146</td>
+<td>0.677500</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.014566</td>
+<td>84100</td>
+<td>[amt]</td>
+<td>0.05</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.593622</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.014566</td>
+<td>84100</td>
+<td>[amt]</td>
+<td>0.05</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.854089</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.014566</td>
+<td>84100</td>
+<td>[amt]</td>
+<td>0.05</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.862387</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.014566</td>
+<td>84100</td>
+<td>[amt]</td>
+<td>0.05</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.885963</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.014566</td>
+<td>84100</td>
+<td>[amt]</td>
+<td>0.05</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.869034</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.014566</td>
+<td>84100</td>
+<td>[amt]</td>
+<td>0.05</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="72fa28ce-0462-48a6-a76f-d28371dda465" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train4, df_80, _df4_mean_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_065005/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.993780</td>
+<td>0.006567</td>
+<td>0.018182</td>
+<td>0.009649</td>
+<td>0.663976</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.016809</td>
+<td>42050</td>
+<td>[amt]</td>
+<td>0.1</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.991113</td>
+<td>0.008255</td>
+<td>0.036364</td>
+<td>0.013455</td>
+<td>0.618455</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.016809</td>
+<td>42050</td>
+<td>[amt]</td>
+<td>0.1</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.865731</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.016809</td>
+<td>42050</td>
+<td>[amt]</td>
+<td>0.1</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.888579</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.016809</td>
+<td>42050</td>
+<td>[amt]</td>
+<td>0.1</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.989940</td>
+<td>0.009114</td>
+<td>0.046753</td>
+<td>0.015254</td>
+<td>0.728206</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.016809</td>
+<td>42050</td>
+<td>[amt]</td>
+<td>0.1</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.989940</td>
+<td>0.009114</td>
+<td>0.046753</td>
+<td>0.015254</td>
+<td>0.728206</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.016809</td>
+<td>42050</td>
+<td>[amt]</td>
+<td>0.1</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.877423</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.016809</td>
+<td>42050</td>
+<td>[amt]</td>
+<td>0.1</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.990723</td>
+<td>0.008939</td>
+<td>0.041558</td>
+<td>0.014713</td>
+<td>0.758804</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.016809</td>
+<td>42050</td>
+<td>[amt]</td>
+<td>0.1</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.990710</td>
+<td>0.008375</td>
+<td>0.038961</td>
+<td>0.013787</td>
+<td>0.754776</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.016809</td>
+<td>42050</td>
+<td>[amt]</td>
+<td>0.1</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.778624</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.016809</td>
+<td>42050</td>
+<td>[amt]</td>
+<td>0.1</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.857305</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.016809</td>
+<td>42050</td>
+<td>[amt]</td>
+<td>0.1</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.875832</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.016809</td>
+<td>42050</td>
+<td>[amt]</td>
+<td>0.1</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.883690</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.016809</td>
+<td>42050</td>
+<td>[amt]</td>
+<td>0.1</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.886679</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.016809</td>
+<td>42050</td>
+<td>[amt]</td>
+<td>0.1</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="c6465717-6477-4649-8512-244c8bf5449b" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train5, df_80, _df5_mean_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_065116/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.974651</td>
+<td>0.009679</td>
+<td>0.140260</td>
+<td>0.018109</td>
+<td>0.762008</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018212</td>
+<td>21025</td>
+<td>[amt]</td>
+<td>0.2</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.968343</td>
+<td>0.007955</td>
+<td>0.145455</td>
+<td>0.015084</td>
+<td>0.686752</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018212</td>
+<td>21025</td>
+<td>[amt]</td>
+<td>0.2</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.868728</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018212</td>
+<td>21025</td>
+<td>[amt]</td>
+<td>0.2</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.888796</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018212</td>
+<td>21025</td>
+<td>[amt]</td>
+<td>0.2</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.961876</td>
+<td>0.008405</td>
+<td>0.187013</td>
+<td>0.016088</td>
+<td>0.790183</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018212</td>
+<td>21025</td>
+<td>[amt]</td>
+<td>0.2</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.961876</td>
+<td>0.008405</td>
+<td>0.187013</td>
+<td>0.016088</td>
+<td>0.790183</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018212</td>
+<td>21025</td>
+<td>[amt]</td>
+<td>0.2</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.891512</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018212</td>
+<td>21025</td>
+<td>[amt]</td>
+<td>0.2</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.964097</td>
+<td>0.009063</td>
+<td>0.189610</td>
+<td>0.017299</td>
+<td>0.804425</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018212</td>
+<td>21025</td>
+<td>[amt]</td>
+<td>0.2</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.963664</td>
+<td>0.008831</td>
+<td>0.187013</td>
+<td>0.016866</td>
+<td>0.809713</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018212</td>
+<td>21025</td>
+<td>[amt]</td>
+<td>0.2</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.855702</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018212</td>
+<td>21025</td>
+<td>[amt]</td>
+<td>0.2</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.863929</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018212</td>
+<td>21025</td>
+<td>[amt]</td>
+<td>0.2</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.862611</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018212</td>
+<td>21025</td>
+<td>[amt]</td>
+<td>0.2</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.884554</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018212</td>
+<td>21025</td>
+<td>[amt]</td>
+<td>0.2</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.889678</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018212</td>
+<td>21025</td>
+<td>[amt]</td>
+<td>0.2</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="77c0a5cf-fb29-4a5b-99f2-7a0c9ede262f" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train6, df_80, _df6_mean_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_065157/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.949574</td>
+<td>0.009408</td>
+<td>0.280519</td>
+<td>0.018205</td>
+<td>0.808472</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018733</td>
+<td>14017</td>
+<td>[amt]</td>
+<td>0.299993</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.942470</td>
+<td>0.008381</td>
+<td>0.285714</td>
+<td>0.016284</td>
+<td>0.725144</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018733</td>
+<td>14017</td>
+<td>[amt]</td>
+<td>0.299993</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.860889</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018733</td>
+<td>14017</td>
+<td>[amt]</td>
+<td>0.299993</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.985395</td>
+<td>0.014300</td>
+<td>0.114286</td>
+<td>0.025419</td>
+<td>0.890098</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018733</td>
+<td>14017</td>
+<td>[amt]</td>
+<td>0.299993</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.930609</td>
+<td>0.007616</td>
+<td>0.314286</td>
+<td>0.014872</td>
+<td>0.818151</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018733</td>
+<td>14017</td>
+<td>[amt]</td>
+<td>0.299993</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.930609</td>
+<td>0.007616</td>
+<td>0.314286</td>
+<td>0.014872</td>
+<td>0.818151</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018733</td>
+<td>14017</td>
+<td>[amt]</td>
+<td>0.299993</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.993758</td>
+<td>0.010195</td>
+<td>0.028571</td>
+<td>0.015027</td>
+<td>0.883878</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018733</td>
+<td>14017</td>
+<td>[amt]</td>
+<td>0.299993</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.932977</td>
+<td>0.008337</td>
+<td>0.332468</td>
+<td>0.016265</td>
+<td>0.830028</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018733</td>
+<td>14017</td>
+<td>[amt]</td>
+<td>0.299993</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.934016</td>
+<td>0.008404</td>
+<td>0.329870</td>
+<td>0.016390</td>
+<td>0.831543</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018733</td>
+<td>14017</td>
+<td>[amt]</td>
+<td>0.299993</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.604243</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018733</td>
+<td>14017</td>
+<td>[amt]</td>
+<td>0.299993</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.982451</td>
+<td>0.014811</td>
+<td>0.145455</td>
+<td>0.026884</td>
+<td>0.889313</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018733</td>
+<td>14017</td>
+<td>[amt]</td>
+<td>0.299993</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.861303</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018733</td>
+<td>14017</td>
+<td>[amt]</td>
+<td>0.299993</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.989671</td>
+<td>0.013612</td>
+<td>0.072727</td>
+<td>0.022932</td>
+<td>0.885505</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018733</td>
+<td>14017</td>
+<td>[amt]</td>
+<td>0.299993</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.989671</td>
+<td>0.013612</td>
+<td>0.072727</td>
+<td>0.022932</td>
+<td>0.885505</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.018733</td>
+<td>14017</td>
+<td>[amt]</td>
+<td>0.299993</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="46dad246-242a-4805-b7bf-bd8a470882b0" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train7, df_80, _df7_mean_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_065229/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.916411</td>
+<td>0.008416</td>
+<td>0.420779</td>
+<td>0.016502</td>
+<td>0.828619</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019004</td>
+<td>10512</td>
+<td>[amt]</td>
+<td>0.400019</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.912039</td>
+<td>0.007753</td>
+<td>0.407792</td>
+<td>0.015218</td>
+<td>0.762284</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019004</td>
+<td>10512</td>
+<td>[amt]</td>
+<td>0.400019</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.963513</td>
+<td>0.013546</td>
+<td>0.290909</td>
+<td>0.025887</td>
+<td>0.876453</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019004</td>
+<td>10512</td>
+<td>[amt]</td>
+<td>0.400019</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.948557</td>
+<td>0.012878</td>
+<td>0.394805</td>
+<td>0.024943</td>
+<td>0.889180</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019004</td>
+<td>10512</td>
+<td>[amt]</td>
+<td>0.400019</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.893364</td>
+<td>0.006753</td>
+<td>0.431169</td>
+<td>0.013298</td>
+<td>0.833487</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019004</td>
+<td>10512</td>
+<td>[amt]</td>
+<td>0.400019</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.893364</td>
+<td>0.006753</td>
+<td>0.431169</td>
+<td>0.013298</td>
+<td>0.833487</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019004</td>
+<td>10512</td>
+<td>[amt]</td>
+<td>0.400019</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.965032</td>
+<td>0.013532</td>
+<td>0.277922</td>
+<td>0.025808</td>
+<td>0.880542</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019004</td>
+<td>10512</td>
+<td>[amt]</td>
+<td>0.400019</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.901057</td>
+<td>0.007668</td>
+<td>0.454545</td>
+<td>0.015082</td>
+<td>0.846933</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019004</td>
+<td>10512</td>
+<td>[amt]</td>
+<td>0.400019</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.900381</td>
+<td>0.007702</td>
+<td>0.459740</td>
+<td>0.015150</td>
+<td>0.843639</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019004</td>
+<td>10512</td>
+<td>[amt]</td>
+<td>0.400019</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.604243</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019004</td>
+<td>10512</td>
+<td>[amt]</td>
+<td>0.400019</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.945548</td>
+<td>0.012786</td>
+<td>0.415584</td>
+<td>0.024808</td>
+<td>0.886951</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019004</td>
+<td>10512</td>
+<td>[amt]</td>
+<td>0.400019</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.950418</td>
+<td>0.011561</td>
+<td>0.340260</td>
+<td>0.022363</td>
+<td>0.868049</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019004</td>
+<td>10512</td>
+<td>[amt]</td>
+<td>0.400019</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.945418</td>
+<td>0.013453</td>
+<td>0.438961</td>
+<td>0.026106</td>
+<td>0.887662</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019004</td>
+<td>10512</td>
+<td>[amt]</td>
+<td>0.400019</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.948557</td>
+<td>0.012878</td>
+<td>0.394805</td>
+<td>0.024943</td>
+<td>0.889180</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019004</td>
+<td>10512</td>
+<td>[amt]</td>
+<td>0.400019</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="3b39ecbd-dabd-4393-885c-78cefc474fe6" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0503(df_train8, df_80, _df8_mean_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_065302/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.876305</td>
+<td>0.007306</td>
+<td>0.542857</td>
+<td>0.014417</td>
+<td>0.835443</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019171</td>
+<td>8410</td>
+<td>[amt]</td>
+<td>0.5</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.879227</td>
+<td>0.007165</td>
+<td>0.519481</td>
+<td>0.014134</td>
+<td>0.761894</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019171</td>
+<td>8410</td>
+<td>[amt]</td>
+<td>0.5</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.878248</td>
+<td>0.008225</td>
+<td>0.602597</td>
+<td>0.016229</td>
+<td>0.861540</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019171</td>
+<td>8410</td>
+<td>[amt]</td>
+<td>0.5</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.916974</td>
+<td>0.010827</td>
+<td>0.540260</td>
+<td>0.021229</td>
+<td>0.887029</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019171</td>
+<td>8410</td>
+<td>[amt]</td>
+<td>0.5</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.864556</td>
+<td>0.006673</td>
+<td>0.542857</td>
+<td>0.013183</td>
+<td>0.837880</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019171</td>
+<td>8410</td>
+<td>[amt]</td>
+<td>0.5</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.864556</td>
+<td>0.006673</td>
+<td>0.542857</td>
+<td>0.013183</td>
+<td>0.837880</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019171</td>
+<td>8410</td>
+<td>[amt]</td>
+<td>0.5</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.900442</td>
+<td>0.009840</td>
+<td>0.589610</td>
+<td>0.019358</td>
+<td>0.888977</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019171</td>
+<td>8410</td>
+<td>[amt]</td>
+<td>0.5</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.868123</td>
+<td>0.007015</td>
+<td>0.555844</td>
+<td>0.013854</td>
+<td>0.841006</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019171</td>
+<td>8410</td>
+<td>[amt]</td>
+<td>0.5</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.869738</td>
+<td>0.007003</td>
+<td>0.548052</td>
+<td>0.013830</td>
+<td>0.842724</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019171</td>
+<td>8410</td>
+<td>[amt]</td>
+<td>0.5</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.998333</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.604243</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019171</td>
+<td>8410</td>
+<td>[amt]</td>
+<td>0.5</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.907489</td>
+<td>0.010131</td>
+<td>0.563636</td>
+<td>0.019904</td>
+<td>0.887128</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019171</td>
+<td>8410</td>
+<td>[amt]</td>
+<td>0.5</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.842518</td>
+<td>0.007579</td>
+<td>0.719481</td>
+<td>0.015000</td>
+<td>0.859309</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019171</td>
+<td>8410</td>
+<td>[amt]</td>
+<td>0.5</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.890689</td>
+<td>0.009081</td>
+<td>0.597403</td>
+<td>0.017890</td>
+<td>0.882991</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019171</td>
+<td>8410</td>
+<td>[amt]</td>
+<td>0.5</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.848488</td>
+<td>0.007736</td>
+<td>0.706494</td>
+<td>0.015305</td>
+<td>0.861127</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.019171</td>
+<td>8410</td>
+<td>[amt]</td>
+<td>0.5</td>
+<td>231011</td>
+<td>0.001667</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="다른-것-추가" class="level1">
+<h1>다른 것 추가</h1>
+<div id="f90e7166-9ce3-47cb-b0f1-ecabc42ceb0b" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> auto_amt_ver0520(df_tr, df_tst, _df_mean):</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    df_tr <span class="op">=</span> df_tr[[<span class="st">'trans_date_trans_time'</span>,  <span class="st">'merchant'</span>, <span class="st">'category'</span>, <span class="st">'amt'</span>,</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>       <span class="st">'first'</span>, <span class="st">'last'</span>, <span class="st">'gender'</span>, <span class="st">'street'</span>, <span class="st">'city'</span>, <span class="st">'state'</span>, <span class="st">'zip'</span>, <span class="st">'lat'</span>,</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>       <span class="st">'long'</span>, <span class="st">'city_pop'</span>, <span class="st">'job'</span>, <span class="st">'dob'</span>, <span class="st">'trans_num'</span>, <span class="st">'unix_time'</span>, <span class="st">'merch_lat'</span>,</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>       <span class="st">'merch_long'</span>, <span class="st">'is_fraud'</span>]]</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    df_tst <span class="op">=</span> df_tst[[<span class="st">'trans_date_trans_time'</span>,  <span class="st">'merchant'</span>, <span class="st">'category'</span>, <span class="st">'amt'</span>,</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>       <span class="st">'first'</span>, <span class="st">'last'</span>, <span class="st">'gender'</span>, <span class="st">'street'</span>, <span class="st">'city'</span>, <span class="st">'state'</span>, <span class="st">'zip'</span>, <span class="st">'lat'</span>,</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>       <span class="st">'long'</span>, <span class="st">'city_pop'</span>, <span class="st">'job'</span>, <span class="st">'dob'</span>, <span class="st">'trans_num'</span>, <span class="st">'unix_time'</span>, <span class="st">'merch_lat'</span>,</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>       <span class="st">'merch_long'</span>, <span class="st">'is_fraud'</span>]]     </span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>    tr <span class="op">=</span> TabularDataset(df_tr)</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>    tst <span class="op">=</span> TabularDataset(df_tst)</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>    predictr <span class="op">=</span> TabularPredictor(label<span class="op">=</span><span class="st">"is_fraud"</span>, verbosity<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>    t1 <span class="op">=</span> time.time()</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>    predictr.fit(tr)</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>    t2 <span class="op">=</span> time.time()</span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>    time_diff <span class="op">=</span> t2 <span class="op">-</span> t1</span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> predictr._trainer.model_graph.nodes</span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> []</span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> model_name <span class="kw">in</span> models:</span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 모델 평가</span></span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>        eval_result <span class="op">=</span> predictr.evaluate(tst, model<span class="op">=</span>model_name)</span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 결과를 데이터프레임에 추가</span></span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a>        results.append({<span class="st">'model'</span>: model_name, </span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'acc'</span>: eval_result[<span class="st">'accuracy'</span>], </span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'pre'</span>: eval_result[<span class="st">'precision'</span>], </span>
+<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'rec'</span>: eval_result[<span class="st">'recall'</span>], </span>
+<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'f1'</span>: eval_result[<span class="st">'f1'</span>], </span>
+<span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'auc'</span>: eval_result[<span class="st">'roc_auc'</span>]})</span>
+<span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb45-31"><a href="#cb45-31" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> []</span>
+<span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a>    time_diff <span class="op">=</span> []</span>
+<span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> []</span>
+<span id="cb45-34"><a href="#cb45-34" aria-hidden="true" tabindex="-1"></a>    pre <span class="op">=</span> []</span>
+<span id="cb45-35"><a href="#cb45-35" aria-hidden="true" tabindex="-1"></a>    rec <span class="op">=</span> []</span>
+<span id="cb45-36"><a href="#cb45-36" aria-hidden="true" tabindex="-1"></a>    f1 <span class="op">=</span> [] </span>
+<span id="cb45-37"><a href="#cb45-37" aria-hidden="true" tabindex="-1"></a>    auc <span class="op">=</span> [] </span>
+<span id="cb45-38"><a href="#cb45-38" aria-hidden="true" tabindex="-1"></a>    graph_based <span class="op">=</span> []</span>
+<span id="cb45-39"><a href="#cb45-39" aria-hidden="true" tabindex="-1"></a>    method <span class="op">=</span> [] </span>
+<span id="cb45-40"><a href="#cb45-40" aria-hidden="true" tabindex="-1"></a>    throw_rate <span class="op">=</span> [] </span>
+<span id="cb45-41"><a href="#cb45-41" aria-hidden="true" tabindex="-1"></a>    train_size <span class="op">=</span> []</span>
+<span id="cb45-42"><a href="#cb45-42" aria-hidden="true" tabindex="-1"></a>    train_cols <span class="op">=</span> []</span>
+<span id="cb45-43"><a href="#cb45-43" aria-hidden="true" tabindex="-1"></a>    train_frate <span class="op">=</span> []</span>
+<span id="cb45-44"><a href="#cb45-44" aria-hidden="true" tabindex="-1"></a>    test_size <span class="op">=</span> []</span>
+<span id="cb45-45"><a href="#cb45-45" aria-hidden="true" tabindex="-1"></a>    test_frate <span class="op">=</span> []</span>
+<span id="cb45-46"><a href="#cb45-46" aria-hidden="true" tabindex="-1"></a>    hyper_params <span class="op">=</span> [] </span>
+<span id="cb45-47"><a href="#cb45-47" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb45-48"><a href="#cb45-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> result <span class="kw">in</span> results:</span>
+<span id="cb45-49"><a href="#cb45-49" aria-hidden="true" tabindex="-1"></a>        model_name <span class="op">=</span> result[<span class="st">'model'</span>]</span>
+<span id="cb45-50"><a href="#cb45-50" aria-hidden="true" tabindex="-1"></a>        model.append(model_name)</span>
+<span id="cb45-51"><a href="#cb45-51" aria-hidden="true" tabindex="-1"></a>        time_diff.append(<span class="va">None</span>)  <span class="co"># 각 모델별로 학습한 시간을 나타내고 싶은데 잘 안됨</span></span>
+<span id="cb45-52"><a href="#cb45-52" aria-hidden="true" tabindex="-1"></a>        acc.append(result[<span class="st">'acc'</span>]) </span>
+<span id="cb45-53"><a href="#cb45-53" aria-hidden="true" tabindex="-1"></a>        pre.append(result[<span class="st">'pre'</span>])</span>
+<span id="cb45-54"><a href="#cb45-54" aria-hidden="true" tabindex="-1"></a>        rec.append(result[<span class="st">'rec'</span>])</span>
+<span id="cb45-55"><a href="#cb45-55" aria-hidden="true" tabindex="-1"></a>        f1.append(result[<span class="st">'f1'</span>])</span>
+<span id="cb45-56"><a href="#cb45-56" aria-hidden="true" tabindex="-1"></a>        auc.append(result[<span class="st">'auc'</span>])</span>
+<span id="cb45-57"><a href="#cb45-57" aria-hidden="true" tabindex="-1"></a>        graph_based.append(<span class="va">False</span>) </span>
+<span id="cb45-58"><a href="#cb45-58" aria-hidden="true" tabindex="-1"></a>        method.append(<span class="st">'Autogluon'</span>) </span>
+<span id="cb45-59"><a href="#cb45-59" aria-hidden="true" tabindex="-1"></a>        throw_rate.append(_df_mean)</span>
+<span id="cb45-60"><a href="#cb45-60" aria-hidden="true" tabindex="-1"></a>        train_size.append(<span class="bu">len</span>(tr))</span>
+<span id="cb45-61"><a href="#cb45-61" aria-hidden="true" tabindex="-1"></a>        train_cols.append([col <span class="cf">for</span> col <span class="kw">in</span> tr.columns <span class="cf">if</span> col <span class="op">!=</span> <span class="st">'is_fraud'</span>])</span>
+<span id="cb45-62"><a href="#cb45-62" aria-hidden="true" tabindex="-1"></a>        train_frate.append(tr.is_fraud.mean())</span>
+<span id="cb45-63"><a href="#cb45-63" aria-hidden="true" tabindex="-1"></a>        test_size.append(<span class="bu">len</span>(tst))</span>
+<span id="cb45-64"><a href="#cb45-64" aria-hidden="true" tabindex="-1"></a>        test_frate.append(tst.is_fraud.mean())</span>
+<span id="cb45-65"><a href="#cb45-65" aria-hidden="true" tabindex="-1"></a>        hyper_params.append(<span class="va">None</span>)</span>
+<span id="cb45-66"><a href="#cb45-66" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb45-67"><a href="#cb45-67" aria-hidden="true" tabindex="-1"></a>    df_results <span class="op">=</span> pd.DataFrame(<span class="bu">dict</span>(</span>
+<span id="cb45-68"><a href="#cb45-68" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span>model,</span>
+<span id="cb45-69"><a href="#cb45-69" aria-hidden="true" tabindex="-1"></a>        time<span class="op">=</span>time_diff,</span>
+<span id="cb45-70"><a href="#cb45-70" aria-hidden="true" tabindex="-1"></a>        acc<span class="op">=</span>acc,</span>
+<span id="cb45-71"><a href="#cb45-71" aria-hidden="true" tabindex="-1"></a>        pre<span class="op">=</span>pre,</span>
+<span id="cb45-72"><a href="#cb45-72" aria-hidden="true" tabindex="-1"></a>        rec<span class="op">=</span>rec,</span>
+<span id="cb45-73"><a href="#cb45-73" aria-hidden="true" tabindex="-1"></a>        f1<span class="op">=</span>f1,</span>
+<span id="cb45-74"><a href="#cb45-74" aria-hidden="true" tabindex="-1"></a>        auc<span class="op">=</span>auc,</span>
+<span id="cb45-75"><a href="#cb45-75" aria-hidden="true" tabindex="-1"></a>        graph_based<span class="op">=</span>graph_based,</span>
+<span id="cb45-76"><a href="#cb45-76" aria-hidden="true" tabindex="-1"></a>        method<span class="op">=</span>method,</span>
+<span id="cb45-77"><a href="#cb45-77" aria-hidden="true" tabindex="-1"></a>        throw_rate<span class="op">=</span>throw_rate,  </span>
+<span id="cb45-78"><a href="#cb45-78" aria-hidden="true" tabindex="-1"></a>        train_size<span class="op">=</span>train_size,</span>
+<span id="cb45-79"><a href="#cb45-79" aria-hidden="true" tabindex="-1"></a>        train_cols<span class="op">=</span>train_cols,</span>
+<span id="cb45-80"><a href="#cb45-80" aria-hidden="true" tabindex="-1"></a>        train_frate<span class="op">=</span>train_frate,</span>
+<span id="cb45-81"><a href="#cb45-81" aria-hidden="true" tabindex="-1"></a>        test_size<span class="op">=</span>test_size,</span>
+<span id="cb45-82"><a href="#cb45-82" aria-hidden="true" tabindex="-1"></a>        test_frate<span class="op">=</span>test_frate,</span>
+<span id="cb45-83"><a href="#cb45-83" aria-hidden="true" tabindex="-1"></a>        hyper_params<span class="op">=</span>hyper_params</span>
+<span id="cb45-84"><a href="#cb45-84" aria-hidden="true" tabindex="-1"></a>    ))    </span>
+<span id="cb45-85"><a href="#cb45-85" aria-hidden="true" tabindex="-1"></a>    ymdhms <span class="op">=</span> datetime.datetime.fromtimestamp(time.time()).strftime(<span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">-%H%M%S'</span>) </span>
+<span id="cb45-86"><a href="#cb45-86" aria-hidden="true" tabindex="-1"></a>    df_results.to_csv(<span class="ss">f'../results2/</span><span class="sc">{</span>ymdhms<span class="sc">}</span><span class="ss">-Autogluon.csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb45-87"><a href="#cb45-87" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="42864800-4874-4954-ba07-58c27e2292fa" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>auto_amt_ver0520(df_train1, df_test, _df1_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_094915/"
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">acc</th>
+<th data-quarto-table-cell-role="th">pre</th>
+<th data-quarto-table-cell-role="th">rec</th>
+<th data-quarto-table-cell-role="th">f1</th>
+<th data-quarto-table-cell-role="th">auc</th>
+<th data-quarto-table-cell-role="th">graph_based</th>
+<th data-quarto-table-cell-role="th">method</th>
+<th data-quarto-table-cell-role="th">throw_rate</th>
+<th data-quarto-table-cell-role="th">train_size</th>
+<th data-quarto-table-cell-role="th">train_cols</th>
+<th data-quarto-table-cell-role="th">train_frate</th>
+<th data-quarto-table-cell-role="th">test_size</th>
+<th data-quarto-table-cell-role="th">test_frate</th>
+<th data-quarto-table-cell-role="th">hyper_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>KNeighborsUnif</td>
+<td>None</td>
+<td>0.997854</td>
+<td>0.774099</td>
+<td>0.882843</td>
+<td>0.824903</td>
+<td>0.996391</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.005728</td>
+<td>734003</td>
+<td>[trans_date_trans_time, merchant, category, amt, first, last, gender, street, city, state, zip, lat, long, city_pop, job, dob, trans_num, unix_time, merch_lat, merch_long]</td>
+<td>0.005729</td>
+<td>314572</td>
+<td>0.005725</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>KNeighborsDist</td>
+<td>None</td>
+<td>0.998760</td>
+<td>0.850472</td>
+<td>0.950583</td>
+<td>0.897745</td>
+<td>0.996693</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.005728</td>
+<td>734003</td>
+<td>[trans_date_trans_time, merchant, category, amt, first, last, gender, street, city, state, zip, lat, long, city_pop, job, dob, trans_num, unix_time, merch_lat, merch_long]</td>
+<td>0.005729</td>
+<td>314572</td>
+<td>0.005725</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LightGBMXT</td>
+<td>None</td>
+<td>0.997641</td>
+<td>0.940150</td>
+<td>0.627984</td>
+<td>0.752996</td>
+<td>0.995792</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.005728</td>
+<td>734003</td>
+<td>[trans_date_trans_time, merchant, category, amt, first, last, gender, street, city, state, zip, lat, long, city_pop, job, dob, trans_num, unix_time, merch_lat, merch_long]</td>
+<td>0.005729</td>
+<td>314572</td>
+<td>0.005725</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBM</td>
+<td>None</td>
+<td>0.997266</td>
+<td>0.838246</td>
+<td>0.647418</td>
+<td>0.730576</td>
+<td>0.992670</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.005728</td>
+<td>734003</td>
+<td>[trans_date_trans_time, merchant, category, amt, first, last, gender, street, city, state, zip, lat, long, city_pop, job, dob, trans_num, unix_time, merch_lat, merch_long]</td>
+<td>0.005729</td>
+<td>314572</td>
+<td>0.005725</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RandomForestGini</td>
+<td>None</td>
+<td>0.997965</td>
+<td>0.955294</td>
+<td>0.676291</td>
+<td>0.791938</td>
+<td>0.998141</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.005728</td>
+<td>734003</td>
+<td>[trans_date_trans_time, merchant, category, amt, first, last, gender, street, city, state, zip, lat, long, city_pop, job, dob, trans_num, unix_time, merch_lat, merch_long]</td>
+<td>0.005729</td>
+<td>314572</td>
+<td>0.005725</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RandomForestEntr</td>
+<td>None</td>
+<td>0.998163</td>
+<td>0.978857</td>
+<td>0.694059</td>
+<td>0.812216</td>
+<td>0.998040</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.005728</td>
+<td>734003</td>
+<td>[trans_date_trans_time, merchant, category, amt, first, last, gender, street, city, state, zip, lat, long, city_pop, job, dob, trans_num, unix_time, merch_lat, merch_long]</td>
+<td>0.005729</td>
+<td>314572</td>
+<td>0.005725</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>None</td>
+<td>0.998404</td>
+<td>0.940937</td>
+<td>0.769572</td>
+<td>0.846671</td>
+<td>0.983846</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.005728</td>
+<td>734003</td>
+<td>[trans_date_trans_time, merchant, category, amt, first, last, gender, street, city, state, zip, lat, long, city_pop, job, dob, trans_num, unix_time, merch_lat, merch_long]</td>
+<td>0.005729</td>
+<td>314572</td>
+<td>0.005725</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>None</td>
+<td>0.997603</td>
+<td>0.995270</td>
+<td>0.584120</td>
+<td>0.736179</td>
+<td>0.999165</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.005728</td>
+<td>734003</td>
+<td>[trans_date_trans_time, merchant, category, amt, first, last, gender, street, city, state, zip, lat, long, city_pop, job, dob, trans_num, unix_time, merch_lat, merch_long]</td>
+<td>0.005729</td>
+<td>314572</td>
+<td>0.005725</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>ExtraTreesEntr</td>
+<td>None</td>
+<td>0.997597</td>
+<td>0.994324</td>
+<td>0.583565</td>
+<td>0.735479</td>
+<td>0.999239</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.005728</td>
+<td>734003</td>
+<td>[trans_date_trans_time, merchant, category, amt, first, last, gender, street, city, state, zip, lat, long, city_pop, job, dob, trans_num, unix_time, merch_lat, merch_long]</td>
+<td>0.005729</td>
+<td>314572</td>
+<td>0.005725</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NeuralNetFastAI</td>
+<td>None</td>
+<td>0.998992</td>
+<td>0.944311</td>
+<td>0.875625</td>
+<td>0.908672</td>
+<td>0.997173</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.005728</td>
+<td>734003</td>
+<td>[trans_date_trans_time, merchant, category, amt, first, last, gender, street, city, state, zip, lat, long, city_pop, job, dob, trans_num, unix_time, merch_lat, merch_long]</td>
+<td>0.005729</td>
+<td>314572</td>
+<td>0.005725</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>None</td>
+<td>0.997253</td>
+<td>0.840727</td>
+<td>0.641866</td>
+<td>0.727960</td>
+<td>0.980501</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.005728</td>
+<td>734003</td>
+<td>[trans_date_trans_time, merchant, category, amt, first, last, gender, street, city, state, zip, lat, long, city_pop, job, dob, trans_num, unix_time, merch_lat, merch_long]</td>
+<td>0.005729</td>
+<td>314572</td>
+<td>0.005725</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>NeuralNetTorch</td>
+<td>None</td>
+<td>0.997619</td>
+<td>0.865786</td>
+<td>0.691283</td>
+<td>0.768756</td>
+<td>0.993116</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.005728</td>
+<td>734003</td>
+<td>[trans_date_trans_time, merchant, category, amt, first, last, gender, street, city, state, zip, lat, long, city_pop, job, dob, trans_num, unix_time, merch_lat, merch_long]</td>
+<td>0.005729</td>
+<td>314572</td>
+<td>0.005725</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LightGBMLarge</td>
+<td>None</td>
+<td>0.997543</td>
+<td>0.858939</td>
+<td>0.682954</td>
+<td>0.760903</td>
+<td>0.990375</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.005728</td>
+<td>734003</td>
+<td>[trans_date_trans_time, merchant, category, amt, first, last, gender, street, city, state, zip, lat, long, city_pop, job, dob, trans_num, unix_time, merch_lat, merch_long]</td>
+<td>0.005729</td>
+<td>314572</td>
+<td>0.005725</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>WeightedEnsemble_L2</td>
+<td>None</td>
+<td>0.999399</td>
+<td>0.975797</td>
+<td>0.917823</td>
+<td>0.945923</td>
+<td>0.999333</td>
+<td>False</td>
+<td>Autogluon</td>
+<td>0.005728</td>
+<td>734003</td>
+<td>[trans_date_trans_time, merchant, category, amt, first, last, gender, street, city, state, zip, lat, long, city_pop, job, dob, trans_num, unix_time, merch_lat, merch_long]</td>
+<td>0.005729</td>
+<td>314572</td>
+<td>0.005725</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="f2a1490a-6a6d-448a-9f47-ad011808785b" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>Xcolumns <span class="op">=</span> [<span class="st">'category'</span>, <span class="st">'amt'</span>,<span class="st">'gender'</span>, <span class="st">'street'</span>, <span class="st">'city'</span>, <span class="st">'state'</span>, <span class="st">'zip'</span>, <span class="st">'lat'</span>, <span class="st">'long'</span>, <span class="st">'city_pop'</span>, <span class="st">'job'</span>, <span class="st">'unix_time'</span>, <span class="st">'is_fraud'</span>]</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>df_tr <span class="op">=</span> df_train1[Xcolumns]</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>df_tst <span class="op">=</span> df_test[Xcolumns]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b4ea0956-283e-4950-9074-67f077da8672" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>tr <span class="op">=</span> TabularDataset(df_tr)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>tst <span class="op">=</span> TabularDataset(df_tst)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TabularPredictor(label<span class="op">=</span><span class="st">"is_fraud"</span>, verbosity<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20240520_103239/"</code></pre>
+</div>
+</div>
+<div id="78317b84-f199-4b39-8903-7a71f9576e0a" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>predictr.fit(tr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>&lt;autogluon.tabular.predictor.predictor.TabularPredictor at 0x7f6099bb3400&gt;</code></pre>
+</div>
+</div>
+<div id="31b25ff9-c967-406f-be21-bcc97e1c10a8" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>yyhat_prob <span class="op">=</span> predictr.predict_proba(tst).iloc[:,<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="c77f0459-cb2d-403e-bab5-651498465192" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>df_tst_compact<span class="op">=</span>tst.assign(yyhat_prob <span class="op">=</span> yyhat_prob).loc[:,[<span class="st">'amt'</span>,<span class="st">'is_fraud'</span>,<span class="st">'yyhat_prob'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="32e3b4a9-4ddd-4bac-85c4-ab8e68ea5f36" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df_tst_compact[df_tst_compact.amt<span class="op">&lt;</span><span class="dv">80</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">amt</th>
+<th data-quarto-table-cell-role="th">is_fraud</th>
+<th data-quarto-table-cell-role="th">yyhat_prob</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>7.53</td>
+<td>0</td>
+<td>0.001258</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>3.79</td>
+<td>0</td>
+<td>0.001710</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>59.07</td>
+<td>0</td>
+<td>0.002354</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>25.58</td>
+<td>0</td>
+<td>0.000962</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5</td>
+<td>20.59</td>
+<td>0</td>
+<td>0.004030</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">314538</td>
+<td>19.68</td>
+<td>1</td>
+<td>0.005087</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">314558</td>
+<td>12.43</td>
+<td>1</td>
+<td>0.064472</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">314563</td>
+<td>20.51</td>
+<td>1</td>
+<td>0.003546</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">314566</td>
+<td>17.83</td>
+<td>1</td>
+<td>0.003011</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">314571</td>
+<td>12.57</td>
+<td>1</td>
+<td>0.995636</td>
+</tr>
+</tbody>
+</table>
+
+<p>230999 rows × 3 columns</p>
+</div>
+</div>
+</div>
+<div id="a7220c02-c679-4a95-aff8-835e01864c4d" class="cell" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>df_tst_compact[</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    (df_tst_compact.amt<span class="op">&lt;</span><span class="dv">80</span>) <span class="op">&amp;</span> (df_tst_compact.is_fraud<span class="op">==</span><span class="dv">1</span>)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>].yyhat_prob.hist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="240503 df_train1, df_test_files/figure-html/cell-39-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="aeab12ad-8874-4102-b571-afcea0631efa" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>sklearn.metrics.f1_score(</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>    df_tst_compact[df_tst_compact.amt<span class="op">&lt;</span><span class="dv">80</span>].is_fraud,</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>    df_tst_compact[df_tst_compact.amt<span class="op">&lt;</span><span class="dv">80</span>].yyhat_prob<span class="op">&gt;</span><span class="fl">0.5</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<pre><code>0.5813528336380257</code></pre>
+</div>
+</div>
+<div id="876f10b4-4ff0-48a2-8469-3b418054b559" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>sklearn.metrics.recall_score(</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>    df_tst_compact[df_tst_compact.amt<span class="op">&lt;</span><span class="dv">80</span>].is_fraud,</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>    df_tst_compact[df_tst_compact.amt<span class="op">&lt;</span><span class="dv">80</span>].yyhat_prob<span class="op">&gt;</span><span class="fl">0.5</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<pre><code>0.412987012987013</code></pre>
+</div>
+</div>
+<div id="88fd0c44-29d9-425f-95dd-318992ffbe46" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>sklearn.metrics.precision_score(</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>    df_tst_compact[df_tst_compact.amt<span class="op">&lt;</span><span class="dv">80</span>].is_fraud,</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>    df_tst_compact[df_tst_compact.amt<span class="op">&lt;</span><span class="dv">80</span>].yyhat_prob<span class="op">&gt;</span><span class="fl">0.5</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
+<pre><code>0.9814814814814815</code></pre>
 </div>
 </div>
 
